@@ -7,7 +7,11 @@
 'use strict';
 
 angular.module('fsMobile', ['ionic', 'fsMobile.controllers', 'fsMobile.states', 'fsMobile.rest', 'config'])
+    .config(function ($stateProvider, $urlRouterProvider) {
 
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/app/home');
+    })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,55 +24,4 @@ angular.module('fsMobile', ['ionic', 'fsMobile.controllers', 'fsMobile.states', 
                 StatusBar.styleDefault();
             }
         });
-    })
-
-    .config(function ($stateProvider, $urlRouterProvider) {
-        $stateProvider
-
-            // TODO: cleanup template stuff
-            .state('app', {
-                url: '/app',
-                abstract: true,
-                templateUrl: 'templates/menu.html',
-                controller: 'AppCtrl'
-            })
-
-            .state('app.search', {
-                url: '/search',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/search.html'
-                    }
-                }
-            })
-
-            .state('app.browse', {
-                url: '/browse',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/browse.html'
-                    }
-                }
-            })
-            .state('app.playlists', {
-                url: '/playlists',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlists.html',
-                        controller: 'PlaylistsCtrl'
-                    }
-                }
-            })
-
-            .state('app.single', {
-                url: '/playlists/:playlistId',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlist.html',
-                        controller: 'PlaylistCtrl'
-                    }
-                }
-            });
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/playlists');
     });
