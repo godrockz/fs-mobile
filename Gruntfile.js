@@ -358,16 +358,20 @@ module.exports = function (grunt) {
         karma: {
             options: {
                 basePath: '',
-                frameworks: ['mocha', 'chai'],
+                frameworks: ['jasmine'],
                 files: [
                     '<%= yeoman.app %>/bower_components/angular/angular.js',
                     '<%= yeoman.app %>/bower_components/angular-mocks/angular-mocks.js',
                     '<%= yeoman.app %>/bower_components/angular-animate/angular-animate.js',
                     '<%= yeoman.app %>/bower_components/angular-sanitize/angular-sanitize.js',
                     '<%= yeoman.app %>/bower_components/angular-ui-router/release/angular-ui-router.js',
+                    '<%= yeoman.app %>/bower_components/localforage/dist/localforage.js',
+                    '<%= yeoman.app %>/bower_components/angular-localForage/dist/angular-localForage.js',
+                    '<%= yeoman.app %>/bower_components/chance/chance.js',
                     '<%= yeoman.app %>/bower_components/ionic/release/js/ionic.js',
                     '<%= yeoman.app %>/bower_components/ionic/release/js/ionic-angular.js',
                     '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
+                    '<%= yeoman.app %>/<%= yeoman.states %>/**/*.js',
                     '<%= yeoman.test %>/mock/**/*.js',
                     '<%= yeoman.test %>/spec/**/*.js'
                 ],
@@ -377,7 +381,8 @@ module.exports = function (grunt) {
                 singleRun: false,
                 preprocessors: {
                     // Update this if you change the yeoman config path
-                    '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js': ['coverage']
+                    '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js': ['coverage'],
+                    '<%= yeoman.app %>/<%= yeoman.states %>/**/*.js': ['coverage']
                 },
                 coverageReporter: {
                     reporters: [
@@ -394,7 +399,7 @@ module.exports = function (grunt) {
             },
             continuous: {
                 browsers: ['PhantomJS'],
-                singleRun: true,
+                singleRun: true
             }
         },
 
