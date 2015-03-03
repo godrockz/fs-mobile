@@ -10,6 +10,7 @@ module.exports = function (grunt) {
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('grunt-jsonizer');
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
@@ -135,6 +136,22 @@ module.exports = function (grunt) {
                 }]
             },
             server: '.temp'
+        },
+
+        jsonizer: {
+            defaults: {
+                options: {
+                    halLinksAttribute: '_links',
+                    halLinkAttribute: 'href',
+                    jsonOutputDirectory: '<%= yeoman.dist %>/<%= yeoman.scripts %>/data',
+                    outputFileSuffix: '.json',
+                    baseUrl: 'https://dev-fs-rest-service.herokuapp.com',
+                    resources: [{
+                        url: '/',
+                        recursive: true
+                    }]
+                }
+            }
         },
 
         autoprefixer: {
@@ -311,7 +328,8 @@ module.exports = function (grunt) {
                 'compass:server',
                 'copy:styles',
                 'copy:vendor',
-                'copy:fonts'
+                'copy:fonts',
+                'jsonizer:defaults'
             ],
             test: [
                 'compass',
