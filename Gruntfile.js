@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
-    grunt.loadNpmTasks('grunt-jsonizer');
+    //grunt.loadNpmTasks('grunt-jsonizer'); // this should be done by require('load-grunt-tasks')(grunt);
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
