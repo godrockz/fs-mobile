@@ -1,12 +1,12 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .service('storageManager', ['$localForage', '$http', '$q', function ($storage, $http, $q) {
+    .service('storageManager', function ($localForage, $http, $q, ENV) {
 
         // url can be with or without domain
         var fetch = function(url) {
             var path = urlToPathConverter(url)
-            return $storage.getItem(path).then(function(value) {
+            return $localForage.getItem(path).then(function(value) {
                 console.log('localForage success');
                 if (!value) {
                     console.log('but value is empty');
@@ -23,7 +23,7 @@ angular.module('fsMobile.services')
             return $http.get(path).then(function(response) {
                 console.log('fetching from json file succeeded');
                 if (response.data)
-                    $storage.setItem(path, response.data);
+                    $localForage.setItem(path, response.data);
                 return response.data;
             }, function(error) {
                 console.log('fetching from json file failed');
@@ -34,7 +34,7 @@ angular.module('fsMobile.services')
         var urlToPathConverter = function(url) {
             var parser = document.createElement('a')
             parser.href = url;
-            return 'json' + parser.pathname + '.json';
+            return ENV.offlineJsonDataDirectory + parser.pathname + '.json';
         };
 
 
@@ -56,4 +56,4 @@ angular.module('fsMobile.services')
             fetch: fetch
         };
 
-    }]);
+    });

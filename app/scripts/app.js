@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('fsMobile.services', []);
-angular.module('fsMobile', ['ionic','LocalForageModule', 'fsMobile.controllers', 'fsMobile.states', 'fsMobile.rest','fsMobile.storage', 'fsMobile.services','config'])
+angular.module('fsMobile', ['ionic','LocalForageModule', 'fsMobile.controllers', 'fsMobile.states', 'fsMobile.rest', 'fsMobile.services','config'])
     .config(function ($stateProvider, $urlRouterProvider) {
 
         // if none of the above states are matched, use this as the fallback

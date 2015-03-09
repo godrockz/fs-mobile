@@ -45,7 +45,8 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        apiEndpoint: 'https://dev-fs-rest-service.herokuapp.com'
+                        apiEndpoint: 'https://dev-fs-rest-service.herokuapp.com',
+                        offlineJsonDataDirectory: 'scripts/data'
                     }
                 }
             },
@@ -53,7 +54,8 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'production',
-                        apiEndpoint: 'https://dev-fs-rest-service.herokuapp.com'
+                        apiEndpoint: 'https://dev-fs-rest-service.herokuapp.com',
+                        offlineJsonDataDirectory: 'scripts/data'
                     }
                 }
             }
