@@ -10,35 +10,39 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/location/locations.html',
-                controller: function ($state, $scope, RestClient, ENV, storageManager) {
-                    $scope.data = 'Loading from ' + ENV.apiEndpoint;
+                controller: function ($state, $scope ) {
 
-                    storageManager.fetch(ENV.apiEndpoint+'/index').then(function(data){
-                        console.log('data',data);
+                    $scope.$watch('resources.index',function(){
+                        if($scope.resources.index){
+                            $scope.resources.index.$load.locations().then(function(locations){
+                                console.log('got locations',locations);
+                                $scope.locations = locations;
+                                $scope.resources.locations = locations;
+                            });
+                        }
                     });
-
-                    $scope.locations = [{id:1, name:'Mainstage'},{id:2,name:'Kunstzelt'}];
 
                 }
             }
         }
     });
 
-
     $stateProvider.state('app.location', {
-        url: '/location/:id',
+        url: '/location/:idx',
         views: {
             'menuContent': {
                 templateUrl: 'states/location/location.html',
-                controller: function ($scope, $stateParams,RestClient, ENV) {
-                    $scope.data = 'Loading from ' + ENV.apiEndpoint;
+                controller: function ($scope, $stateParams) {
 
-                    RestClient.load(ENV.apiEndpoint).then(function (data) {
-                        $scope.data = data;
+                    if($scope.resources.locations){
+                        $scope.location= $scope.resources.locations[$stateParams.idx];
+                    }
+
+                    $scope.$watch('resources.locations',function(){
+                        if($scope.resources.locations){
+                            $scope.location = $scope.resources.locations[$stateParams.idx];
+                        }
                     });
-
-                    $scope.locations = [{id:1, name:'Mainstage'},{id:2,name:'Kunstzelt'}];
-                    $scope.location = $scope.locations[$stateParams.id];
                 }
             }
         }
