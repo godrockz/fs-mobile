@@ -7,6 +7,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         controller: function ($scope, dataProvider, ENV) {
             $scope.resources = {};
             dataProvider.fetch(ENV.apiEndpoint).then(function (index) {
+                console.log('index', index);
                 $scope.resources.index = index;
             });
         }
