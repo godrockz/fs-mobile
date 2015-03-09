@@ -13,6 +13,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/home/home.html',
                 controller: function ($scope, RestClient, ENV) {
+
                     console.log('state init');
                     $scope.data = 'Loading from ' + ENV.apiEndpoint;
 
