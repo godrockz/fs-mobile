@@ -1,8 +1,16 @@
 <p>oben</p>
 <ion-view view-title="Home">
-  <ion-content>
-    <h1>Home</h1>
-    <p>{{::data}}</p>
-  </ion-content>
+    <ion-content>
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="resources.refreshData()">
+        </ion-refresher>
+
+        <h1>Homex</h1>
+
+        <p>{{::data}}</p>
+        pull to refresh
+
+    </ion-content>
 </ion-view>
 <p>unten</p>

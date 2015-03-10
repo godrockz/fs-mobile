@@ -38,7 +38,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         $scope.event= $scope.resources.events[$stateParams.idx];
                     }
 
-                    $scope.$watch('resources.locations',function(){
+                    $scope.$watch('resources.events',function(){
                         if($scope.resources.events){
                             $scope.event = $scope.resources.events[$stateParams.idx];
                         }
