@@ -7,11 +7,20 @@
 'use strict';
 
 angular.module('fsMobile.services', []);
-angular.module('fsMobile', ['ionic','LocalForageModule', 'fsMobile.controllers', 'fsMobile.states', 'fsMobile.rest', 'fsMobile.services','fsMobile.filters','config'])
-    .config(function ($stateProvider, $urlRouterProvider) {
+angular.module('fsMobile', ['ionic','pascalprecht.translate','LocalForageModule', 'fsMobile.controllers', 'fsMobile.states', 'fsMobile.rest', 'fsMobile.services','fsMobile.filters','config'])
+    .config(function ($stateProvider, $urlRouterProvider,$translateProvider) {
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
+
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'lang/',
+            suffix:'.json'
+        });
+        $translateProvider.determinePreferredLanguage();
+        $translateProvider.registerAvailableLanguageKeys(['de_DE','en_EN'],{'de*':'de_DE','en*':'en_EN'});
+
     })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
