@@ -3,12 +3,12 @@
     <ion-content>
         <ion-refresher
             pulling-text="Pull to refresh..."
-            on-refresh="resources.refreshData()">
+            on-refresh="refreshData()">
         </ion-refresher>
 
-        <h1>Homex</h1>
+        <h1>Home</h1>
 
-        <p>{{::data}}</p>
+        <p>{{::appData.$metaInfo.date}}</p>
         pull to refresh
 
     </ion-content>

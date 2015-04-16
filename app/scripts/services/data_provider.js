@@ -1,45 +1,42 @@
 /**
- * enriches retrieved data with accessor functions
+ * TODO: Documentation
  * <p/>
- * Created by Benjamin Jacob on 09.03.15.
+ * Created by Benjamin Jacob on 16.04.15.
  * <p/>
+ * © 2015 upSource GmbH, all rights reserved.
  */
-'use strict';
-angular.module('fsMobile.services').service('dataProvider', function (storageManager, ucFirstFilter) {
+angular.module('fsMobile.services').service('dataProvider',function($q, storageManager,ENV){
 
-
-    function fetchInvocation(url) {
-        return function () {
-            return fetchData(url);
-        };
-    }
-
-    function wrapInvocations(data){
-        if (data._links) {
-            data.$load = {};
-            angular.forEach(data._links, function (link, key) {
-                data.$load[ key] = fetchInvocation(link.href);
-            });
-        }else{
-            console.log('got',data);
-        }
-    }
-
-    function fetchData(url) {
-        return storageManager.fetch(url).then(function (data) {
-            if (data._links) {
-                wrapInvocations(data);
-            }else if (angular.isArray(data)){
-                angular.forEach(data,function(entry){
-                    wrapInvocations(entry);
-                });
-            }
-            return data;
-        });
-    }
+    var indexRO;
+    var dataRO;
 
     var svc = {
-        fetch: fetchData
+        updateData: function(){
+            return storageManager.fetchData(ENV.apiEndpoint).then(function (indexRo) {
+                indexRO = indexRO;
+                console.log('indexRo',indexRo);
+                var dataRoUrl = indexRo._links.data.href;
+                return storageManager.fetchData(dataRoUrl).then(function (data) {
+                    dataRO = data;
+                });
+            });
+        },
+        getIndexRO: function(){
+
+            if(indexRO){
+                return $q.when(indexRO);
+            }else{
+                return svc.updateData();
+            }
+        },
+        getAppDataRo: function (){
+            if(dataRO){
+                return $q.when(dataRO);
+            }else{
+                return svc.updateData();
+            }
+        }
     };
     return svc;
+
 });

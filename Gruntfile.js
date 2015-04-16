@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        apiEndpoint: 'https://dev-fs-rest-service.herokuapp.com',
+                        apiEndpoint: 'http://localhost:8080',
                         offlineJsonDataDirectory: 'scripts/data'
                     }
                 }
@@ -147,10 +147,15 @@ module.exports = function (grunt) {
                     halLinkAttribute: 'href',
                     jsonOutputDirectory: '<%= yeoman.dist %>/<%= yeoman.scripts %>/data',
                     outputFileSuffix: '.json',
-                    baseUrl: 'https://dev-fs-rest-service.herokuapp.com',
+                    //baseUrl: 'http://dev-fs-rest-service.herokuapp.com',
+                    baseUrl: 'http://localhost:8080',
                     resources: [{
+                        url: '/data',
+                        recursive: false
+                    },
+                    {
                         url: '/',
-                        recursive: true
+                        recursive: false
                     }]
                 }
             }
@@ -331,7 +336,6 @@ module.exports = function (grunt) {
                 'copy:styles',
                 'copy:vendor',
                 'copy:fonts',
-                'jsonizer:defaults'
             ],
             test: [
                 'compass',

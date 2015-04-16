@@ -10,18 +10,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/location/locations.html',
-                controller: function ($state, $scope ) {
-
-                    $scope.$watch('resources.index',function(){
-                        if($scope.resources.index){
-                            $scope.resources.index.$load.locations().then(function(locations){
-                                console.log('got locations',locations);
-                                $scope.locations = locations;
-                                $scope.resources.locations = locations;
-                            });
-                        }
-                    });
-
+                controller: function (appData, $state, $scope, $translate ) {
+                    $scope.locations = appData.locations;
+                    $scope.currentLanguage = $translate.use().split('_')[0];
+                    console.log('appData',appData.locations);
                 }
             }
         }

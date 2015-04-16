@@ -29,3 +29,7 @@ explains quite well how to accomplish this. An AVD demands libs for a specific a
 * publishing the app: http://ionicframework.com/docs/guide/publishing.html
 
 * a 'released' apk must be signed even though it is only used for testing purposes! (http://developer.android.com/tools/publishing/app-signing.html)
+
+
+# jsonizer
+run grunt  jsonizer:defaults to fetch data for offline usage from api 

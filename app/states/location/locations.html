@@ -2,10 +2,13 @@
     <ion-content>
         <ion-list>
             <ion-item ng-repeat="location in locations" ui-sref="app.location({idx:$index})">
-                Id: {{location.data.id}}
-                Translations: {{location.data.translations}}
-                GeoCoordinate: {{location.data.geoCoordinate}}
-                timeZone: {{location.data.timeZone}}
+                <div class="item item-avatar">
+                    <img ng-src="{{location.images[0]}}" style="width:50px;height:70px;">
+                    <h2>{{location.translations[currentLanguage].name}}</h2>
+                    <p>{{location.code}}</p>
+
+                {{location.translations[currentLanguage].description}}
+                </div>
             </ion-item>
         </ion-list>
     </ion-content>

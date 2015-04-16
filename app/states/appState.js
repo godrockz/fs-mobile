@@ -4,19 +4,23 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
-        controller: function ($scope, dataProvider, ENV) {
-
-            $scope.resources = {
-                refreshData:function(){
-                    dataProvider.fetch(ENV.apiEndpoint).then(function (index) {
-                        console.log('index', index);
-                        $scope.resources.index = index;
-                    }).finally(function(){
-                        $scope.$broadcast('scroll.refreshComplete');
-                    });
-                }
+        resolve:{
+            appData:function(dataProvider, $rootScope){
+                return dataProvider.updateData().then(function(){
+                    return dataProvider.getAppDataRo();
+                }).finally(function(){
+                    $rootScope.$broadcast('scroll.refreshComplete');
+                });
+            }
+        },
+        controller:function($scope,appData, dataProvider){
+            $scope.refreshData = function(){
+                return dataProvider.updateData().then(function(){
+                    return dataProvider.getAppDataRo();
+                }).finally(function(){
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
             };
-            $scope.resources.refreshData();
         }
     });
 });
