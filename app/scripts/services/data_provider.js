@@ -15,7 +15,7 @@ angular.module('fsMobile.services').service('dataProvider',function($q, storageM
             return storageManager.fetchData(ENV.apiEndpoint).then(function (indexRo) {
                 indexRO = indexRO;
                 console.log('indexRo',indexRo);
-                var dataRoUrl = indexRo._links.data.href;
+                var dataRoUrl = indexRo.data._links.data.href;
                 return storageManager.fetchData(dataRoUrl).then(function (data) {
                     dataRO = data;
                 });
