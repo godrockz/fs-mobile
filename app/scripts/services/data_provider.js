@@ -5,6 +5,7 @@
  * <p/>
  * © 2015 upSource GmbH, all rights reserved.
  */
+'use strict';
 angular.module('fsMobile.services').service('dataProvider',function($q, storageManager,ENV){
 
     var indexRO;
@@ -16,8 +17,11 @@ angular.module('fsMobile.services').service('dataProvider',function($q, storageM
                 indexRO = indexRO;
                 console.log('indexRo',indexRo);
                 var dataRoUrl = indexRo.data._links.data.href;
+                console.log('retrieve from ',dataRoUrl);
                 return storageManager.fetchData(dataRoUrl).then(function (data) {
-                    dataRO = data;
+                    console.log('got data ',data);
+                    dataRO = data.data;
+                    return  dataRO;
                 });
             });
         },
@@ -31,8 +35,10 @@ angular.module('fsMobile.services').service('dataProvider',function($q, storageM
         },
         getAppDataRo: function (){
             if(dataRO){
+                console.log('already in cache',dataRO);
                 return $q.when(dataRO);
             }else{
+                console.log('run update Data');
                 return svc.updateData();
             }
         }

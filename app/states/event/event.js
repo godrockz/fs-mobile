@@ -11,10 +11,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/event/events.html',
                 controller: function ($state, $scope , appData, $translate) {
-                    console.log('eventController');
+                    console.log('eventController', appData);
                     $scope.events = appData.events;
                     $scope.currentLanguage = $translate.use().split('_')[0];
-                    console.log('events',$translate.use(),$scope.events);
+
+                    console.log('events', $translate.use(),$scope.events);
                 }
             }
         }

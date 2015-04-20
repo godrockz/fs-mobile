@@ -34,7 +34,7 @@ angular.module('fsMobile.services')
                 }
                 return response.data;
             }, function (error) {
-                console.log('fetching from file failed due to',err);
+                console.log('fetching from file failed due to',error);
                 return error;
             });
         };
