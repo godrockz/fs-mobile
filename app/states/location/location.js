@@ -10,10 +10,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/location/locations.html',
-                controller: function (appData, $state, $scope, $translate ) {
-                    $scope.locations = appData.locations;
+                controller: function ($state, $scope, Resource) {
                     $scope.currentLanguage = $translate.use().split('_')[0];
-                    console.log('appData',appData.locations);
+                    $scope.locations = new Resource('locations');
                 }
             }
         }
@@ -24,16 +23,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/location/location.html',
-                controller: function ($scope, $stateParams) {
+                controller: function ($scope, $stateParams, Resource) {
 
-                    if($scope.resources.locations){
-                        $scope.location= $scope.resources.locations[$stateParams.idx];
-                    }
+                    $scope.locations = new Resource('locations');
+                    $scope.location = $scope.locations[$stateParams.idx];
 
-                    $scope.$watch('resources.locations',function(){
-                        if($scope.resources.locations){
-                            $scope.location = $scope.resources.locations[$stateParams.idx];
-                        }
+                    $scope.$watch('locations',function(){
+                        $scope.location = $scope.locations[$stateParams.idx];
                     });
                 }
             }

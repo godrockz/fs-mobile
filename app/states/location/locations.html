@@ -1,14 +1,14 @@
 <ion-view view-title="{{'app.general.locations'|translate}}">
     <ion-content>
-        <ion-list>
-            <ion-item ng-repeat="location in locations" ui-sref="app.location({idx:$index})">
-                <div class="item item-avatar">
-                    <img ng-src="{{location.images[0]}}" style="width:50px;height:70px;">
-                    <h2>{{location.translations[currentLanguage].name}}</h2>
-                    <p>{{location.code}}</p>
-
-                {{location.translations[currentLanguage].description}}
-                </div>
+        <ion-list type="card" ng-repeat="location in locations.values()" ui-sref="app.location({idx:$index})">
+            <ion-item class="item-header">
+                <h2>{{location.translations[currentLanguage].name}}</h2>
+            </ion-item>
+            <ion-item class="item-image" ng-if="location.images.length">
+                <img ng-src="{{location.images[0]}}">
+            </ion-item>
+            <ion-item class="item-desc">
+                <p>{{location.translations[currentLanguage].preview}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

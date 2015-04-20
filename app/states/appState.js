@@ -13,14 +13,8 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 });
             }
         },
-        controller:function($scope,appData, dataProvider){
-            $scope.refreshData = function(){
-                return dataProvider.updateData().then(function(){
-                    return dataProvider.getAppDataRo();
-                }).finally(function(){
-                    $scope.$broadcast('scroll.refreshComplete');
-                });
-            };
+        controller: function ($scope, dataUpdater) {
+            dataUpdater.run();
         }
     });
 });

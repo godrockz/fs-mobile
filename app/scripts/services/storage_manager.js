@@ -3,23 +3,16 @@ angular.module('fsMobile.services')
 
     .service('storageManager', function ($localForage, $http, $q, ENV) {
 
-        // url can be with or without domain
-        var fetchData = function (url) {
-            // first try to load required resource via rest
-            var path = urlToPathConverter(url);
-
-            return fetchRemote(url).catch(function(err){
-                // it was not possible
-                console.log('web failed due to',err);
-                return $localForage.getItem(path).then(function(data){
-                    if (!data) {
-                        console.log('localStorage failed due to empty data');
-                        return $q.reject('got data but data is empty');
-                    }
-                    return data;
-                });
-            }).catch(function(err){
-                console.log('error with local storage',err);
+        var fetch = function(resource_name) {
+            return $localForage.getItem(resource_name).then(function(value) {
+                console.log('localForage success - ' + resource_name);
+                if (!value) {
+                    console.log('but value is empty');
+                    // value = fetchFromFile(path);
+                }
+                return value;
+            }, function(error) {
+                console.log('localForage failed - ' + resource_name);
                 return fetchFromFile(path);
             });
         };
