@@ -6,26 +6,23 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         templateUrl: 'templates/menu.html',
         resolve:{
             appData:function(dataProvider, $rootScope){
-                return dataProvider.updateData().then(function(){
-                    return dataProvider.getAppDataRo().then(function(data){
-                        console.log(' loaded data:',data);
-                        return data;
-                    });
-                }).finally(function(){
+                return dataProvider.getData().finally(function(){
                     $rootScope.$broadcast('scroll.refreshComplete');
                 });
             }
         },
-        controller: function($scope, appData, dataProvider){
+        controller: function($scope, appData, $translate, dataProvider){
             console.log('appData in Ctrl ', appData);
-            $scope.refreshData = function(){
-                return dataProvider.updateData().then(function(){
-                    return dataProvider.getAppDataRo().then(function(data){
-                        console.log('data',data);
-                        return data;
+            $scope.appData = appData;
+            $scope.currentLanguage = $translate.use().split('_')[0];
+            $scope.refreshData = function() {
+                dataProvider.refreshData().then(function(data){
+                    console.log('refresh: new data saved', data);
+                    angular.forEach(data, function(resource, resourceName) {
+                        $scope.appData[resourceName] = resource;
                     });
-                }).finally(function(){
                     $scope.$broadcast('scroll.refreshComplete');
+                    // dataProvider.deleteData();
                 });
             };
         }

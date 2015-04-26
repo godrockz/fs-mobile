@@ -1,8 +1,11 @@
 <ion-view view-title="Location">
     <ion-content>
-        <h1>{{::location.data.id}}</h1>
-        Translations: {{::location.data.translations}}
-        GeoCoordinate: {{::location.data.geoCoordinate}}
-        timeZone: {{::location.data.timeZone}}
+        <h1>{{::location.id}}</h1>
+		Name: {{::location.translations[currentLanguage].name}} <br>
+		Code: {{::location.code}} <br>
+        Description: {{::location.translations[currentLanguage].description}} <br>
+        GeoCoordinate: <br>
+		  Latitude: {{::location.geoCoordinate.latitude}} <br>
+		  Longitude: {{::location.geoCoordinate.longitude}}
     </ion-content>
 </ion-view>

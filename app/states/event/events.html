@@ -1,7 +1,7 @@
 <ion-view view-title="Events">
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="event in events" ui-sref="app.location({idx:$index})">
+            <ion-item ng-repeat="event in appData.events.values()" ui-sref="app.location({idx:$index})">
                 <img ng-src="{{event.images[0]}}" style="width:50px;height:50px;">
                 Name: {{event.translations[currentLanguage].name}}
                 preview: {{event.translations[currentLanguage].preview}}

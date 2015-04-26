@@ -5,22 +5,19 @@ angular.module('fsMobile.services')
 
         // url can be with or without domain
         var fetchData = function (url) {
-            // first try to load required resource via rest
             var path = urlToPathConverter(url);
 
-            return fetchRemote(url).catch(function(err){
-                // it was not possible
-                console.log('web failed due to',err);
-                return $localForage.getItem(path).then(function(data){
-                    if (!data) {
-                        console.log('localStorage failed due to empty data');
-                        return $q.reject('got data but data is empty');
-                    }
-                    return data;
-                });
+            return $localForage.getItem(path).then(function(data){
+                data = data || '{}';
+                data =  JSON.parse(data);
+                // make sure that we don't have old array format
+                if (angular.isArray(data.locations)) data = {};
+                return data
             }).catch(function(err){
                 console.log('error with local storage',err);
-                return fetchFromFile(path);
+                // TODO: I still need to update this method
+                // return fetchFromFile(path);
+                return
             });
         };
 
@@ -60,13 +57,23 @@ angular.module('fsMobile.services')
                     key: urlToPathConverter(url),
                     fetched : new Date()
                 };
-                $localForage.setItem(data.$metaInfo.key,data);
                 data.$metaInfo.src='WEB';
                 return data;
             });
         };
 
+        var deleteLocalData = function (url) {
+            var path = urlToPathConverter(url);
+            return $localForage.setItem(path, undefined)
+                .then(function() {
+                    console.log('local data deleted');
+
+                });
+        };
+
         return {
-            fetchData: fetchData
+            fetchData: fetchData,
+            fetchRemote: fetchRemote,
+            deleteLocalData: deleteLocalData
         };
     });
