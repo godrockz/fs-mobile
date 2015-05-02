@@ -15,6 +15,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             console.log('appData in Ctrl ', appData);
             $scope.appData = appData;
             $scope.currentLanguage = $translate.use().split('_')[0];
+            $scope.deleteData = dataProvider.deleteData;
             $scope.refreshData = function() {
                 dataProvider.refreshData().then(function(data){
                     console.log('refresh: new data saved', data);
@@ -22,7 +23,6 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                         $scope.appData[resourceName] = resource;
                     });
                     $scope.$broadcast('scroll.refreshComplete');
-                    // dataProvider.deleteData();
                 });
             };
         }

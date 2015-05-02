@@ -6,33 +6,26 @@ angular.module('fsMobile.services')
         // url can be with or without domain
         var fetchData = function (url) {
             var path = urlToPathConverter(url);
-
-            return $localForage.getItem(path).then(function(data){
-                data = data || '{}';
-                data =  JSON.parse(data);
-                // make sure that we don't have old array format
-                if (angular.isArray(data.locations)) data = {};
+            console.log('fetching from localForage:', path);
+            return $localForage.getItem(path).then(function(data) {
+                console.log('fetching from localForage succeeded');
+                if (!data)
+                    console.log('localFtorage: no data');
                 return data
-            }).catch(function(err){
-                console.log('error with local storage',err);
-                // TODO: I still need to update this method
-                // return fetchFromFile(path);
-                return
-            });
+            })
         };
 
-        var fetchFromFile = function (path) {
-            console.log('fetching from ',path);
+        var fetchFromFile = function (url) {
+            var path = urlToPathConverter(url);
+            console.log('fetching from JSON',path);
             return $http.get(path).then(function (response) {
-                console.log('fetching from json file succeeded - ' + path);
-                if (response.data) {
-                    $localForage.setItem(path, response.data);
-                    console.log('saving to localForage was successful - ' + path);
-                }
-                return response.data;
-            }, function (error) {
-                console.log('fetching from file failed due to',error);
-                return error;
+                console.log('fetching from JSON succeeded');
+                response.$metaInfo = {
+                    uri: url,
+                    key: path,
+                    src: 'JSON'
+                };
+                return response;
             });
         };
 
@@ -55,9 +48,9 @@ angular.module('fsMobile.services')
                 data.$metaInfo={
                     uri: url,
                     key: urlToPathConverter(url),
-                    fetched : new Date()
+                    fetched : new Date(),
+                    src: 'WEB'
                 };
-                data.$metaInfo.src='WEB';
                 return data;
             });
         };
@@ -74,6 +67,7 @@ angular.module('fsMobile.services')
         return {
             fetchData: fetchData,
             fetchRemote: fetchRemote,
+            fetchFromFile: fetchFromFile,
             deleteLocalData: deleteLocalData
         };
     });
