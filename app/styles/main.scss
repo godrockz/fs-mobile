@@ -3,6 +3,8 @@ body * {
     cursor: url('../images/finger.png'), auto !important;
 }
 
+.scroll{height: 100%;}
+
 // Your application styles go here
 @import "../states/home/home.scss";
 
