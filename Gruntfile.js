@@ -184,6 +184,9 @@ module.exports = function (grunt) {
             sass: {
                 src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}', '<%= yeoman.app %>/<%= yeoman.states %>/{,*/}*.{scss,sass}'],
                 ignorePath: /(\.\.\/){1,2}lib\//
+            },
+            options: {
+                exclude: ['bower_components/ionic/release/css/ionic.css']
             }
         },
 

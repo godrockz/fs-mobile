@@ -1,13 +1,21 @@
-<ion-view view-title="Events">
-    <ion-content>
-        <ion-list>
-            <ion-item ng-repeat="event in appData.events.values()" ui-sref="app.location({idx:$index})">
-                <img ng-src="{{event.images[0]}}" style="width:50px;height:50px;">
-                Name: {{event.translations[currentLanguage].name}}
-                preview: {{event.translations[currentLanguage].preview}}
-                Tags: {{event.translations[currentLanguage].tags}}
+<ion-view view-title="Events" class="events">
+	<ion-tabs class="tabs-striped tabs-top tabs-background-default tabs-color-default">
+		<ion-tab title="Jetzt" class="active">
+			<ion-view>
+			<ion-content>
+				<ion-list>
+					<ion-item ng-repeat="event in appData.events.values()" ui-sref="app.location({idx:$index})">
+						<img ng-src="{{event.images[0]}}" style="width:50px;height:50px;">
+						Name: {{event.translations[currentLanguage].name}}
+						preview: {{event.translations[currentLanguage].preview}}
+						Tags: {{event.translations[currentLanguage].tags}}
 
-            </ion-item>
-        </ion-list>
-    </ion-content>
+					</ion-item>
+				</ion-list>
+			</ion-content>
+			</ion-view>
+		</ion-tab>
+		<ion-tab title="Trubinenhalle">
+		</ion-tab>
+	</ion-tabs>
 </ion-view>

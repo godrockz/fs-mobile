@@ -1,3 +1,32 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+
+$positive:                          #ff9800 !default;
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../bower_components/ionic/release/fonts" !default;
+
+// Include all of Ionic
+// @import "www/lib/ionic/scss/ionic";
+@import "../bower_components/ionic/scss/ionic.scss";
+
+
+
 // Global styles
 body * {
     cursor: url('../images/finger.png'), auto !important;
@@ -9,3 +38,38 @@ body * {
 @import "../states/home/home.scss";
 
 
+.bar {
+  .title {
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .button.ion-navicon-round:before {
+    font-size: 22px;
+  }
+}
+
+.tab-item {
+  opacity: 1;
+}
+
+.tabs-striped .tabs {
+  background-color: #efefef;
+}
+
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
+
+  border-color: $positive;
+}
+
+.events {
+
+  .list {
+    background-color: #dbdbdb;
+  }
+
+  .item-complex {
+    margin-top: 15px;
+  }
+
+}
