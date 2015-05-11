@@ -17,6 +17,14 @@ $dark:                            #444 !default;
 
 
 $positive:                          #ff9800 !default;
+$bar-title-font-size:               18px !default;
+$font-size-large:                   22px !default;
+$font-size-base:                    18px !default;
+$font-size-medium:                  16px !default;
+$font-size-small:                   14px !default;
+
+$item-font-size:                    18px !default;
+$item-padding:                      16px !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../bower_components/ionic/release/fonts" !default;
@@ -69,8 +77,36 @@ body * {
     background-color: #dbdbdb;
   }
 
-  .item-complex {
+  .item-content {
     margin-top: 15px;
+    line-height: 18px;
+    background-color: rgb(77, 74, 74);
+    color: white;
+
+
+    .event-time {
+      background-color: $positive;
+      border-radius: 24px;
+      opacity: 0.7;
+      height: 50px;
+      width: 50px;
+      display: inline-block;
+      text-align: center;
+      font-size: 12px;
+    }
+    .event-desc {
+      display: inline-block;
+      text-align: center;
+      overflow: hidden;
+      height: 50px;
+      width: 100%;
+      padding-top: 8px;
+
+      .event-location {
+        font-size: $font-size-medium;
+        color: $positive;
+      }
+    }
   }
 
 }

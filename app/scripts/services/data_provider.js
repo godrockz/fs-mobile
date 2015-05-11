@@ -7,17 +7,12 @@
  */
 'use strict';
 angular.module('fsMobile.services')
-    .service('dataProvider', function ($q, storageManager, $localForage, Resource, ENV) {
+    .service('dataProvider', function ($q, storageManager, $localForage, AppData, ENV) {
 
         var url = ENV.apiEndpoint + '/data';
 
         var prepareData = function (data) {
-            return _.mapValues(data, function (value, key) {
-                if (key === '$metaInfo') {
-                    return value;
-                }
-                return new Resource(value);
-            });
+            return new AppData(data);
         };
 
         var updateLocalForageData = function (response, data) {
