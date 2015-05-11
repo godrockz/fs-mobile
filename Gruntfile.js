@@ -113,7 +113,7 @@ module.exports = function (grunt) {
                 reporter: require('jshint-stylish')
             },
             all: [
-                'Gruntfile.js',
+                //'Gruntfile.js',
                 '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
                 '<%= yeoman.app %>/<%= yeoman.states %>/**/*.js'
             ],

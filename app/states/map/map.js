@@ -14,8 +14,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     $ionicSideMenuDelegate.canDragContent(false);
 
-                    var head_height = document.getElementsByClassName("bar-header")[0].offsetHeight;
-                    $scope.winHeight = window.innerHeight - head_height;
+                    var headHeight = document.getElementsByClassName('bar-header')[0].offsetHeight;
+                    $scope.winHeight = window.innerHeight - headHeight;
                     $scope.winWidth = window.innerWidth;
                 }
             }

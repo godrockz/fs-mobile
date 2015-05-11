@@ -9,10 +9,11 @@ angular.module('fsMobile.services')
             console.log('fetching from localForage:', path);
             return $localForage.getItem(path).then(function(data) {
                 console.log('fetching from localForage succeeded');
-                if (!data)
-                    console.log('localFtorage: no data');
-                return data
-            })
+                if (!data) {
+                    console.log('localStorage: no data');
+                }
+                return data;
+            });
         };
 
         var fetchFromFile = function (url) {
