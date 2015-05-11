@@ -11,6 +11,11 @@ angular.module('fsMobile.filters', []).
             return str.substring(0, 1).toUpperCase() + str.substring(1);
         };
     })
+    .filter('jsonice',function(){
+        return function (data){
+            return JSON.stringify(data,null,1);
+        };
+    })
     .filter('trans', function (translations) {
         var translationsProperty = 'translations';
         function isTranslateable(instance) {

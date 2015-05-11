@@ -1,7 +1,7 @@
 <ion-view view-title="{{'app.general.settings'|translate}}">
     <ion-content>
         <div class="list">
-            <label class="item item-input item-select">
+            <label class="item item-input item-select" ng-click="onDebug()">
                 <div class="input-label">
                         {{'app.settings.language.label'|translate}}
                 </div>
@@ -9,6 +9,13 @@
                         ng-options="('language.'+lang | translate) for lang in view.availableLanguages">
                 </select>
             </label>
+        </div>
+        <div ng-if="debug.cnt >10">
+        <h1 >Debug:</h1>
+        <a style="float:right;" class="button button-calm"  ng-click="debug.cnt=0">off</a>
+        <pre style="font-size:14px">
+{{debugInfo|jsonice}}
+        </pre>
         </div>
     </ion-content>
 </ion-view>
