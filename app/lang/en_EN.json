@@ -1,5 +1,10 @@
 {
 
     "app.general.location":"Location",
-    "app.general.locations":"Locations"
+    "app.general.locations":"Locations",
+    "app.general.settings":"Einstellungen",
+    "app.settings.language.label":"Language",
+
+    "language.de_DE":"German",
+    "language.en_EN":"Englisch"
 }

@@ -1,0 +1,14 @@
+<ion-view view-title="Settigns">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                        {{'app.settings.language.label'|translate}}
+                </div>
+                <select ng-model="view.selectedLanguage"
+                        ng-options="('language.'+lang | translate) for lang in view.availableLanguages">
+                </select>
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

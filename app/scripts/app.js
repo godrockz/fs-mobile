@@ -7,7 +7,12 @@
 'use strict';
 
 angular.module('fsMobile.services', []);
-angular.module('fsMobile', ['ionic','pascalprecht.translate','LocalForageModule', 'fsMobile.controllers', 'fsMobile.states', 'fsMobile.rest', 'fsMobile.services','fsMobile.filters','config'])
+angular.module('fsMobile', ['ionic','pascalprecht.translate',
+    'LocalForageModule',
+    'fsMobile.controllers',
+    'fsMobile.states', 'fsMobile.rest',
+    'fsMobile.services','fsMobile.filters',
+    'config'])
     .config(function ($stateProvider, $urlRouterProvider,$translateProvider) {
 
         // if none of the above states are matched, use this as the fallback
@@ -21,7 +26,8 @@ angular.module('fsMobile', ['ionic','pascalprecht.translate','LocalForageModule'
         $translateProvider.determinePreferredLanguage();
         $translateProvider.registerAvailableLanguageKeys(['de_DE','en_EN'],{'de*':'de_DE','en*':'en_EN'});
 
-    })
+    }).constant('AVAILABLE_LANGUAGES',['de_DE','en_EN'])
+
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

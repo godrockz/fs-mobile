@@ -10,7 +10,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/event/events.html',
-                controller: function ($state, $scope) {
+                controller: function () {
                 }
             }
         }

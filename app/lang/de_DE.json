@@ -1,6 +1,11 @@
 {
 
     "app.general.location":"Ort",
-    "app.general.locations":"Orte"
+    "app.general.locations":"Orte",
+    "app.general.settings":"Einstellungen",
+    "app.settings.language.label":"Sprache",
+
+    "language.de_DE":"Deutsch",
+    "language.en_EN":"Englisch"
 
 }
