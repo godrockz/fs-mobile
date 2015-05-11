@@ -18,6 +18,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
     $stateProvider.state('app.event', {
         url: '/event/:idx',
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'states/event/event.html',

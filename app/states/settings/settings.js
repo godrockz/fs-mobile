@@ -11,16 +11,15 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/settings/settings.html',
-                controller: function ($scope, AVAILABLE_LANGUAGES, $translate) {
+                controller: function ($scope, AVAILABLE_LANGUAGES, $translate, $rootScope) {
                     $scope.view = {
                         availableLanguages : AVAILABLE_LANGUAGES,
                         selectedLanguage : $translate.use()
                     };
-                    console.log('scope . available langs ',$scope.view.availableLanguages,'selected',$scope.view.selectedLanguage);
                     $scope.$watch('view.selectedLanguage', function () {
-                        console.log('selectedLanguage changed:',$scope.view.selectedLanguage);
                         if($scope.view.selectedLanguage !== $translate.use()) {
                             $translate.use($scope.view.selectedLanguage);
+                            $rootScope.$emit('translationChanged');
                         }
                     });
                 }

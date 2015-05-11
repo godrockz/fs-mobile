@@ -1,28 +1,28 @@
-<ion-view view-title="Events" class="events">
-	<ion-tabs class="tabs-striped tabs-top tabs-background-default tabs-color-default">
-		<ion-tab title="Jetzt" class="active">
-			<ion-view>
-			<ion-content>
-				<ion-list>
-					<ion-item ng-repeat="event in appData.events.values()"
-						      ui-sref="app.location({idx:$index})">
-						<div class="event-time">
-							16:30</br> - </br>17:00
-						</div>
-						<div class="event-desc">
-							{{event.translations[currentLanguage].name}}
-							</br>
-							<span class="event-location">
-								{{appData.getLocation(event).translations[currentLanguage].name}}
-							<span>
-						</div>
-						<!-- <img ng&#45;src="{{event.images[0]}}" style="width:50px;height:50px;"> -->
-					</ion-item>
-				</ion-list>
-			</ion-content>
-			</ion-view>
-		</ion-tab>
-		<ion-tab title="Trubinenhalle">
-		</ion-tab>
-	</ion-tabs>
+<ion-view view-title="Events" class="events" cache-view="false">
+    <ion-tabs class="tabs-striped tabs-top tabs-background-default tabs-color-default">
+        <ion-tab title="Jetzt" class="active">
+            <ion-view>
+                <ion-content>
+                    <ion-list>
+                        <ion-item ng-repeat="event in appData.events.values()"
+                                  ui-sref="app.location({idx:$index})">
+                            <div class="event-time">
+                                16:30</br> - </br>17:00
+                            </div>
+                            <div class="event-desc">
+                                {{::event|trans:'name'}}
+                                </br>
+                                <span class="event-location">
+                                    {{::appData.getLocation(event)|trans:'name'}}
+                                </span>
+                            </div>
+                            <!-- <img ng&#45;src="{{event.images[0]}}" style="width:50px;height:50px;"> -->
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab title="Trubinenhalle">
+        </ion-tab>
+    </ion-tabs>
 </ion-view>
