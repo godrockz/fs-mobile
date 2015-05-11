@@ -1,5 +1,16 @@
 'use strict';
 angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
+    var defaultLanguage='en';
+    function guessLanguage(langIdentifier){
+        if (langIdentifier && langIdentifier.length >= 5 && langIdentifier.indexOf('_') !== -1) {
+            var parts = langIdentifier.split('_');
+            if(parts.length > 0){
+                return parts[0];
+            }
+        }
+        return defaultLanguage;
+    }
+
     $stateProvider.state('app', {
         url: '/app',
         abstract: true,
@@ -14,7 +25,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         controller: function($scope, appData, $translate, dataProvider){
             console.log('appData in Ctrl ', appData);
             $scope.appData = appData;
-            $scope.currentLanguage = $translate.use().split('_')[0];
+            $scope.currentLanguage = guessLanguage($translate.use());
             $scope.deleteData = dataProvider.deleteData;
             $scope.refreshData = function() {
                 dataProvider.refreshData().then(function(data){

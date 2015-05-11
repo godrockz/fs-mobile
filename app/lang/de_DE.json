@@ -2,6 +2,9 @@
 
     "app.general.location":"Ort",
     "app.general.locations":"Orte",
+    "app.general.home":"Home",
+    "app.general.map":"Karte",
+    "app.general.events":"Events",
     "app.general.settings":"Einstellungen",
     "app.settings.language.label":"Sprache",
 
