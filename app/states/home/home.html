@@ -1,20 +1,5 @@
-<p>oben</p>
-<ion-view view-title="Home">
-    <ion-content>
-        <ion-refresher
-            pulling-text="Pull to refresh..."
-            on-refresh="refreshData()">
-        </ion-refresher>
-
-        <h1>Home</h1>
-
-        <p>{{appData.$metaInfo.fetched}}</p>
-        pull to refresh
-
-		<br>
-		<br>
-        <a href='' ng-click="deleteData()">delete local data</a>
+<ion-view view-title="{{'app.general.home'|translate}}">
+    <ion-content class="home-state">
 
     </ion-content>
 </ion-view>
-<p>unten</p>

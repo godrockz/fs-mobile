@@ -12,7 +12,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/home/home.html',
-                controller: function () {
+                controller: function ($scope,$timeout, $state) {
 
                 }
             }

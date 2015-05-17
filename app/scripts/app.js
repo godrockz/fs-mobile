@@ -16,7 +16,7 @@ angular.module('fsMobile', ['ionic','pascalprecht.translate',
     .config(function ($stateProvider, $urlRouterProvider,$translateProvider) {
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/home');
+        $urlRouterProvider.otherwise('/');
 
 
         $translateProvider.useStaticFilesLoader({
