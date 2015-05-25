@@ -7,6 +7,10 @@
     "app.general.events":"Events",
     "app.general.settings":"Einstellungen",
     "app.settings.language.label":"Sprache",
+    "app.settings.data.divider":"App-Daten",
+    "app.settings.fetchdate.label":"Stand",
+    "app.settings.data.update":"Daten update",
+    "app.settings.data.delete":"Daten löschen",
 
     "language.de_DE":"Deutsch",
     "language.en_EN":"Englisch"

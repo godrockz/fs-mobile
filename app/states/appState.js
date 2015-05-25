@@ -15,7 +15,14 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         controller: function($scope, appData, $translate, dataProvider){
             console.log('appData in Ctrl ', appData);
             $scope.appData = appData;
-            $scope.deleteData = dataProvider.deleteData;
+
+            $scope.deleteData = function(){
+                dataProvider.deleteData();
+                dataProvider.getData().then(function(data){
+                   $scope.appData = data;
+                });
+            };
+
             $scope.refreshData = function() {
                 dataProvider.refreshData().then(function(data){
                     console.log('refresh: new data saved', data);
@@ -25,7 +32,6 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                     $scope.$broadcast('scroll.refreshComplete');
                 });
             };
-
         }
     });
 });

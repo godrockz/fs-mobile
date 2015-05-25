@@ -1,15 +1,50 @@
 .starting {
     background: url("../images/starting.png") no-repeat;
+    background-position: 50%;
     background-size: cover;
     width: 100%;
     height: 100%;
-    p.txt{
+
+    div.txt {
+        background-color: #95004e;
+        bottom: 0;
+        height: 20px;
+        margin: 0;
+        opacity: 0.5;
+        position: absolute;
+        width: 100%;
+    }
+    p.txt {
         color: #fff;
-        font-size: 7vw;
-        font-weight: 800;
-        position: relative;
+        font-size: 11px;
+        font-weight: 400;
+        margin: 0px;
+        padding: 0px;
+        bottom: 0px;
+        position: absolute;
         text-align: center;
-        text-shadow: 5px 4px 4px #000;
-        top: 85%;
+        text-shadow: 2px 1px 0 #000;
+        width: 100%;
+    }
+
+    .logo-ct {
+        position: absolute;
+        left: 50%;
+        bottom: 6vw;
+        .start-logo {
+            background: url('../images/logo.png') no-repeat center center;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            height: 58vw;
+            width: 38vw;
+
+            max-height: 300px;
+            max-width: 300px;
+
+            left: -50%;
+            position: relative;
+        }
     }
 }

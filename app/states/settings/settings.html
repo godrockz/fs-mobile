@@ -1,9 +1,5 @@
-<ion-view view-title="{{'app.general.settings'|translate}}">
+<ion-view view-title="{{'app.general.settings'|translate}}" class="settings" cache-view="true">
     <ion-content>
-        <ion-refresher
-            pulling-text="Pull to refresh..."
-            on-refresh="refreshData()">
-        </ion-refresher>
         <div class="list">
             <label class="item item-input item-select" ng-click="onDebug()">
                 <div class="input-label">
@@ -13,14 +9,21 @@
                         ng-options="('language.'+lang | translate) for lang in view.availableLanguages">
                 </select>
             </label>
+
+            <div class="item item-divider">
+                <span class="item-divider-text">{{'app.settings.data.divider'|translate}}</span>
+                <span class="app-data-date">
+                    {{'app.settings.fetchdate.label'|translate}} {{appData.$metaInfo.fetched|date:'dd.MM HH:mm:ss'}}
+                </span>
+            </div>
+
+            <div class="item" >
+                <button class="button button-full button-positive" ng-click="refreshData()">{{'app.settings.data.update'|translate}}</button>
+            </div>
+            <div class="item" >
+                <button class="button button-full button-positive" ng-click="deleteData()">{{'app.settings.data.delete'|translate}}</button>
+            </div>
         </div>
-
-        <p>{{appData.$metaInfo.fetched}}</p>
-        pull to refresh
-
-        <br>
-        <br>
-        <a href='' ng-click="deleteData()">delete local data</a>
 
         <div ng-if="debug.cnt >10">
         <h1 >Debug:</h1>

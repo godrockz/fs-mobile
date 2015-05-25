@@ -28,9 +28,9 @@ angular.module('fsMobile.controllers').config(function ($stateProvider) {
             }).then(function(){
                 return addTimer('translate for saxons',4000);
             }).then(function(){
-                return addTimer('resort after trouble with saxon descent',2000);
+                return addTimer('error with saxon descent',2000);
             }).then(function(){
-                return addTimer('providing english and german language only',2000);
+                return addTimer('providing english and german only',2000);
             }).then(function(){
                 return addTimer('running app',1000);
             }).then(function(){
@@ -40,7 +40,9 @@ angular.module('fsMobile.controllers').config(function ($stateProvider) {
             console.log('starting the app');
 
             $scope.$on('$destroy',function(){
-                timerDestruct();
+                if(angular.isFunction(timerDestruct)){
+                    timerDestruct();
+                }
             });
         }
 
