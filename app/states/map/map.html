@@ -3,7 +3,7 @@
         <div class="zoombuttons">
             <button class="button ion ion-plus"  ng-disabled="zoomlevel >= 3" ng-click="zoomIn()"></button>
             <br>
-            <button class="button ion ion-minus" ng-disabled="zoomlevel <= 1" ng-click="zoomOut()"></button>
+            <button class="button ion ion-minus" ng-disabled="zoomlevel <= 0.5" ng-click="zoomOut()"></button>
         </div>
 
         <ion-scroll delegate-handle="siteplan" zooming="true" direction="xy" ng-style="{height: winHeight + 'px', width: winWidth + 'px'}">

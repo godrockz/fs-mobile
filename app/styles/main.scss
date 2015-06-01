@@ -15,7 +15,7 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
-
+$background-general:                lightgrey;
 $positive:                          #AB1C57 !default;
 $bar-title-font-size:               18px !default;
 $font-size-large:                   22px !default;
@@ -47,6 +47,7 @@ body * {
 @import "../states/map/map";
 @import "../states/starting";
 @import "../states/settings/settings";
+@import "../states/location/location";
 
 
 // menu bar image
