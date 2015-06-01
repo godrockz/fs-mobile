@@ -1,3 +1,60 @@
 .home-state {
+    background-color: $background-general;
+    padding: 0 0.5em;
+    .news-item {
+        background-color: white;
+        box-shadow: 3px 2px 6px grey;
+        margin: 0.8em 0;
+        padding: 0.5em;
+        height: 5em;
 
+        .news-date {
+            width: 100%;
+            height: 100%;
+            .box {
+                border-radius: 50%;
+                display: inline-block;
+                width: 4em;
+                height: 4em;
+                background-color: rgba($positive, 0.5);
+                position: relative;
+                line-height: 4em;
+                text-align: center;
+                span {
+                    display: inline-block;
+                    vertical-align: middle;
+                    line-height: normal;
+                    font-size: 0.8em;
+                    color: white;
+                }
+            }
+
+        }
+        .news-text {
+            padding: 0.5em 0;
+
+            p.head {
+                font-size: 1.2em;
+                margin: 0 0 0.2em;
+                color: $positive;
+            }
+            p.text {
+                font-size: 0.7em;
+                overflow: hidden;
+                margin: 0;
+                height: 2em;
+                position:relative;
+                line-height: 1.2em;
+            }
+            p.text:before {
+                content:'';
+                width:100%;
+                height:100%;
+                position:absolute;
+                left:0;
+                top:0;
+                background:linear-gradient(transparent 1em, white);
+            }
+        }
+    }
 }

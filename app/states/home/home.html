@@ -1,5 +1,15 @@
 <ion-view view-title="{{'app.general.home'|translate}}">
     <ion-content class="home-state">
-
+        <div ng-repeat="item in news" class="news-item row">
+            <div class="news-date col-25">
+                <div class="box">
+                    <span>DO<br>14:30</span>
+                </div>
+            </div>
+            <div class="news-text col-75">
+                <p class="head">{{item.title}}</p>
+                <p class="text">{{item.text}}</p>
+            </div>
+        </div>
     </ion-content>
 </ion-view>
