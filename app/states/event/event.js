@@ -10,7 +10,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/event/events.html',
-                controller: function () {
+                controller: function ($scope) {
+                    $scope.currentEvents = [];
+                    $scope.watching = { currentDateTime: new Date('2015-07-29T10:20') };
+                    $scope.$watch('watching.currentDateTime',function(time){
+                         $scope.currentEvents =
+                             $scope.appData.events.filterByTime(time)
+                    });
                 }
             }
         }

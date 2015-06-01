@@ -12,6 +12,8 @@ angular.module('fsMobile', ['ionic','pascalprecht.translate',
     'fsMobile.controllers',
     'fsMobile.states', 'fsMobile.rest',
     'fsMobile.services','fsMobile.filters',
+    'fsMobile.directives',
+    'ui.bootstrap.datetimepicker',
     'config'])
     .config(function ($stateProvider, $urlRouterProvider,$translateProvider) {
 

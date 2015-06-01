@@ -16,6 +16,12 @@ angular.module('fsMobile.filters', []).
             return JSON.stringify(data,null,1);
         };
     })
+    .filter('timeFormat',function(){
+        return function (time, property){
+            if (!time) return '';
+            return moment(time).format(property);
+        };
+    })
     .filter('trans', function (translations) {
         var translationsProperty = 'translations';
         function isTranslateable(instance) {

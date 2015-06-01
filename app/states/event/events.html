@@ -3,11 +3,20 @@
         <ion-tab title="Jetzt" class="active">
             <ion-view>
                 <ion-content>
+                    <label class="item item-input">
+                        <span class="input-label">Current Date Time (for testing)</span>
+                        <my-date-time-picker placeholder="Enter Date here"
+                                             title="Select Date"
+                                             ng-model="watching.currentDateTime"
+                                             ng-change="test(currentDateTime)" />
+                    </label>
                     <ion-list>
-                        <ion-item ng-repeat="event in appData.events.values()"
+                        <ion-item ng-repeat="event in currentEvents"
                                   ui-sref="app.location({idx:$index})">
                             <div class="event-time">
-                                16:30</br> - </br>17:00
+                                {{ ::event.start|timeFormat:'HH:mm' }}</br>
+                                - </br>
+                                {{ ::event.end|timeFormat:'HH:mm' }}
                             </div>
                             <div class="event-desc">
                                 {{::event|trans:'name'}}
