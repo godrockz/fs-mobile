@@ -12,35 +12,38 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope,$timeout, $state) {
+                controller: function ($scope) {
 
-                    console.log('$scope.appData',$scope.appData);
 
                     $scope.news = $scope.appData.news;
 
-                    //$scope.news = [
-                    //    {   title: 'Toiletten verstopft!',
-                    //        text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, ' +
-                    //        'sed diam nonumy eirmod tempor invidunt ut labore et dolore magna ' +
-                    //        'aliquyam erat, sed diam voluptua. At vero eos et accusam et justo ' +
-                    //        'duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata ' +
-                    //        'sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,' +
-                    //        ' consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ' +
-                    //        'ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos ' +
-                    //        'et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, ' +
-                    //        'no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-                    //        date: '2015.08.01 - 20:00'
-                    //    },
-                    //    {   title: 'Freibier für alle!',
-                    //        text: 'Stet clita kasd gubergren, no sea takimata ' +
-                    //        'sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,' +
-                    //        ' consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ' +
-                    //        'ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos ' +
-                    //        'et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, ' +
-                    //        'no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-                    //        date: '2015.08.02 - 12:00'
+                    console.log('news',$scope.news);
+
+                }
+            }
+        }
+    });
+
+    $stateProvider.state('app.singlenews', {
+        url: '/news/:idx',
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: 'states/news/singlenews.html',
+                controller: function ($scope, $stateParams) {
+
+                    if($scope.appData.news){
+
+                        $scope.news= $scope.appData.news[$stateParams.idx];
+
+                        console.log('SINGLE NEWS',$scope.appData.news);
+                    }
+
+                    //$scope.$watch('resources.news',function(){
+                    //    if($scope.resources.news){
+                    //        $scope.news = $scope.resources.news[$stateParams.idx];
                     //    }
-                    //];
+                    //});
                 }
             }
         }

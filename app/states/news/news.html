@@ -1,12 +1,12 @@
 <ion-view view-title="{{'app.general.news'|translate}}">
     <ion-content class="news-state">
-        <div ng-repeat="item in news| filter:{deleted : false}" class="news-item row" ui-sref="app.news({idx:$index})">
+        <div ng-repeat="item in news| filter:{deleted : false}" class="news-item row" ui-sref="app.singlenews({idx:item.id})">
             <div class="news-date col-25">
                 <div class="box">
                     <span>{{item.publishDate|date:'EEE'}}<br>{{item.publishDate|date:'H:mm'}}</span>
                 </div>
             </div>
-            <div class="news-text col-75">
+            <div class="news-text-head col-75">
                 <p class="head">{{item.translations.de.title}}</p>
                 <p class="text">{{item.translations.de.text}}</p>
             </div>

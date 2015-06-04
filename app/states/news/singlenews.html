@@ -1,0 +1,25 @@
+<ion-view view-title="{{'app.general.news'|translate}}">
+    <ion-content class="single-news">
+        <div class="image-box">
+            <img class="image" ng-src="{{news.image}}" />
+        </div>
+        <div class="content-box">
+            <div class="news-item-single row">
+                <div class="news-date col-25">
+                    <div class="box">
+                        <span>{{news.publishDate|date:'EEE'}}<br>{{news.publishDate|date:'H:mm'}}</span>
+                    </div>
+                </div>
+                <div class="news-text-head col-75 col-center">
+                    <p class="head">{{news.translations.de.title}}</p>
+                    <!--<p class="text">{{news.translations.de.text}}</p>-->
+                </div>
+            </div>
+            <p class="news-text">{{news.translations.de.text}}</p>
+
+
+
+        </div>
+
+    </ion-content>
+</ion-view>
