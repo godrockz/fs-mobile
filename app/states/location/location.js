@@ -10,7 +10,35 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/location/locations.html',
-                controller: function () {
+                controller: function ($scope, $ionicSideMenuDelegate) {
+
+                    $ionicSideMenuDelegate.canDragContent(false);
+
+                    $scope.data = [
+                        {   title: 'Konzert 1',
+                            typ: 'CONCERT',
+                            date: '2015.08.01 - 20:00',
+                            location: 'Mainstage',
+                            text: 'Dies ist ein freier Text der das Event, in diesem Fall das Konzert 1 beschreibt.',
+                            genre: 'Post-Punk'
+                        },
+                        {   title: 'Konzert 2',
+                            typ: 'CONCERT',
+                            date: '2015.07.30 - 18:30',
+                            location: 'Kunstzelt',
+                            text: 'Dies ist ein freier Text der das Event, in diesem Fall das Konzert 2 beschreibt.',
+                            genre: 'Post-Punk'
+                        },
+                        {   title: 'Seminar A',
+                            typ: 'SEMINAR',
+                            date: '2015.08.01 - 14:00',
+                            location: 'Mainstage',
+                            text: 'Dies ist ein freier Text der das Event, in diesem Fall das Seminar A beschreibt.'
+                        }
+                    ];
+
+                    console.log('$scope.appData',$scope.data);
+
                 }
             }
         }

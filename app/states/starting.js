@@ -34,7 +34,7 @@ angular.module('fsMobile.controllers').config(function ($stateProvider) {
             }).then(function(){
                 return addTimer('running app',1000);
             }).then(function(){
-                $state.go('app.home');
+                $state.go('app.news');
             });
 
             console.log('starting the app');
