@@ -67,6 +67,9 @@
         font-size: 1.2em;
         margin: 0 0 0.2em;
         color: $positive;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     p.text {
         font-size: 0.7em;
