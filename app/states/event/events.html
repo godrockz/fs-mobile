@@ -1,8 +1,19 @@
 <ion-view view-title="Events" class="events" cache-view="false">
-    <ion-tabs class="tabs-striped tabs-top tabs-background-default tabs-color-default">
-        <ion-tab title="Jetzt" class="active">
-            <ion-view>
-                <ion-content>
+    <ion-content>
+        <tab-slide-box class="tabs-striped tabs-top tabs-background-default tabs-color-default">
+            <div class="tsb-icons">
+                <div class="tsb-ic-wrp">
+                    <ion-scroll direction="x" class="tsb-hscroll">
+                        <a href="javascript:;">Jetzt</a>
+                        <a href="javascript:;">Turbinenhalle</a>
+                        <a href="javascript:;">Herzstück</a>
+                        <a href="javascript:;">Artland</a>
+                        <a href="javascript:;">Secret Garden</a>
+                    </ion-scroll>
+                </div>
+            </div>
+            <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+                <ion-slide>
                     <label class="item item-input">
                         <span class="input-label">Current Date Time (for testing)</span>
                         <my-date-time-picker placeholder="Enter Date here"
@@ -25,13 +36,23 @@
                                     {{::appData.getLocation(event)|trans:'name'}}
                                 </span>
                             </div>
-                            <!-- <img ng&#45;src="{{event.images[0]}}" style="width:50px;height:50px;"> -->
                         </ion-item>
                     </ion-list>
-                </ion-content>
-            </ion-view>
-        </ion-tab>
-        <ion-tab title="Trubinenhalle">
-        </ion-tab>
-    </ion-tabs>
+                </ion-slide>
+                <ion-slide>
+                    <h1>Turbinenhalle</h1>
+                </ion-slide>
+                <ion-slide>
+                    <h1>Herzstück</h1>
+                </ion-slide>
+                <ion-slide>
+                    <h1>Artland</h1>
+                </ion-slide>
+                <ion-slide>
+                    <h1>Secret Garden</h1>
+                </ion-slide>
+
+            </ion-slide-box>
+        </tab-slide-box>
+    </ion-content>
 </ion-view>

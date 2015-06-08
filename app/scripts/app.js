@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('fsMobile.services', []);
-angular.module('fsMobile', ['ionic','pascalprecht.translate',
+angular.module('fsMobile', ['ionic','tabSlideBox', 'pascalprecht.translate',
     'LocalForageModule',
     'fsMobile.controllers',
     'fsMobile.states', 'fsMobile.rest',
