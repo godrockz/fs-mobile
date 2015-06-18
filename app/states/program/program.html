@@ -1,0 +1,123 @@
+<!--<ion-view view-title="{{'app.general.locations'|translate}}" >-->
+<ion-view view-title="Programm" >
+    <ion-content>
+        <div class="row" style="
+                                width:100%;
+                                background-color:black;
+                                color:white;
+                                line-height: 1em;
+                                padding:1em 0;
+                                text-align: center">
+            <div class="col-25" ng-click="previous()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
+                <small>{{tabNames[tabIndex==0?tabNames.length-1:tabIndex-1]}}</small>
+            </div>
+            <div class="col-50">
+                <b>{{tabNames[tabIndex]}}</b>
+            </div>
+            <div class="col-25" ng-click="next()" style="word-wrap: normal; padding-left: 0.5em;">
+                <small>{{tabNames[tabIndex==tabNames.length-1?0:tabIndex+1]}}</small>
+            </div>
+        </div>
+        <ion-slide-box on-slide-changed="changeTabHeadTo($index)"
+                       does-continue="true"
+                       style="  height:100%;
+                                background-color: rgba(14,04,86,0.5);
+                                padding-top:2em;
+                                /*position:absolute;*/
+                                /*top:0;*/
+                                /*left:0;*/
+
+                                ">
+            <ion-slide style="height:100%" ng-repeat="tab in tabNames">
+                <ion-scroll style="height:100%;padding-top:3.5em;">
+                    <div class=""><h1>{{::tab}}</h1></div>
+                </ion-scroll>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>
+
+
+
+<!--<ion-view view-title="Events" class="events" cache-view="false">-->
+    <!--<ion-content scroll="false">-->
+        <!--<tab-slide-box tab="0" class="tabs-striped tabs-top tabs-background-default tabs-color-default">-->
+            <!--<div class="tsb-icons">-->
+                <!--<div class="tsb-ic-wrp">-->
+                    <!--<ion-scroll direction="x" class="tsb-hscroll">-->
+                        <!--<a href="javascript:;">Jetzt</a>-->
+                        <!--<a href="javascript:;">Turbinenhalle</a>-->
+                        <!--<a href="javascript:;">Herzstück</a>-->
+                        <!--<a href="javascript:;">Artland</a>-->
+                        <!--<a href="javascript:;">Secret Garden</a>-->
+                    <!--</ion-scroll>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">-->
+                <!--<ion-slide>-->
+                    <!--<label class="item item-input">-->
+                        <!--<span class="input-label">Current Date Time (for testing)</span>-->
+                        <!--<my-date-time-picker placeholder="Enter Date here"-->
+                                             <!--title="Select Date"-->
+                                             <!--ng-model="watching.currentDateTime"-->
+                                             <!--ng-change="test(currentDateTime)" />-->
+                    <!--</label>-->
+                    <!--<ion-list>-->
+                        <!--<ion-item ng-repeat="event in currentEvents"-->
+                                  <!--ui-sref="app.location({idx:$index})">-->
+                            <!--<div class="event-time">-->
+                                <!--{{ ::event.start|timeFormat:'HH:mm' }}</br>-->
+                                <!-&#45;&#45; </br>-->
+                                <!--{{ ::event.end|timeFormat:'HH:mm' }}-->
+                            <!--</div>-->
+                            <!--<div class="event-desc">-->
+                                <!--{{::event|trans:'name'}}-->
+                                <!--</br>-->
+                                <!--<span class="event-location">-->
+                                    <!--{{::appData.getLocation(event)|trans:'name'}}-->
+                                <!--</span>-->
+                            <!--</div>-->
+                        <!--</ion-item>-->
+                    <!--</ion-list>-->
+                <!--</ion-slide>-->
+                <!--<ion-slide>-->
+                    <!--<ion-scroll style="height:100%" delegate-handle="slide1Scroll" >-->
+                        <!--<h1>Turbinenhalle</h1>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                        <!--<p>content</p>-->
+                    <!--</ion-scroll>-->
+                <!--</ion-slide>-->
+                <!--<ion-slide>-->
+                    <!--<h1>Herzstück</h1>-->
+                <!--</ion-slide>-->
+                <!--<ion-slide>-->
+                    <!--<h1>Artland</h1>-->
+                <!--</ion-slide>-->
+                <!--<ion-slide>-->
+                    <!--<h1>Secret Garden</h1>-->
+                <!--</ion-slide>-->
+
+            <!--</ion-slide-box>-->
+        <!--</tab-slide-box>-->
+    <!--</ion-content>-->
+<!--</ion-view>-->
