@@ -1,0 +1,27 @@
+<!--<ion-view view-title="{{'app.general.locations'|translate}}" >-->
+<ion-view class="workshops" view-title="Workshops" >
+    <ion-content>
+        <div class="row tabmenu">
+            <div class="col-25 tabmenu-left" ng-click="previousTab()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
+                <small>{{ 'app.days.' + previousDay()|translate }}</small>
+            </div>
+            <div class="col-50 tabmenu-center">
+                <b>{{ 'app.days.' + currentDay()|translate }}</b>
+            </div>
+            <div class="col-25 tabmenu-right" ng-click="nextTab()" style="word-wrap: normal; padding-left: 0.5em;">
+                <small>{{ 'app.days.' + nextDay()|translate }}</small>
+            </div>
+        </div>
+
+        <ion-slide-box class="container" on-slide-changed="changeTabHeadTo($index)"
+                                         does-continue="true">
+            <ion-slide class="tab" ng-repeat="(day, events) in groupedEvents">
+                <ion-scroll class="list">
+                    <div class="prog-box" ng-repeat="event in events">
+                        {{ event.translations.de.name }}
+                    </div>
+                </ion-scroll>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>

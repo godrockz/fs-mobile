@@ -1,10 +1,23 @@
 {
 
+    "app.general.news":"News",
     "app.general.location":"Location",
     "app.general.locations":"Locations",
+    "app.general.siteplan":"Map",
     "app.general.settings":"Settings",
+    "app.general.program":"Program",
+    "app.general.workshops":"Workshops",
+    "app.general.siteplan":"Map",
     "app.settings.language.label":"Language",
 
+    "app.days.monday":"Monday",
+    "app.days.tuesday":"Tuesday",
+    "app.days.wednesday":"Wednesday",
+    "app.days.thursday":"Thursday",
+    "app.days.friday":"Friday",
+    "app.days.saturday":"Saturday",
+    "app.days.sunday":"Sunday",
+
     "language.de_DE":"German",
-    "language.en_EN":"Englisch"
+    "language.en_EN":"English"
 }

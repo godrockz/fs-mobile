@@ -6,11 +6,21 @@
     "app.general.siteplan":"Geländeplan",
     "app.general.events":"Events",
     "app.general.settings":"Einstellungen",
+    "app.general.program":"Programm",
+    "app.general.workshops":"Workshops",
     "app.settings.language.label":"Sprache",
     "app.settings.data.divider":"App-Daten",
     "app.settings.fetchdate.label":"Stand",
     "app.settings.data.update":"Daten update",
     "app.settings.data.delete":"Daten löschen",
+
+    "app.days.monday":"Montag",
+    "app.days.tuesday":"Dienstag",
+    "app.days.wednesday":"Mittwoch",
+    "app.days.thursday":"Donnerstag",
+    "app.days.friday":"Freitag",
+    "app.days.saturday":"Samstag",
+    "app.days.sunday":"Sonntag",
 
     "language.de_DE":"Deutsch",
     "language.en_EN":"Englisch"

@@ -32,6 +32,18 @@ angular.module('fsMobile.services')
                     return result;
                 });
                 return _.sortBy(this.values(), 'start')
+            },
+            groupByDay: function() {
+                return _.groupBy(this.values(), function(resource) {
+                    if (resource.start) {
+                        return moment(resource.start)
+                            .format('dddd')
+                            .toLowerCase();
+                    } else {
+                        return 'unknown';
+                    }
+                });
+                return _.sortBy(this.values(), 'start')
             }
 
         };

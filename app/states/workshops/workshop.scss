@@ -1,0 +1,20 @@
+.workshops {
+
+  .container {
+    height: 100%;
+    .tab {
+      background-color: $background-general;
+      .list {
+        height: 100%;
+        padding: 0 0.5em;
+        .prog-box {
+          background-color: white;
+          box-shadow: 3px 2px 6px grey;
+          margin: 0.5em 0 1em 0;
+          padding: 0.5em;
+          height: 5em;
+        }
+      }
+    }
+  }
+}

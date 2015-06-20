@@ -42,6 +42,9 @@ body * {
 
 .scroll{height: 100%;}
 
+// Partials
+@import "partials/tabmenu";
+
 // Your application styles go here
 @import "../states/news/news";
 @import "../states/map/map";
@@ -49,6 +52,7 @@ body * {
 @import "../states/settings/settings";
 @import "../states/location/location";
 @import "../states/program/program";
+@import "../states/workshops/workshop";
 
 
 // menu bar image
