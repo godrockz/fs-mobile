@@ -13,3 +13,5 @@ plugins
 *.DS_Store
 
 app/scripts/config.js
+app/scripts/data
+resources

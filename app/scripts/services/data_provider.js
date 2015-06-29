@@ -50,7 +50,7 @@ angular.module('fsMobile.services')
                             return updateLocalForageData(response);
                         }).catch(function (error) {
                             console.log('fetching from file failed due to', error);
-                            return error;
+                            return {};
                         });
                     })
                     .then(prepareData);

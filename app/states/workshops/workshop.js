@@ -10,11 +10,19 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, Resource) {
 
                     $ionicSideMenuDelegate.canDragContent(false);
 
-                    $scope.groupedEvents = $scope.appData.events.groupByDay();
+                    if (!$scope.appData.workshops && $scope.appData.events) {
+                        $scope.appData.workshops = new Resource(
+                            $scope.appData.events.filterByEventCategory('WORKSHOP'));
+                    }
+
+                    $scope.groupedEvents = {}
+                    if ($scope.appData.workshops) {
+                        $scope.groupedEvents = $scope.appData.workshops.groupByDay();
+                    }
 
                     var days = _.keys($scope.groupedEvents);
                     var tabIndex = 0;
@@ -30,7 +38,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.previousTab = function() {
                         $ionicSlideBoxDelegate.previous();
                     };
-
 
                     $scope.previousDay = function() {
                         var index = tabIndex ? tabIndex-1 : days.length-1

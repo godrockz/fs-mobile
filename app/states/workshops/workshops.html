@@ -2,13 +2,17 @@
 <ion-view class="workshops" view-title="Workshops" >
     <ion-content>
         <div class="row tabmenu">
-            <div class="col-25 tabmenu-left" ng-click="previousTab()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
+            <div class="col-25 tabmenu-left" ng-click="previousTab()"
+                                             ng-if="previousDay()"
+                                             style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
                 <small>{{ 'app.days.' + previousDay()|translate }}</small>
             </div>
-            <div class="col-50 tabmenu-center">
+            <div class="col-50 tabmenu-center" ng-if="currentDay()">
                 <b>{{ 'app.days.' + currentDay()|translate }}</b>
             </div>
-            <div class="col-25 tabmenu-right" ng-click="nextTab()" style="word-wrap: normal; padding-left: 0.5em;">
+            <div class="col-25 tabmenu-right" ng-click="nextTab()"
+                                              ng-if="nextDay()"
+                                              style="word-wrap: normal; padding-left: 0.5em;">
                 <small>{{ 'app.days.' + nextDay()|translate }}</small>
             </div>
         </div>
