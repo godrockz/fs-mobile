@@ -43,17 +43,15 @@ angular.module('fsMobile.services')
                         return 'unknown';
                     }
                 });
-                //return _.sortBy(this.values(), 'start')
             },
             groupByLocation: function() {
                 return _.groupBy(this.values(), function(resource) {
-                    if (resource.location) {
-                        return resource.location;
+                    if (resource.locationRef) {
+                        return resource.locationRef;
                     } else {
                         return 'unknown';
                     }
                 });
-                return _.sortBy(this.values(), 'start')
             },
             filterByEventCategory: function(cat,neq) {
                 return _.filter(this.values(), function(resource) {
