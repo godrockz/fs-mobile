@@ -25,10 +25,14 @@ angular.module('fsMobile', ['ionic','tabSlideBox', 'pascalprecht.translate',
             prefix: 'lang/',
             suffix:'.json'
         });
+        $translateProvider.fallbackLanguage(['en', 'de']);
         $translateProvider.determinePreferredLanguage();
-        $translateProvider.registerAvailableLanguageKeys(['de_DE','en_EN'],{'de*':'de_DE','en*':'en_EN'});
+        $translateProvider.registerAvailableLanguageKeys(['de','en'],{
+            'de*':'de',
+            'en*':'en'
+        });
 
-    }).constant('AVAILABLE_LANGUAGES',['de_DE','en_EN'])
+    }).constant('AVAILABLE_LANGUAGES',['de','en'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
