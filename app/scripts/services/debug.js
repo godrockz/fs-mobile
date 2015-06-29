@@ -1,10 +1,13 @@
 /**
- * TODO: Documentation
  * <p/>
  * Created by Benjamin Jacob on 12.05.15.
  * <p/>
  * © 2015 upSource GmbH, all rights reserved.
  */
+
+/*global
+    angular
+*/
 'use strict';
 angular.module('fsMobile.services').service('debug', function ($rootScope) {
     $rootScope.debugInfo = {};
@@ -16,8 +19,5 @@ angular.module('fsMobile.services').service('debug', function ($rootScope) {
             };
         }
     };
-
     return svc;
-
-
 });

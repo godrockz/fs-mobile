@@ -1,3 +1,7 @@
+/*global
+    angular
+*/
+
 'use strict';
 angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
 
@@ -5,28 +9,28 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
-        resolve:{
-            appData:function(dataProvider, $rootScope){
-                return dataProvider.getData().finally(function(){
+        resolve: {
+            appData: function (dataProvider, $rootScope) {
+                return dataProvider.getData().finally(function () {
                     $rootScope.$broadcast('scroll.refreshComplete');
                 });
             }
         },
-        controller: function($scope, appData, $translate, dataProvider){
+        controller: function ($scope, appData, dataProvider) {
             console.log('appData in Ctrl ', appData);
             $scope.appData = appData;
 
-            $scope.deleteData = function(){
+            $scope.deleteData = function () {
                 dataProvider.deleteData();
-                dataProvider.getData().then(function(data){
-                   $scope.appData = data;
+                dataProvider.getData().then(function (data) {
+                    $scope.appData = data;
                 });
             };
 
-            $scope.refreshData = function() {
-                dataProvider.refreshData().then(function(data){
+            $scope.refreshData = function () {
+                dataProvider.refreshData().then(function (data) {
                     console.log('refresh: new data saved', data);
-                    angular.forEach(data, function(resource, resourceName) {
+                    angular.forEach(data, function (resource, resourceName) {
                         $scope.appData[resourceName] = resource;
                     });
                     $scope.$broadcast('scroll.refreshComplete');
@@ -35,4 +39,3 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         }
     });
 });
-

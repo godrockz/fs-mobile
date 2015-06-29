@@ -1,8 +1,10 @@
-/**
- * <p/>
- * Created by Benjamin Jacob on 24.02.15.
- * <p/>
- */
+/*jslint
+  plusplus: true
+*/
+/*global
+    angular, moment
+*/
+
 'use strict';
 angular.module('fsMobile.states').config(function ($stateProvider) {
     $stateProvider.state('app.program', {
@@ -12,6 +14,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 templateUrl: 'states/program/program.html',
                 controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
 
+                    var newLocations = [],
+                        actualEvent = null;
+
                     $ionicSideMenuDelegate.canDragContent(false);
 
                     $scope.currentDateTime = new Date('2015-07-29T10:20');
@@ -19,23 +24,19 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.events = $scope.appData.events;
                     $scope.locations = $scope.appData.locations;
 
-
                     // Events nach Location sortieren
                     $scope.eventsGroupLoc = $scope.events.groupByLocation();
-
 
                     // Events mit bestimmten Kategorien zu einer Location hinzufügen
                     $scope.eventsOutput = null;
 
-                    var newLocations = [];
-
-                    angular.forEach($scope.eventsGroupLoc, function(locationEvents, locationId) {
+                    angular.forEach($scope.eventsGroupLoc, function (locationEvents, locationId) {
 
                         var newlocation = [];
                         newlocation.id = locationId;
-                        if(locationId === 'unknown'){
-                            newlocation.name = 'unknown';}
-                        else{
+                        if (locationId === 'unknown') {
+                            newlocation.name = 'unknown';
+                        } else {
                             newlocation.name = $scope.locations[locationId].translations.de.name;
                         }
                         newlocation.events = {
@@ -45,27 +46,26 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                             'saturday': {index: 3, events: []},
                             'sunday': {index: 4, events: []}
                         };
-                        var actualEvent = null;
 
                         // Alle Events der Location auslesen und hinzufügen wenn richtige Kategorie
                         newlocation.eventCount = 0;
-                        angular.forEach(locationEvents, function(event, key) {
-                            if(event.eventCategory === 'CONCERT'){
-                                var day = moment(event.start).format('dddd').toLowerCase();
+                        angular.forEach(locationEvents, function (event) {
+                            if (event.eventCategory === 'CONCERT') {
+                                var day = moment(event.start).format('dddd').toLowerCase(),
+                                    eStart = new Date(event.start),
+                                    eEnd = new Date(event.end),
+                                    aEnd = null;
 
-                                var eStart = new Date(event.start);
-                                var eEnd   = new Date(event.end);
-
-                                if(actualEvent === null){
+                                if (actualEvent === null) {
                                     actualEvent = event.id;
-                                }else{
-                                    var aEnd   = new Date(actualEvent.end);
+                                } else {
+                                    aEnd = new Date(actualEvent.end);
 
-                                    if($scope.currentDateTime >= eStart && $scope.currentDateTime <= eEnd){
+                                    if ($scope.currentDateTime >= eStart && $scope.currentDateTime <= eEnd) {
                                         actualEvent = event.id;
-                                    }else if($scope.currentDateTime < eEnd && $scope.currentDateTime > aEnd){
+                                    } else if ($scope.currentDateTime < eEnd && $scope.currentDateTime > aEnd) {
                                         actualEvent = event.id;
-                                    }else if($scope.currentDateTime < eStart){
+                                    } else if ($scope.currentDateTime < eStart) {
                                         actualEvent = event.id;
                                     }
                                 }
@@ -76,23 +76,23 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         });
 
                         newlocation.actualEvent = actualEvent;
-                        if(newlocation.eventCount > 0){
+                        if (newlocation.eventCount > 0) {
                             newLocations.push(newlocation);
                         }
                     });
                     $scope.eventsOutput = newLocations;
-                    console.log('$scope.eventsOutput',$scope.eventsOutput);
+                    console.log('$scope.eventsOutput', $scope.eventsOutput);
 
                     $scope.tabIndex = 0;
-                    $scope.changeTabHeadTo = function(index){
+                    $scope.changeTabHeadTo = function (index) {
                         $scope.tabIndex = index;
                     };
 
-                    $scope.next = function() {
+                    $scope.next = function () {
                         $ionicSlideBoxDelegate.next();
                     };
 
-                    $scope.previous = function() {
+                    $scope.previous = function () {
                         $ionicSlideBoxDelegate.previous();
                     };
                 }
@@ -108,10 +108,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 templateUrl: 'states/program/singleprogram.html',
                 controller: function ($scope, $stateParams) {
 
-                    if($scope.appData.events){
-                        $scope.event= $scope.appData.events[$stateParams.idx];
+                    if ($scope.appData.events) {
+                        $scope.event = $scope.appData.events[$stateParams.idx];
                     }
-                    console.log('$scope.event',$scope.event);
+                    console.log('$scope.event', $scope.event);
 
                 }
             }

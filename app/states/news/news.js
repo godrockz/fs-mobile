@@ -3,6 +3,10 @@
  * Created by Benjamin Jacob on 24.02.15.
  * <p/>
  */
+
+/*global
+    angular
+*/
 'use strict';
 angular.module('fsMobile.states', []);
 angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigProvider) {
@@ -16,10 +20,9 @@ angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigP
                 templateUrl: 'states/news/news.html',
                 controller: function ($scope) {
 
-
                     $scope.news = $scope.appData.news;
 
-                    console.log('news',$scope.news);
+                    console.log('news', $scope.news);
 
                 }
             }
@@ -34,18 +37,12 @@ angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigP
                 templateUrl: 'states/news/singlenews.html',
                 controller: function ($scope, $stateParams) {
 
-                    if($scope.appData.news){
+                    if ($scope.appData.news) {
 
-                        $scope.news= $scope.appData.news[$stateParams.idx];
+                        $scope.news = $scope.appData.news[$stateParams.idx];
 
-                        console.log('SINGLE NEWS',$scope.appData.news);
+                        console.log('SINGLE NEWS', $scope.appData.news);
                     }
-
-                    //$scope.$watch('resources.news',function(){
-                    //    if($scope.resources.news){
-                    //        $scope.news = $scope.resources.news[$stateParams.idx];
-                    //    }
-                    //});
                 }
             }
         }

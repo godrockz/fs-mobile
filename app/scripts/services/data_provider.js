@@ -1,18 +1,30 @@
-/**
- * TODO: Documentation
- * <p/>
- * Created by Benjamin Jacob on 16.04.15.
- * <p/>
- * © 2015 upSource GmbH, all rights reserved.
- */
+/*jslint
+  vars: true
+*/
+/*global
+    angular
+*/
+
 'use strict';
 angular.module('fsMobile.services')
-    .service('dataProvider', function ($q, storageManager, $localForage, AppData, ENV) {
+    .service('dataProvider', function (storageManager, $localForage, AppData, ENV) {
 
         var url = ENV.apiEndpoint + '/data';
 
         var prepareData = function (data) {
             return new AppData(data);
+        };
+
+        var updateResourceData = function (localObjects, objects) {
+            localObjects = localObjects || {};
+            angular.forEach(objects, function (object) {
+                if (object.deleted) {
+                    delete localObjects[object.id];
+                } else {
+                    localObjects[object.id] = object;
+                }
+            });
+            return localObjects;
         };
 
         var updateLocalForageData = function (response, data) {
@@ -25,19 +37,6 @@ angular.module('fsMobile.services')
             return $localForage.setItem(response.$metaInfo.key, data);
         };
 
-        var updateResourceData = function (localObjects, objects) {
-            localObjects = localObjects || {};
-            angular.forEach(objects, function (object, id) {
-                // TODO: Backend has to provide ids for each object
-                object.id = object.id || id;
-                if (object.deleted) {
-                    delete localObjects[object.id];
-                } else {
-                    localObjects[object.id] = object;
-                }
-            });
-            return localObjects;
-        };
 
         return {
             getData: function () {

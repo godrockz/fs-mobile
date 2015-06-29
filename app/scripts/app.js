@@ -6,16 +6,23 @@
 // 'starter.controllers' is found in controllers.js
 'use strict';
 
+/*jslint
+  browser: true
+*/
+/*global
+    angular
+*/
+
 angular.module('fsMobile.services', []);
-angular.module('fsMobile', ['ionic','tabSlideBox', 'pascalprecht.translate',
+angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
     'LocalForageModule',
     'fsMobile.controllers',
     'fsMobile.states', 'fsMobile.rest',
-    'fsMobile.services','fsMobile.filters',
+    'fsMobile.services', 'fsMobile.filters',
     'fsMobile.directives',
     'ui.bootstrap.datetimepicker',
     'config'])
-    .config(function ($stateProvider, $urlRouterProvider,$translateProvider) {
+    .config(function ($urlRouterProvider, $translateProvider) {
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/');
@@ -23,27 +30,27 @@ angular.module('fsMobile', ['ionic','tabSlideBox', 'pascalprecht.translate',
 
         $translateProvider.useStaticFilesLoader({
             prefix: 'lang/',
-            suffix:'.json'
+            suffix: '.json'
         });
         $translateProvider.fallbackLanguage(['en', 'de']);
         $translateProvider.determinePreferredLanguage();
-        $translateProvider.registerAvailableLanguageKeys(['de','en'],{
-            'de*':'de',
-            'en*':'en'
+        $translateProvider.registerAvailableLanguageKeys(['de', 'en'], {
+            'de*': 'de',
+            'en*': 'en'
         });
 
-    }).constant('AVAILABLE_LANGUAGES',['de','en'])
+    }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
+                window.StatusBar.styleDefault();
             }
         });
     });

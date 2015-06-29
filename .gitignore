@@ -3,6 +3,8 @@ www
 .idea
 .tmp
 .sass-cache
+.ruby-version
+.temp
 app/bower_components
 coverage
 platforms
