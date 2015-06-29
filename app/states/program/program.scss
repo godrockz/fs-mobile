@@ -32,21 +32,78 @@
             padding: 0.5em;
           }
           .prog-box {
-            background-color: white;
-            box-shadow: 3px 2px 6px grey;
-            margin: 0.5em 0 1em 0;
-            padding: 0.5em;
-            height: 5em;
+              background-color: white;
+              box-shadow: 3px 2px 6px grey;
+              margin: 0.5em 0 1em 0;
+              padding: 0.5em;
+              height: 5em;
+              position: relative;
+              .row {
+                  padding: 0;
+              }
+              .prog-date {
+                  text-align: center;
+                  width: 100%;
+                  height: 100%;
+                  .box {
+                      border-radius: 50%;
+                      display: inline-block;
+                      width: 4em;
+                      height: 4em;
+                      background-color: rgba($positive, 0.5);
+                      position: relative;
+                      line-height: 4em;
+                      text-align: center;
+                      span {
+                          display: inline-block;
+                          vertical-align: middle;
+                          line-height: normal;
+                          font-size: 0.8em;
+                          color: white;
+                      }
+                  }
+              }
+
+              .prog-text-head {
+                  padding: 0.5em 0;
+
+                  p.head {
+                      font-size: 1.2em;
+                      margin: 0 0 0.2em;
+                      color: $positive;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                  }
+                  p.text {
+                      font-size: 0.7em;
+                      overflow: hidden;
+                      margin: 0;
+                      height: 2em;
+                      position:relative;
+                      line-height: 1.2em;
+                  }
+                  p.text:before {
+                      content:'';
+                      width:100%;
+                      height:100%;
+                      position:absolute;
+                      left:0;
+                      top:0;
+                      background:linear-gradient(transparent 1em, white);
+                  }
+              }
+              .prog-actual {
+                  background-color: $positive;
+                  margin: 0 -1.8em;
+                  height: 6em;
+                  position: absolute;
+                  top: 5em;
+                  left: 0;
+                  z-index: 99;
+              }
           }
-          .prog-actual {
-            background-color: $positive;
-            margin: 0 -1.8em;
-            height: 6em;
-            position: relative;
-            top: -1em;
-            left: 0;
-            z-index: -1;
-          }
+
         }
       }
     }

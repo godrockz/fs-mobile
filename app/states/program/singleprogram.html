@@ -1,8 +1,6 @@
 <ion-view view-title="Event">
     <ion-content>
-        <h1>{{::location.data.id}}</h1>
-        Translations: {{::location.data.translations}}
-        GeoCoordinate: {{::location.data.geoCoordinate}}
-        timeZone: {{::location.data.timeZone}}
+        <h1>{{::event.translations.de.name}}</h1>
+        {{::event.translations.de.description}}
     </ion-content>
 </ion-view>
