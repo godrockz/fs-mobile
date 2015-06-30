@@ -9,10 +9,10 @@
     "app.general.program":"Programm",
     "app.general.workshops":"Workshops",
     "app.settings.language.label":"Sprache",
-    "app.settings.data.divider":"App-Daten",
+    "app.settings.data.divider":"App Content",
     "app.settings.fetchdate.label":"Stand",
     "app.settings.data.update":"Daten update",
-    "app.settings.data.delete":"Daten löschen",
+    "app.settings.data.delete":"Daten zurücksetzen",
 
     "app.days.monday":"Montag",
     "app.days.tuesday":"Dienstag",
@@ -22,7 +22,6 @@
     "app.days.saturday":"Samstag",
     "app.days.sunday":"Sonntag",
 
-    "language.de_DE":"Deutsch",
-    "language.en_EN":"Englisch"
-
+    "language.de":"Deutsch",
+    "language.en":"Englisch"
 }

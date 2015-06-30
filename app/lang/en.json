@@ -1,14 +1,18 @@
 {
 
-    "app.general.news":"News",
     "app.general.location":"Location",
     "app.general.locations":"Locations",
+    "app.general.news":"News",
     "app.general.siteplan":"Map",
+    "app.general.events":"Events",
     "app.general.settings":"Settings",
     "app.general.program":"Program",
     "app.general.workshops":"Workshops",
-    "app.general.siteplan":"Map",
     "app.settings.language.label":"Language",
+    "app.settings.data.divider":"App-Daten",
+    "app.settings.fetchdate.label":"last update:",
+    "app.settings.data.update":"update content",
+    "app.settings.data.delete":"reset content",
 
     "app.days.monday":"Monday",
     "app.days.tuesday":"Tuesday",
@@ -18,6 +22,6 @@
     "app.days.saturday":"Saturday",
     "app.days.sunday":"Sunday",
 
-    "language.de_DE":"German",
-    "language.en_EN":"English"
+    "language.de":"German",
+    "language.en":"English"
 }
