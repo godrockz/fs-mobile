@@ -22,7 +22,7 @@
             <ion-slide class="tab" ng-repeat="(day, events) in groupedEvents">
                 <ion-scroll class="list">
                     <div class="prog-box" ng-repeat="event in events">
-                        {{ event.translations.de.name }}
+                        {{ event|trans:'name'}}
                     </div>
                 </ion-scroll>
             </ion-slide>
