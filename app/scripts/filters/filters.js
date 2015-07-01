@@ -71,7 +71,7 @@ angular.module('fsMobile.filters', [])
                 // more defaults
                 result = fallBackToProperty(instance, property);
             }
-            console.log('translated result',result);
+            //console.log('translated result',result);
             return result;
         };
     });

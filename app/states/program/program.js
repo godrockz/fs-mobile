@@ -8,11 +8,11 @@
 'use strict';
 angular.module('fsMobile.states').config(function ($stateProvider) {
     $stateProvider.state('app.program', {
-        url: '/program',
+        url: '/program/all/:locationId',
         views: {
             'menuContent': {
                 templateUrl: 'states/program/program.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $stateParams) {
 
                     var newLocations = [],
                         actualEvent = null;
@@ -32,7 +32,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     angular.forEach($scope.eventsGroupLoc, function (locationEvents, locationId) {
 
-                        var newlocation = [];
+                        var newlocation = [];// TODO ? init as array and handle as object ???
                         newlocation.id = locationId;
                         if (locationId === 'unknown') {
                             newlocation.name = 'unknown';
@@ -50,6 +50,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         // Alle Events der Location auslesen und hinzufügen wenn richtige Kategorie
                         newlocation.eventCount = 0;
                         angular.forEach(locationEvents, function (event) {
+                            // TODO: please support more types in the program at least +SEMINAR and maybe WORSHIP
                             if (event.eventCategory === 'CONCERT') {
                                 var day = moment(event.start).format('dddd').toLowerCase(),
                                     eStart = new Date(event.start),
@@ -95,6 +96,20 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.previous = function () {
                         $ionicSlideBoxDelegate.previous();
                     };
+
+                    if($stateParams.locationId){
+                        var nextIdx;
+                        angular.forEach($scope.eventsOutput,function(output ,idx){
+                            console.log('output',idx,output);
+                            if(output.id === $stateParams.locationId){
+                                nextIdx = idx;
+                            }
+                        });
+                        if(nextIdx){
+                            $scope.changeTabHeadTo(nextIdx);
+                        }
+                    }
+
                 }
             }
         }
