@@ -29,7 +29,8 @@
                             <div class="col-50 prog-date-left">{{::eventday}}</div>
                             <div class="col-50 prog-date-right">{{::eventday}} DATE</div>
                         </div>
-                        <div class="prog-box" ng-repeat="event in events.events | orderBy: 'start'" ui-sref="app.singleprogram({idx:event.id})" id="{{event.id}}">
+                        <div class="prog-box" ng-repeat="event in events.events | orderBy: 'start'"
+                             ui-sref="app.singleprogram({idx:event.id})" id="{{event.id}}">
                             <div class="prog-actual"></div>
                             <div class="row" >
                                 <div class="prog-date col-25">
@@ -38,8 +39,8 @@
                                     </div>
                                 </div>
                                 <div class="prog-text-head col-75">
-                                    <p class="head">{{::event.translations.de.name}} {{event.id === location.actualEvent?'!':''}}</p>
-                                    <p class="text">{{::event.translations.de.description}}</p>
+                                    <p class="head">{{::event|trans:'name'}} {{event.id === location.actualEvent?'!':''}}</p>
+                                    <p class="text">{{::event|trans:'description'}}</p>
                                 </div>
                             </div>
                         </div>
