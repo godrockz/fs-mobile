@@ -12,4 +12,38 @@
             border:1px solid white;
         }
     }
+    .location-pin{
+        position:absolute;
+        background-color: #ddd;
+        opacity: 0.1;
+        border:1px solid #aaa;
+        /*
+         with height position and radius is set by javascript
+        */
+    }
+    .selected-loc{
+        position:fixed;
+        bottom:40px;
+        opacity:0.8;
+
+    }
+    .selected-loc>div{
+        width:0.4vw;
+        height: 200px;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .location-description{
+        background-color:#333;
+        opacity:0.5;
+
+        .locationName,.locationPreview{
+            font-weight:bold;
+            color:white;
+        }
+    }
+
 }

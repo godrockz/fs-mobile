@@ -38,6 +38,9 @@ angular.module('fsMobile.filters', [])
         }
 
         function fallBackToProperty(instance, property) {
+            if(!instance){
+                return 'n.a.';
+            }
             if (instance[property]) {
                 return instance[property];
             }
@@ -52,17 +55,29 @@ angular.module('fsMobile.filters', [])
         }
 
         return function (instance, property) {
-            instance[translationsProperty].de[property] = 'wald';
-            instance[translationsProperty].en[property] = 'wood';
+            // WTF ist this ?
+            //instance[translationsProperty].de[property] = 'wald';
+            //instance[translationsProperty].en[property] = 'wood';
             var currentLanguage = translations.getCurrentLanguage();
+            if(currentLanguage && currentLanguage.length>2 ){
+                currentLanguage = currentLanguage.substring(0,2);
+            }
             //console.log('instance',instance,'lang',currentLanguage);
-            if (isTranslateable(instance)) {
-                fallBackToProperty(instance, property);
+            var result;
+            if (!isTranslateable(instance)) {
+                console.log('not translateable');
+                result = fallBackToProperty(instance, property);
             }
-            if (doesLanguageExist(instance, currentLanguage)) {
+            else if (doesLanguageExist(instance, currentLanguage)) {
+                console.log('translateable and lang exists ',currentLanguage,property,instance);
                 // fallback to default language
-                return instance[translationsProperty][currentLanguage][property];
+                result = instance[translationsProperty][currentLanguage][property];
+            }else{
+                console.log('nothing @all');
+                // more defaults
+                result = fallBackToProperty(instance, property);
             }
-            fallBackToProperty(instance, property);
+            console.log('translated result',result);
+            return result;
         };
     });

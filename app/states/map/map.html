@@ -1,15 +1,32 @@
-<ion-view view-title="{{'app.general.siteplan'|translate}}" class="map" cache-view="false">
+<ion-view view-title="{{'app.general.siteplan'|translate}}  {{selectedLocation|trans:'name'}}" class="map"
+          cache-view="false">
     <ion-content>
         <div class="zoombuttons">
-            <button class="button ion ion-plus"  ng-disabled="zoomlevel >= 3" ng-click="zoomIn()"></button>
+            <button class="button ion ion-plus" ng-disabled="zoomlevel >= 3" ng-click="zoomIn()"></button>
             <br>
             <button class="button ion ion-minus" ng-disabled="zoomlevel <= 0.5" ng-click="zoomOut()"></button>
         </div>
 
-        <ion-scroll delegate-handle="siteplan" zooming="true" direction="xy" ng-style="{height: winHeight + 'px', width: winWidth + 'px'}">
-            <!--div style="width: 2000px; height: 996px; background: url('images/plan.jpg') no-repeat"></div-->
-            <locmap image-url="images/plan.jpg" locations="mappedLocations" ></locmap>
-        </ion-scroll>
+        <ion-scroll delegate-handle="siteplan" zooming="true" direction="xy"
+                    ng-style="{height: winHeight + 'px', width: winWidth + 'px'}">
+            <locmap image-url="images/plan.jpg"
+                    locations="mappedLocations"
+                    ng-model="selectedLocation">
+            </locmap>
 
+
+            <div class="card selected-loc" ng-if="selectedLocation">
+                <div class="item item-text-wrap" style="background-image:url('{{selectedLocation.images[0]}}');">
+
+                    <div class="location-description">
+                        <p class="locationName">{{selectedLocation|trans:'name'}}</p>
+
+                        <p class="locationPreview">
+                            {{selectedLocation|trans:'preview'}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </ion-scroll>
     </ion-content>
 </ion-view>
