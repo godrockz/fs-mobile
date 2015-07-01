@@ -1,4 +1,4 @@
-<ion-view view-title="{{'app.general.siteplan'|translate}}" class="map">
+<ion-view view-title="{{'app.general.siteplan'|translate}}" class="map" cache-view="false">
     <ion-content>
         <div class="zoombuttons">
             <button class="button ion ion-plus"  ng-disabled="zoomlevel >= 3" ng-click="zoomIn()"></button>
@@ -7,7 +7,8 @@
         </div>
 
         <ion-scroll delegate-handle="siteplan" zooming="true" direction="xy" ng-style="{height: winHeight + 'px', width: winWidth + 'px'}">
-            <div style="width: 1845px; height: 870px; background: url('images/gelaende.jpg') no-repeat"></div>
+            <!--div style="width: 2000px; height: 996px; background: url('images/plan.jpg') no-repeat"></div-->
+            <locmap image-url="images/plan.jpg" locations="mappedLocations" ></locmap>
         </ion-scroll>
 
     </ion-content>

@@ -53,9 +53,9 @@ angular.module('tabSlideBox', [])
 
                 var ta = element[0],
                     $ta = element;
-                $ta.addClass("tabbed-slidebox");
-                if (attrs.tabsPosition === "bottom") {
-                    $ta.addClass("btm");
+                $ta.addClass('tabbed-slidebox');
+                if (attrs.tabsPosition === 'bottom') {
+                    $ta.addClass('btm');
                 }
 
                 //Handle multiple slide/scroll boxes
@@ -72,39 +72,39 @@ angular.module('tabSlideBox', [])
                 }
 
                 function getX(matrix) {
-                    matrix = matrix.replace("translate3d(", "");
-                    matrix = matrix.replace("translate(", "");
+                    matrix = matrix.replace('translate3d(', '');
+                    matrix = matrix.replace('translate(', '');
                     return parseInt(matrix, 10);
                 }
 
                 function setPosition(index) {
-                    var iconsDiv = angular.element(ta.querySelector(".tsb-icons")),
-                        icons = iconsDiv.find("a"),
-                        wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"),
-                        scrollDiv = wrap.querySelector(".scroll"),
+                    var iconsDiv = angular.element(ta.querySelector('.tsb-icons')),
+                        icons = iconsDiv.find('a'),
+                        wrap = iconsDiv[0].querySelector('.tsb-ic-wrp'),
+                        scrollDiv = wrap.querySelector('.scroll'),
                         middle = iconsDiv[0].offsetWidth / 2,
                         curEl = angular.element(icons[index]),
-                        prvEl = angular.element(iconsDiv[0].querySelector(".active"));
+                        prvEl = angular.element(iconsDiv[0].querySelector('.active'));
 
                     if (curEl && curEl.length) {
                         var curElWidth = curEl[0].offsetWidth,
                             curElLeft = curEl[0].offsetLeft;
 
                         if (prvEl.attr('icon-off')) {
-                            prvEl.attr("class", prvEl.attr('icon-off'));
+                            prvEl.attr('class', prvEl.attr('icon-off'));
                         } else {
-                            prvEl.removeClass("active");
+                            prvEl.removeClass('active');
                         }
                         if (curEl.attr('icon-on')) {
-                            curEl.attr("class", curEl.attr('icon-on'));
+                            curEl.attr('class', curEl.attr('icon-on'));
                         }
-                        curEl.addClass("active");
+                        curEl.addClass('active');
 
                         var leftStr = (middle - curElLeft - curElWidth / 2 + 5);
                         //If tabs are not scrollable
                         if (!scrollDiv) {
-                            leftStr = (middle - curElLeft - curElWidth / 2 + 5) + "px";
-                            wrap.style.webkitTransform = "translate3d(" + leftStr + ",0,0)";
+                            leftStr = (middle - curElLeft - curElWidth / 2 + 5) + 'px';
+                            wrap.style.webkitTransform = 'translate3d(' + leftStr + ',0,0)';
                         } else {
                             //If scrollable tabs
                             var wrapWidth = wrap.offsetWidth;
@@ -124,8 +124,8 @@ angular.module('tabSlideBox', [])
                 }
 
                 function renderScrollableTabs() {
-                    var iconsDiv = angular.element(ta.querySelector(".tsb-icons")),
-                        icons = iconsDiv.find("a"),
+                    var iconsDiv = angular.element(ta.querySelector('.tsb-icons')),
+                        icons = iconsDiv.find('a'),
                         totalTabs = icons.length;
 
                     angular.forEach(icons, function (value, key) {
@@ -135,7 +135,7 @@ angular.module('tabSlideBox', [])
                         });
 
                         if (a.attr('icon-off')) {
-                            a.attr("class", a.attr('icon-off'));
+                            a.attr('class', a.attr('icon-off'));
                         }
                     });
 
@@ -169,21 +169,21 @@ angular.module('tabSlideBox', [])
                 $scope.events = new SimplePubSub();
 
                 $scope.slideHasChanged = function (index) {
-                    $scope.events.trigger("slideChange", {
-                        "index": index
+                    $scope.events.trigger('slideChange', {
+                        'index': index
                     });
                     $timeout(function () {
                         if ($scope.onSlideMove) {
                             $scope.onSlideMove({
-                                "index": eval(index)
+                                'index': eval(index)
                             });
                         }
                     }, 100);
                 };
 
                 $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
-                    $scope.events.trigger("ngRepeatFinished", {
-                        "event": ngRepeatFinishedEvent
+                    $scope.events.trigger('ngRepeatFinished', {
+                        'event': ngRepeatFinishedEvent
                     });
                 });
             }

@@ -12,6 +12,18 @@
 */
 'use strict';
 angular.module('fsMobile.states').config(function ($stateProvider) {
+
+    function isLocationMappable(location){
+        var result = angular.isDefined(location.markOnMap) &&
+        location.markOnMap === true &&
+        angular.isDefined(location.geoCoordinate);
+
+        console.log('paule',location,result);
+
+        return result;
+
+    }
+
     $stateProvider.state('app.map', {
         url: '/map',
         views: {
@@ -28,6 +40,19 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.winWidth = window.innerWidth;
 
                     $scope.zoomlevel = 1;
+
+                    console.log('locations',$scope.appData.locations);
+
+                    // collect locations that can be displayed on map
+                    $scope.mappedLocations = [];
+                    angular.forEach($scope.appData.locations,function(location){
+                        if(isLocationMappable(location)){
+                            $scope.mappedLocations.push(location);
+                        }
+                    });
+                    console.log('got ',$scope.mappedLocations.length,' found', $scope.mappedLocations);
+
+
 
                     $scope.zoomOut = function () {
                         $scope.zoomlevel = scrollDelegate.getScrollView().__zoomLevel - 0.5;
