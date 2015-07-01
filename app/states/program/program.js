@@ -32,13 +32,17 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     angular.forEach($scope.eventsGroupLoc, function (locationEvents, locationId) {
 
-                        var newlocation = [];// TODO ? init as array and handle as object ???
+                        if(!$scope.locations[locationId]){
+                            return; // why should we create dummy locations for unassigned events ?
+                        }
+                        var newlocation = {};
                         newlocation.id = locationId;
                         if (locationId === 'unknown') {
                             newlocation.name = 'unknown';
                         } else {
                             newlocation.translations = $scope.locations[locationId].translations;
                         }
+                        console.log('newlocation.translations',newlocation.translations, $scope.locations[locationId]);
                         newlocation.events = {
                             'wednesday': {index: 0, events: []},
                             'thursday': {index: 1, events: []},
@@ -51,7 +55,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         newlocation.eventCount = 0;
                         angular.forEach(locationEvents, function (event) {
                             // TODO: please support more types in the program at least +SEMINAR and maybe WORSHIP
-                            if (event.eventCategory === 'CONCERT') {
+                            if (event.eventCategory === 'CONCERT'||event.eventCategory ==='SEMINAR'||event.eventCategory ==='WORSHIP') {
                                 var day = moment(event.start).format('dddd').toLowerCase(),
                                     eStart = new Date(event.start),
                                     eEnd = new Date(event.end),
