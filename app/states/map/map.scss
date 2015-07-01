@@ -1,48 +1,50 @@
 .map {
     background-color: $background-general;
     .zoombuttons {
-        position:absolute;
-        top:30px;
-        left:15px;
-        z-index:9999;
+        position: absolute;
+        top: 30px;
+        left: 15px;
+        z-index: 9999;
         .button {
             background-color: $positive;
             color: white;
             margin-bottom: 2em;
-            border:1px solid white;
+            border: 1px solid white;
         }
     }
-    .location-pin{
-        position:absolute;
+    .location-pin {
+        position: absolute;
         background-color: #ddd;
         opacity: 0.1;
-        border:1px solid #aaa;
+        border: 1px solid #aaa;
         /*
          with height position and radius is set by javascript
         */
     }
-    .selected-loc{
-        position:fixed;
-        bottom:40px;
-        opacity:0.8;
-
-    }
-    .selected-loc>div{
-        width:0.4vw;
+    .selected-loc {
+        position: absolute;
+        bottom: 40px;
+        opacity: 0.8;
+        z-index: 9990;
+        max-width: 50vw;
+        width: 80%;
         height: 200px;
+    }
+    .selected-loc > div {
+        width: 100%;
+        height: 100%;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
     }
 
-    .location-description{
-        background-color:#333;
-        opacity:0.5;
-
-        .locationName,.locationPreview{
-            font-weight:bold;
-            color:white;
+    .location-description {
+        background-color: #333;
+        padding:4px;
+        .locationName, .locationPreview {
+            font-weight: bold;
+            color: white;
         }
     }
 

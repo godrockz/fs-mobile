@@ -38,7 +38,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     $scope.winHeight = window.innerHeight - headHeight;
                     $scope.winWidth = window.innerWidth;
-
+                    $scope.selection={};// will hold selected location as a container to prevent problems with inherited scopes
                     $scope.zoomlevel = 1;
 
                     console.log('locations',$scope.appData.locations);

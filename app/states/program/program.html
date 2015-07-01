@@ -3,13 +3,13 @@
     <ion-content>
         <div class="row tabmenu">
             <div class="col-25 tabmenu-left" ng-click="previous()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
-                <small>{{eventsOutput[tabIndex==0?tabNames.length-1:tabIndex-1].name}}</small>
+                <small>{{eventsOutput[tabIndex==0?tabNames.length-1:tabIndex-1]|trans|'name'}}</small>
             </div>
             <div class="col-50 tabmenu-center">
                 <b>{{eventsOutput[tabIndex].name}}</b>
             </div>
             <div class="col-25 tabmenu-right" ng-click="next()" style="word-wrap: normal; padding-left: 0.5em;">
-                <small>{{eventsOutput[tabIndex==tabNames.length-1?0:tabIndex+1].name}}</small>
+                <small>{{eventsOutput[tabIndex==tabNames.length-1?0:tabIndex+1]|trans:'name'}}</small>
             </div>
         </div>
 

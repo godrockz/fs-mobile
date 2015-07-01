@@ -37,7 +37,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         if (locationId === 'unknown') {
                             newlocation.name = 'unknown';
                         } else {
-                            newlocation.name = $scope.locations[locationId].translations.de.name;
+                            newlocation.translations = $scope.locations[locationId].translations;
                         }
                         newlocation.events = {
                             'wednesday': {index: 0, events: []},

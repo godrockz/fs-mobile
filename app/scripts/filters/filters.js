@@ -55,9 +55,6 @@ angular.module('fsMobile.filters', [])
         }
 
         return function (instance, property) {
-            // WTF ist this ?
-            //instance[translationsProperty].de[property] = 'wald';
-            //instance[translationsProperty].en[property] = 'wood';
             var currentLanguage = translations.getCurrentLanguage();
             if(currentLanguage && currentLanguage.length>2 ){
                 currentLanguage = currentLanguage.substring(0,2);
@@ -65,15 +62,12 @@ angular.module('fsMobile.filters', [])
             //console.log('instance',instance,'lang',currentLanguage);
             var result;
             if (!isTranslateable(instance)) {
-                console.log('not translateable');
                 result = fallBackToProperty(instance, property);
             }
             else if (doesLanguageExist(instance, currentLanguage)) {
-                console.log('translateable and lang exists ',currentLanguage,property,instance);
                 // fallback to default language
                 result = instance[translationsProperty][currentLanguage][property];
             }else{
-                console.log('nothing @all');
                 // more defaults
                 result = fallBackToProperty(instance, property);
             }
