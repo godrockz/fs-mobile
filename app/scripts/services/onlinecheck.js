@@ -5,7 +5,7 @@
  * <p/>
  */
 'use strict';
-angular.module('fsMobile.services').service('ConnectionState', function ($localForage, $q, $log, debug) {
+angular.module('fsMobile.services').service('ConnectionState', function ($rootScope, $localForage, $q, $log, debug, $timeout) {
 
     var key = 'lastOnlineCheck';
     var maxAge = 1000 * 60 * 2; // check every n minutes
@@ -14,11 +14,36 @@ angular.module('fsMobile.services').service('ConnectionState', function ($localF
         this.date = (new Date()).getTime();
         this.online = online;
     }
+    var checkProm;
+    var waitMs = 1000;
+    var checkUri = 'http://upsource.de/_res/images/team-bjb.png';
 
 
     function _checkOnline() {
         var deferred = $q.defer();
-        deferred.resolve(false);
+
+         if(!checkProm) {
+             var result=undefined;
+             var newImg = new Image();
+             newImg.onload = function () {
+                 $rootScope.$apply(function () {
+                     if(result===undefined) {// not resolved by timeout
+                         result = true;
+                         deferred.resolve(true);
+                     }
+                     checkProm = undefined;
+                 });
+             };
+             newImg.src = checkUri;
+             $timeout(function(){
+                 if(result==undefined){// no result within 1 sec
+                     result=false;
+                     deferred.resolve(false);//
+                     checkProm=undefined;// allow next check
+                 }
+
+             },waitMs);
+         }
         return deferred.promise;
     }
 
@@ -43,15 +68,19 @@ angular.module('fsMobile.services').service('ConnectionState', function ($localF
 
     function getOnlineState(lastCheck) {
 
-        if (lastCheck && lastCheck + maxAge < (new Date()).getTime()) {
+        if(!lastCheck){
+            var prom = _checkOnline();
+            return storeState(prom);
+        }
+        if (lastCheck + maxAge < (new Date()).getTime()) {
             // check now
             var prom = _checkOnline();
             return storeState(prom);
 
         } else {
+
             debug.addData('onlineCheck', 'Results of last check', lastCheck);
-            var prom = _checkOnline();
-            return storeState(prom);
+            return lastCheck.online;
         }
     }
 

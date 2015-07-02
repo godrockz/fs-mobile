@@ -150,3 +150,13 @@ body * {
   }
 
 }
+.fssrc{
+    background-repeat: no-repeat;
+    width: 100%;
+    border-bottom-width:0px!important;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding:0px;
+}
