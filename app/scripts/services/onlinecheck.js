@@ -5,45 +5,54 @@
  * <p/>
  */
 'use strict';
-angular.module('fsMobile.services').service('ConnectionState', function ($rootScope, $localForage, $q, $log, debug, $timeout) {
+angular.module('fsMobile.services').service('ConnectionState', function (ENV, $http, $rootScope, $localForage, $q, $log, debug, $timeout) {
 
     var key = 'lastOnlineCheck';
-    var maxAge = 1000 * 60 * 2; // check every n minutes
+    var maxAge = 1000 * 60 * 0.2; // check every n minutes
+    var url = ENV.apiEndpoint + '/';
 
     function LastCheck(online) {
+        /**
+         * contains a time stamp of last check
+         * @type {number}
+         */
         this.date = (new Date()).getTime();
         this.online = online;
     }
+
     var checkProm;
     var waitMs = 1000;
-    var checkUri = 'http://upsource.de/_res/images/team-bjb.png';
-
 
     function _checkOnline() {
         var deferred = $q.defer();
 
-         if(!checkProm) {
-             var result=undefined;
-             var newImg = new Image();
-             newImg.onload = function () {
-                 $rootScope.$apply(function () {
-                     if(result===undefined) {// not resolved by timeout
-                         result = true;
-                         deferred.resolve(true);
-                     }
-                     checkProm = undefined;
-                 });
-             };
-             newImg.src = checkUri;
-             $timeout(function(){
-                 if(result==undefined){// no result within 1 sec
-                     result=false;
-                     deferred.resolve(false);//
-                     checkProm=undefined;// allow next check
-                 }
+        if (!checkProm) {
+            var result = undefined;
+            $http.get(url).then(function () {
 
-             },waitMs);
-         }
+                if (result === undefined) {// not resolved by timeout
+                    result = true;
+                    deferred.resolve(true);
+                }
+                checkProm = undefined;
+
+            }, function () {
+                if (result == undefined) {// no result within 1 sec
+                    result = false;
+                    deferred.resolve(false);//
+                    checkProm = undefined;// allow next check
+                }
+            });
+
+            $timeout(function () {
+                if (result == undefined) {// no result within 1 sec
+                    result = false;
+                    deferred.resolve(false);//
+                    checkProm = undefined;// allow next check
+                }
+
+            }, waitMs);
+        }
         return deferred.promise;
     }
 
@@ -68,11 +77,12 @@ angular.module('fsMobile.services').service('ConnectionState', function ($rootSc
 
     function getOnlineState(lastCheck) {
 
-        if(!lastCheck){
+        if (!lastCheck) {
             var prom = _checkOnline();
             return storeState(prom);
         }
-        if (lastCheck + maxAge < (new Date()).getTime()) {
+
+        if (lastCheck.date + maxAge < (new Date()).getTime()) {
             // check now
             var prom = _checkOnline();
             return storeState(prom);
