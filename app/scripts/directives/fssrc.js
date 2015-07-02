@@ -37,7 +37,7 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, Connect
             // use background image url
             console.log('elem', elem[0]);
             elem[0].style.backgroundImage = 'url(\'' + url + '\')';
-            elem.addClass = "fssrc";
+            elem.addClass = 'fssrc';
         }
     }
 

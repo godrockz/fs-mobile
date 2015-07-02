@@ -8,7 +8,7 @@
 angular.module('fsMobile.services').service('ConnectionState', function (ENV, $http, $rootScope, $localForage, $q, $log, debug, $timeout) {
 
     var key = 'lastOnlineCheck';
-    var maxAge = 1000 * 60 * 0.2; // check every n minutes
+    var maxAge = 1000 * 60 * 2; // check every n minutes
     var url = ENV.apiEndpoint + '/';
 
     function LastCheck(online) {
