@@ -45,8 +45,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        possibleApiEndpoint1: 'http://localhost:8080',
-                        possibleApiEndpoint2: 'http://localhost:8080',
+                        apiEndpoint: 'http://localhost:8080',
                         offlineJsonDataDirectory: 'scripts/data'
                     }
                 }
@@ -55,8 +54,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'production',
-                        remoteApiEndpoint: 'http://spektacholeriker.de:8080',
-                        localApiEndpoint: 'http://local.spektacholeriker.de:8080',
+                        apiEndpoint: 'https://dev-fs-rest-service.herokuapp.com',
                         offlineJsonDataDirectory: 'scripts/data'
                     }
                 }
