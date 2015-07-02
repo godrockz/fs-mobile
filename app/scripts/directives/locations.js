@@ -50,7 +50,7 @@ angular.module('fsMobile.directives').directive('locmap', function () {
                     ctrl.$setViewValue(location);
                 });
 
-            }
+            };
         }
     };
 });

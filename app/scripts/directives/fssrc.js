@@ -47,7 +47,7 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, Connect
             console.log('fsSrc running');
             var defaults = attrs.topic || 'concert';
             if (!attrs.fsSrc) {
-                $log.error("angular expression expected within fs-src attribute");
+                $log.error('angular expression expected within fs-src attribute');
             }
             var onlineSrc = scope.$eval(attrs.fsSrc);
             console.log('got as online src', onlineSrc);
@@ -64,5 +64,5 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, Connect
                 attrs.$set('src', getRandomOfflineImage(defaults));
             });
         }
-    }
+    };
 });

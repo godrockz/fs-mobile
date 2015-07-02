@@ -1,5 +1,5 @@
 <!--<ion-view view-title="{{'app.general.locations'|translate}}" >-->
-<ion-view class="program" view-title="Programm" >
+<ion-view class="program" view-title="{{'app.general.program'|translate}}" >
     <ion-content>
         <div class="row tabmenu">
             <div class="col-25 tabmenu-left" ng-click="previous()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
@@ -15,19 +15,16 @@
 
         <ion-slide-box  class="prog-container"
                         on-slide-changed="changeTabHeadTo($index)"
-                       does-continue="true"
-                       style="  ;
-                                /*background-color: rgba(14,04,86,0.5);*/
-                                ">
+                       does-continue="true">
 
             <ion-slide class="prog-tab" ng-repeat="location in eventsOutput">
                 <div class="centerline" style=""></div>
                 <ion-scroll class="prog-list" >
                     <!--<div><h1>{{::tab}}</h1></div>-->
-                    <div class="prog-day" ng-repeat="(eventday, events) in location.events | orderBy:'index'" ng-if="events.events.length > 0" >
+                    <div class="prog-day" ng-repeat="(eventday, events) in location.events | orderObjectBy:'index'" ng-if="events.events.length > 0" >
                         <div class="row">
-                            <div class="col-50 prog-date-left">{{::eventday}}</div>
-                            <div class="col-50 prog-date-right">{{::eventday}} DATE</div>
+                            <div class="col-50 prog-date-left">{{'app.days.' + (events.date | timeFormat: 'dddd')| lowercase | translate }}</div>
+                            <div class="col-50 prog-date-right">{{events.date | timeFormat: 'DD.MM.'}}</div>
                         </div>
                         <div class="prog-box" ng-repeat="event in events.events | orderBy: 'start'"
                              ui-sref="app.singleprogram({idx:event.id})" id="{{event.id}}">
@@ -35,7 +32,7 @@
                             <div class="row" >
                                 <div class="prog-date col-25">
                                     <div class="box">
-                                        <span>{{::event.start|date:'EEE'}}<br>{{::event.start|date:'H:mm'}}</span>
+                                        <span>{{'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{::event.start|date:'H:mm'}}</span>
                                     </div>
                                 </div>
                                 <div class="prog-text-head col-75">
@@ -53,88 +50,3 @@
         </ion-slide-box>
     </ion-content>
 </ion-view>
-
-
-
-<!--<ion-view view-title="Events" class="events" cache-view="false">-->
-    <!--<ion-content scroll="false">-->
-        <!--<tab-slide-box tab="0" class="tabs-striped tabs-top tabs-background-default tabs-color-default">-->
-            <!--<div class="tsb-icons">-->
-                <!--<div class="tsb-ic-wrp">-->
-                    <!--<ion-scroll direction="x" class="tsb-hscroll">-->
-                        <!--<a href="javascript:;">Jetzt</a>-->
-                        <!--<a href="javascript:;">Turbinenhalle</a>-->
-                        <!--<a href="javascript:;">Herzstück</a>-->
-                        <!--<a href="javascript:;">Artland</a>-->
-                        <!--<a href="javascript:;">Secret Garden</a>-->
-                    <!--</ion-scroll>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">-->
-                <!--<ion-slide>-->
-                    <!--<label class="item item-input">-->
-                        <!--<span class="input-label">Current Date Time (for testing)</span>-->
-                        <!--<my-date-time-picker placeholder="Enter Date here"-->
-                                             <!--title="Select Date"-->
-                                             <!--ng-model="watching.currentDateTime"-->
-                                             <!--ng-change="test(currentDateTime)" />-->
-                    <!--</label>-->
-                    <!--<ion-list>-->
-                        <!--<ion-item ng-repeat="event in currentEvents"-->
-                                  <!--ui-sref="app.location({idx:$index})">-->
-                            <!--<div class="event-time">-->
-                                <!--{{ ::event.start|timeFormat:'HH:mm' }}</br>-->
-                                <!-&#45;&#45; </br>-->
-                                <!--{{ ::event.end|timeFormat:'HH:mm' }}-->
-                            <!--</div>-->
-                            <!--<div class="event-desc">-->
-                                <!--{{::event|trans:'name'}}-->
-                                <!--</br>-->
-                                <!--<span class="event-location">-->
-                                    <!--{{::appData.getLocation(event)|trans:'name'}}-->
-                                <!--</span>-->
-                            <!--</div>-->
-                        <!--</ion-item>-->
-                    <!--</ion-list>-->
-                <!--</ion-slide>-->
-                <!--<ion-slide>-->
-                    <!--<ion-scroll style="height:100%" delegate-handle="slide1Scroll" >-->
-                        <!--<h1>Turbinenhalle</h1>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                        <!--<p>content</p>-->
-                    <!--</ion-scroll>-->
-                <!--</ion-slide>-->
-                <!--<ion-slide>-->
-                    <!--<h1>Herzstück</h1>-->
-                <!--</ion-slide>-->
-                <!--<ion-slide>-->
-                    <!--<h1>Artland</h1>-->
-                <!--</ion-slide>-->
-                <!--<ion-slide>-->
-                    <!--<h1>Secret Garden</h1>-->
-                <!--</ion-slide>-->
-
-            <!--</ion-slide-box>-->
-        <!--</tab-slide-box>-->
-    <!--</ion-content>-->
-<!--</ion-view>-->

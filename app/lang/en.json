@@ -23,6 +23,17 @@
     "app.days.sunday":"Sunday",
     "app.map.open.location":"Program",
 
+    "app.days.abbr.monday":"Mon",
+    "app.days.abbr.tuesday":"Tue",
+    "app.days.abbr.wednesday":"Wed",
+    "app.days.abbr.thursday":"Thu",
+    "app.days.abbr.friday":"Fri",
+    "app.days.abbr.saturday":"Sat",
+    "app.days.abbr.sunday":"Sun",
+
+    "app.time.from":"From",
+    "app.time.to":"Until",
+
     "language.de":"German",
     "language.en":"English"
 }

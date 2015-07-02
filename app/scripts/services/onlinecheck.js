@@ -27,7 +27,7 @@ angular.module('fsMobile.services').service('ConnectionState', function (ENV, $h
         var deferred = $q.defer();
 
         if (!checkProm) {
-            var result = undefined;
+            var result;
             $http.get(url).then(function () {
 
                 if (result === undefined) {// not resolved by timeout
@@ -37,7 +37,7 @@ angular.module('fsMobile.services').service('ConnectionState', function (ENV, $h
                 checkProm = undefined;
 
             }, function () {
-                if (result == undefined) {// no result within 1 sec
+                if (result === undefined) {// no result within 1 sec
                     result = false;
                     deferred.resolve(false);//
                     checkProm = undefined;// allow next check
@@ -45,7 +45,7 @@ angular.module('fsMobile.services').service('ConnectionState', function (ENV, $h
             });
 
             $timeout(function () {
-                if (result == undefined) {// no result within 1 sec
+                if (result !== undefined) {// no result within 1 sec
                     result = false;
                     deferred.resolve(false);//
                     checkProm = undefined;// allow next check
@@ -70,7 +70,7 @@ angular.module('fsMobile.services').service('ConnectionState', function (ENV, $h
             });
         }, function (err) {
             debug.addData('onlineCheck', 'Results of last check', err);
-            deferred.reject(err)
+            deferred.reject(err);
         });
         return deferred.promise;
     }
@@ -78,14 +78,12 @@ angular.module('fsMobile.services').service('ConnectionState', function (ENV, $h
     function getOnlineState(lastCheck) {
 
         if (!lastCheck) {
-            var prom = _checkOnline();
-            return storeState(prom);
+            return storeState(_checkOnline());
         }
 
         if (lastCheck.date + maxAge < (new Date()).getTime()) {
             // check now
-            var prom = _checkOnline();
-            return storeState(prom);
+            return storeState(_checkOnline());
 
         } else {
 
@@ -109,5 +107,5 @@ angular.module('fsMobile.services').service('ConnectionState', function (ENV, $h
                 return getOnlineState();
             });
         }
-    }
+    };
 });

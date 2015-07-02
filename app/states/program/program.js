@@ -42,13 +42,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         } else {
                             newlocation.translations = $scope.locations[locationId].translations;
                         }
-                        console.log('newlocation.translations',newlocation.translations, $scope.locations[locationId]);
+
                         newlocation.events = {
-                            'wednesday': {index: 0, events: []},
-                            'thursday': {index: 1, events: []},
-                            'friday': {index: 2, events: []},
-                            'saturday': {index: 3, events: []},
-                            'sunday': {index: 4, events: []}
+                            'wednesday': {index: 0, date: moment('29.07.2015','DD.MM.YYYY'), events: []},
+                            'thursday': {index: 1, date: moment('30.07.2015','DD.MM.YYYY'), events: []},
+                            'friday': {index: 2, date: moment('31.07.2015','DD.MM.YYYY'), events: []},
+                            'saturday': {index: 3, date: moment('01.08.2015','DD.MM.YYYY'), events: []},
+                            'sunday': {index: 4, date: moment('02.08.2015','DD.MM.YYYY'), events: []}
                         };
 
                         // Alle Events der Location auslesen und hinzufügen wenn richtige Kategorie
@@ -129,6 +129,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     if ($scope.appData.events) {
                         $scope.event = $scope.appData.events[$stateParams.idx];
+                        $scope.event.location = $scope.appData.locations[$scope.event.locationRef];
                     }
                     console.log('$scope.event', $scope.event);
 
