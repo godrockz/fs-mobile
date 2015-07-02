@@ -233,7 +233,7 @@ module.exports = function (grunt) {
                     html: {
                         steps: {
                             js: ['concat', 'uglifyjs'],
-                            css: ['cssmin']
+                            css: ['concat', 'cssmin']
                         },
                         post: {}
                     }
@@ -250,13 +250,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // The following *-min tasks produce minified files in the dist folder
-        cssmin: {
-            options: {
-                //root: '<%= yeoman.app %>',
-                noRebase: true
-            }
-        },
         htmlmin: {
             dist: {
                 options: {
@@ -268,7 +261,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.dist %>',
-                    src: ['*.html', 'templates/**/*.html', '<%= yeoman.app %>/<%= yeoman.states %>/**/*.html'],
+                    src: ['*.html', 'templates/**/*.html', '<%= yeoman.states %>/**/*.html'],
                     dest: '<%= yeoman.dist %>'
                 }]
             }
@@ -286,6 +279,7 @@ module.exports = function (grunt) {
                         '<%= yeoman.images %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
                         '*.html',
                         'templates/**/*.html',
+                        '<%= yeoman.states %>/**/*.html',
                         'fonts/*',
                     ]
                 }, {
@@ -303,9 +297,9 @@ module.exports = function (grunt) {
             },
             fonts: {
                 expand: true,
-                cwd: 'app/lib/ionic/release/fonts/',
-                dest: '<%= yeoman.app %>/fonts/',
-                src: '*'
+                cwd: '<%= yeoman.app %>/bower_components/ionic/release/',
+                dest: '<%= yeoman.dist %>',
+                src: 'fonts/*'
             },
             vendor: {
                 expand: true,
@@ -324,6 +318,12 @@ module.exports = function (grunt) {
                 cwd: '.temp',
                 dest: '<%= yeoman.dist %>/',
                 src: '**/*'
+            },
+            locales: {
+                expand: true,
+                cwd: '<%= yeoman.app %>/lang',
+                dest: '<%= yeoman.dist %>/lang',
+                src: '*'
             }
         },
 
@@ -348,7 +348,6 @@ module.exports = function (grunt) {
             ],
             dist: [
                 'compass:dist',
-                'copy:styles',
                 'copy:vendor',
                 'copy:fonts'
             ]
@@ -357,16 +356,15 @@ module.exports = function (grunt) {
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
         // to use the Usemin blocks.
-        // cssmin: {
-        //   dist: {
-        //     files: {
-        //       '<%= yeoman.dist %>/<%= yeoman.styles %>/main.css': [
-        //         '.temp/<%= yeoman.styles %>/**/*.css',
-        //         '<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'
-        //       ]
-        //     }
-        //   }
-        // },
+        cssmin: {
+          dist: {
+            files: {
+              '<%= yeoman.dist %>/<%= yeoman.styles %>/main.css': [
+                '.temp/<%= yeoman.styles %>/**/*.css'
+              ]
+            }
+          }
+        },
         // uglify: {
         //   dist: {
         //     files: {
@@ -582,7 +580,8 @@ module.exports = function (grunt) {
         'cssmin',
         'uglify',
         'usemin',
-        'htmlmin'
+        'htmlmin',
+        'copy:locales'
     ]);
 
     grunt.registerTask('coverage',
