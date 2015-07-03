@@ -7,7 +7,7 @@
             <div class="news-item-single row">
                 <div class="news-date col-25">
                     <div class="box">
-                        <span>{{news.publishDate|date:'EEE'}}<br>{{news.publishDate|date:'H:mm'}}</span>
+                        <span>{{'app.days.abbr.' + (news.publishDate | date:'EEEE') | lowercase | translate}}<br>{{news.publishDate|date:'H:mm'}}</span>
                     </div>
                 </div>
                 <div class="news-text-head col-75 col-center">
@@ -17,9 +17,7 @@
             </div>
             <p class="news-text">{{news|trans:'text'}}</p>
 
-
-
-            <p class="author">By:{{news.author}}</p>
+            <p class="author" ng-if="news.author">{{'app.news.by'|translate}}: {{::news.author}}</p>
         </div>
 
     </ion-content>

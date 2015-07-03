@@ -21,7 +21,6 @@
     "app.days.friday":"Friday",
     "app.days.saturday":"Saturday",
     "app.days.sunday":"Sunday",
-    "app.map.open.location":"Program",
 
     "app.days.abbr.monday":"Mon",
     "app.days.abbr.tuesday":"Tue",
@@ -33,6 +32,11 @@
 
     "app.time.from":"From",
     "app.time.to":"Until",
+
+    "app.map.open.location":"Program",
+
+    "app.news.by":"By",
+    "app.news.loadmore":"Load more News...",
 
     "language.de":"German",
     "language.en":"English"
