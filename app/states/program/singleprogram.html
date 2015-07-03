@@ -1,9 +1,25 @@
-<ion-view view-title="Event">
-    <ion-content>
-        <div class="image-box" style="background-image:url('{{event.images[0]}}')">
+<ion-view view-title="{{'app.general.program'|translate}}">
+    <ion-content class="single-program">
+        <div class="image-box" fs-src="event.images[0]">
 
         </div>
-        <h1>{{::event.translations.de.name}}</h1>
-        {{::event.translations.de.description}}
+        <div class="content-box">
+            <div class="program-item-single row">
+                <div class="program-date col-25">
+                    <div class="box">
+                        <span>{{'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{event.start|date:'H:mm'}}</span>
+                    </div>
+                </div>
+                <div class="program-text-head col-75 col-center">
+                    <p class="head">{{event|trans:'name'}}</p>
+                </div>
+            </div>
+            <p class="program-info"><span class="tag">{{'app.general.location'|translate}}:</span> {{event.location|trans:'name'}}</p>
+            <p class="program-info">
+                <span class="tag">{{'app.time.from'|translate}}:</span> {{event.start|date:'H:mm'}}
+                <span class="tag">{{'app.time.to'|translate}}:</span> {{event.end|date:'H:mm'}}</p>
+            <p class="program-text">{{event|trans:'description'}}</p>
+        </div>
+
     </ion-content>
 </ion-view>
