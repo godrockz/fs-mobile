@@ -30,7 +30,6 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
     }
 
     function setImage(elem, attrs, url) {
-        var absoluteUri = (DYNENV.apiEndpoint||'') + url;
         if (elem[0].tagName === 'img') {
             attrs.$set('src', absoluteUri);
         } else {
@@ -54,7 +53,8 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
             ConnectionState.isOnline().then(function (isOnline) {
                 if (isOnline) {
                     console.log('isOnline true');
-                    setImage(elem, attrs, onlineSrc);
+                    var absoluteUri = (DYNENV.apiEndpoint||'') + onlineSrc;
+                    setImage(elem, attrs, absoluteUri);
                 } else {
                     console.log('isOnline false');
                     setImage(elem, attrs, getRandomOfflineImage(defaults));
