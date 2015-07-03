@@ -13,8 +13,9 @@ angular.module('fsMobile.controllers').config(function ($stateProvider) {
     $stateProvider.state('starting', {
         url: '/',
         templateUrl: 'states/starting.html',
-        controller: function ($scope, $timeout, $state, $q) {
+        controller: function ($scope, $timeout, $state, $q, EndpointDetector) {
             var timerDestruct;
+            EndpointDetector.discoverEndpoint();
 
             function addTimer(txt, ms) {
                 var deferred = $q.defer();

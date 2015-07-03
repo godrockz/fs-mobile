@@ -26,7 +26,7 @@ angular.module('fsMobile.services')
          * @returns {*}
          */
         var fetchData = function (url) {
-
+            console.log('original uri',url);
             var path = urlToPathConverter(url);
             console.log('fetching from localForage:', path);
             return $localForage.getItem(path).then(function (data) {

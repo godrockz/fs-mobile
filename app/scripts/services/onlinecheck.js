@@ -12,7 +12,7 @@ angular.module('fsMobile.services').service('ConnectionState', function (DYNENV,
 
     function endpoint(){
         EndpointDetector.discoverEndpoint();
-        return DYNENV.apiEndpoint + '/';
+        return (DYNENV.apiEndpoint||'') + '/';
     }
 
     function LastCheck(online) {
