@@ -18,11 +18,18 @@ angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigP
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope) {
-                    console.log('news controller mit viele news');
-                    $scope.news = $scope.appData.news;
+                controller: function ($scope, $filter) {
 
-                    console.log('news', $scope.news);
+                    $scope.news = $scope.appData.news;
+                    $scope.news = $filter('filter')($scope.news,{deleted : false});
+                    $scope.news = $filter('orderObjectBy')($scope.news,'publishDate','date');
+
+                    $scope.newsLength = Object.keys($scope.news).length;
+                    $scope.itemsToDisplay = $scope.newsLength>7?7:$scope.newsLength;
+
+                    $scope.showMoreItems = function() {
+                        $scope.itemsToDisplay += $scope.newsLength>7?7:$scope.newsLength;
+                    };
 
                 }
             }

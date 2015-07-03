@@ -29,7 +29,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
 
             $scope.refreshData = function () {
                 // alwyas discover endpoint on refresh
-                EndpointDetector.discoverEndpoint().then(function (endpoint) {
+                EndpointDetector.discoverEndpoint().then(function () {
                     dataProvider.refreshData().then(function (data) {
                         console.log('refresh: new data saved', data);
                         angular.forEach(data, function (resource, resourceName) {

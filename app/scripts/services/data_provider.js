@@ -11,7 +11,7 @@ angular.module('fsMobile.services')
         // TODO : we must store data in local storage without using full api url instead we should store it under data only
         function endPoint(){
             return (DYNENV.apiEndpoint||'') + '/data';
-        };
+        }
 
         var prepareData = function (data) {
             return new AppData(data);

@@ -76,19 +76,52 @@ angular.module('fsMobile.filters', [])
         };
     })
     .filter('orderObjectBy', function(){
-        return function(input, attribute) {
+        return function(input, attribute, type) {
             if (!angular.isObject(input)){ return input; }
+            if (!type){ type = 'int'; }
 
-            var array = [];
+            var objectArray = [];
             for(var objectKey in input) {
-                array.push(input[objectKey]);
+                if(typeof input[objectKey] === 'object'){
+                    objectArray.push(input[objectKey]);
+                }
             }
 
-            array.sort(function(a, b){
-                a = parseInt(a[attribute]);
-                b = parseInt(b[attribute]);
-                return a - b;
-            });
-            return array;
+            switch (type){
+                case 'int':
+                    objectArray.sort(function(a, b){
+                        a = parseInt(a[attribute]);
+                        b = parseInt(b[attribute]);
+                        return a - b;
+                    });
+                    break;
+                case 'date':
+                    objectArray.sort(function(a, b){
+                        a = moment(a[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
+                        b = moment(b[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
+                        return b - a;
+                    });
+                    break;
+            }
+            return objectArray;
         };
-    });
+    })
+    .filter('limitObjectTo', [function(){
+        return function(obj, limit){
+            var keys = Object.keys(obj);
+            if(keys.length < 1){
+                return [];
+            }
+
+            var ret = {},
+                count = 0;
+            angular.forEach(keys, function(key){
+                if(count >= limit){
+                    return false;
+                }
+                ret[key] = obj[key];
+                count++;
+            });
+            return ret;
+        };
+    }]);
