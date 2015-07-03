@@ -5,11 +5,15 @@
  * <p/>
  */
 'use strict';
-angular.module('fsMobile.services').service('ConnectionState', function (ENV, $http, $rootScope, $localForage, $q, $log, debug, $timeout) {
+angular.module('fsMobile.services').service('ConnectionState', function (DYNENV, EndpointDetector, $http, $rootScope, $localForage, $q, $log, debug, $timeout) {
 
     var key = 'lastOnlineCheck';
     var maxAge = 1000 * 60 * 2; // check every n minutes
-    var url = ENV.apiEndpoint + '/';
+
+    function endpoint(){
+        EndpointDetector.discoverEndpoint();
+        return DYNENV.apiEndpoint + '/';
+    }
 
     function LastCheck(online) {
         /**
@@ -28,7 +32,7 @@ angular.module('fsMobile.services').service('ConnectionState', function (ENV, $h
 
         if (!checkProm) {
             var result = undefined;
-            $http.get(url).then(function () {
+            $http.get(endpoint()).then(function () {
 
                 if (result === undefined) {// not resolved by timeout
                     result = true;

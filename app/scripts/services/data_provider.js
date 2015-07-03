@@ -7,9 +7,11 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .service('dataProvider', function (storageManager, $localForage, AppData, ENV) {
-
-        var url = ENV.apiEndpoint + '/data';
+    .service('dataProvider', function (storageManager, $localForage, AppData, DYNENV) {
+        // TODO : we must store data in local storage without using full api url instead we should store it under data only
+        function endPoint(){
+            return DYNENV.apiEndpoint + '/data';
+        };
 
         var prepareData = function (data) {
             return new AppData(data);
@@ -34,18 +36,20 @@ angular.module('fsMobile.services')
                     updateResourceData(data[resourceName], objects);
             });
             data.$metaInfo = response.$metaInfo;
+            console.log('stored data to XXX:',response.$metaInfo.key);
             return $localForage.setItem(response.$metaInfo.key, data);
         };
 
 
         return {
             getData: function () {
-                return storageManager.fetchData(url)
+                return storageManager.fetchData(endPoint())
                     .then(function (data) {
                         if (data) {
+                            console.log('got data from fetchDAtaMEthod',data);
                             return data;
                         }
-                        return storageManager.fetchFromFile(url).then(function (response) {
+                        return storageManager.fetchFromFile(endPoint()).then(function (response) {
                             return updateLocalForageData(response);
                         }).catch(function (error) {
                             console.log('fetching from file failed due to', error);
@@ -56,10 +60,10 @@ angular.module('fsMobile.services')
             },
             refreshData: function () {
                 console.log('refresh');
-                return storageManager.fetchRemote(url)
+                return storageManager.fetchRemote(endPoint())
                     .then(function (response) {
                         console.log('refresh: remote data received', response);
-                        return storageManager.fetchData(url)
+                        return storageManager.fetchData(endPoint())
                             .then(function (localForageData) {
                                 console.log('refresh: local data fetched', localForageData);
                                 return updateLocalForageData(response, localForageData)
@@ -68,7 +72,7 @@ angular.module('fsMobile.services')
                     });
             },
             deleteData: function () {
-                return storageManager.deleteLocalData(url);
+                return storageManager.deleteLocalData(endPoint());
             }
         };
 

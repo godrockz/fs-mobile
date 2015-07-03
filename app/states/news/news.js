@@ -19,7 +19,7 @@ angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigP
             'menuContent': {
                 templateUrl: 'states/news/news.html',
                 controller: function ($scope) {
-
+                    console.log('news controller mit viele news');
                     $scope.news = $scope.appData.news;
 
                     console.log('news', $scope.news);

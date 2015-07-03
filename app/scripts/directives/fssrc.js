@@ -4,7 +4,7 @@
  * <p/>
  */
 'use strict';
-angular.module('fsMobile.directives').directive('fsSrc', function ($log, ConnectionState) {
+angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV, ConnectionState) {
     var images = {
         concert: [
             'images/random/bands_01.png',
@@ -30,13 +30,13 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, Connect
     }
 
     function setImage(elem, attrs, url) {
-
+        var absoluteUri = DYNENV.apiEndpoint + url;
         if (elem[0].tagName === 'img') {
-            attrs.$set('src', url);
+            attrs.$set('src', absoluteUri);
         } else {
             // use background image url
             console.log('elem', elem[0]);
-            elem[0].style.backgroundImage = 'url(\'' + url + '\')';
+            elem[0].style.backgroundImage = 'url(\'' + absoluteUri + '\')';
             elem.addClass = 'fssrc';
         }
     }

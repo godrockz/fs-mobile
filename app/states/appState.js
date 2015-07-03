@@ -1,6 +1,6 @@
 /*global
-    angular
-*/
+ angular
+ */
 
 'use strict';
 angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
@@ -16,7 +16,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 });
             }
         },
-        controller: function ($scope, appData, dataProvider) {
+        controller: function ($scope, appData, dataProvider, EndpointDetector) {
             console.log('appData in Ctrl ', appData);
             $scope.appData = appData;
 
@@ -28,13 +28,17 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             };
 
             $scope.refreshData = function () {
-                dataProvider.refreshData().then(function (data) {
-                    console.log('refresh: new data saved', data);
-                    angular.forEach(data, function (resource, resourceName) {
-                        $scope.appData[resourceName] = resource;
+                // alwyas discover endpoint on refresh
+                EndpointDetector.discoverEndpoint().then(function (endpoint) {
+                    dataProvider.refreshData().then(function (data) {
+                        console.log('refresh: new data saved', data);
+                        angular.forEach(data, function (resource, resourceName) {
+                            $scope.appData[resourceName] = resource;
+                        });
+                        $scope.$broadcast('scroll.refreshComplete');
                     });
-                    $scope.$broadcast('scroll.refreshComplete');
                 });
+
             };
         }
     });

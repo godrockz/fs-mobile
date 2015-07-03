@@ -20,8 +20,13 @@ angular.module('fsMobile.services')
             return ENV.offlineJsonDataDirectory + path + '.json';
         };
 
-        // url can be with or without domain
+        /**
+         * retrieving data from local storage
+         * @param url
+         * @returns {*}
+         */
         var fetchData = function (url) {
+
             var path = urlToPathConverter(url);
             console.log('fetching from localForage:', path);
             return $localForage.getItem(path).then(function (data) {
@@ -51,8 +56,10 @@ angular.module('fsMobile.services')
             if (!window.navigator.onLine) {
                 return $q.reject('No internet connection');
             }
+            console.log('url to fetch',url);
 
             return $http.get(url).then(function (data) {
+                console.log('set $metaInfoKey to ',url);
                 data.$metaInfo = {
                     uri: url,
                     key: urlToPathConverter(url),
