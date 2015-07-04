@@ -1,5 +1,5 @@
 <!--<ion-view view-title="{{'app.general.locations'|translate}}" >-->
-<ion-view class="program" view-title="{{'app.general.program'|translate}}" >
+<ion-view class="program" view-title="{{'app.general.program'|translate}}" cache-view="false">
     <ion-content>
         <div class="row tabmenu">
             <div class="col-25 tabmenu-left" ng-click="previous()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
@@ -23,8 +23,8 @@
                     <!--<div><h1>{{::tab}}</h1></div>-->
                     <div class="prog-day" ng-repeat="(eventday, events) in location.events | orderObjectBy:'index'" ng-if="events.events.length > 0" >
                         <div class="row">
-                            <div class="col-50 prog-date-left">{{'app.days.' + (events.date | timeFormat: 'dddd')| lowercase | translate }}</div>
-                            <div class="col-50 prog-date-right">{{events.date | timeFormat: 'DD.MM.'}}</div>
+                            <div class="col-50 prog-date-left">{{::'app.days.' + (events.date | timeFormat: 'dddd')| lowercase | translate }}</div>
+                            <div class="col-50 prog-date-right">{{::events.date | timeFormat: 'DD.MM.'}}</div>
                         </div>
                         <div class="prog-box" ng-repeat="event in events.events | orderBy: 'start'"
                              ui-sref="app.singleprogram({idx:event.id})" id="{{event.id}}">
@@ -32,7 +32,7 @@
                             <div class="row" >
                                 <div class="prog-date col-25">
                                     <div class="box">
-                                        <span>{{'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{::event.start|date:'H:mm'}}</span>
+                                        <span>{{::'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{::event.start|date:'H:mm'}}</span>
                                     </div>
                                 </div>
                                 <div class="prog-text-head col-75">
