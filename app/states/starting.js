@@ -16,13 +16,14 @@ angular.module('fsMobile.controllers').config(function ($stateProvider) {
         controller: function ($scope, $timeout, $state, $q, EndpointDetector) {
             var timerDestruct;
             EndpointDetector.discoverEndpoint();
+            var factor = 0.25;
 
             function addTimer(txt, ms) {
                 var deferred = $q.defer();
                 $scope.whatWeAreDoing = txt;
                 timerDestruct = $timeout(function () {
                     deferred.resolve();
-                }, ms || 1000);
+                }, factor *( ms || 1000));
                 return deferred.promise;
             }
             addTimer('initalizing application').then(function () {
