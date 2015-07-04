@@ -31,11 +31,11 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
 
     function setImage(elem, attrs, url) {
         if (elem[0].tagName === 'img') {
-            attrs.$set('src', absoluteUri);
+            attrs.$set('src', url);
         } else {
             // use background image url
             console.log('elem', elem[0]);
-            elem[0].style.backgroundImage = 'url(\'' + absoluteUri + '\')';
+            elem[0].style.backgroundImage = 'url(\'' + url + '\')';
             elem.addClass('fssrc');
         }
     }
