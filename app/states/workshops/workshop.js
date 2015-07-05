@@ -41,12 +41,25 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     // Sort days
                     days = _.keys($scope.groupedEvents);
                     var day_of_week = $filter('lowercase')(moment().format('e'));
-                    console.log('day_of_week',day_of_week);
+                    //console.log('day_of_week',day_of_week);
                     var list = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
                     var sorted_list = list.slice(day_of_week).concat(list.slice(0,day_of_week));
-                    console.log('sorted_list',list.slice(day_of_week.toString));
+                    //console.log('sorted_list',list.slice(day_of_week.toString));
                     days.sort(function(a,b) { return sorted_list.indexOf(a) > sorted_list.indexOf(b); });
 
+                    var fsDays = {
+                        'wednesday': {index: 0, date: moment('29.07.2015','DD.MM.YYYY'), events: []},
+                        'thursday': {index: 1, date: moment('30.07.2015','DD.MM.YYYY'), events: []},
+                        'friday': {index: 2, date: moment('31.07.2015','DD.MM.YYYY'), events: []},
+                        'saturday': {index: 3, date: moment('01.08.2015','DD.MM.YYYY'), events: []},
+                        'sunday': {index: 4, date: moment('02.08.2015','DD.MM.YYYY'), events: []}
+                    };
+
+                    var groupedEventsSize = Object.keys($scope.groupedEvents);
+
+                    for(var x = 0 ; x < groupedEventsSize.length ; x++){
+                        fsDays[groupedEventsSize[x]].events = $scope.groupedEvents[groupedEventsSize[x]];
+                    }
 
                     $scope.changeTabHeadTo = function (index) {
                         $scope.tabIndex = index;

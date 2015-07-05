@@ -8,6 +8,7 @@
     "app.general.settings":"Einstellungen",
     "app.general.program":"Programm",
     "app.general.workshops":"Workshops",
+    "app.general.workshop":"Workshops",
     "app.settings.language.label":"Sprache",
     "app.settings.data.divider":"App Content",
     "app.settings.fetchdate.label":"Stand",
@@ -37,6 +38,8 @@
 
     "app.news.by":"Von",
     "app.news.loadmore":"Mehr News laden...",
+
+    "app.workshop.from":"Von",
 
     "language.de":"Deutsch",
     "language.en":"Englisch"
