@@ -17,9 +17,11 @@ angular.module('fsMobile.services')
         var lastCheckMs;
         var maxAge = 1000 * 60 * 1;// last endpoint check should not be older than
 
+        var cnt=0;
 
         function isOnline(url) {
             var deferred = $q.defer();
+            cnt++;
             lastCheckMs = (new Date()).getTime();
             $http.get(url).then(function () {
 
@@ -44,11 +46,11 @@ angular.module('fsMobile.services')
 
                 isOnline(ENV.remoteApiEndpoint).then(function () {
                     DYNENV.apiEndpoint = ENV.remoteApiEndpoint;
-                    debug.addData('endpointdetection','Discovers which endpoint should be used to query api',{endpoint:DYNENV.apiEndpoint, lasUpdate : new Date()});
+                    debug.addData('endpointdetection','Discovers which endpoint should be used to query api',{checkCnt: cnt, endpoint:DYNENV.apiEndpoint, lasUpdate : new Date()});
                     deferred.resolve(DYNENV);
                 }, function () {
                     DYNENV.apiEndpoint = ENV.localApiEndpoint;
-                    debug.addData('endpointdetection','Discovers which endpoint should be used to query api',{endpoint:DYNENV.apiEndpoint, lasUpdate : new Date()});
+                    debug.addData('endpointdetection','Discovers which endpoint should be used to query api',{checkCnt: cnt, endpoint:DYNENV.apiEndpoint, lasUpdate : new Date()});
                     deferred.resolve(DYNENV);
                 });
                 return deferred.promise;
