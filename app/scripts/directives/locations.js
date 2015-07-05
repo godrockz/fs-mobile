@@ -6,6 +6,12 @@
  */
 'use strict';
 angular.module('fsMobile.directives').directive('locmap', function () {
+
+
+    var defaultSize = 60;
+
+
+
     function createLocationMarker(x, y, width, height) {
         var elem = document.createElement('div');
         elem.style.top = x + 'px';
@@ -29,11 +35,12 @@ angular.module('fsMobile.directives').directive('locmap', function () {
 
         },
         link: function (scope, elem, attrs, ctrl) {
-            var size = 60;
+
             console.log('locmap scope', scope);
             angular.forEach(scope.locations, function (loc) {
                 console.log('loc', loc);
                 var coord = loc.geoCoordinate;
+                var size = coord.size||defaultSize;
                 var clbl = createLocationMarker(coord.longitude, coord.latitude, size, size);
                 angular.element(clbl).bind('click', function (e) {
                     e.stopPropagation();
