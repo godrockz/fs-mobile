@@ -8,22 +8,19 @@
         </div>
 
         <div class="card selected-loc" ng-if="selection.location">
-            <div class="item item-text-wrap" style="background-image:url('{{selection.location.images[0]}}');">
+            <div class="item item-text-wrap" >
 
-                <div class="location-description">
 
                     <h3 class="locationName">{{selection.location|trans:'name'}}</h3>
 
                     <p class="locationPreview">
                         {{selection.location|trans:'preview'}}</p>
-                    <a class="button button-light" ui-sref="app.program({locationId:selected.location.id})" >
+                    <a class="button button-positive program-btn" ui-sref="app.program({locationId:selected.location.id})" >
                         {{'app.map.open.location'|translate}}
                     </a>
 
-
-
                     <a ng-click="selection.location=undefined" class="close"><span class="ion-android-close"></span></a>
-                </div>
+
             </div>
         </div>
 

@@ -23,41 +23,52 @@
     }
     .selected-loc {
         position: absolute;
-        bottom: 40px;
+        bottom: 0px;
+
         opacity: 0.8;
         z-index: 9990;
-        max-width: 50vw;
-        width: 80%;
+        width: 100%;
         height: 200px;
+        margin: 0px;
+
+        border-top:1px solid $positive;
+        @extend .noBorders;
     }
+
+    .noBorders{
+        border-top-left-radius:0px !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-left-radius:0px !important;
+        border-bottom-right-radius: 0px !important;
+    }
+
     .selected-loc > div {
         width: 100%;
         height: 100%;
-        border-bottom-width:0px!important;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        padding:0px;
+
+        background-color: #333;
+        @extend .noBorders;
+
     }
 
-    .location-description {
-        background-color: #333;
-        padding:0px;
-        height:80%;
-        padding:4px;
-        .locationName, .locationPreview,  .close {
-            font-weight: bold;
-            color: white;
-            padding-top:10px;
-        }
-        .close{
-            padding: 10px; // bigger clickarea
-            position: absolute;
-            z-index: 4;
-            right:0px;
-            top:0px;
-        }
+    .locationName, .locationPreview, .close {
+        font-weight: bold;
+        color: white;
+        padding-top: 10px;
+    }
+    .close {
+        padding: 10px; // bigger clickarea
+        position: absolute;
+        z-index: 4;
+        right: 0px;
+        top: 0px;
+        margin:16px;
+    }
+    .program-btn{
+        position:absolute;
+        bottom:0px;
+        right:0px;
+        margin: 16px;
     }
 
 }
