@@ -30,10 +30,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     // Events mit bestimmten Kategorien zu einer Location hinzufügen
                     $scope.eventsOutput = null;
 
+                    // map to allow jumpt to slides by locationIds without further foreach
+                    var locationSlideIndexMap = {};
+
                     angular.forEach($scope.eventsGroupLoc, function (locationEvents, locationId) {
 
                         if(!$scope.locations[locationId]){
-                            return; // why should we create dummy locations for unassigned events ?
+                            return; // we should not create dummy locations for unassigned events ?
                         }
                         var newlocation = {};
                         newlocation.id = locationId;
@@ -54,8 +57,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         // Alle Events der Location auslesen und hinzufügen wenn richtige Kategorie
                         newlocation.eventCount = 0;
                         angular.forEach(locationEvents, function (event) {
-                            // TODO: please support more types in the program at least +SEMINAR and maybe WORSHIP
-                            if (event.eventCategory === 'CONCERT'||event.eventCategory ==='SEMINAR'||event.eventCategory ==='WORSHIP') {
+
+                            if (event.eventCategory !== 'WORKSHOP') {
                                 var day = moment(event.start).format('dddd').toLowerCase(),
                                     eStart = new Date(event.start),
                                     eEnd = new Date(event.end),
@@ -81,8 +84,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         });
 
                         newlocation.actualEvent = actualEvent;
-                        if (newlocation.eventCount > 0) {
+                        if (newlocation.eventCount > 0) { // only put locations that have events
+                            var idx = newLocations.length;
                             newLocations.push(newlocation);
+                            locationSlideIndexMap[locationId]=idx;
                         }
                     });
                     $scope.eventsOutput = newLocations;
@@ -101,17 +106,25 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         $ionicSlideBoxDelegate.previous();
                     };
 
-                    if($stateParams.locationId){
-                        var nextIdx;
-                        angular.forEach($scope.eventsOutput,function(output ,idx){
-                            console.log('output',idx,output);
-                            if(output.id === $stateParams.locationId){
-                                nextIdx = idx;
-                            }
-                        });
-                        if(nextIdx){
-                            $scope.changeTabHeadTo(nextIdx);
+                    $scope.active={slide:undefined};
+                    function slideTo(locationId) {
+                        // first find the index of slides that contains the location
+                        if (!angular.isDefined(locationSlideIndexMap[locationId])) {
+                            return;
+                            // we do not have any location with this id so it mus be a workshop type
+                            // for workshops we cannot jump in location based so we can't do anything here
+                            // except we implement hidden workshop locations or something like this
                         }
+                        var idx = locationSlideIndexMap[locationId];
+                        console.log('slide to found ', idx);
+                        $scope.changeTabHeadTo(idx);
+                        $scope.active.slide = idx;
+
+                    }
+
+                    // jump to location if requested by param
+                    if($stateParams.locationId){
+                        slideTo($stateParams.locationId);
                     }
 
                 }
