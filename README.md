@@ -33,3 +33,22 @@ explains quite well how to accomplish this. An AVD demands libs for a specific a
 
 # jsonizer
 run grunt  jsonizer:defaults to fetch data for offline usage from api 
+
+# release it
+
+The following steps will create a realeasable apk
+```
+grunt
+```
+```
+cordova plugin rm org.apache.cordova.console
+```
+```
+cordova build --release android
+```
+```
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore <your-keystore>.keystore /home/johannes/Work/js/fs-mobile/platforms/android/build/outputs/apk/android-release-unsigned.apk <key_alias>
+```
+```
+zipalign -v 4 /home/johannes/Work/js/fs-mobile/platforms/android/build/outputs/apk/android-release-unsigned.apk FreakstockApp.apk
+```

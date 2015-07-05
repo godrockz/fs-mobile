@@ -595,6 +595,7 @@ module.exports = function (grunt) {
         'wiredep',
         'newer:jshint',
         'karma:continuous',
-        'compress'
+        'compress',
+        'jsonizer'
     ]);
 };

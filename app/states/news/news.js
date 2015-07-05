@@ -8,7 +8,6 @@
     angular
 */
 'use strict';
-angular.module('fsMobile.states', []);
 angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigProvider) {
 
     $ionicConfigProvider.backButton.text('').previousTitleText('').icon('ion-chevron-left');

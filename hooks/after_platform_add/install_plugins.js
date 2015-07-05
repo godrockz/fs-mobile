@@ -14,6 +14,6 @@ var script = path.resolve(__dirname, '../../node_modules/cordova/bin', cmd);
 packageJSON.cordovaPlugins = packageJSON.cordovaPlugins || [];
 packageJSON.cordovaPlugins.forEach(function (plugin) {
   exec(script + ' plugin add ' + plugin, function (error, stdout, stderr) {
-    sys.puts(stdout);
+    console.log(stdout);
   });
 });

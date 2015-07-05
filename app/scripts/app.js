@@ -13,12 +13,15 @@
     angular
 */
 
+angular.module('fsMobile.states', []);
 angular.module('fsMobile.services', []);
 angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
     'LocalForageModule',
     'fsMobile.controllers',
-    'fsMobile.states', 'fsMobile.rest',
-    'fsMobile.services', 'fsMobile.filters',
+    'fsMobile.states',
+    'fsMobile.rest',
+    'fsMobile.services',
+    'fsMobile.filters',
     'fsMobile.directives',
     'ui.bootstrap.datetimepicker',
     'config'])
