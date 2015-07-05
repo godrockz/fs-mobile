@@ -15,7 +15,8 @@
 
                     <p class="locationPreview">
                         {{selection.location|trans:'preview'}}</p>
-                    <a class="button button-positive program-btn" ui-sref="app.program({locationId:selected.location.id})" >
+                    <a class="button button-positive program-btn"
+                       ui-sref="app.program({locationId:selection.location.id})" >
                         {{'app.map.open.location'|translate}}
                     </a>
 
