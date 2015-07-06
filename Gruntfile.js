@@ -45,8 +45,8 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'development',
-                        remoteApiEndpoint: 'http://spektacholeriker.de:8080',
-                        localApiEndpoint: 'http://fs.spektacholeriker.de:8080',
+                        remoteApiEndpoint: 'http://localhost:8080',
+                        localApiEndpoint: 'http://localhost:8080',
                         offlineJsonDataDirectory: 'scripts/data'
                     }
                 }
