@@ -21,15 +21,20 @@
         height: 100%;
         padding: 0 0.5em;
         .prog-day {
-          .prog-date-left {
-            text-align: right;
-            height: 2em;
-            padding: 0.5em;
-          }
-          .prog-date-right {
-            text-align: left;
-            height: 2em;
-            padding: 0.5em;
+          .prog-date {
+            overflow: hidden;
+            div {
+              height: 2em;
+              padding: 0.5em;
+              float: left;
+              width: 50%;
+              &.prog-date-left {
+                text-align: right;
+              }
+              &.prog-date-right {
+                text-align: left;
+              }
+            }
           }
           .prog-box {
               background-color: white;
@@ -41,10 +46,10 @@
               .row {
                   padding: 0;
               }
-              .prog-date {
-                  text-align: center;
-                  width: 100%;
-                  height: 100%;
+              .prog-datetime {
+                  float: left;
+                  text-align: left;
+                  margin-right: 0.5em;
                   .box {
                       border-radius: 50%;
                       display: inline-block;
@@ -66,6 +71,7 @@
 
               .prog-text-head {
                   padding: 0.5em 0;
+                  overflow: hidden;
 
                   p.head {
                       font-size: 1.2em;

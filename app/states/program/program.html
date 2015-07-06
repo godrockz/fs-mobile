@@ -1,14 +1,14 @@
 <!--<ion-view view-title="{{'app.general.locations'|translate}}" >-->
 <ion-view class="program" view-title="{{'app.general.program'|translate}}" cache-view="false">
     <ion-content>
-        <div class="row tabmenu">
-            <div class="col-25 tabmenu-left" ng-click="previous()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
+        <div class="tabmenu">
+            <div class="tabmenu-left" ng-click="previous()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
                 <small>{{eventsOutput[tabIndex==0?tabNames.length-1:tabIndex-1]|trans:'name'}}</small>
             </div>
-            <div class="col-50 tabmenu-center">
+            <div class="tabmenu-center">
                 <b>{{eventsOutput[tabIndex]|trans:'name'}}</b>
             </div>
-            <div class="col-25 tabmenu-right" ng-click="next()" style="word-wrap: normal; padding-left: 0.5em;">
+            <div class="tabmenu-right" ng-click="next()" style="word-wrap: normal; padding-left: 0.5em;">
                 <small>{{eventsOutput[tabIndex==tabNames.length-1?0:tabIndex+1]|trans:'name'}}</small>
             </div>
         </div>
@@ -23,23 +23,21 @@
                 <ion-scroll class="prog-list" >
                     <!--<div><h1>{{::tab}}</h1></div>-->
                     <div class="prog-day" ng-repeat="(eventday, events) in location.events | orderObjectBy:'index'" ng-if="events.events.length > 0" >
-                        <div class="row">
-                            <div class="col-50 prog-date-left">{{::'app.days.' + (events.date | timeFormat: 'dddd')| lowercase | translate }}</div>
-                            <div class="col-50 prog-date-right">{{::events.date | timeFormat: 'DD.MM.'}}</div>
+                        <div class="prog-date">
+                            <div class="prog-date-left">{{::'app.days.' + (events.date | timeFormat: 'dddd')| lowercase | translate }}</div>
+                            <div class="prog-date-right">{{::events.date | timeFormat: 'DD.MM.'}}</div>
                         </div>
                         <div class="prog-box" ng-repeat="event in events.events | orderBy: 'start'"
                              ui-sref="app.singleprogram({idx:event.id})" id="{{event.id}}">
                             <div class="prog-actual"></div>
-                            <div class="row" >
-                                <div class="prog-date col-25">
-                                    <div class="box">
-                                        <span>{{::'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{::event.start|date:'H:mm'}}</span>
-                                    </div>
+                            <div class="prog-datetime">
+                                <div class="box">
+                                    <span>{{::'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{::event.start|date:'H:mm'}}</span>
                                 </div>
-                                <div class="prog-text-head col-75">
-                                    <p class="head">{{::event|trans:'name'}} {{event.id === location.actualEvent?'!':''}}</p>
-                                    <p class="text">{{::event|trans:'description'}}</p>
-                                </div>
+                            </div>
+                            <div class="prog-text-head">
+                                <p class="head">{{::event|trans:'name'}} {{event.id === location.actualEvent?'!':''}}</p>
+                                <p class="text">{{::event|trans:'description'}}</p>
                             </div>
                         </div>
                     </div>

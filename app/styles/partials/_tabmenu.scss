@@ -4,16 +4,21 @@
   color: $positive;
   line-height: 1em;
   padding: 0;
-  height: 4em; text-align: center;
+  // height: 3em;
+  overflow: hidden;
+  text-align: center;
   //border-bottom: 4px solid $positive;
 
-    .tabmenu-left, .tabmenu-right, .tabmenu-center {
-        position: relative;
-        padding-top:1em;
-    }
-
-  .tabmenu-left, .tabmenu-right {
+  .tabmenu-left, .tabmenu-right, .tabmenu-center {
     position: relative;
+    padding: 1em 0;
+    float: left;
+  }
+  .tabmenu-left, .tabmenu-right {
+    width: 34%;
+  }
+  .tabmenu-center {
+    width: 32%;
   }
   .tabmenu-left:before, .tabmenu-right:before {
     content:'';
