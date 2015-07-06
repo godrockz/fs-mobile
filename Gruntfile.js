@@ -150,7 +150,7 @@ module.exports = function (grunt) {
                     jsonOutputDirectory: '<%= yeoman.dist %>/<%= yeoman.scripts %>/data',
                     outputFileSuffix: '.json',
                     //baseUrl: 'http://dev-fs-rest-service.herokuapp.com',
-                    baseUrl: 'http://localhost:8080',
+                    baseUrl: 'http://spektacholeriker.de:8080',
                     resources: [{
                         url: '/data',
                         recursive: false
