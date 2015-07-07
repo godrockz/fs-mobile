@@ -133,8 +133,9 @@
     div.content-box {
         padding: 0.5em;
 
-        .program-item-single {
+        .program-headline {
             margin-top: -1em;
+            overflow: hidden;
         }
         .program-info {
             padding: 0.5em 1.5em 0;
@@ -149,9 +150,7 @@
 }
 
 .program-date {
-    text-align: center;
-    width: 100%;
-    height: 100%;
+    float: left;
     .box {
         border-radius: 50%;
         display: inline-block;
@@ -173,7 +172,9 @@
 }
 
 .program-text-head {
-    padding: 0.5em 0;
+    overflow: hidden;
+    margin-top: 1.4em;
+    padding-left: 1em;
 
     p.head {
         font-size: 1.2em;
