@@ -99,15 +99,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 templateUrl: 'states/workshops/workshop.html',
                 controller: function ($scope, $stateParams) {
 
-                    if ($scope.resources.events) {
+                    if ($scope.appData.events) {
                         $scope.event = $scope.appData.events[$stateParams.idx];
+                        $scope.event.location = $scope.appData.locations[$scope.event.locationRef];
                     }
-
-                    $scope.$watch('resources.events', function () {
-                        if ($scope.appData.events) {
-                            $scope.event = $scope.appData.events[$stateParams.idx];
-                        }
-                    });
                 }
             }
         }

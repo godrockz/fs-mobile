@@ -32,6 +32,7 @@
     "app.days.abbr.saturday":"Sa",
     "app.days.abbr.sunday":"So",
 
+    "app.time.start":"Start",
     "app.time.from":"Von",
     "app.time.to":"Bis",
 
@@ -40,7 +41,7 @@
     "app.news.by":"Von",
     "app.news.loadmore":"Mehr News laden...",
 
-    "app.workshop.from":"Von",
+    "app.workshop.from":"Referent",
 
     "language.de":"Deutsch",
     "language.en":"Englisch"
