@@ -19,7 +19,7 @@ angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigP
                 templateUrl: 'states/news/news.html',
                 controller: function ($scope, $filter) {
 
-                    $scope.news = $scope.appData.news;
+                    $scope.news = $scope.appData.news || {};
                     $scope.news = $filter('filter')($scope.news,{deleted : false});
                     $scope.news = $filter('orderObjectBy')($scope.news,'publishDate','date');
 

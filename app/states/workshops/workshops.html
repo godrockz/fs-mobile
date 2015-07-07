@@ -20,25 +20,20 @@
                                          does-continue="true">
             <ion-slide class="work-tab" ng-repeat="(day, events) in groupedEvents">
                 <ion-scroll class="work-list">
+                    <div class="work-box"
+                            ng-repeat="event in events | orderBy: 'start'"
+                            ui-sref="app.workshop({idx:event.id})"
+                            id="{{event.id}}">
+                        <div class="work-date">
+                            <div class="box">
+                                <span class="box-text">{{::event.start|date:'H:mm'}}<span ng-if="event.end"><br><small>-</small><br>{{::event.end|date:'H:mm'}}</span></span>
 
-                    <div class="work-day" ng-repeat="event in events">
-                        <div class="work-box"
-                             ng-repeat="event in events | orderBy: 'start'"
-                             ui-sref="app.workshop({idx:event.id})"
-                             id="{{event.id}}">
-                            <div >
-                                <div class="work-date">
-                                    <div class="box">
-                                        <span class="box-text">{{::event.start|date:'H:mm'}}<span ng-if="event.end"><br><small>-</small><br>{{::event.end|date:'H:mm'}}</span></span>
-
-                                    </div>
-                                </div>
-                                <div class="work-text-head">
-                                    <p class="head">{{::event|trans:'name'}}</p>
-                                    <p class="text" ng-if="::event.author">{{'app.workshop.from'|translate }}: {{::event.author}}</p>
-                                    <p class="text">{{'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
-                                </div>
                             </div>
+                        </div>
+                        <div class="work-text-head">
+                            <p class="head">{{::event|trans:'name'}}</p>
+                            <p class="text" ng-if="::event.author">{{'app.workshop.from'|translate }}: {{::event.author}}</p>
+                            <p class="text">{{'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
                         </div>
                     </div>
 

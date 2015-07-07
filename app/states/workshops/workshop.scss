@@ -7,59 +7,57 @@
             .work-list {
                 height: 100%;
                 padding: 0 0.5em;
-                .work-day {
-                    .work-box {
-                        background-color: white;
-                        box-shadow: 3px 2px 6px grey;
-                        margin: 0.5em 0 1em 0;
-                        padding: 0.5em;
-                        height: 5em;
-                        position: relative;
-                        .row {
-                            padding: 0;
-                        }
-                        .work-date {
-                            text-align: left;
-                            margin-right: 0.5em;
-                            float: left;
-                            .box {
-                                border-radius: 50%;
+                .work-box {
+                    background-color: white;
+                    box-shadow: 3px 2px 6px grey;
+                    margin: 0.5em 0 1em 0;
+                    padding: 0.5em;
+                    height: 5em;
+                    position: relative;
+                    .row {
+                        padding: 0;
+                    }
+                    .work-date {
+                        text-align: left;
+                        margin-right: 0.5em;
+                        float: left;
+                        .box {
+                            border-radius: 50%;
+                            display: inline-block;
+                            width: 4em;
+                            height: 4em;
+                            background-color: rgba($positive, 0.5);
+                            position: relative;
+                            line-height: 4em;
+                            text-align: center;
+                            span.box-text {
                                 display: inline-block;
-                                width: 4em;
-                                height: 4em;
-                                background-color: rgba($positive, 0.5);
-                                position: relative;
-                                line-height: 4em;
-                                text-align: center;
-                                span.box-text {
-                                    display: inline-block;
-                                    vertical-align: middle;
-                                    line-height: 1.2em;
-                                    font-size: 0.8em;
-                                    color: white;
-                                }
+                                vertical-align: middle;
+                                line-height: 1.2em;
+                                font-size: 0.8em;
+                                color: white;
                             }
                         }
+                    }
 
-                        .work-text-head {
+                    .work-text-head {
+                        overflow: hidden;
+                        padding: 0.2em 0;
+
+                        p.head {
+                            font-size: 1.2em;
+                            margin: 0 0 0.2em;
+                            color: $positive;
                             overflow: hidden;
-                            padding: 0.2em 0;
-
-                            p.head {
-                                font-size: 1.2em;
-                                margin: 0 0 0.2em;
-                                color: $positive;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                white-space: nowrap;
-                            }
-                            p.text {
-                                font-size: 0.7em;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                margin: 0;
-                                line-height: 1.5em;
-                            }
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                        p.text {
+                            font-size: 0.7em;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            margin: 0;
+                            line-height: 1.5em;
                         }
                     }
                 }

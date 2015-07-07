@@ -20,11 +20,16 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             console.log('appData in Ctrl ', appData);
             $scope.appData = appData;
 
-            $scope.deleteData = function () {
-                dataProvider.deleteData();
+            var fetchData = function () {
                 dataProvider.getData().then(function (data) {
                     $scope.appData = data;
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
+            };
+
+            $scope.deleteData = function () {
+                dataProvider.deleteData();
+                fetchData();
             };
 
             $scope.refreshData = function () {
@@ -32,10 +37,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 EndpointDetector.discoverEndpoint().then(function () {
                     dataProvider.refreshData().then(function (data) {
                         console.log('refresh: new data saved', data);
-                        angular.forEach(data, function (resource, resourceName) {
-                            $scope.appData[resourceName] = resource;
-                        });
-                        $scope.$broadcast('scroll.refreshComplete');
+                        fetchData();
                     });
                 });
 

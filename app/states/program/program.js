@@ -25,7 +25,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.locations = $scope.appData.locations;
 
                     // Events nach Location sortieren
-                    $scope.eventsGroupLoc = $scope.events.groupByLocation();
+                    $scope.eventsGroupLoc = {};
+                    if ($scope.events) {
+                        $scope.eventsGroupLoc = $scope.events.groupByLocation();
+                    }
 
                     // Events mit bestimmten Kategorien zu einer Location hinzufügen
                     $scope.eventsOutput = null;
