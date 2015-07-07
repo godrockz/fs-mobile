@@ -37,7 +37,7 @@
                             </div>
                             <div class="prog-text-head">
                                 <p class="head">{{::event|trans:'name'}} {{event.id === location.actualEvent?'!':''}}</p>
-                                <p class="text">{{::event|trans:'description'}}</p>
+                                <p class="text">{{::'app.event.category.' + event.eventCategory|translate | uppercase}} <span ng-if="::event.author">| {{::event.author}}</span></p>
                             </div>
                         </div>
                     </div>

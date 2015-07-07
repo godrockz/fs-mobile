@@ -43,6 +43,13 @@
 
     "app.workshop.from":"Referent",
 
+    "app.event.category.CONCERT":"Konzert",
+    "app.event.category.WORKSHOP":"Workshop",
+    "app.event.category.SEMINAR":"Seminar",
+    "app.event.category.WORSHIP":"Worship",
+    "app.event.category.PRAYER":"Gebet",
+    "app.event.category.MISC":"",
+
     "language.de":"Deutsch",
     "language.en":"Englisch"
 }
