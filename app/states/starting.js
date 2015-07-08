@@ -29,12 +29,13 @@ angular.module('fsMobile.controllers').config(function ($stateProvider) {
             } else {
                 $scope.whatWeAreDoing = 'Starting app';
             }
-            $q.all(promises).then(function () {
+            $q.all(promises).finally(function () {
                 $scope.whatWeAreDoing = 'Loading Data';
                 dataProvider.getData().then(function (data) {
                     $state.go(next_state, {appData: data}, {reload: true});
                 }).catch(function(message) {
                     $scope.whatWeAreDoing = message;
+                    $state.go(next_state, {appData: {}}, {reload: true});
                 });
             });
         }
