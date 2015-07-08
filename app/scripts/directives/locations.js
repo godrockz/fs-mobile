@@ -5,7 +5,7 @@
  * <p/>
  */
 'use strict';
-angular.module('fsMobile.directives').directive('locmap', function () {
+angular.module('fsMobile.directives').directive('locmap', function (debug) {
 
 
     var defaultSize = 60;
@@ -18,7 +18,6 @@ angular.module('fsMobile.directives').directive('locmap', function () {
         elem.style.left = y + 'px';
         elem.style.width = width + 'px';
         elem.style.height = height + 'px';
-        elem.style.backgroundColor = 'black';
         elem.style.borderRadius = width + 'px';
         elem.className = 'location-pin';
         return elem;
@@ -45,6 +44,10 @@ angular.module('fsMobile.directives').directive('locmap', function () {
                 });
                 elem.append(clbl);
             });
+
+            if(debug.isDebugEnabled()){
+                elem.addClass('debug');
+            };
 
             scope.locationClicked = function (location) {
                 scope.$apply(function(){

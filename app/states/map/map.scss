@@ -14,12 +14,18 @@
     }
     .location-pin {
         position: absolute;
-        background-color: #ddd;
+
         opacity: 0.1;
         border: 1px solid #aaa;
         /*
          with height position and radius is set by javascript
         */
+    }
+    .debug{
+        .location-pin{
+            background-color:#000;
+            opacity:0.5;
+        }
     }
     .selected-loc {
         position: absolute;

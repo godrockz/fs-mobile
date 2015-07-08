@@ -36,7 +36,15 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.debug = {cnt: 0};
                     $scope.onDebug = function () {
                         $scope.debug.cnt++;
+                        if($scope.debug.cnt>10){
+                            debug.setDebug(true);
+                        }
                     };
+                    $scope.stopdebug = function(){
+                        debug.setDebug(false);
+                        $scope.debug.cnt = 0;
+                    };
+
                     debug.addData('translate', '$translate.use()', $translate.use());
                     $rootScope.$on('translationChanged', function () {
                         debug.addData('translate', '$translate.use()', $translate.use());

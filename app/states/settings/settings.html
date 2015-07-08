@@ -1,7 +1,7 @@
 <ion-view view-title="{{'app.general.settings'|translate}}" class="settings" cache-view="true">
     <ion-content>
         <div class="list">
-            <label class="item item-input item-select" ng-click="onDebug()">
+            <label class="item item-input item-select" >
                 <div class="input-label">
                         {{'app.settings.language.label'|translate}}
                 </div>
@@ -11,7 +11,7 @@
             </label>
 
             <div class="item item-divider">
-                <span class="item-divider-text">{{'app.settings.data.divider'|translate}}</span>
+                <span class="item-divider-text" ng-click="onDebug()">{{'app.settings.data.divider'|translate}}</span>
                 <span class="app-data-date">
                     {{'app.settings.fetchdate.label'|translate}} {{appData.$metaInfo.fetched|date:'dd.MM HH:mm:ss'}}
                 </span>
@@ -27,7 +27,7 @@
 
         <div ng-if="debug.cnt >10">
         <h1 >Debug:</h1>
-        <a style="float:right;" class="button button-calm"  ng-click="debug.cnt=0">off</a>
+        <a style="float:right;" class="button button-calm"  ng-click="stopdebug();debug.cnt=0">off</a>
         <pre style="font-size:14px">
 {{debugInfo|jsonice}}
         </pre>
