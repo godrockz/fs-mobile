@@ -14,12 +14,7 @@
 angular.module('fsMobile.states').config(function ($stateProvider) {
 
     function isLocationMappable(location){
-        var result = angular.isDefined(location.markOnMap) &&
-        location.markOnMap === true &&
-        angular.isDefined(location.geoCoordinate);
-
-        console.log('paule',location,result);
-
+        var result = angular.isDefined(location.geoCoordinate);
         return result;
 
     }
@@ -29,19 +24,55 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/map/map.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicScrollDelegate) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicScrollDelegate, debug, $timeout) {
+
+                    function safeApply(fn){
+                        if(!$scope.$$phase){
+                            $scope.$apply(fn)
+                        }else{
+                            fn();
+                        }
+                    }
+
+                    function updateScreenSize(headHeight){
+                        $scope.winHeight = window.innerHeight - headHeight;
+                        $scope.winWidth = window.innerWidth;
+                    }
+
+
+                    function updateOrientation(headheight){
+                        return function() { // factory to safely propagate the headheight
+                            safeApply(function () {
+                                var prevWidth = $scope.winWidth;
+                                var prevHeight = $scope.winHeight;
+                                updateScreenSize(headheight);
+                                scrollDelegate.resize();
+
+                                debug.addData('orientation', 'discover orientation change', {
+                                    prevWidth: prevWidth, prevHeight: prevHeight,
+                                    width: $scope.winWidth, height: $scope.winHeight,
+                                    scrollView: scrollDelegate.getScrollView()
+                                });
+                            });
+                        };
+                    }
 
                     $ionicSideMenuDelegate.canDragContent(false);
 
                     var headHeight = document.getElementsByClassName('bar-header')[0].offsetHeight,
                         scrollDelegate = $ionicScrollDelegate.$getByHandle('siteplan');
 
-                    $scope.winHeight = window.innerHeight - headHeight;
-                    $scope.winWidth = window.innerWidth;
+                    updateScreenSize(headHeight);
                     $scope.selection={};// will hold selected location as a container to prevent problems with inherited scopes
                     $scope.zoomlevel = 1;
 
-                    console.log('locations',$scope.appData.locations);
+                    // HANDLE ORIENTATION CHANGES portrait / landscape
+                    $scope._updateOrientation = updateOrientation(headHeight);
+                    window.addEventListener('orientationchange', $scope._updateOrientation, false);
+                    $scope.$on('$destroy',function(){
+                        // remove native listener on scope destroy
+                        window.removeEventListener('orientationchange', $scope._updateOrientation)
+                    });
 
                     // collect locations that can be displayed on map
                     $scope.mappedLocations = [];
@@ -51,8 +82,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         }
                     });
                     console.log('got ',$scope.mappedLocations.length,' found', $scope.mappedLocations);
-
-
 
                     $scope.zoomOut = function () {
                         $scope.zoomlevel = scrollDelegate.getScrollView().__zoomLevel - 0.5;

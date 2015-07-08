@@ -35,10 +35,7 @@ angular.module('fsMobile.directives').directive('locmap', function () {
 
         },
         link: function (scope, elem, attrs, ctrl) {
-
-            console.log('locmap scope', scope);
             angular.forEach(scope.locations, function (loc) {
-                console.log('loc', loc);
                 var coord = loc.geoCoordinate;
                 var size = coord.size||defaultSize;
                 var clbl = createLocationMarker(coord.longitude, coord.latitude, size, size);
@@ -47,13 +44,10 @@ angular.module('fsMobile.directives').directive('locmap', function () {
                     scope.locationClicked(loc);
                 });
                 elem.append(clbl);
-
             });
 
             scope.locationClicked = function (location) {
-                console.log('location', location.translations.de.name);
                 scope.$apply(function(){
-                    console.log('apply');
                     ctrl.$setViewValue(location);
                 });
 
