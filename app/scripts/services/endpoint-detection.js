@@ -12,7 +12,7 @@
 'use strict';
 angular.module('fsMobile.services')
     .value('DYNENV', {apiEndpoint: undefined})
-    .service('EndpointDetector', function (ENV, DYNENV, $http, $q, debug) {
+    .service('EndpointDetector', function (ENV, DYNENV, $http, $q, debug, $location) {
 
         var lastCheckMs;
         var maxAge = 1000 * 60 * 1;// last endpoint check should not be older than
@@ -23,10 +23,12 @@ angular.module('fsMobile.services')
             var deferred = $q.defer();
             cnt++;
             lastCheckMs = (new Date()).getTime();
-            $http.get(url).then(function () {
+            $http.get(url+'/').then(function () {
 
+                debug.addData('endpointdetection1','raw',{url:url,result:true,location:$location.absUrl()});
                 deferred.resolve(true);
             }, function (e) {
+                debug.addData('endpointdetection1','raw',{url:url,result:'was error',err:e, location:$location.absUrl()});
                 deferred.reject(e);
             });
 
@@ -41,18 +43,31 @@ angular.module('fsMobile.services')
 
 
                 if (DYNENV.apiEndpoint && lastCheckMs + maxAge < (new Date()).getTime()) {
+                    debug.addData('endpoint','min wait before next check is '+maxAge+ ' ms',{using:DYNENV.apiEndpoint,location:$location.absUrl()});
                     deferred.resolve(DYNENV);
-                }
 
-                isOnline(ENV.remoteApiEndpoint).then(function () {
-                    DYNENV.apiEndpoint = ENV.remoteApiEndpoint;
-                    debug.addData('endpointdetection','Discovers which endpoint should be used to query api',{checkCnt: cnt, endpoint:DYNENV.apiEndpoint, lasUpdate : new Date()});
-                    deferred.resolve(DYNENV);
-                }, function () {
-                    DYNENV.apiEndpoint = ENV.localApiEndpoint;
-                    debug.addData('endpointdetection','Discovers which endpoint should be used to query api',{checkCnt: cnt, endpoint:DYNENV.apiEndpoint, lasUpdate : new Date()});
-                    deferred.resolve(DYNENV);
-                });
+                }else {
+                    debug.addData('endpoint','lastcheck schon lange her bisheriger endpoint',{using:DYNENV.apiEndpoint});
+                    isOnline(ENV.remoteApiEndpoint).then(function () {
+                        DYNENV.apiEndpoint = ENV.remoteApiEndpoint;
+                        debug.addData('endpointdetection', 'Discovers which endpoint should be used to query api', {
+                            checkCnt: cnt,
+                            endpoint: DYNENV.apiEndpoint,
+                            lasUpdate: new Date(),
+                            location:$location.absUrl()
+                        });
+                        deferred.resolve(DYNENV);
+                    }, function () {
+                        DYNENV.apiEndpoint = ENV.localApiEndpoint;
+                        debug.addData('endpointdetection', 'Discovers which endpoint should be used to query api', {
+                            checkCnt: cnt,
+                            endpoint: DYNENV.apiEndpoint,
+                            location:$location.absUrl(),
+                            lasUpdate: new Date()
+                        });
+                        deferred.resolve(DYNENV);
+                    });
+                }
                 return deferred.promise;
             }
         };
