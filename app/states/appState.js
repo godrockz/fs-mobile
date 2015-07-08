@@ -7,40 +7,32 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
 
     $stateProvider.state('app', {
         url: '/app',
+        params: {appData: null},
+        cache: false, // this is needed because reload: true for $state.go doesn't work
         abstract: true,
         templateUrl: 'templates/menu.html',
-        resolve: {
-            appData: function (dataProvider, $rootScope) {
-                return dataProvider.getData().finally(function () {
-                    $rootScope.$broadcast('scroll.refreshComplete');
-                });
-            }
-        },
-        controller: function ($scope, appData, dataProvider, EndpointDetector) {
-            console.log('appData in Ctrl ', appData);
-            $scope.appData = appData;
+        controller: function ($scope, $state, dataProvider, EndpointDetector) {
+            $scope.appData = $state.params.appData || {};
 
-            var fetchData = function () {
-                dataProvider.getData().then(function (data) {
-                    $scope.appData = data;
-                    $scope.$broadcast('scroll.refreshComplete');
-                });
+            var loadData = function (promise) {
+                $state.go('starting',
+                    {promise: promise, referer: 'app.settings'},
+                    {reload: true});
             };
 
             $scope.deleteData = function () {
-                dataProvider.deleteData();
-                fetchData();
+                var promise = dataProvider.deleteData();
+                loadData(promise);
             };
 
             $scope.refreshData = function () {
                 // alwyas discover endpoint on refresh
-                EndpointDetector.discoverEndpoint().then(function () {
-                    dataProvider.refreshData().then(function (data) {
+                var promise = EndpointDetector.discoverEndpoint().then(function () {
+                    return dataProvider.refreshData().then(function (data) {
                         console.log('refresh: new data saved', data);
-                        fetchData();
                     });
                 });
-
+                loadData(promise);
             };
         }
     });
