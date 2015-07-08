@@ -32,6 +32,7 @@
     "app.days.abbr.saturday":"Sat",
     "app.days.abbr.sunday":"Sun",
 
+    "app.time.start":"Start",
     "app.time.from":"From",
     "app.time.to":"Until",
 
@@ -40,7 +41,14 @@
     "app.news.by":"By",
     "app.news.loadmore":"Load more News...",
 
-    "app.workshop.from":"By",
+    "app.workshop.from":"Speaker",
+
+    "app.event.category.CONCERT":"Concert",
+    "app.event.category.WORKSHOP":"Workshop",
+    "app.event.category.SEMINAR":"Seminar",
+    "app.event.category.WORSHIP":"Worship",
+    "app.event.category.PRAYER":"Prayer",
+    "app.event.category.MISC":"",
 
     "language.de":"German",
     "language.en":"English"

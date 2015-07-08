@@ -44,7 +44,7 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $rootScope, $state) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -55,5 +55,13 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
             }
+        });
+
+        // redirects to starting page if no appData exists yet
+        $rootScope.$on('$stateChangeStart', function (e, toState, toParams) {
+            if (toState.name === 'starting') { return; }
+            if (toParams.appData) { return; }
+            e.preventDefault();
+            $state.go('starting', {referer: toState.name});
         });
     });

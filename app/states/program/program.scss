@@ -133,8 +133,9 @@
     div.content-box {
         padding: 0.5em;
 
-        .program-item-single {
+        .program-headline {
             margin-top: -1em;
+            overflow: hidden;
         }
         .program-info {
             padding: 0.5em 1.5em 0;
@@ -149,9 +150,7 @@
 }
 
 .program-date {
-    text-align: center;
-    width: 100%;
-    height: 100%;
+    float: left;
     .box {
         border-radius: 50%;
         display: inline-block;
@@ -164,7 +163,7 @@
         span {
             display: inline-block;
             vertical-align: middle;
-            line-height: normal;
+            line-height: 1.4em;
             font-size: 0.8em;
             color: white;
         }
@@ -173,11 +172,13 @@
 }
 
 .program-text-head {
-    padding: 0.5em 0;
+    overflow: hidden;
+    margin-top: 1.4em;
+    padding-left: 1em;
 
     p.head {
         font-size: 1.2em;
-        margin: 0 0 0.2em;
+        margin: 0 0 0.3em;
         color: $positive;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -191,13 +192,13 @@
         position:relative;
         line-height: 1.2em;
     }
-    p.text:before {
-        content:'';
-        width:100%;
-        height:100%;
-        position:absolute;
-        left:0;
-        top:0;
-        background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
-    }
+    //p.text:before {
+    //    content:'';
+    //    width:100%;
+    //    height:100%;
+    //    position:absolute;
+    //    left:0;
+    //    top:0;
+    //    background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
+    //}
 }

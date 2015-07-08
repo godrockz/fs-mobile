@@ -4,13 +4,13 @@
 
         </div>
         <div class="content-box">
-            <div class="program-item-single row">
-                <div class="program-date col-25">
+            <div class="program-headline">
+                <div class="program-date">
                     <div class="box">
                         <span>{{'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{event.start|date:'H:mm'}}</span>
                     </div>
                 </div>
-                <div class="program-text-head col-75 col-center">
+                <div class="program-text-head">
                     <p class="head">{{event|trans:'name'}}</p>
                 </div>
             </div>
