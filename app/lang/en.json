@@ -11,7 +11,7 @@
     "app.general.workshops":"Workshops",
     "app.general.workshop":"Workshops",
     "app.settings.language.label":"Language",
-    "app.settings.data.divider":"App-Daten",
+    "app.settings.data.divider":"App content",
     "app.settings.fetchdate.label":"last update:",
     "app.settings.data.update":"update content",
     "app.settings.data.delete":"reset content",
@@ -51,5 +51,17 @@
     "app.event.category.MISC":"",
 
     "language.de":"German",
-    "language.en":"English"
+    "language.en":"English",
+
+    "imprint.court":"Register Court:",
+    "imprint.courtfile":"Local court Kassel VR 4876",
+    "imprint.privacy.header":"Privacy Policy",
+    "imprint.privacy.content":"We, the Jesus Freaks Deutschland e.V. (hereinafter 'Jesus Freaks', 'we' and 'us') take the protection of your personal data very seriously and adhere strictly to the rules of german data protection laws. Personal data is only collected in this app and the associated back-end systems for technical purposes. In no event the data will be sold or otherwise transferred to third parties. The following statement gives an overview of how we ensure this protection and what kind of data is collected for what purpose.",
+    "imprint.handling.header":"Data processing:",
+    "imprint.handling.content":"The content (news, program, workshops, bands) in this app can be updated. When you update information our server automatically collects some data in the server log files. These are: date and time of request, the request type (full or incremental update request), the IP address of your mobile phone, date and time of last update. These data cannot be associated to people by Jesus Freaks. Merging with other data sources does not happen.",
+    "imprint.geolocation.header":"location Services",
+    "imprint.geolocation.content":"No data according your position is sent to our servers by this app.",
+    "imprint.more.header":"Further information",
+    "imprint.more.content":"It is important to us that you trust in us. Therefore we will always answer any questions concerning the processing of personal data. If you have questions that are not answered by this privacy statement or if you wish to receive more information, please sent an e-mail to"
+
 }
