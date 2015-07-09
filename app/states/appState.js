@@ -15,9 +15,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             $scope.appData = $state.params.appData || {};
 
             var loadData = function (promise) {
-                $state.go('starting',
-                    {promise: promise, referer: 'app.settings'},
-                    {reload: true});
+                $state.go('starting', {promise: promise}, {reload: true});
             };
 
             $scope.deleteData = function () {
