@@ -39,32 +39,32 @@ angular.module('fsMobile.services')
                     return result;
                 });
             },
-            groupByDay: function () {
-                return _.groupBy(this.values(), function (resource) {
+            groupByDay: function (values) {
+                values = values || this.values();
+                return _.groupBy(values, function (resource) {
                     if (resource.start) {
-                        return moment(resource.start)
-                            .format('dddd')
-                            .toLowerCase();
+                        return moment(resource.start).startOf('day').format();
                     }
                     return 'unknown';
                 });
             },
-            groupByLocation: function () {
-                return _.groupBy(this.values(), function (resource) {
+            groupByLocation: function (values) {
+                values = values || this.values();
+                return _.groupBy(values, function (resource) {
                     if (resource.locationRef) {
                         return resource.locationRef;
                     }
                     return 'unknown';
                 });
             },
-            filterByEventCategory: function (cat, neq) {
+            filterByEventCategory: function (cat, exclude) {
+                exclude = exclude || false;
                 return _.filter(this.values(), function (resource) {
                     if (!resource.eventCategory) { return false; }
-                    var result = neq || false;
                     if (resource.eventCategory === cat) {
-                        result = !neq;
+                        return !exclude;
                     }
-                    return result;
+                    return exclude;
                 });
 
             }

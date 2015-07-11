@@ -2,7 +2,7 @@
   plusplus: true
 */
 /*global
-    angular, moment
+    angular, moment, _
 */
 
 'use strict';
@@ -12,123 +12,54 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/program.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $stateParams) {
-                    var newLocations = [],
-                        actualEvent = null;
+                controller: function ($scope, $ionicSideMenuDelegate,
+                                      $ionicSlideBoxDelegate, $stateParams) {
+                    var program_length = $scope.appData.program.length,
+                        currentDateTime = moment('2015-07-30T12:30'),
+                        startSlideIndex = 0;
+
+                    // jump to location if requested by param
+                    if ($stateParams.locationId) {
+                        startSlideIndex  = _.findIndex($scope.appData.program, function (loc) {
+                            return loc.id === $stateParams.locationId;
+                        });
+                        if (startSlideIndex < 0) { startSlideIndex = 0; }
+                    }
 
                     $ionicSideMenuDelegate.canDragContent(false);
 
-                    $scope.currentDateTime = new Date('2015-07-29T10:20');
-
-                    $scope.events = $scope.appData.events;
-                    $scope.locations = $scope.appData.locations;
-
-                    // Events nach Location sortieren
-                    $scope.eventsGroupLoc = {};
-                    if ($scope.events) {
-                        $scope.eventsGroupLoc = $scope.events.groupByLocation();
-                    }
-
-                    // Events mit bestimmten Kategorien zu einer Location hinzufügen
-                    $scope.eventsOutput = null;
-
-                    // map to allow jumpt to slides by locationIds without further foreach
-                    var locationSlideIndexMap = {};
-
-                    angular.forEach($scope.eventsGroupLoc, function (locationEvents, locationId) {
-
-                        if(!$scope.locations[locationId]){
-                            return; // we should not create dummy locations for unassigned events ?
-                        }
-                        var newlocation = {};
-                        newlocation.id = locationId;
-                        if (locationId === 'unknown') {
-                            newlocation.name = 'unknown';
-                        } else {
-                            newlocation.translations = $scope.locations[locationId].translations;
-                        }
-
-                        newlocation.events = {
-                            'wednesday': {index: 0, date: moment('29.07.2015','DD.MM.YYYY'), events: []},
-                            'thursday': {index: 1, date: moment('30.07.2015','DD.MM.YYYY'), events: []},
-                            'friday': {index: 2, date: moment('31.07.2015','DD.MM.YYYY'), events: []},
-                            'saturday': {index: 3, date: moment('01.08.2015','DD.MM.YYYY'), events: []},
-                            'sunday': {index: 4, date: moment('02.08.2015','DD.MM.YYYY'), events: []}
-                        };
-
-                        // Alle Events der Location auslesen und hinzufügen wenn richtige Kategorie
-                        newlocation.eventCount = 0;
-                        angular.forEach(locationEvents, function (event) {
-
-                            if (event.eventCategory !== 'WORKSHOP') {
-                                var day = moment(event.start).format('dddd').toLowerCase(),
-                                    eStart = new Date(event.start),
-                                    eEnd = new Date(event.end),
-                                    aEnd = null;
-
-                                if (actualEvent === null) {
-                                    actualEvent = event.id;
-                                } else {
-                                    aEnd = new Date(actualEvent.end);
-
-                                    if ($scope.currentDateTime >= eStart && $scope.currentDateTime <= eEnd) {
-                                        actualEvent = event.id;
-                                    } else if ($scope.currentDateTime < eEnd && $scope.currentDateTime > aEnd) {
-                                        actualEvent = event.id;
-                                    } else if ($scope.currentDateTime < eStart) {
-                                        actualEvent = event.id;
-                                    }
-                                }
-
-                                newlocation.events[day].events.push(event);
-                                newlocation.eventCount++;
-                            }
-                        });
-
-                        newlocation.actualEvent = actualEvent;
-                        if (newlocation.eventCount > 0) { // only put locations that have events
-                            var idx = newLocations.length;
-                            newLocations.push(newlocation);
-                            locationSlideIndexMap[locationId]=idx;
-                        }
-                    });
-                    $scope.eventsOutput = newLocations;
-                    console.log('$scope.eventsOutput', $scope.eventsOutput);
-
-                    $scope.tabIndex = 0;
-                    $scope.changeTabHeadTo = function (index) {
-                        $scope.tabIndex = index;
+                    $scope.isRunning = function (event) {
+                        var eStart = moment(event.start),
+                            eEnd = event.end ? moment(event.end) : moment(event.start).endOf('day');
+                        return currentDateTime >= eStart && currentDateTime <= eEnd;
                     };
 
-                    $scope.next = function () {
+                    $scope.nextTab = function () {
                         $ionicSlideBoxDelegate.next();
                     };
-
-                    $scope.previous = function () {
+                    $scope.previousTab = function () {
                         $ionicSlideBoxDelegate.previous();
                     };
 
-                    $scope.active={slide:undefined};
-                    function slideTo(locationId) {
-                        // first find the index of slides that contains the location
-                        if (!angular.isDefined(locationSlideIndexMap[locationId])) {
-                            return;
-                            // we do not have any location with this id so it mus be a workshop type
-                            // for workshops we cannot jump in location based so we can't do anything here
-                            // except we implement hidden workshop locations or something like this
-                        }
-                        var idx = locationSlideIndexMap[locationId];
-                        console.log('slide to found ', idx);
-                        $scope.changeTabHeadTo(idx);
-                        $scope.active.slide = idx;
+                    $scope.previousLocation = function () {
+                        var index = $scope.slide.index ? $scope.slide.index - 1 : program_length - 1;
+                        return $scope.appData.program[index];
+                    };
 
+                    $scope.nextLocation = function () {
+                        var index = $scope.slide.index === program_length - 1 ? 0 : $scope.slide.index + 1;
+                        return $scope.appData.program[index];
+                    };
+
+                    $scope.currentLocation = function () {
+                        return $scope.appData.program[$scope.slide.index];
+                    };
+
+                    if ($stateParams.locationId) {
+                        $ionicSlideBoxDelegate.slide($stateParams.locationId);
                     }
 
-                    // jump to location if requested by param
-                    if($stateParams.locationId){
-                        slideTo($stateParams.locationId);
-                    }
-
+                    $scope.slide = { index: startSlideIndex };
                 }
             }
         }

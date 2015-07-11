@@ -99,7 +99,7 @@ angular.module('fsMobile.filters', [])
                     objectArray.sort(function(a, b){
                         a = moment(a[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
                         b = moment(b[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
-                        return b - a;
+                        return a - b;
                     });
                     break;
             }
