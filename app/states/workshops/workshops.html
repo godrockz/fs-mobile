@@ -1,45 +1,41 @@
-<ion-view class="workshops" view-title="{{'app.general.workshops'|translate}}" >
+<ion-view class="workshops" view-title="{{::'app.general.workshops'|translate}}" >
     <ion-content>
         <div class="tabmenu">
             <div class="tabmenu-left" ng-click="previousTab()"
-                                             ng-if="previousDay()"
-                                             style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
-                <small>{{ 'app.days.' + previousDay()|translate }}</small>
+                                    style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
+                <small ng-if="previousDay()">{{ 'app.days.' + previousDay()|translate }}</small>
             </div>
-            <div class="tabmenu-center" ng-if="currentDay()">
+            <div class="tabmenu-center" ng-if="::currentDay()">
                 <b>{{ 'app.days.' + currentDay()|translate }}</b>
             </div>
             <div class="tabmenu-right" ng-click="nextTab()"
-                                              ng-if="nextDay()"
-                                              style="word-wrap: normal; padding-left: 0.5em;">
-                <small>{{ 'app.days.' + nextDay()|translate }}</small>
+                                       style="word-wrap: normal; padding-left: 0.5em;">
+                <small ng-if="nextDay()">{{ 'app.days.' + nextDay()|translate }}</small>
             </div>
         </div>
 
-        <ion-slide-box class="work-container" on-slide-changed="changeTabHeadTo($index)"
-                                         does-continue="true">
-            <ion-slide class="work-tab" ng-repeat="(day, events) in groupedEvents">
+        <ion-slide-box class="work-container" on-slide-changed="changeTabHeadTo($index)">
+            <ion-slide class="work-tab" ng-repeat="day in ::appData.workshops | orderObjectBy:'date':'date'">
                 <ion-scroll class="work-list">
                     <div class="work-box"
-                            ng-repeat="event in events | orderBy: 'start'"
+                            ng-repeat="event in ::day.events | orderBy: 'start'"
                             ui-sref="app.workshop({idx:event.id})"
-                            id="{{event.id}}">
+                            id="{{::event.id}}">
                         <div class="work-date">
                             <div class="box">
-                                <span class="box-text">{{::event.start|date:'H:mm'}}<span ng-if="event.end"><br><small>-</small><br>{{::event.end|date:'H:mm'}}</span></span>
+                                <span
+                                    class="box-text">{{::event.start|date:'H:mm'}}<span
+                                        ng-if="::event.end"><br><small>-</small><br>{{::event.end|date:'H:mm'}}</span></span>
 
                             </div>
                         </div>
                         <div class="work-text-head">
                             <p class="head">{{::event|trans:'name'}}</p>
-                            <p class="text" ng-if="::event.author">{{'app.workshop.from'|translate }}: {{::event.author}}</p>
-                            <p class="text">{{'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
+                            <p class="text" ng-if="::event.author">{{::'app.workshop.from'|translate }}: {{::event.author}}</p>
+                            <p class="text">{{::'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
                         </div>
                     </div>
 
-                    <!--<div class="prog-box" ng-repeat="event in events">-->
-                        <!--{{ event|trans:'name'}}-->
-                    <!--</div>-->
                 </ion-scroll>
             </ion-slide>
         </ion-slide-box>

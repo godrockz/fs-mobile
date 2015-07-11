@@ -30,7 +30,6 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/');
 
-
         $translateProvider.useStaticFilesLoader({
             prefix: 'lang/',
             suffix: '.json'
@@ -41,6 +40,20 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
             'de*': 'de',
             'en*': 'en'
         });
+        function guessLanguage(lang) {
+            if (lang && lang.length >= 5 && lang.indexOf('_') !== -1) {
+                var parts = lang.split('_');
+                if (parts.length > 0) {
+                    return parts[0];
+                }
+            }
+            if (lang && lang.length === 2) {
+                return lang;
+            }
+            return 'en';
+        }
+        var lang = guessLanguage($translateProvider.use());
+        $translateProvider.use(lang);
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 

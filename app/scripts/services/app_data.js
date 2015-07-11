@@ -11,9 +11,12 @@ angular.module('fsMobile.services')
                 this[key] = (key === '$metaInfo') ? value : new Resource(value);
             }.bind(this));
 
-            // Events nach Location gruppieren
+            this.locations = this.locations || {};
+
             this.program = [];
+            this.workshops = [];
             if (this.events) {
+                // groups evens by location for program
                 var programEvents = this.events.filterByEventCategory('WORKSHOP', true);
                 programEvents = this.events.groupByLocation(programEvents);
 
@@ -31,6 +34,19 @@ angular.module('fsMobile.services')
                         loc.days.push(day);
                     });
                     this.program.push(loc);
+                }, this);
+
+                // groups workshops by days
+                var workshopEvents = this.events.filterByEventCategory('WORKSHOP');
+                workshopEvents = this.events.groupByDay(workshopEvents);
+
+                angular.forEach(workshopEvents, function (dayEvents, dayString) {
+                    var day = {
+                        date: moment(dayString),
+                        events: dayEvents
+                    };
+                    day.day_name = day.date.format('dddd').toLowerCase();
+                    this.workshops.push(day);
                 }, this);
             }
         }
