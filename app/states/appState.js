@@ -8,27 +8,35 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
     $stateProvider.state('app', {
         url: '/app',
         params: {appData: null},
-        cache: false, // this is needed because reload: true for $state.go doesn't work
         abstract: true,
         templateUrl: 'templates/menu.html',
-        controller: function ($scope, $state, dataProvider, EndpointDetector) {
-            $scope.appData = $state.params.appData || {};
+        controller: function ($scope, $state, $ionicLoading, dataProvider,
+                              EndpointDetector, $timeout) {
+            $scope.appData = $scope.appData || $state.params.appData || {};
 
-            var loadData = function (promise) {
-                $state.go('starting', {promise: promise}, {reload: true});
-            };
+            function loadData (promise) {
+                promise.then(function () {
+                    return dataProvider.getData();
+                }).then(function (data) {
+                    $scope.appData = data;
+                    $ionicLoading.hide();
+                }, function (error) {
+                    $ionicLoading.show({template: error});
+                    $timeout(function () { $ionicLoading.hide(); }, 1500);
+                });
+            }
 
             $scope.deleteData = function () {
+                $ionicLoading.show({template: 'Resetting...'});
                 var promise = dataProvider.deleteData();
                 loadData(promise);
             };
 
             $scope.refreshData = function () {
+                $ionicLoading.show({template: 'Updating...'});
                 // alwyas discover endpoint on refresh
                 var promise = EndpointDetector.discoverEndpoint().then(function () {
-                    return dataProvider.refreshData().then(function (data) {
-                        console.log('refresh: new data saved', data);
-                    });
+                    return dataProvider.refreshData();
                 });
                 loadData(promise);
             };

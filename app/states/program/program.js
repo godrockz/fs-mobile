@@ -13,7 +13,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/program/program.html',
                 controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $stateParams) {
-
                     var newLocations = [],
                         actualEvent = null;
 

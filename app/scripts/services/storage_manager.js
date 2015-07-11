@@ -89,6 +89,7 @@ angular.module('fsMobile.services')
             return $localForage.setItem(path, undefined)
                 .then(function () {
                     console.log('local data deleted');
+                    return {};
                 }).catch(function (error) {
                     debug.addData(
                         'delete_local_data_failed',

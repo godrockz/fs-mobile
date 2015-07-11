@@ -12,30 +12,22 @@
 angular.module('fsMobile.controllers').config(function ($stateProvider) {
     $stateProvider.state('starting', {
         url: '/',
-        params: {referer: null, promise: null},
+        params: {referer: null},
         templateUrl: 'states/starting.html',
-        controller: function ($scope, $timeout, $state, $q, dataProvider) {
+        controller: function ($scope, $timeout, $state, dataProvider) {
+            $scope.whatWeAreDoing = 'Starting...';
 
-            var next_state = $state.params.referer || 'app.news',
-                promises = [$timeout(function(){return;}, 1500)];
+            var next_state = $state.params.referer || 'app.news';
 
-            var promise = $state.params.promise;
-            if (promise) {
-                $scope.whatWeAreDoing = 'Updating local data';
-                promise.catch(function(message) {
-                    $scope.whatWeAreDoing = message;
-                });
-                promises.push(promise);
-            } else {
-                $scope.whatWeAreDoing = 'Starting app';
-            }
-            $q.all(promises).finally(function () {
-                $scope.whatWeAreDoing = 'Loading Data';
+            $timeout(function(){return;}, 1000).then(function () {
+                $scope.whatWeAreDoing = 'Loading data...';
                 dataProvider.getData().then(function (data) {
                     $state.go(next_state, {appData: data}, {reload: true});
                 }).catch(function(message) {
                     $scope.whatWeAreDoing = message;
-                    $state.go(next_state, {appData: {}}, {reload: true});
+                    $timeout(function () {
+                        $state.go(next_state, {appData: {}}, {reload: true});
+                    }, 1500);
                 });
             });
         }
