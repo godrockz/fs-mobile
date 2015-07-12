@@ -3,6 +3,10 @@
  * Created by Benjamin Jacob on 02.07.15.
  * <p/>
  */
+
+/*global
+    angular
+*/
 'use strict';
 angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV, ConnectionState) {
     var images = {
@@ -34,7 +38,6 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
             attrs.$set('src', url);
         } else {
             // use background image url
-            console.log('elem', elem[0]);
             elem[0].style.backgroundImage = 'url(\'' + url + '\')';
             elem.addClass('fssrc');
         }
@@ -43,29 +46,24 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {
-            console.log('fsSrc running');
-            var defaults = attrs.topic || 'concert';
+            var defaults = attrs.topic || 'concert',
+                onlineSrc = scope.$eval(attrs.fsSrc);
             if (!attrs.fsSrc) {
                 $log.error('angular expression expected within fs-src attribute');
             }
-            var onlineSrc = scope.$eval(attrs.fsSrc);
-            console.log('got as online src', onlineSrc);
+            if (!onlineSrc) {
+                setImage(elem, attrs, getRandomOfflineImage(defaults));
+                return;
+            }
             ConnectionState.isOnline().then(function (isOnline) {
                 if (isOnline) {
-                    if(onlineSrc === undefined){
-                        setImage(elem, attrs, getRandomOfflineImage(defaults));
-                        return;
-                    }
-                    console.log('isOnline true');
                     var absoluteUri = (DYNENV.apiEndpoint||'') + onlineSrc;
                     setImage(elem, attrs, absoluteUri);
                 } else {
-                    console.log('isOnline false');
                     setImage(elem, attrs, getRandomOfflineImage(defaults));
                 }
-            }, function (err) {
-                console.log('err', err);
-                attrs.$set('src', getRandomOfflineImage(defaults));
+            }, function () {
+                setImage(elem, attrs, getRandomOfflineImage(defaults));
             });
         }
     };
