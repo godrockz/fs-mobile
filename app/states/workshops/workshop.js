@@ -4,11 +4,8 @@
  * <p/>
  */
 
-/*jslint
-  nomen: true
-*/
 /*global
-    angular, moment, _
+    angular
 */
 
 'use strict';
@@ -18,9 +15,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $filter) {
-                    var workshops_length = $scope.appData.workshops.length;
-
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
                     $scope.tabIndex = 0;
 
                     $ionicSideMenuDelegate.canDragContent(false);

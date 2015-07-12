@@ -24,21 +24,24 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/map/map.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicScrollDelegate, debug, $timeout) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicScrollDelegate, debug) {
+                    $ionicSideMenuDelegate.canDragContent(false);
+
+                    var headHeight = document.getElementsByClassName('bar-header')[0].offsetHeight,
+                        scrollDelegate = $ionicScrollDelegate.$getByHandle('siteplan');
 
                     function safeApply(fn){
-                        if(!$scope.$$phase){
-                            $scope.$apply(fn)
-                        }else{
+                        if (!$scope.$$phase) {
+                            $scope.$apply(fn);
+                        } else {
                             fn();
                         }
                     }
 
-                    function updateScreenSize(headHeight){
+                    function updateScreenSize(headHeight) {
                         $scope.winHeight = window.innerHeight - headHeight;
                         $scope.winWidth = window.innerWidth;
-                    }
-
+                     }
 
                     function updateOrientation(headheight){
                         return function() { // factory to safely propagate the headheight
@@ -57,11 +60,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         };
                     }
 
-                    $ionicSideMenuDelegate.canDragContent(false);
-
-                    var headHeight = document.getElementsByClassName('bar-header')[0].offsetHeight,
-                        scrollDelegate = $ionicScrollDelegate.$getByHandle('siteplan');
-
                     updateScreenSize(headHeight);
                     $scope.selection={};// will hold selected location as a container to prevent problems with inherited scopes
                     $scope.zoomlevel = 1;
@@ -71,7 +69,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     window.addEventListener('orientationchange', $scope._updateOrientation, false);
                     $scope.$on('$destroy',function(){
                         // remove native listener on scope destroy
-                        window.removeEventListener('orientationchange', $scope._updateOrientation)
+                        window.removeEventListener('orientationchange', $scope._updateOrientation);
                     });
 
                     // collect locations that can be displayed on map
