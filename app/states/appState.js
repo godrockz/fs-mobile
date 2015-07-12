@@ -11,7 +11,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         abstract: true,
         templateUrl: 'templates/menu.html',
         controller: function ($scope, $state, $ionicLoading, dataProvider,
-                              EndpointDetector, $timeout) {
+                              EndpointDetector, $timeout, $ionicHistory) {
             $scope.appData = $scope.appData || $state.params.appData || {};
 
             function loadData (promise) {
@@ -19,6 +19,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                     return dataProvider.getData();
                 }).then(function (data) {
                     $scope.appData = data;
+                    $ionicHistory.clearCache();
                     $ionicLoading.hide();
                 }, function (error) {
                     $ionicLoading.show({template: error});

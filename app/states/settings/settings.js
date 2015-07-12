@@ -20,7 +20,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/settings/settings.html',
                 controller: function ($scope, AVAILABLE_LANGUAGES, $translate,
-                                      $rootScope, debug, $q) {
+                                      $rootScope, debug, $q, $ionicHistory) {
                     $scope.view = {
                         availableLanguages: AVAILABLE_LANGUAGES,
                         selectedLanguage: $translate.use()
@@ -29,6 +29,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         if ($scope.view.selectedLanguage !== $translate.use()) {
                             $q.when($translate.use($scope.view.selectedLanguage))
                               .then(function () {
+                                $ionicHistory.clearCache();
                                 $rootScope.$emit('translationChanged');
                             });
                         }

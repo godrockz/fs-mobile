@@ -41,32 +41,25 @@ angular.module('fsMobile.filters', [])
     .filter('orderObjectBy', function(){
         return function(input, attribute, type) {
             if (!angular.isObject(input)){ return input; }
-            if (!type){ type = 'int'; }
-
-            var objectArray = [];
-            for(var objectKey in input) {
-                if(typeof input[objectKey] === 'object'){
-                    objectArray.push(input[objectKey]);
-                }
-            }
+            if (!type) { type = 'int'; }
 
             switch (type){
                 case 'int':
-                    objectArray.sort(function(a, b){
+                    input.sort(function(a, b){
                         a = parseInt(a[attribute]);
                         b = parseInt(b[attribute]);
                         return a - b;
                     });
                     break;
                 case 'date':
-                    objectArray.sort(function(a, b){
+                    input.sort(function(a, b){
                         a = moment(a[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
                         b = moment(b[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
                         return a - b;
                     });
                     break;
             }
-            return objectArray;
+            return input;
         };
     })
     .filter('limitObjectTo', [function(){
