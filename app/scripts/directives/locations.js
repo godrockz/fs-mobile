@@ -4,6 +4,10 @@
  * Created by Benjamin Jacob on 30.06.15.
  * <p/>
  */
+
+/*global
+    angular, document
+*/
 'use strict';
 angular.module('fsMobile.directives').directive('locmap', function (debug) {
 
@@ -36,6 +40,7 @@ angular.module('fsMobile.directives').directive('locmap', function (debug) {
         link: function (scope, elem, attrs, ctrl) {
             angular.forEach(scope.locations, function (loc) {
                 var coord = loc.geoCoordinate;
+                if (!coord) { return; }
                 var size = coord.size||defaultSize;
                 var clbl = createLocationMarker(coord.longitude, coord.latitude, size, size);
                 angular.element(clbl).bind('click', function (e) {
@@ -45,9 +50,9 @@ angular.module('fsMobile.directives').directive('locmap', function (debug) {
                 elem.append(clbl);
             });
 
-            if(debug.isDebugEnabled()){
+            if (debug.isDebugEnabled()) {
                 elem.addClass('debug');
-            };
+            }
 
             scope.locationClicked = function (location) {
                 scope.$apply(function(){

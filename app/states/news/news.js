@@ -17,21 +17,12 @@ angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigP
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope, $filter) {
-
-                    $scope.news = $scope.appData.news || {};
-                    $scope.news = $filter('filter')($scope.news,{deleted : false});
-                    $scope.news = $filter('orderObjectBy')($scope.news,'publishDate','date');
-
-                    if(!angular.isDefined($scope.news)){
-                        $scope.newsLength = 0;
-                    }else {
-                        $scope.newsLength = Object.keys($scope.news).length;
-                    }
-                    $scope.itemsToDisplay = $scope.newsLength>7?7:$scope.newsLength;
+                controller: function ($scope) {
+                    $scope.initialLength = 7;
+                    $scope.itemsToDisplay = $scope.initialLength;
 
                     $scope.showMoreItems = function() {
-                        $scope.itemsToDisplay += $scope.newsLength>7?7:$scope.newsLength;
+                        $scope.itemsToDisplay += $scope.initialLength;
                     };
 
                 }

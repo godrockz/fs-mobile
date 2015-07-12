@@ -31,7 +31,7 @@ angular.module('fsMobile.filters', [])
         return function (instance, property) {
             var lang = $translate.use(),
                 translation = null;
-            if (!instance) { return 'n.a'; }
+            if (!instance) { return ''; }
             if (instance.translations && instance.translations[lang]) {
                 translation = instance.translations[lang][property];
             }
@@ -39,23 +39,25 @@ angular.module('fsMobile.filters', [])
         };
     })
     .filter('orderObjectBy', function(){
-        return function(input, attribute, type) {
+        return function(input, attribute, type, dir) {
             if (!angular.isObject(input)){ return input; }
             if (!type) { type = 'int'; }
+
+            dir = dir? dir.toLowerCase() : null;
 
             switch (type){
                 case 'int':
                     input.sort(function(a, b){
                         a = parseInt(a[attribute]);
                         b = parseInt(b[attribute]);
-                        return a - b;
+                        return dir === 'desc' ? b - a : a - b;
                     });
                     break;
                 case 'date':
                     input.sort(function(a, b){
                         a = moment(a[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
                         b = moment(b[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
-                        return a - b;
+                        return dir === 'desc' ? b - a : a - b;
                     });
                     break;
             }

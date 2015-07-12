@@ -37,17 +37,18 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     };
 
                     $scope.previousDay = function () {
-                        var day = $scope.appData.workshops[$scope.tabIndex - 1] || {};
-                        return day.day_name;
+                        var day = $scope.appData.workshops[$scope.tabIndex - 1];
+                        return day? day.day_name : undefined;
                     };
 
                     $scope.nextDay = function () {
-                        var day = $scope.appData.workshops[$scope.tabIndex + 1] || {};
-                        return day.day_name;
+                        var day = $scope.appData.workshops[$scope.tabIndex + 1];
+                        return day? day.day_name : undefined;
                     };
 
                     $scope.currentDay = function () {
-                        return $scope.appData.workshops[$scope.tabIndex].day_name;
+                        var day =  $scope.appData.workshops[$scope.tabIndex];
+                        return day? day.day_name : undefined;
                     };
 
                 }

@@ -4,7 +4,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('AppData', function (Resource) {
+    .factory('AppData', function (Resource, $filter) {
 
         function AppData(data) {
             angular.forEach(data, function (value, key) {
@@ -12,6 +12,13 @@ angular.module('fsMobile.services')
             }.bind(this));
 
             this.locations = this.locations || {};
+
+            this.fsNews = [];
+            if (this.news) {
+                this.fsNews = $filter('filter')(this.news.values(), {deleted: false});
+                this.fsNews = $filter('orderObjectBy')(
+                    this.fsNews, 'publishDate', 'date', 'desc');
+            }
 
             this.program = [];
             this.workshops = [];
