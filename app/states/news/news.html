@@ -1,9 +1,10 @@
-<ion-view view-title="{{'app.general.news'|translate}}">
+<ion-view view-title="{{::'app.general.news'|translate}}">
     <ion-content class="news-state">
-        <div ng-repeat="item in news | limitTo : itemsToDisplay" class="news-item" ui-sref="app.singlenews({idx:item.id})">
+        <div ng-repeat="item in ::news | limitTo : itemsToDisplay"
+             class="news-item" ui-sref="app.singlenews({idx:item.id})">
             <div class="news-date">
                 <div class="box">
-                    <span>{{'app.days.abbr.' + (item.publishDate | date:'EEEE') | lowercase | translate}}<br>{{item.publishDate|date:'H:mm'}}</span>
+                    <span>{{::'app.days.abbr.' + (item.publishDate | date:'EEEE') | lowercase | translate}}<br>{{::item.publishDate|date:'H:mm'}}</span>
                 </div>
             </div>
             <div class="news-text-head">
@@ -11,8 +12,8 @@
                 <p class="text">{{::item|trans:'text'}}</p>
             </div>
         </div>
-        <div class="news-item news-more" ng-click="showMoreItems()" ng-if="newsLength>itemsToDisplay">
-            {{'app.news.loadmore'|translate}}
+        <div class="news-item news-more" ng-click="::showMoreItems()" ng-if="::newsLength>itemsToDisplay">
+            {{::'app.news.loadmore'|translate}}
         </div>
         <br>
     </ion-content>

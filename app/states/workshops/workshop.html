@@ -1,6 +1,6 @@
-<ion-view view-title="{{'app.general.workshop'|translate}}">
+<ion-view view-title="{{::'app.general.workshop'|translate}}">
     <ion-content class="single-work">
-        <div class="image-box" fs-src="event.images[0]" topic="workshop">
+        <div class="image-box" fs-src="::event.images[0]" topic="workshop">
 
         </div>
         <div class="content-box">
@@ -17,7 +17,7 @@
             <p class="work-info"><span class="tag">{{::'app.general.location'|translate}}:</span> {{::event.location|trans:'name'}}</p>
             <p class="work-info">
                 <span class="tag">{{::event.end?('app.time.from'|translate):('app.time.start'|translate)}}:</span> {{::event.start|date:'H:mm'}}
-                <span class="tag" ng-if="::event.end">{{'app.time.to'|translate}}:</span> {{::event.end?(event.end|date:'H:mm'):''}}</p>
+                <span class="tag" ng-if="::event.end">{{::'app.time.to'|translate}}:</span> {{::event.end?(event.end|date:'H:mm'):''}}</p>
             <p class="work-info" ng-if="::event.author"><span class="tag">{{::'app.workshop.from'|translate}}:</span> {{::event.author}}</p>
             <p class="work-text">{{::event|trans:'description'}}</p>
         </div>

@@ -75,6 +75,6 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
             if (toState.name === 'starting') { return; }
             if (toParams.appData) { return; }
             e.preventDefault();
-            $state.go('starting', {referer: toState.name});
+            $state.go('starting', {referer: toState.name, stateParams: toParams});
         });
     });

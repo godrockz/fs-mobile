@@ -1,22 +1,24 @@
-<ion-view view-title="{{'app.general.news'|translate}}">
+<ion-view view-title="{{::'app.general.news'|translate}}">
     <ion-content class="single-news">
-        <div class="image-box" fs-src="news.image">
+        <div class="image-box" fs-src="::news.image">
 
         </div>
         <div class="content-box">
             <div class="news-item-single row">
                 <div class="news-date col-25">
                     <div class="box">
-                        <span>{{'app.days.abbr.' + (news.publishDate | date:'EEEE') | lowercase | translate}}<br>{{news.publishDate|date:'H:mm'}}</span>
+                        <span>{{::'app.days.abbr.' + (news.publishDate | date:'EEEE') | lowercase | translate}}<br>{{::news.publishDate|date:'H:mm'}}</span>
                     </div>
                 </div>
                 <div class="news-text-head col-75 col-center">
-                    <p class="head">{{news|trans:'title'}}</p>
+                    <p class="head">{{::news|trans:'title'}}</p>
                 </div>
             </div>
-            <p class="news-text">{{news|trans:'text'}}</p>
+            <p class="news-text">{{::news|trans:'text'}}</p>
 
-            <p class="author" ng-if="news.author">{{'app.news.by'|translate}}: {{::news.author}}</p>
+            <p class="author" ng-if="::news.author">
+                {{::'app.news.by'|translate}}: {{::news.author}}
+            </p>
         </div>
 
     </ion-content>
