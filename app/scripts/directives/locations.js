@@ -29,7 +29,7 @@ angular.module('fsMobile.directives').directive('locmap', function (debug) {
 
     return {
         restrict: 'E',
-        template: '<div style="width: 1847px; height: 911px; background: url(\'{{imageUrl}}\')"></div>',
+        template: '<div style="width: 2000px; height: 996px; background: url(\'{{imageUrl}}\')"></div>',
         replace: true,
         require:'ngModel',
         scope: {
