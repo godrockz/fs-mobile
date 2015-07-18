@@ -172,3 +172,13 @@ body * {
     background-size: cover;
     padding:0px;
 }
+
+.spinner {
+  svg {
+    stroke: #AB1C57;
+    fill: #AB1C57;
+  }
+}
+.ion-android-arrow-down:before {
+  color: #AB1C57;
+}

@@ -21,9 +21,13 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                     $scope.appData = data;
                     $ionicHistory.clearCache();
                     $ionicLoading.hide();
+                    $scope.$broadcast('scroll.refreshComplete');
                 }, function (error) {
                     $ionicLoading.show({template: error});
-                    $timeout(function () { $ionicLoading.hide(); }, 1500);
+                    return $timeout(function () {
+                        $ionicLoading.hide();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }, 1500);
                 });
             }
 
@@ -34,10 +38,13 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             };
 
             $scope.refreshData = function () {
-                $ionicLoading.show({template: 'Updating...'});
                 // alwyas discover endpoint on refresh
                 var promise = EndpointDetector.discoverEndpoint().then(function () {
-                    return dataProvider.refreshData();
+                    var ifModifiedSince = null;
+                    if ($scope.appData) {
+                        ifModifiedSince = $scope.appData.$metaInfo.fetched;
+                    }
+                    return dataProvider.refreshData(ifModifiedSince);
                 });
                 loadData(promise);
             };

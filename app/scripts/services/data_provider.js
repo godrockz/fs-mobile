@@ -50,9 +50,9 @@ angular.module('fsMobile.services')
                     })
                     .then(prepareData);
             },
-            refreshData: function () {
+            refreshData: function (ifModifiedSince) {
                 console.log('refresh');
-                return storageManager.fetchRemote(endPoint())
+                return storageManager.fetchRemote(endPoint(), ifModifiedSince)
                     .then(function (response) {
                         return storageManager.fetchData(endPoint())
                             .then(function (localForageData) {

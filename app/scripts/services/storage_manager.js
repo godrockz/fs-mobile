@@ -63,10 +63,13 @@ angular.module('fsMobile.services')
             });
         }
 
-        function fetchRemote (url) {
-            console.log('url to fetch',url);
-
-            return $http.get(url).then(function (data) {
+        function fetchRemote (url, ifModifiedSince) {
+            var options = {};
+            ifModifiedSince = new Date();
+            if (ifModifiedSince) {
+                options.headers = {'If-Modified-Since': ifModifiedSince};
+            }
+            return $http.get(url, options).then(function (data) {
                 data.$metaInfo = {
                     uri: url,
                     key: urlToPathConverter(url),

@@ -20,7 +20,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/settings/settings.html',
                 controller: function ($scope, AVAILABLE_LANGUAGES, $translate,
-                                      $rootScope, debug, $q, $ionicHistory) {
+                                      $rootScope, debug, $q, $ionicHistory,
+                                      $ionicLoading) {
                     $scope.view = {
                         availableLanguages: AVAILABLE_LANGUAGES,
                         selectedLanguage: $translate.use()
@@ -34,6 +35,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                             });
                         }
                     });
+
+                    $scope.refresh = function() {
+                        $ionicLoading.show({template: 'Updating...'});
+                        $scope.refreshData();
+                    };
 
                     // DEBUGGING INFORMATION
                     $scope.debug = {cnt: 0};
