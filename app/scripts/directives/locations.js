@@ -18,8 +18,8 @@ angular.module('fsMobile.directives').directive('locmap', function (debug) {
 
     function createLocationMarker(x, y, width, height) {
         var elem = document.createElement('div');
-        elem.style.top = x + 'px';
-        elem.style.left = y + 'px';
+        elem.style.top = parseInt(x, 10) + 'px';
+        elem.style.left = parseInt(y, 10) + 'px';
         elem.style.width = width + 'px';
         elem.style.height = height + 'px';
         elem.style.borderRadius = width + 'px';

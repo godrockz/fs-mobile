@@ -1,9 +1,9 @@
-<ion-view view-title="{{'app.general.siteplan'|translate}}" class="map">
+<ion-view view-title="{{'app.general.siteplan'|translate}}" class="map" hide-nav-bar="true">
     <ion-content>
         <div class="zoombuttons">
             <button class="button ion ion-plus" ng-disabled="zoomlevel >= 3" ng-click="zoomIn()"></button>
             <br>
-            <button class="button ion ion-minus" ng-disabled="zoomlevel <= 0.5" ng-click="zoomOut()"></button>
+            <button class="button ion ion-minus" ng-disabled="zoomlevel <= 0.4" ng-click="zoomOut()"></button>
         </div>
 
         <div class="card selected-loc" ng-if="selection.location">
@@ -24,8 +24,9 @@
             </div>
         </div>
 
-        <ion-scroll delegate-handle="siteplan" zooming="true" direction="xy"
-                    ng-style="{height: winHeight + 'px', width: winWidth + 'px'}">
+        <ion-scroll delegate-handle="siteplan"  zooming="true" min-zoom="0.4"
+                    direction="xy" scrollbar-x="false" scrollbar-y="false"
+                    style="width: 100%; height: 100%;">
             <locmap image-url="images/plan.jpg"
                     locations="mappedLocations"
                     ng-model="selection.location">
