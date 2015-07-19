@@ -11,7 +11,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         abstract: true,
         templateUrl: 'templates/menu.html',
         controller: function ($scope, $state, $ionicLoading, dataProvider,
-                              EndpointDetector, $timeout, $ionicHistory) {
+                              $timeout, $ionicHistory) {
             $scope.appData = $scope.appData || $state.params.appData || {};
 
             function loadData (promise) {
@@ -39,14 +39,12 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
 
             $scope.refreshData = function () {
                 // alwyas discover endpoint on refresh
-                var promise = EndpointDetector.discoverEndpoint().then(function () {
-                    var ifModifiedSince = null;
-                    if ($scope.appData) {
-                        ifModifiedSince = $scope.appData.$metaInfo.fetched;
-                    }
-                    return dataProvider.refreshData(ifModifiedSince);
-                });
-                loadData(promise);
+                var ifModifiedSince = null;
+                if ($scope.appData.$metaInfo) {
+                    ifModifiedSince = $scope.appData.$metaInfo.fetched;
+                }
+                var promise = dataProvider.refreshData(ifModifiedSince);
+                return loadData(promise);
             };
         }
     });

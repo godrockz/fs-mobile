@@ -27,7 +27,6 @@ angular.module('fsMobile.services')
          * @returns {*}
          */
         function fetchData (url) {
-            console.log('original uri',url);
             var path = urlToPathConverter(url);
             console.log('fetching from localForage:', path);
             return $localForage.getItem(path).then(function (data) {
@@ -65,9 +64,8 @@ angular.module('fsMobile.services')
 
         function fetchRemote (url, ifModifiedSince) {
             var options = {};
-            ifModifiedSince = new Date();
             if (ifModifiedSince) {
-                options.headers = {'If-Modified-Since': ifModifiedSince};
+                options.headers = {'If-Modified-Since': ifModifiedSince.toUTCString()};
             }
             return $http.get(url, options).then(function (data) {
                 data.$metaInfo = {
@@ -88,8 +86,10 @@ angular.module('fsMobile.services')
         }
 
         function deleteLocalData (url) {
-            var path = urlToPathConverter(url);
-            return $localForage.setItem(path, undefined)
+            var path = urlToPathConverter(url),
+                dataPromise = $localForage.setItem(path, undefined),
+                metaInfoPromise = $localForage.setItem('meta_info', undefined);
+            return $q.all(dataPromise, metaInfoPromise)
                 .then(function () {
                     console.log('local data deleted');
                     return {};
@@ -102,8 +102,23 @@ angular.module('fsMobile.services')
                 });
         }
 
+        function getMetaInfo () {
+            console.log('getting meta info');
+            return $localForage.getItem('meta_info').then(function (data) {
+                if (data) {
+                    console.log('meta info received', data);
+                    return data;
+                }
+                console.log('no meta data');
+                return {};
+            }, function (error) {
+                console.log('meta info error', error);
+            });
+        }
+
         return {
             fetchData: fetchData,
+            getMetaInfo: getMetaInfo,
             fetchRemote: fetchRemote,
             fetchFromFile: fetchFromFile,
             deleteLocalData: deleteLocalData

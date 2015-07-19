@@ -4,7 +4,8 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .service('dataProvider', function (storageManager, $localForage, AppData, DYNENV) {
+    .service('dataProvider', function (storageManager, $localForage, AppData,
+                                       DYNENV, EndpointDetector) {
         // TODO : we must store data in local storage without using full api url
         //        instead we should store it under data only
         function endPoint(){
@@ -34,7 +35,9 @@ angular.module('fsMobile.services')
                     updateResourceData(data[resourceName], objects);
             });
             data.$metaInfo = response.$metaInfo;
-            return $localForage.setItem(response.$metaInfo.key, data);
+            return $localForage.setItem('meta_info', response.$metaInfo).then(function () {
+                return $localForage.setItem(response.$metaInfo.key, data);
+            });
         }
 
         return {
@@ -52,14 +55,17 @@ angular.module('fsMobile.services')
             },
             refreshData: function (ifModifiedSince) {
                 console.log('refresh');
-                return storageManager.fetchRemote(endPoint(), ifModifiedSince)
-                    .then(function (response) {
-                        return storageManager.fetchData(endPoint())
-                            .then(function (localForageData) {
-                                return updateLocalForageData(response, localForageData)
-                                    .then(prepareData);
-                            });
-                    });
+                return EndpointDetector.discoverEndpoint().then(function () {
+                    return storageManager.fetchRemote(endPoint(), ifModifiedSince);
+                }).then(function (response) {
+                    return storageManager.fetchData(endPoint())
+                        .then(function (localForageData) {
+                            return updateLocalForageData(response, localForageData);
+                        });
+                });
+            },
+            getMetaInfo: function () {
+                return storageManager.getMetaInfo();
             },
             deleteData: function () {
                 return storageManager.deleteLocalData(endPoint());

@@ -7,6 +7,7 @@ angular.module('fsMobile.services')
     .factory('AppData', function (Resource, $filter) {
 
         function AppData(data) {
+            this.$metaInfo = data.$metaInfo;
             angular.forEach(data, function (value, key) {
                 this[key] = (key === '$metaInfo') ? value : new Resource(value);
             }.bind(this));

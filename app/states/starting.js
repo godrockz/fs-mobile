@@ -20,7 +20,13 @@ angular.module('fsMobile.controllers').config(function ($stateProvider) {
             var next_state = $state.params.referer || 'app.news',
                 params = $state.params.stateParams || {};
 
-            $timeout(function(){return;}, 1000).then(function () {
+            $timeout(function(){return;}, 1000)
+            .then(dataProvider.getMetaInfo)
+            .then(function (metaInfo) {
+                $scope.whatWeAreDoing = 'Updating data...';
+                return dataProvider.refreshData(metaInfo.fetched);
+            })
+            .finally(function () {
                 $scope.whatWeAreDoing = 'Loading data...';
                 dataProvider.getData().then(function (data) {
                     params.appData = data;
