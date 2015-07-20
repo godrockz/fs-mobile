@@ -65,6 +65,7 @@ angular.module('fsMobile.services')
         function fetchRemote (url, ifModifiedSince) {
             var options = {};
             if (ifModifiedSince) {
+                ifModifiedSince = new Date(ifModifiedSince);
                 options.headers = {'If-Modified-Since': ifModifiedSince.toUTCString()};
             }
             return $http.get(url, options).then(function (data) {
