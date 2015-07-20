@@ -15,7 +15,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
 
     $stateProvider.state('app.imprint', {
-        url: '/imrpint',
+        url: '/imprint',
         views: {
             'menuContent': {
                 templateUrl: 'states/imprint/imprint.html',
