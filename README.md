@@ -62,3 +62,15 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore <your-keystore>
 ```
 zipalign -v 4 /home/johannes/Work/js/fs-mobile/platforms/android/build/outputs/apk/android-release-unsigned.apk FreakstockApp.apk
 ```
+
+# iOS Quirks
+
+iOS has a mechanism called *App Transport Security*. It is enabled by default. App Transport Security blocks cleartext HTTP (http://) resource loads since it is defined as insecure. In this project resources need to be loaded as cleartext HTTP. To disable this mechanism the following code needs to be added to ```Freakstock-Info.plist```
+
+```xml
+<key>NSAppTransportSecurity</key>
+<dict>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
+</dict>
+```
