@@ -2,10 +2,10 @@
 <widget id="de.freakstock.app" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Freakstock</name>
   <description>
-        Festival App and Program Guide for FreakStock Festival
+        Festival App and Program Guide for Freakstock Festival
     </description>
   <author email="info@freakstock.de" href="http://freakstock.de">
-        FreakStock App Team
+        Freakstock App Team
     </author>
   <content src="index.html"/>
   <access origin="*"/>
