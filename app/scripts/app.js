@@ -35,12 +35,13 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
             suffix: '.json'
         });
         $translateProvider.fallbackLanguage(['en', 'de']);
-        $translateProvider.determinePreferredLanguage();
+        var discoveredLanguage = $translateProvider.determinePreferredLanguage();
         $translateProvider.registerAvailableLanguageKeys(['de', 'en'], {
             'de*': 'de',
             'en*': 'en'
         });
         function guessLanguage(lang) {
+            console.log(lang);
             if (lang && lang.length >= 5 && lang.indexOf('_') !== -1) {
                 var parts = lang.split('_');
                 if (parts.length > 0) {
@@ -50,9 +51,9 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
             if (lang && lang.length === 2) {
                 return lang;
             }
-            return 'en';
+            return 'de';
         }
-        var lang = guessLanguage($translateProvider.use());
+        var lang = guessLanguage(discoveredLanguage);
         $translateProvider.use(lang);
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
