@@ -54,6 +54,11 @@
     "language.en":"Englisch",
 
 
+    "imprint.board":"vertretungsberechtigter Vorstand",
+    "imprint.chairman":"1. Vorsitzende",
+    "imprint.treasurer":"Kassenwart",
+    "imprint.secretary":"Schriftführerin",
+    "imprint.germany":"Deutschland",
     "imprint.court":"Registergericht:",
     "imprint.courtfile":"Amtsgericht Kassel VR 4876",
     "imprint.privacy.header":"Datenschutzhinweis",

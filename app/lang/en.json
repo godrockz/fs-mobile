@@ -53,6 +53,11 @@
     "language.de":"German",
     "language.en":"English",
 
+    "imprint.board":"managing committee",
+    "imprint.chairman":"Chairman",
+    "imprint.treasurer":"Treasurer",
+    "imprint.secretary":"Secretary",
+    "imprint.germany":"Germany",
     "imprint.court":"Register Court:",
     "imprint.courtfile":"Local court Kassel VR 4876",
     "imprint.privacy.header":"Privacy Policy",
