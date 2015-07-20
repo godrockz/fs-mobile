@@ -1,5 +1,5 @@
 /*global
- angular
+ angular, navigator
  */
 
 'use strict';
@@ -7,18 +7,27 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
 
     $stateProvider.state('app', {
         url: '/app',
-        params: {appData: null},
         abstract: true,
         templateUrl: 'templates/menu.html',
-        controller: function ($scope, $state, $ionicLoading, dataProvider,
-                              $timeout, $ionicHistory) {
-            $scope.appData = $scope.appData || $state.params.appData || {};
+        resolve: {
+            appData: function (dataProvider) {
+                var promise = dataProvider.getMetaInfo().then(function (metaInfo) {
+                    return dataProvider.refreshData(metaInfo.fetched);
+                }).finally(function () {
+                    return dataProvider.getData();
+                });
+                return promise;
+            }
+        },
+        controller: function ($scope, $ionicLoading, dataProvider,
+                              $timeout, $ionicHistory, appData, AppData) {
+            $scope.appData = new AppData(appData);
 
             function loadData (promise) {
                 promise.then(function () {
                     return dataProvider.getData();
                 }).then(function (data) {
-                    $scope.appData = data;
+                    $scope.appData = new AppData(data);
                     $ionicHistory.clearCache();
                     $ionicLoading.hide();
                     $scope.$broadcast('scroll.refreshComplete');
@@ -46,6 +55,10 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 var promise = dataProvider.refreshData(ifModifiedSince);
                 return loadData(promise);
             };
+
+            if (navigator.splashscreen) {
+                navigator.splashscreen.hide();
+            }
         }
     });
 });

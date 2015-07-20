@@ -4,16 +4,12 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .service('dataProvider', function (storageManager, $localForage, AppData,
-                                       DYNENV, EndpointDetector) {
+    .service('dataProvider', function (storageManager, $localForage, DYNENV,
+                                       EndpointDetector) {
         // TODO : we must store data in local storage without using full api url
         //        instead we should store it under data only
         function endPoint(){
             return (DYNENV.apiEndpoint||'') + '/data';
-        }
-
-        function  prepareData (data) {
-            return new AppData(data);
         }
 
         function updateResourceData (localObjects, objects) {
@@ -50,8 +46,7 @@ angular.module('fsMobile.services')
                         }).catch(function () {
                             return {};
                         });
-                    })
-                    .then(prepareData);
+                    });
             },
             refreshData: function (ifModifiedSince) {
                 console.log('refresh');

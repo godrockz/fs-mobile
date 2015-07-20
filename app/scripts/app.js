@@ -15,7 +15,9 @@
 
 angular.module('fsMobile.states', []);
 angular.module('fsMobile.services', []);
-angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
+angular.module('fsMobile', ['ionic', 'ngCordova',
+    'tabSlideBox',
+    'pascalprecht.translate',
     'LocalForageModule',
     'fsMobile.controllers',
     'fsMobile.states',
@@ -28,7 +30,7 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
     .config(function ($urlRouterProvider, $translateProvider) {
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/app/news');
 
         $translateProvider.useStaticFilesLoader({
             prefix: 'lang/',
@@ -58,10 +60,11 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 
-    .run(function ($ionicPlatform, $rootScope, $state) {
+    .run(function ($ionicPlatform) {
+
         $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
+            // Hide the accessory bar by default 
+            // (remove this to show the accessory bar above the keyboard for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 //window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
@@ -69,13 +72,5 @@ angular.module('fsMobile', ['ionic', 'tabSlideBox', 'pascalprecht.translate',
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
             }
-        });
-
-        // redirects to starting page if no appData exists yet
-        $rootScope.$on('$stateChangeStart', function (e, toState, toParams) {
-            if (toState.name === 'starting') { return; }
-            if (toParams.appData) { return; }
-            e.preventDefault();
-            $state.go('starting', {referer: toState.name, stateParams: toParams});
         });
     });
