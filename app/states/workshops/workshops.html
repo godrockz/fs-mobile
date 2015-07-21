@@ -16,7 +16,7 @@
 
         <ion-slide-box class="work-container" on-slide-changed="changeTabHeadTo($index)">
             <ion-slide class="work-tab" ng-repeat="day in ::appData.workshops | orderObjectBy:'date':'date'">
-                <ion-scroll class="work-list">
+                <ion-scroll class="work-list" ng-if="showSlide($index)">
                     <div class="work-box"
                             ng-repeat="event in ::day.events | orderBy: 'start'"
                             ui-sref="app.workshop({idx:event.id})"
