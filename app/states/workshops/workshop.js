@@ -45,14 +45,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         var day =  $scope.appData.workshops[$scope.tabIndex];
                         return day? day.day_name : undefined;
                     };
-
-                    // only render prev, current and next slide
-                    $scope.showSlide = function (index) {
-                        return index === $scope.tabIndex-1 ||
-                               index === $scope.tabIndex ||
-                               index === $scope.tabIndex+1;
-                    };
-
                 }
             }
         }

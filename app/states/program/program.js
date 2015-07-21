@@ -60,23 +60,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     }
 
                     $scope.slide = { index: startSlideIndex };
-
-                    // only render prev, current and next slide
-                    $scope.showSlide = function (index) {
-
-                        var prev = $scope.slide.index - 1;
-                        if (prev < 0) {
-                            prev = program_length - 1;
-                        }
-                        var next = $scope.slide.index + 1;
-                        if (next >= program_length) {
-                            next = 0;
-                        }
-
-                        return index === prev ||
-                               index === $scope.slide.index ||
-                               index === next;
-                    };
                 }
             }
         }
