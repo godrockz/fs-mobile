@@ -56,9 +56,12 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 return loadData(promise);
             };
 
-            if (navigator.splashscreen) {
-                navigator.splashscreen.hide();
-            }
+
+            $scope.$watch('$viewContentLoaded', function () {
+                if (navigator.splashscreen) {
+                    navigator.splashscreen.hide();
+                }
+            });
         }
     });
 });

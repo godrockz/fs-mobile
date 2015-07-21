@@ -73,8 +73,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                             next = 0;
                         }
 
-                        return index === prev || index === $scope.slide.index || index === next;
-                    }
+                        return index === prev ||
+                               index === $scope.slide.index ||
+                               index === next;
+                    };
                 }
             }
         }

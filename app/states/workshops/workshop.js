@@ -48,8 +48,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     // only render prev, current and next slide
                     $scope.showSlide = function (index) {
-                        return index === $scope.tabIndex-1 || index === $scope.tabIndex || index === $scope.tabIndex+1;
-                    }
+                        return index === $scope.tabIndex-1 ||
+                               index === $scope.tabIndex ||
+                               index === $scope.tabIndex+1;
+                    };
 
                 }
             }
