@@ -13,10 +13,20 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/program/program.html',
                 controller: function ($scope, $ionicSideMenuDelegate,
-                                      $ionicSlideBoxDelegate, $stateParams) {
+                                      $ionicSlideBoxDelegate, $stateParams, $translate) {
                     var program_length = $scope.appData.program.length,
                         currentDateTime = moment('2015-07-30T12:30'),
                         startSlideIndex = 0;
+
+                    var lang = $translate.use();
+
+                    $scope.getTags = function(event) {
+                        var tags = [];
+                        for(var j = 0; j < event.translations[lang].tags.length;j++){
+                            tags.push(event.translations[lang].tags[j])
+                        }
+                        return tags;
+                    };
 
                     // jump to location if requested by param
                     if ($stateParams.locationId) {
@@ -71,14 +81,20 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',
-                controller: function ($scope, $stateParams) {
+                controller: function ($scope, $stateParams, $translate) {
+
+                    var lang = $translate.use();
 
                     if ($scope.appData.events) {
                         $scope.event = $scope.appData.events[$stateParams.idx];
                         $scope.event.location = $scope.appData.locations[$scope.event.locationRef];
                     }
-                    console.log('$scope.event', $scope.event);
 
+                    $scope.event.tags = [];
+                    for(var j = 0; j < $scope.event.translations[lang].tags.length;j++){
+                        $scope.event.tags.push($scope.event.translations[lang].tags[j])
+                    }
+                    console.log('$scope.event', $scope.event);
                 }
             }
         }

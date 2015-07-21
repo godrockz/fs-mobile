@@ -21,6 +21,9 @@
                 <span class="tag">{{::'app.time.from'|translate}}:</span> {{::event.start|date:'H:mm'}}
                 <span class="tag">{{::'app.time.to'|translate}}:</span> {{::event.end|date:'H:mm'}}
             </p>
+            <p class="program-tags">
+                <small ng-repeat="tag in event.tags">#{{tag|lowercase}}&nbsp;</small>
+            </p>
             <p class="program-text">{{::event|trans:'description'}}</p>
         </div>
 

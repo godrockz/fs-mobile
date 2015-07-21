@@ -74,22 +74,22 @@
 }
 
 .news-text-head {
-    padding: 0.5em 0;
+    padding: 0.2em 0 0.5em;
     overflow: hidden;
-
     p.head {
-        font-size: 1.2em;
-        margin: 0 0 0.2em;
+        font-size: 1em;
+        margin: 0 0 0.3em;
         color: $positive;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        line-height: 1.1em;
+        //overflow: hidden;
+        //text-overflow: ellipsis;
+        //white-space: nowrap;
     }
     p.text {
         font-size: 0.7em;
         overflow: hidden;
         margin: 0;
-        height: 2em;
+        height: 3.5em;
         position:relative;
         line-height: 1.2em;
     }

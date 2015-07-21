@@ -12,7 +12,7 @@
                     box-shadow: 3px 2px 6px grey;
                     margin: 0.5em 0 1em 0;
                     padding: 0.5em;
-                    height: 5em;
+                    min-height: 5em;
                     position: relative;
                     .row {
                         padding: 0;
@@ -31,6 +31,7 @@
                             line-height: 4em;
                             text-align: center;
                             span.box-text {
+                                width: 4em;
                                 display: inline-block;
                                 vertical-align: middle;
                                 line-height: 1.2em;
@@ -45,12 +46,12 @@
                         padding: 0.2em 0;
 
                         p.head {
-                            font-size: 1.2em;
+                            font-size: 1em;
                             margin: 0 0 0.2em;
                             color: $positive;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
+                            //overflow: hidden;
+                            //text-overflow: ellipsis;
+                            //white-space: nowrap;
                         }
                         p.text {
                             font-size: 0.7em;
