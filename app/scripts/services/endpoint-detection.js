@@ -43,7 +43,6 @@ angular.module('fsMobile.services')
             discoverEndpoint: function () {
                 var deferred = $q.defer();
 
-
                 if (DYNENV.apiEndpoint && lastCheckMs + maxAge < (new Date()).getTime()) {
                     debug.addData(
                         'endpoint',
@@ -53,10 +52,10 @@ angular.module('fsMobile.services')
                 } else {
                     debug.addData(
                         'endpoint',
-                        'lastcheck schon lange her bisheriger endpoint',
+                        'lastcheck schon lange her, bisheriger endpoint',
                         {using:DYNENV.apiEndpoint});
-                    isOnline(ENV.remoteApiEndpoint).then(function () {
-                        DYNENV.apiEndpoint = ENV.remoteApiEndpoint;
+                    isOnline(ENV.localApiEndpoint).then(function () {
+                        DYNENV.apiEndpoint = ENV.localApiEndpoint;
                         debug.addData(
                             'endpointdetection',
                             'Discovers which endpoint should be used to query api',
@@ -66,7 +65,7 @@ angular.module('fsMobile.services')
                              location: $location.absUrl()});
                         deferred.resolve(DYNENV);
                     }, function () {
-                        DYNENV.apiEndpoint = ENV.localApiEndpoint;
+                        DYNENV.apiEndpoint = ENV.remoteApiEndpoint;
                         debug.addData(
                             'endpointdetection',
                             'Discovers which endpoint should be used to query api',
