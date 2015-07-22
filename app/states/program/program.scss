@@ -41,7 +41,7 @@
               box-shadow: 3px 2px 6px grey;
               margin: 0.5em 0 1em 0;
               padding: 0.5em;
-              height: 5em;
+              min-height: 5em;
               position: relative;
               .row {
                   padding: 0;
@@ -70,14 +70,13 @@
               }
 
               .prog-text-head {
-                  padding: 0.2em 0 0.5em;
+                  padding: 0.2em 0;
                   overflow: hidden;
 
                   p.head {
-                      font-size: 0.9em;
+                      font-size: 1em;
                       margin: 0 0 0.2em;
                       color: $positive;
-                      line-height: 1em;
                       //overflow: hidden;
                       //text-overflow: ellipsis;
                       //white-space: nowrap;
@@ -85,23 +84,21 @@
                   p.text {
                       font-size: 0.7em;
                       overflow: hidden;
+                      text-overflow: ellipsis;
                       margin: 0;
-                      height: 1.2em;
-                      position:relative;
-                      line-height: 1.2em;
-                      text-overflow: ellipsis;
+                      line-height: 1.5em;
                       white-space: nowrap;
                   }
-                  p.tags {
-                      font-size: 0.6em;
-                      overflow: hidden;
-                      height: 1.2em;
-                      position:relative;
-                      line-height: 1.2em;
-                      text-overflow: ellipsis;
-                      white-space: nowrap;
-                      margin: 0.2em 0 0;
-                  }
+                  // p.tags {
+                  //     font-size: 0.6em;
+                  //     overflow: hidden;
+                  //     height: 1.2em;
+                  //     position:relative;
+                  //     line-height: 1.2em;
+                  //     text-overflow: ellipsis;
+                  //     white-space: nowrap;
+                  //     margin: 0.2em 0 0;
+                  // }
                   //p.text:before {
                   //    content:'';
                   //    width:100%;
