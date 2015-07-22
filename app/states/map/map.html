@@ -1,11 +1,5 @@
 <ion-view view-title="{{'app.general.siteplan'|translate}}" class="map">
     <ion-content>
-        <div class="zoombuttons">
-            <button class="button ion ion-plus" ng-disabled="zoomlevel >= 3" ng-click="zoomIn()"></button>
-            <br>
-            <button class="button ion ion-minus" ng-disabled="zoomlevel <= 0.4" ng-click="zoomOut()"></button>
-        </div>
-
         <div class="card selected-loc" ng-if="selection.location">
             <div class="item item-text-wrap" >
 
