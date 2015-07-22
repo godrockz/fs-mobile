@@ -23,7 +23,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.getTags = function(event) {
                         var tags = [];
                         for(var j = 0; j < event.translations[lang].tags.length;j++){
-                            tags.push(event.translations[lang].tags[j])
+                            tags.push(event.translations[lang].tags[j]);
                         }
                         return tags;
                     };
@@ -92,7 +92,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     $scope.event.tags = [];
                     for(var j = 0; j < $scope.event.translations[lang].tags.length;j++){
-                        $scope.event.tags.push($scope.event.translations[lang].tags[j])
+                        $scope.event.tags.push($scope.event.translations[lang].tags[j]);
                     }
                     console.log('$scope.event', $scope.event);
                 }
