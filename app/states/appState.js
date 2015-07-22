@@ -10,13 +10,18 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         abstract: true,
         templateUrl: 'templates/menu.html',
         resolve: {
-            appData: function (dataProvider) {
-                var promise = dataProvider.getMetaInfo().then(function (metaInfo) {
+            appData: function (dataProvider, $q) {
+                var defered = $q.defer();
+                dataProvider.getMetaInfo().then(function (metaInfo) {
                     return dataProvider.refreshData(metaInfo.fetched);
                 }).finally(function () {
-                    return dataProvider.getData();
+                    dataProvider.getData().then(function (data) {
+                        defered.resolve(data);
+                    }, function () {
+                        defered.resolve({});
+                    });
                 });
-                return promise;
+                return defered.promise;
             }
         },
         controller: function ($scope, $ionicLoading, dataProvider,
