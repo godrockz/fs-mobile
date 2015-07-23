@@ -22,7 +22,7 @@ angular.module('fsMobile.services')
             var deferred = $q.defer();
             cnt++;
             lastCheckMs = (new Date()).getTime();
-            $http.get(url+'/').then(function () {
+            $http.get(url+'/', {timeout: 2000}).then(function () {
                 debug.addData(
                     'endpointdetection1',
                     'raw',
