@@ -5,7 +5,7 @@
  */
 
 /*global
-    angular
+    angular, moment, _
 */
 
 'use strict';
@@ -16,7 +16,12 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
                 controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
-                    $scope.tabIndex = 0;
+                    var currentTime = moment();
+                    // sets the tabIndex to the current day
+                    $scope.tabIndex = _.findIndex($scope.appData.workshops, function (ws) {
+                        return currentTime.isSame(ws.date, "day");
+                    });
+                    if ($scope.tabIndex < 0) { $scope.tabIndex = 0; }
 
                     $ionicSideMenuDelegate.canDragContent(false);
 

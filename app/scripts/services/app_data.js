@@ -56,6 +56,9 @@ angular.module('fsMobile.services')
                     day.day_name = day.date.format('dddd').toLowerCase();
                     this.workshops.push(day);
                 }, this);
+
+                this.workshops = $filter('orderObjectBy')(
+                    this.workshops, 'date', 'date');
             }
         }
 
