@@ -19,7 +19,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     var currentTime = moment();
                     // sets the tabIndex to the current day
                     $scope.tabIndex = _.findIndex($scope.appData.workshops, function (ws) {
-                        return currentTime.isSame(ws.date, "day");
+                        return currentTime.isSame(ws.date, 'day');
                     });
                     if ($scope.tabIndex < 0) { $scope.tabIndex = 0; }
 
