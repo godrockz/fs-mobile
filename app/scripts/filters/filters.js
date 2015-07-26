@@ -55,8 +55,8 @@ angular.module('fsMobile.filters', [])
                     break;
                 case 'date':
                     input.sort(function(a, b){
-                        a = moment(a[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
-                        b = moment(b[attribute],'YYYY-MM-DD-HH:mm').format('YYYYMMDDHHmm');
+                        a = moment(a[attribute],'YYYY-MM-DD-HH:mm').unix();
+                        b = moment(b[attribute],'YYYY-MM-DD-HH:mm').unix();
                         return dir === 'desc' ? b - a : a - b;
                     });
                     break;

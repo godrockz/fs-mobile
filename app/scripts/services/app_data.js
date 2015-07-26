@@ -41,6 +41,8 @@ angular.module('fsMobile.services')
                         };
                         loc.days.push(day);
                     });
+                    // need to sort the days
+                    loc.days = $filter('orderObjectBy')(loc.days,'date','date');
                     this.program.push(loc);
                 }, this);
 
