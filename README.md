@@ -41,6 +41,7 @@ The following steps will create a realeasable apk
 First ensure that cordova-plugin-whitelist was added to te application 
     
     cordova plugin add cordova-plugin-whitelist 
+    cordova plugin add cordova-plugin-splashscreen
 
 
 ```
