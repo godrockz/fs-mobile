@@ -15,7 +15,10 @@ angular.module('fsMobile.services')
         function updateResourceData (localObjects, objects) {
             localObjects = localObjects || {};
             angular.forEach(objects, function (object) {
-                if (object.deleted) {
+                if (object.deleted ) {
+                    delete localObjects[object.id];
+                } else if(object.archived){
+                    // handle archived objects same as deleted
                     delete localObjects[object.id];
                 } else {
                     localObjects[object.id] = object;
