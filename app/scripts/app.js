@@ -26,7 +26,8 @@ angular.module('fsMobile', ['ionic', 'ngCordova',
     'fsMobile.filters',
     'fsMobile.directives',
     'ui.bootstrap.datetimepicker',
-    'config'])
+    'config',
+    'ng-showdown'])
     .config(function ($urlRouterProvider, $translateProvider) {
 
         // if none of the above states are matched, use this as the fallback
@@ -63,7 +64,7 @@ angular.module('fsMobile', ['ionic', 'ngCordova',
     .run(function ($ionicPlatform) {
 
         $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default 
+            // Hide the accessory bar by default
             // (remove this to show the accessory bar above the keyboard for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 //window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

@@ -14,7 +14,8 @@
                     <p class="head">{{::news|trans:'title'}}</p>
                 </div>
             </div>
-            <p class="news-text">{{::news|trans:'text'}}</p>
+            <p class="news-text markdown" markdown-to-html="news|trans:'text'"></p>
+
 
             <p class="author" ng-if="::news.author">
                 {{::'app.news.by'|translate}}: {{::news.author}}

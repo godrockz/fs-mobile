@@ -181,3 +181,20 @@ body * {
 .ion-android-arrow-down:before {
   color: #AB1C57;
 }
+
+.markdown {
+    ul > li {
+        margin-left: 20px;
+        list-style-type: disc;
+    }
+
+    pre {
+        display: block;
+        unicode-bidi: embed;
+        background-color: #eee;
+        border-radius: 3px;
+        font-family: "Courier New", monospace, "Monospaced";
+        padding: 5px;
+    }
+
+}
