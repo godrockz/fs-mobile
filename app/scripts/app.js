@@ -32,6 +32,7 @@ angular.module('fsMobile', ['ionic', 'ngCordova',
 
         $showdownProvider.setOption('parseImgDimension', true);
         $showdownProvider.setOption('strikethrough', true);
+        $showdownProvider.setOption('tables', true);
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/news');
