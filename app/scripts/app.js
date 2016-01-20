@@ -28,7 +28,10 @@ angular.module('fsMobile', ['ionic', 'ngCordova',
     'ui.bootstrap.datetimepicker',
     'config',
     'ng-showdown'])
-    .config(function ($urlRouterProvider, $translateProvider) {
+    .config(function ($urlRouterProvider, $translateProvider, $showdownProvider) {
+
+        $showdownProvider.setOption('parseImgDimension', true);
+        $showdownProvider.setOption('strikethrough', true);
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/news');
