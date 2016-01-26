@@ -1,4 +1,4 @@
-<ion-view view-title="{{::'app.general.program'|translate}}">
+<ion-view view-title="{{::event|trans:'name'}}">
     <ion-content class="single-program">
         <div class="image-box" fs-src="::event.images[0]">
 
@@ -11,12 +11,9 @@
                     </div>
                 </div>
                 <div class="program-text-head">
-                    <p class="head">{{::event|trans:'name'}}</p>
+                    {{::event.location|trans:'name'}}
                 </div>
             </div>
-            <p class="program-info">
-                <span class="tag">{{::'app.general.location'|translate}}:</span> {{::event.location|trans:'name'}}
-            </p>
             <p class="program-info">
                 <span class="tag">{{::'app.time.from'|translate}}:</span> {{::event.start|date:'H:mm'}}
                 <span class="tag">{{::'app.time.to'|translate}}:</span> {{::event.end|date:'H:mm'}}
