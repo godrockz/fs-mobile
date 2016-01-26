@@ -55,7 +55,25 @@
   },
   "cordovaPlugins": [
     "org.apache.cordova.device",
-    "com.ionic.keyboard"
+    "com.ionic.keyboard",
+    "cordova-plugin-keyboard",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "org.apache.cordova.device",
+    "com.ionic.keyboard",
+    "cordova-plugin-keyboard",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "org.apache.cordova.device",
+    "com.ionic.keyboard",
+    "cordova-plugin-keyboard",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "org.apache.cordova.device",
+    "com.ionic.keyboard",
+    "cordova-plugin-keyboard",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen"
   ],
   "cordovaPlatforms": [
     "android"

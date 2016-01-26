@@ -14,10 +14,29 @@ module.exports = function (grunt) {
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
+    grunt.loadNpmTasks('grunt-exec');
+
+
+    var pkg = grunt.file.readJSON('package.json');
 
     // Define the configuration for all the tasks
     grunt.initConfig({
+        exec:{
+            installPlugins:{
+                stdout: true,
+                stderr: true,
+                command:function(){
+                    var cmd = '';
+                    for(var plugin in pkg.cordovaPlugins ){
+                        console.log('plugin:',pkg.cordovaPlugins[plugin]);
+                        cmd += 'cordova plugin add ' + pkg.cordovaPlugins[plugin]+ ';';
+                    }
 
+                    return cmd;
+                }
+            }
+
+        },
         // Project settings
         yeoman: {
             // configurable paths
