@@ -17,6 +17,7 @@ angular.module('fsMobile.services')
             this.fsNews = [];
             if (this.news) {
                 this.fsNews = $filter('filter')(this.news.values(), {deleted: false});
+                this.fsNews = $filter('filterNonPublished')(this.fsNews); // do never show content that is not yet published
                 this.fsNews = $filter('orderObjectBy')(
                     this.fsNews, 'publishDate', 'date', 'desc');
             }

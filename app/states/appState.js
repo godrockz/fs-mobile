@@ -25,7 +25,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             }
         },
         controller: function ($scope, $ionicLoading, dataProvider,
-                              $timeout, $ionicHistory, appData, AppData) {
+                              $timeout, $ionicHistory, appData, AppData, $rootScope) {
             $scope.appData = new AppData(appData);
 
             function loadData (promise) {
@@ -36,6 +36,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                     $ionicHistory.clearCache();
                     $ionicLoading.hide();
                     $scope.$broadcast('scroll.refreshComplete');
+                    $rootScope.$broadcast('newDataAvailable');
                 }, function (error) {
                     $ionicLoading.show({template: error});
                     return $timeout(function () {

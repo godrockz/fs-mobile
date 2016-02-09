@@ -1,7 +1,7 @@
 <ion-view view-title="{{::'app.general.news'|translate}}">
     <ion-content class="news-state">
-        <ion-refresher on-refresh="refreshData()" spinner="android"></ion-refresher>
-        <div ng-repeat="item in appData.fsNews | limitTo: itemsToDisplay"
+        <ion-refresher on-refresh="refreshData()" spinner="ios"></ion-refresher>
+        <div ng-repeat="item in newsToShow"
              class="news-item" ui-sref="app.singlenews({idx:item.id})">
             <div class="news-date">
                 <div class="box">

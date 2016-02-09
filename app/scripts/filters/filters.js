@@ -37,8 +37,22 @@ angular.module('fsMobile.filters', [])
             }
             return translation || instance[property] || 'n.a';
         };
-    })
-    .filter('orderObjectBy', function(){
+    }).filter('filterNonPublished', function(){
+        return function(data){
+            var result = [];
+            angular.forEach(data,function(item){
+                if(!item.publishDate){ // no date given adding it
+                    result.push(item);
+                }
+                var publishDate = moment(item.publishDate,moment.ISO_8601);
+                if(publishDate && ! moment().isBefore(publishDate)){
+                    // should currently be published
+                    result.push(item);
+                }
+            });
+            return result;
+        };
+    }).filter('orderObjectBy', function(){
         return function(input, attribute, type, dir) {
             if (!angular.isObject(input)){ return input; }
             if (!type) { type = 'int'; }

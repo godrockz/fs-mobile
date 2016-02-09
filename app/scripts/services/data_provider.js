@@ -40,6 +40,11 @@ angular.module('fsMobile.services')
         }
 
         return {
+            /**
+             * fetch from localStorage
+             * or if fails from from file
+             * @returns {*}
+             */
             getData: function () {
                 return storageManager.fetchData(endPoint())
                     .then(function (data) {
@@ -51,6 +56,13 @@ angular.module('fsMobile.services')
                         });
                     });
             },
+
+            /**
+             * fetches from remote
+             *
+             * @param ifModifiedSince
+             * @returns {*}
+             */
             refreshData: function (ifModifiedSince) {
                 console.log('refresh');
                 return EndpointDetector.discoverEndpoint().then(function () {

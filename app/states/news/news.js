@@ -8,7 +8,8 @@
     angular
 */
 'use strict';
-angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigProvider) {
+angular.module('fsMobile.states')
+    .config(function ($stateProvider, $ionicConfigProvider) {
 
     $ionicConfigProvider.backButton.text('').previousTitleText('').icon('ion-chevron-left');
 
@@ -17,14 +18,21 @@ angular.module('fsMobile.states').config(function ($stateProvider, $ionicConfigP
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope) {
+                controller: function ($scope, $filter) {
+                    var filterLimitTo = $filter('limitTo');
                     $scope.initialLength = 7;
-                    $scope.itemsToDisplay = $scope.initialLength;
 
                     $scope.showMoreItems = function() {
                         $scope.itemsToDisplay += $scope.initialLength;
+                        provideNewDataToScope();
                     };
 
+                    function provideNewDataToScope(){
+                        $scope.itemsToDisplay = $scope.initialLength;
+                        $scope.newsToShow = filterLimitTo($scope.appData.fsNews,$scope.itemsToDisplay);
+                    }
+                    $scope.$on('newDataAvailable', provideNewDataToScope);
+                    provideNewDataToScope();
                 }
             }
         }
