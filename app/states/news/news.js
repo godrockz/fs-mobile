@@ -28,10 +28,10 @@ angular.module('fsMobile.states')
                     };
 
                     function provideNewDataToScope(){
-                        $scope.itemsToDisplay = $scope.initialLength;
                         $scope.newsToShow = filterLimitTo($scope.appData.fsNews,$scope.itemsToDisplay);
                     }
                     $scope.$on('newDataAvailable', provideNewDataToScope);
+                    $scope.itemsToDisplay = $scope.initialLength;
                     provideNewDataToScope();
                 }
             }
