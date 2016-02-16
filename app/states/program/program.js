@@ -15,7 +15,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 controller: function ($scope, $ionicSideMenuDelegate,
                                       $ionicSlideBoxDelegate, $stateParams, $translate) {
                     var program_length = $scope.appData.program.length,
-                        currentDateTime = moment('2015-08-30T12:30'),
                         startSlideIndex = 0;
                     var lang = $translate.use();
 
@@ -52,12 +51,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     }
 
                     $ionicSideMenuDelegate.canDragContent(false);
-
-                    $scope.isRunning = function (event) {
-                        var eStart = moment(event.start),
-                            eEnd = event.end ? moment(event.end) : moment(event.start).endOf('day');
-                        return currentDateTime >= eStart && currentDateTime <= eEnd;
-                    };
 
                     $scope.nextTab = function () {
                         $ionicSlideBoxDelegate.next();
