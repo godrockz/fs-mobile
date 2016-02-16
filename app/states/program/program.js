@@ -15,9 +15,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 controller: function ($scope, $ionicSideMenuDelegate,
                                       $ionicSlideBoxDelegate, $stateParams, $translate) {
                     var program_length = $scope.appData.program.length,
-                        currentDateTime = moment('2015-07-30T12:30'),
+                        currentDateTime = moment('2015-08-30T12:30'),
                         startSlideIndex = 0;
-
                     var lang = $translate.use();
 
                     $scope.getTags = function(event) {
@@ -27,6 +26,22 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         }
                         return tags;
                     };
+
+                    /**
+                     * for any reason ionic allows a slide.index > program_length.
+                     * So we are required to calculateproper index to access our $scope.appData.programm
+                     *
+                     * @param add - is added to the current index
+                     * @returns {number}
+                     */
+                    function programIdx(add){
+                        var length = program_length,
+                            slideIdx = $scope.slide.index + (add || 0),
+                            // factor * length can be subtracted from resultIdx
+                            factor = Math.floor(slideIdx / length),
+                            resultIdx = slideIdx - (length * factor);
+                        return resultIdx;
+                    }
 
                     // jump to location if requested by param
                     if ($stateParams.locationId) {
@@ -47,22 +62,25 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.nextTab = function () {
                         $ionicSlideBoxDelegate.next();
                     };
+
                     $scope.previousTab = function () {
                         $ionicSlideBoxDelegate.previous();
                     };
 
                     $scope.previousLocation = function () {
-                        var index = $scope.slide.index ? $scope.slide.index - 1 : program_length - 1;
+                        var index = programIdx(-1);
                         return $scope.appData.program[index];
                     };
 
                     $scope.nextLocation = function () {
-                        var index = $scope.slide.index === program_length - 1 ? 0 : $scope.slide.index + 1;
-                        return $scope.appData.program[index];
+                        var index = programIdx(+1);
+                        var result =  $scope.appData.program[index];
+                        return result;
                     };
 
                     $scope.currentLocation = function () {
-                        return $scope.appData.program[$scope.slide.index];
+                        var result =  $scope.appData.program[programIdx()];
+                        return result;
                     };
 
                     if ($stateParams.locationId) {
