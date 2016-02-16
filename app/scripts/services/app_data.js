@@ -7,12 +7,15 @@ angular.module('fsMobile.services')
     .factory('AppData', function (Resource, $filter) {
 
         function AppData(data) {
+            var self = this;
             this.$metaInfo = data.$metaInfo;
             angular.forEach(data, function (value, key) {
                 this[key] = (key === '$metaInfo') ? value : new Resource(value);
             }.bind(this));
 
+            // filter unpublished locations
             this.locations = this.locations || {};
+            this.locations = this.locations.filterNotPublished();
 
             this.fsNews = [];
             if (this.news) {
@@ -25,13 +28,19 @@ angular.module('fsMobile.services')
             this.program = [];
             this.workshops = [];
             if (this.events) {
-                // groups evens by location for program
+                // attach locations to published events
+                this.events = this.events.filterNotPublished();
+                angular.forEach(this.events,function(event){
+                    event.location = self.locations[event.locationRef];
+                });
+
+                // BUILD PROGRAM
                 var programEvents = this.events.filterByEventCategory('WORKSHOP', true);
                 programEvents = this.events.groupByLocation(programEvents);
 
                 angular.forEach(programEvents, function(locationEvents, locationId) {
                     var loc = this.locations[locationId];
-                    // we should not create dummy locations for unassigned events ?
+                    // we should not create dummy locations for unassigned events!
                     if (!loc){ return; }
                     loc.days = [];
                     angular.forEach(this.events.groupByDay(locationEvents),
@@ -47,8 +56,10 @@ angular.module('fsMobile.services')
                     this.program.push(loc);
                 }, this);
 
-                // groups workshops by days
+                // BUILD WORKSHOPS
+                // groups workshops by days / filter unpublished / filter workshop types
                 var workshopEvents = this.events.filterByEventCategory('WORKSHOP');
+                workshopEvents =this.events.filterNotPublished(workshopEvents);
                 workshopEvents = this.events.groupByDay(workshopEvents);
 
                 angular.forEach(workshopEvents, function (dayEvents, dayString) {
@@ -60,8 +71,7 @@ angular.module('fsMobile.services')
                     this.workshops.push(day);
                 }, this);
 
-                this.workshops = $filter('orderObjectBy')(
-                    this.workshops, 'date', 'date');
+                this.workshops = $filter('orderObjectBy')(this.workshops, 'date', 'date');
             }
         }
 

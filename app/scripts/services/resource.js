@@ -8,7 +8,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('Resource', function () {
+    .factory('Resource', function (filterNonPublishedFilter) {
 
         function Resource(data) {
             if (data) {
@@ -48,6 +48,24 @@ angular.module('fsMobile.services')
                     return 'unknown';
                 });
             },
+
+            /**
+             * removes any item from list that is not yet published
+             * if no published date is defined for an item the item is retained in list.
+             * @param values
+             * @returns {Resource}
+             */
+            filterNotPublished: function(values){
+                values = values || this.values();
+                var data = filterNonPublishedFilter(values);
+                var result =  new Resource();
+                angular.forEach(data,function(entry){
+                    result[entry.id] = entry;
+                });
+                return result;
+            },
+
+
             groupByLocation: function (values) {
                 values = values || this.values();
                 return _.groupBy(values, function (resource) {

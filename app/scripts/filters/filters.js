@@ -43,6 +43,7 @@ angular.module('fsMobile.filters', [])
             angular.forEach(data,function(item){
                 if(!item.publishDate){ // no date given adding it
                     result.push(item);
+                    return;
                 }
                 var publishDate = moment(item.publishDate,moment.ISO_8601);
                 if(publishDate && ! moment().isBefore(publishDate)){
