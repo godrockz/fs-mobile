@@ -29,7 +29,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     /**
                      * for any reason ionic allows a slide.index > program_length.
-                     * So we are required to calculateproper index to access our $scope.appData.programm
+                     * So we are required to calculate-proper index to access our $scope.appData.programm
                      *
                      * @param add - is added to the current index
                      * @returns {number}
