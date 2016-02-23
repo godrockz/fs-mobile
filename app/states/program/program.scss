@@ -209,4 +209,42 @@
     //    top:0;
     //    background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
     //}
+
+
+
+}
+
+div.new-prog {
+
+    .rowsie{
+        .left{
+
+        }
+        .right{
+
+        }
+    }
+
+    div.header-image {
+
+    }
+
+    p.head {
+        font-size: 24px;
+        position: absolute;
+        bottom: 55px;
+        margin-left: 30px;
+        color: #fff;
+        font-weight: 900;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    p.tags {
+        position: absolute;
+        bottom: 25px;
+        font-weight: bold;
+        font-size: 18px;
+        margin-left: 30px;
+        color: #fff;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
 }

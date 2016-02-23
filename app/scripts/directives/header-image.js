@@ -30,7 +30,10 @@ angular.module('fsMobile.directives')
                 path: '=',
                 topic: '@'
             },
-            template: '<div class="header-image"><img img-cache="" ic-src="{{url}}" ng-if="onlineImage"><img img-cache="" ng-src="{{url}}" ng-if="!onlineImage"></div>',
+            template: '<div class="header-image">' +
+            '  <img img-cache="" ic-src="{{url}}" ng-if="onlineImage">' +
+            '  <img img-cache="" ng-src="{{url}}" ng-if="!onlineImage">' +
+            '</div>',
             link: function (scope) {
 
                 var url = scope.path;
