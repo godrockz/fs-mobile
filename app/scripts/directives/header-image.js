@@ -26,32 +26,32 @@ angular.module('fsMobile.directives')
         }
 
         return {
-            scope:{
-                path:'=',
-                topic:'@'
+            scope: {
+                path: '=',
+                topic: '@'
             },
-            template:'<div class="header-image"><img img-cache="" ic-src="{{url}}" ng-if="onlineImage"><img img-cache="" ng-src="{{url}}" ng-if="!onlineImage"></div>',
-            link:function(scope, elem, attrs ) {
+            template: '<div class="header-image"><img img-cache="" ic-src="{{url}}" ng-if="onlineImage"><img img-cache="" ng-src="{{url}}" ng-if="!onlineImage"></div>',
+            link: function (scope) {
 
-                var url = url = scope.path;
+                var url = scope.path;
 
                 if (angular.isArray(scope.path)) {
                     url = scope.path[0];
                 }
 
-                scope.topic= scope.topic ||'workshop';
-                if(!url){
+                scope.topic = scope.topic || 'workshop';
+                if (!url) {
                     scope.url = getRandomOfflineImage(scope.topic); // use a random image!
                     scope.onlineImage = false;
                 }
                 ConnectionState.checkOnline().then(function (isOnline) {
 
-                    ImgCache.isCached(url,function(isCached) {
+                    ImgCache.isCached(url, function (isCached) {
                         if (!isCached && !isOnline) {
                             // we are not online and have no cached version
                             scope.url = getRandomOfflineImage(scope.topic);
                             scope.onlineImage = false;
-                        }else{
+                        } else {
                             // we are online or have a cached version so we use ist
                             scope.url = (DYNENV.apiEndpoint || '') + url;
                             scope.onlineImage = true;
@@ -59,5 +59,5 @@ angular.module('fsMobile.directives')
                     });
                 });
             }
-        }
+        };
 });

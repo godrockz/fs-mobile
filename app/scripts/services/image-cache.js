@@ -5,6 +5,7 @@
  * Created by Benjamin Jacob on 23.02.16.
  * <p/>
  */
+'use strict';
 angular.module('fsMobile')
     .service('ImageCacheService', function (ImgCache, ConnectionState, DYNENV) {
 
