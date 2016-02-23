@@ -15,7 +15,7 @@
 
 angular.module('fsMobile.states', []);
 angular.module('fsMobile.services', []);
-angular.module('fsMobile', ['ionic', 'ngCordova',
+    angular.module('fsMobile', ['ionic', 'ngCordova',
     'tabSlideBox',
     'pascalprecht.translate',
     'LocalForageModule',
@@ -27,9 +27,20 @@ angular.module('fsMobile', ['ionic', 'ngCordova',
     'fsMobile.directives',
     'ui.bootstrap.datetimepicker',
     'config',
-    'ng-showdown'])
-    .config(function ($urlRouterProvider, $translateProvider, $showdownProvider) {
+    'ng-showdown',
+    'ImgCache'
+])
+    .config(function ($urlRouterProvider, $translateProvider, $showdownProvider, ImgCacheProvider) {
 
+        // image cache
+        ImgCacheProvider.setOption('debug', true);
+        ImgCacheProvider.setOption('usePersistentCache', true);
+        var quota =  73 * 1024 * 1024;
+        console.log('set quota',quota);
+        ImgCacheProvider.setOption('chromeQuota',quota);
+        ImgCacheProvider.manualInit = true;
+
+        // markdown
         $showdownProvider.setOption('parseImgDimension', true);
         $showdownProvider.setOption('strikethrough', true);
         $showdownProvider.setOption('tables', true);
@@ -65,7 +76,7 @@ angular.module('fsMobile', ['ionic', 'ngCordova',
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, ImgCache) {
 
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default
@@ -77,5 +88,6 @@ angular.module('fsMobile', ['ionic', 'ngCordova',
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
             }
+            ImgCache.$init();
         });
     });

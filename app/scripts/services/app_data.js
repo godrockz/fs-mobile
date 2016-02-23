@@ -4,7 +4,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('AppData', function (Resource, $filter) {
+    .factory('AppData', function (Resource, $filter, ImageCacheService) {
 
         /**
          * events before this time are counted to the previous day
@@ -33,6 +33,10 @@ angular.module('fsMobile.services')
                 this.fsNews = $filter('filterNonPublished')(this.fsNews); // do never show content that is not yet published
                 this.fsNews = $filter('orderObjectBy')(
                     this.fsNews, 'publishDate', 'date', 'desc');
+                angular.forEach(this.fsNews,function(news){
+                    ImageCacheService.cacheImage(news.image);
+
+                });
             }
 
             this.program = [];
@@ -42,6 +46,10 @@ angular.module('fsMobile.services')
                 this.events = this.events.filterNotPublished();
                 angular.forEach(this.events,function(event){
                     event.location = self.locations[event.locationRef];
+                    angular.forEach(event.images,function(url){
+                        ImageCacheService.cacheImage(url);
+
+                    });
                 });
 
                 // BUILD PROGRAM
