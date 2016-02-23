@@ -98,7 +98,11 @@ angular.module('fsMobile.services').service('ConnectionState', function (DYNENV,
 
     return {
 
-        isOnline: function () {
+        /**
+         * checks if the system is online
+         * @returns {*}
+         */
+        checkOnline: function () {
 
             return $localForage.getItem(key).then(function (lastCheck) {
                 try {

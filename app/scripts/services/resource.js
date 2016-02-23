@@ -57,8 +57,9 @@ angular.module('fsMobile.services')
                         // if startTime is before dayLimit the event counts to previous day #47
                         if(date.hour() < dayBorderMoment.hour()||
                             (date.hour() === dayBorderMoment.hour() && date.minute()<dayBorderMoment.minute()) ||
-                            (date.hour() === dayBorderMoment.hour() && date.minute() === dayBorderMoment.minute()
-                            && date.second() < dayBorderMoment.second()) ){
+                            (date.hour() === dayBorderMoment.hour() &&
+                            date.minute() === dayBorderMoment.minute() &&
+                            date.second() < dayBorderMoment.second()) ){
                             // should be count for previous day
                             return moment(date).subtract(1,'day').startOf('day').format();
                         }

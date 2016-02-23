@@ -55,7 +55,7 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
                 setImage(elem, attrs, getRandomOfflineImage(defaults));
                 return;
             }
-            ConnectionState.isOnline().then(function (isOnline) {
+            ConnectionState.checkOnline().then(function (isOnline) {
                 if (isOnline) {
                     var absoluteUri = (DYNENV.apiEndpoint||'') + onlineSrc;
                     setImage(elem, attrs, absoluteUri);
