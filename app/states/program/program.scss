@@ -215,13 +215,18 @@
 }
 
 div.new-prog {
-
-    .rowsie{
-        .left{
-
+    .event-date>div{
+        color:#fff;
+        position: absolute;
+        font-size:18px;
+        bottom:0px;
+        margin-bottom:15px;
+        text-transform: uppercase;
+        span{
+            letter-spacing: 3px;
         }
-        .right{
-
+        span:first-child{
+            letter-spacing:11px;
         }
     }
 
