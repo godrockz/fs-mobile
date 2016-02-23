@@ -88,15 +88,17 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
                     };
 
-                    $scope.colorBrights = [];
+                    $scope.colors = [];
                     var prev= '#BFAFFF';
                     for (var i = 0 ; i< 24 ; i++){
                         console.log('prev',prev, 'idx:',((i+6)%24));
-                        $scope.colorBrights[((i+6)%24)] = prev = $scope.shade(prev,-1*60/24);
+                        $scope.colors[((i+6)%24)] = prev = $scope.shade(prev,-1*60/24);
                     }
-                    console.log('$scope.colorBrights',$scope.colorBrights);
+                    console.log('$scope.colors',$scope.colors);
 
-
+                    $scope.colorForEvent = function(event){
+                        return $scope.colors[moment(event.start).hour()];
+                    };
 
                     $scope.contrastColor=function(hex){
                         var num = parseInt(hex.slice(1),16),
