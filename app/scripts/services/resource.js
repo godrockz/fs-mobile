@@ -39,10 +39,30 @@ angular.module('fsMobile.services')
                     return result;
                 });
             },
-            groupByDay: function (values) {
+            /**
+             *
+             * @param values
+             * @param dayLimit a HH:mm:ss string defining the time of day entries should be
+             * grouped to previous day. defaults to 00:00:00
+             */
+            groupByDay: function (values, dayLimit) {
+                dayLimit = dayLimit || '00:00:00';
+
                 values = values || this.values();
                 return _.groupBy(values, function (resource) {
                     if (resource.start) {
+                        var date = moment(resource.start),
+                            dayBorderMoment = moment(dayLimit, 'HH:mm:ss');
+
+                        // if startTime is before dayLimit the event counts to previous day #47
+                        if(date.hour() < dayBorderMoment.hour()||
+                            (date.hour() === dayBorderMoment.hour() && date.minute()<dayBorderMoment.minute()) ||
+                            (date.hour() === dayBorderMoment.hour() && date.minute() === dayBorderMoment.minute()
+                            && date.second() < dayBorderMoment.second()) ){
+                            // should be count for previous day
+                            return moment(date).subtract(1,'day').startOf('day').format();
+                        }
+
                         return moment(resource.start).startOf('day').format();
                     }
                     return 'unknown';

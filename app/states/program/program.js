@@ -2,7 +2,7 @@
   plusplus: true
 */
 /*global
-    angular, moment, _
+    angular, _
 */
 
 'use strict';
@@ -12,8 +12,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/program.html',
-                controller: function ($scope, $ionicSideMenuDelegate,
-                                      $ionicSlideBoxDelegate, $stateParams, $translate) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $stateParams,
+                                      $translate) {
+
                     var program_length = $scope.appData.program.length,
                         startSlideIndex = 0;
                     var lang = $translate.use();

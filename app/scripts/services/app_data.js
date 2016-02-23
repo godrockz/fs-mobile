@@ -6,6 +6,16 @@
 angular.module('fsMobile.services')
     .factory('AppData', function (Resource, $filter) {
 
+        /**
+         * events before this time are counted to the previous day
+         * In result
+         * an event starting 31.08. 23:00 and
+         * an event starting 01.09. 01:00 are both displayed at 31.08. because the time of second event
+         * is before the dayLimit.
+         * @type {string}
+         */
+        var dayLimit='05:59:59';
+
         function AppData(data) {
             var self = this;
             this.$metaInfo = data.$metaInfo;
@@ -43,7 +53,7 @@ angular.module('fsMobile.services')
                     // we should not create dummy locations for unassigned events!
                     if (!loc){ return; }
                     loc.days = [];
-                    angular.forEach(this.events.groupByDay(locationEvents),
+                    angular.forEach(this.events.groupByDay(locationEvents, dayLimit),
                                     function(dayEvents, dayString) {
                         var day = {
                             date: moment(dayString),
