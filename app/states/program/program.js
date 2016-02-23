@@ -91,10 +91,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.colors = [];
                     var prev= '#BFAFFF';
                     for (var i = 0 ; i< 24 ; i++){
-                        console.log('prev',prev, 'idx:',((i+6)%24));
                         $scope.colors[((i+6)%24)] = prev = $scope.shade(prev,-1*60/24);
                     }
-                    console.log('$scope.colors',$scope.colors);
 
                     $scope.colorForEvent = function(event){
                         return $scope.colors[moment(event.start).hour()];

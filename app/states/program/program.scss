@@ -215,12 +215,14 @@
 }
 
 div.new-prog {
+    $spaceBottom:25px;
+
     .event-date>div{
         color:#fff;
         position: absolute;
         font-size:18px;
-        bottom:0px;
-        margin-bottom:15px;
+        bottom:$spaceBottom;
+        margin-bottom:10px;
         text-transform: uppercase;
         span{
             letter-spacing: 3px;
@@ -237,7 +239,7 @@ div.new-prog {
     p.head {
         font-size: 24px;
         position: absolute;
-        bottom: 55px;
+        bottom: $spaceBottom + 30px ;
         margin-left: 30px;
         color: #fff;
         font-weight: 900;
@@ -245,7 +247,7 @@ div.new-prog {
     }
     p.tags {
         position: absolute;
-        bottom: 25px;
+        bottom: $spaceBottom;
         font-weight: bold;
         font-size: 18px;
         margin-left: 30px;
