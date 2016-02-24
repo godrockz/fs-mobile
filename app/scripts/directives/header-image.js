@@ -42,18 +42,20 @@ angular.module('fsMobile.directives')
                     url = scope.path[0];
                 }
 
-                scope.topic = scope.topic || 'workshop';
                 if (!url) {
                     scope.url = getRandomOfflineImage(scope.topic); // use a random image!
                     scope.onlineImage = false;
+                    console.log('default image uri',scope.url);
                 }
                 ConnectionState.checkOnline().then(function (isOnline) {
 
                     ImgCache.isCached(url, function (isCached) {
+                        console.log('is cached ',isCached);
                         if (!isCached && !isOnline) {
                             // we are not online and have no cached version
                             scope.url = getRandomOfflineImage(scope.topic);
                             scope.onlineImage = false;
+                            console.log('offline image uri',scope.url);
                         } else {
                             // we are online or have a cached version so we use ist
                             scope.url = (DYNENV.apiEndpoint || '') + url;
