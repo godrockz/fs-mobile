@@ -56,4 +56,5 @@
   <preference name="AutoHideSplashScreen" value="false"/>
   <preference name="SplashScreenDelay" value="10000"/>
     <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 </widget>
