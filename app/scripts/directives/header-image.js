@@ -31,8 +31,8 @@ angular.module('fsMobile.directives')
                 topic: '@'
             },
             template: '<div class="header-image">' +
-            ' <img img-cache="" ic-src="{{url}}" ng-if="onlineImage">' +
-            ' <img src="{{url}}" ng-if="!onlineImage"><p ng-if="!onlineImage">{{url}}</p>' +
+            '  <img img-cache="" ic-src="{{url}}" ng-if="onlineImage">' +
+            '  <img img-cache="" ng-src="{{url}}" ng-if="!onlineImage">' +
             '</div>',
             link: function (scope) {
 
@@ -42,31 +42,20 @@ angular.module('fsMobile.directives')
                     url = scope.path[0];
                 }
 
-                scope.topic = scope.topic || 'workshop';
                 if (!url) {
                     scope.url = getRandomOfflineImage(scope.topic); // use a random image!
                     scope.onlineImage = false;
-                    console.log('url',scope.url);
-                    return;
+                    console.log('default image uri',scope.url);
                 }
                 ConnectionState.checkOnline().then(function (isOnline) {
-                   /* TODO: discover device support for img-cache
-                    if(!angular.isFunction(ImgCache.isCached)){
-                        // Systems that do not support imgCache use the old Style
-                        if(isOnline){
-                            scope.url = url;
-                        }else{
-                            scope.url = getRandomOfflineImage(scope.topic);
-                        }
-                        return;
-                    }*/
 
                     ImgCache.isCached(url, function (isCached) {
+                        console.log('is cached ',isCached);
                         if (!isCached && !isOnline) {
                             // we are not online and have no cached version
                             scope.url = getRandomOfflineImage(scope.topic);
                             scope.onlineImage = false;
-                            console.log('url',scope.url);
+                            console.log('offline image uri',scope.url);
                         } else {
                             // we are online or have a cached version so we use ist
                             scope.url = (DYNENV.apiEndpoint || '') + url;

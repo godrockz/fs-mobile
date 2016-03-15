@@ -46,6 +46,18 @@ angular.module('fsMobile.services')
                 this.events = this.events.filterNotPublished();
                 angular.forEach(this.events,function(event){
                     event.location = self.locations[event.locationRef];
+
+                    // pre-render tags string to avoid ng-repeat for every event
+                    event.tagString = {};
+                    angular.forEach(event.translations,function(values,lang){
+                        var data = event.translations[lang].tags;
+                        if(data){
+                            event.tagString[lang] =
+                                (!data || data.length<=0) ? '': '#' + data.join(" #");
+                        }
+                    });
+
+
                     angular.forEach(event.images,function(url){
                         ImageCacheService.cacheImage(url);
 

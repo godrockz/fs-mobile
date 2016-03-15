@@ -81,5 +81,4 @@ angular.module('fsMobile.services')
                 return storageManager.deleteLocalData(endPoint());
             }
         };
-
     });
