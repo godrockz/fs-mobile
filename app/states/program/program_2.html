@@ -1,6 +1,6 @@
 <!--<ion-view view-title="{{'app.general.locations'|translate}}" >-->
 
-<ion-view class="program" view-title="{{::'app.general.program'|translate}}">
+<ion-view class="program program-new" view-title="{{::'app.general.program'|translate}}" cache="false">
     <ion-content>
         <div class="tabmenu">
             <div class="tabmenu-left" ng-click="previousTab()" style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
@@ -24,21 +24,13 @@
 
                     <!-- NEW OLD STUFF -->
                     <div class="prog-day new-prog" ng-repeat="day in ::location.days" >
-                        <div class="prog-date">
-                            <div class="prog-date-left">
-                                {{::'app.days.' + (day.date | timeFormat: 'dddd')| lowercase | translate }}
-                            </div>
-                            <div class="prog-date-right">
-                                {{::day.date | timeFormat: 'DD.MM.'}}
-                            </div>
-                        </div>
 
                         <div id="{{::event.id}}"
                              class="prog-box row"
                              ng-repeat="event in ::day.events | orderBy: 'start' track by event.id"
                              ui-sref="app.singleprogram({idx:event.id})">
 
-                            <div class="col col-10 event-date" style="background-color:{{colorForEvent(event)}}">
+                            <div class="col col-prog-left event-date" style="background-color:{{colorForEvent(event,location)}}">
                                 <div>
                                     <span>{{::'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}</span>
                                     <br>
@@ -47,15 +39,22 @@
                                     <span>{{::event.end|date:'HH:mm'}}</span>
                                 </div>
                             </div>
-                            <div class="col col-90">
+
+
+                            <div class="col col-prog-right image-side">
+
                                 <header-image path="event.images"></header-image>
+
+                                <div class="text-container">
                                 <p class="head">{{::event|trans:'name'}}</p>
-                                <p class="tags" style="color:{{colorForEvent(event)}};
+                                <p class="tags" style="color:{{colorForEvent(event, location)}};
                                 text-shadow:
-                                 -1px 0 {{contrastColor(colorForEvent(event))}},
-                                 0 1px {{contrastColor(colorForEvent(event))}},
-                                 1px 0 {{contrastColor(colorForEvent(event))}},
-                                 0 -1px {{contrastColor(colorForEvent(event))}};"><small ng-repeat="tag in getTags(event)">#{{tag|lowercase}}&nbsp;</small></p>
+                                 -1px 0 {{contrastColor(colorForEvent(event, location))}},
+                                 0 1px {{contrastColor(colorForEvent(event, location))}},
+                                 1px 0 {{contrastColor(colorForEvent(event, location))}},
+                                 0 -1px {{contrastColor(colorForEvent(event, location))}};">
+                                    {{event.tagString[lang]}}
+                                </div>
                             </div>
 
 
@@ -69,7 +68,9 @@
                     </div>
 
                     <div style="height:5em;"></div>
-                    <div ng-repeat="color in colors" style="background-color:{{color}}; height:20px; width:20px;">
+
+                    <!-- show color mode-->
+                    <div ng-if="false" ng-repeat="color in colors" style="background-color:{{color}}; height:20px; width:20px;">
 
                     </div>
                 </ion-scroll>
