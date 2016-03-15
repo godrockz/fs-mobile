@@ -31,8 +31,8 @@ angular.module('fsMobile.directives')
                 topic: '@'
             },
             template: '<div class="header-image">' +
-            '  <img img-cache="" ic-src="{{url}}" ng-if="onlineImage">' +
-            '  <img img-cache="" ng-src="{{url}}" ng-if="!onlineImage">' +
+            ' <img img-cache="" ic-src="{{url}}" ng-if="onlineImage">' +
+            ' <img img-cache="" ng-src="{{url}}" ng-if="!onlineImage">' +
             '</div>',
             link: function (scope) {
 
