@@ -60,6 +60,7 @@
     "cordova-plugin-keyboard",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
+    "cordova-plugin-device",
     "com.ionic.keyboard",
     "org.apache.cordova.device",
     "org.apache.cordova.file",
