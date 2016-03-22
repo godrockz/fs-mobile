@@ -7,19 +7,29 @@
  */
 'use strict';
 angular.module('fsMobile')
-    .service('ImageCacheService', function ($q, ImgCache, ConnectionState, DYNENV) {
+    .service('ImageCacheService', function ($rootScope, $q, ImgCache, ConnectionState, DYNENV) {
 
-        // init
+        // we need to wait for platform ready event before we can init the image-cache
         var deferred = $q.defer();
         var initPromise = deferred.promise;
-        function init(){
-           ImgCache.$init(function(){
-               deferred.resolve();
-           },function(){
-               deferred.reject();
-           });
-       }
 
+        function init(){
+            console.log('init imagecache');
+            ImgCache.init(function() {
+                ImgCache.$deferred.resolve();
+                deferred.resolve();
+            }, function() {
+                console.log('init - failed');
+                ImgCache.$deferred.reject();
+                deferred.reject();
+            });
+
+        }
+
+        /**
+         * tries to cache the given url
+         * @param relativeUrl
+         */
         function cacheImg(relativeUrl) {
             if (!relativeUrl) {
                 return;
@@ -27,7 +37,7 @@ angular.module('fsMobile')
             ConnectionState.checkOnline().then(function (isOnline) {
                 if (isOnline) {
                     var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
-                    ImgCache.isCached(absoluteUri, function (cached) {
+                    ImgCache.isCached(absoluteUri, function (url, cached) {
                         if (!cached) {
                             ImgCache.cacheFile(absoluteUri);
                         }
@@ -44,8 +54,31 @@ angular.module('fsMobile')
              */
             cacheImage: function (relativeUrl) {
                 initPromise.then(function () {
+                    console.log('cacheImage', relativeUrl);
                     cacheImg(relativeUrl);
                 });
+            },
+
+            /**
+             *
+             * @param relativeUrl
+             * @returns {*} promise
+             */
+            isCached: function (relativeUrl){
+                var deferred = $q.defer();
+                initPromise.then(function(){
+                    console.log('init promise done');
+                    if(relativeUrl === null || relativeUrl === undefined ){
+                        deferred.resolve(relativeUrl, false);
+                        return;
+                    }
+                    ImgCache.isCached(relativeUrl, function (path, isCached) {
+                        console.log('isCached result ',path, isCached);
+                        deferred.resolve(path, isCached);
+
+                    });
+                });
+                return deferred.promise;
             }
         };
         return svc;

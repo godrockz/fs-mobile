@@ -76,7 +76,7 @@ angular.module('fsMobile.services', []);
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 
-    .run(function ($ionicPlatform , ImageCacheService) {
+    .run(function ($ionicPlatform , ImageCacheService, $rootScope) {
 
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default
@@ -88,6 +88,8 @@ angular.module('fsMobile.services', []);
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
             }
-            ImageCacheService.init();
+            console.log('runing ImageCacheHelperInit.');
+            $rootScope.$apply( ImageCacheService.init);
+            //ImageCacheService.init();
         });
     });
