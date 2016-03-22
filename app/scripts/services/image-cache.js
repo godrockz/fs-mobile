@@ -7,9 +7,16 @@
  */
 'use strict';
 angular.module('fsMobile')
-    .service('ImageCacheService', function (ImgCache, ConnectionState, DYNENV) {
+    .service('ImageCacheService', function ($q, ImgCache, ConnectionState, DYNENV) {
 
-        var init = ImgCache.$init();
+        // init
+        var deferred = $q.defer();
+        var init = deferred.promise;
+        ImgCache.$init(function(){
+            deferred.resolve();
+        },function(){
+            deferred.reject();
+        });
 
         function cacheImg(relativeUrl) {
             if (!relativeUrl) {
