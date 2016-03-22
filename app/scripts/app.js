@@ -88,8 +88,8 @@ angular.module('fsMobile.services', []);
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
             }
-            console.log('running ImageCacheHelperInit.');
-
+            console.log('runing ImageCacheHelperInit.');
+            //$rootScope.$apply( ImageCacheService.init);
             ImageCacheService.init();
         });
     });
