@@ -11,12 +11,14 @@ angular.module('fsMobile')
 
         // init
         var deferred = $q.defer();
-        var init = deferred.promise;
-        ImgCache.$init(function(){
-            deferred.resolve();
-        },function(){
-            deferred.reject();
-        });
+        var initPromise = deferred.promise;
+        function init(){
+           ImgCache.$init(function(){
+               deferred.resolve();
+           },function(){
+               deferred.reject();
+           });
+       }
 
         function cacheImg(relativeUrl) {
             if (!relativeUrl) {
@@ -35,15 +37,13 @@ angular.module('fsMobile')
         }
 
         var svc = {
-            init: function (){
-              // currently does nothing.
-            },
+            init: init,
             /**
              * the url. to cache the image
              * @param relativeUrl
              */
             cacheImage: function (relativeUrl) {
-                init.then(function () {
+                initPromise.then(function () {
                     cacheImg(relativeUrl);
                 });
             }
