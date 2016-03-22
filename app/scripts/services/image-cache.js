@@ -73,7 +73,7 @@ angular.module('fsMobile')
                     }
                     ImgCache.isCached(relativeUrl, function (path, isCached) {
                         console.log('isCached result ',path, isCached);
-                        deferred.resolve(path, isCached);
+                        deferred.resolve(isCached);
 
                     });
                 });

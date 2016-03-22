@@ -89,7 +89,7 @@ angular.module('fsMobile.services', []);
                 window.StatusBar.styleDefault();
             }
             console.log('runing ImageCacheHelperInit.');
-            //$rootScope.$apply( ImageCacheService.init);
-            ImageCacheService.init();
+            $rootScope.$apply( ImageCacheService.init);
+            //ImageCacheService.init();
         });
     });

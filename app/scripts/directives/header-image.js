@@ -112,7 +112,7 @@ angular.module('fsMobile.directives')
                 }
 
                 ConnectionState.checkOnline().then(function (isOnline) {
-                    ImageCacheService.isCached(url).then(function (path, isCached) {
+                    ImageCacheService.isCached(url).then(function (isCached) {
                         console.log('is cached ', isCached, isOnline);
                         if (!isCached && !isOnline) {
                             // we are not online and have no cached version
