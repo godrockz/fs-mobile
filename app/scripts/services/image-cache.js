@@ -67,7 +67,6 @@ angular.module('fsMobile')
             isCached: function (relativeUrl){
                 var deferred = $q.defer();
                 initPromise.then(function(){
-                    console.log('init promise done');
                     if(relativeUrl === null || relativeUrl === undefined ){
                         deferred.resolve(relativeUrl, false);
                         return;
