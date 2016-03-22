@@ -9,25 +9,35 @@
 angular.module('fsMobile')
     .service('ImageCacheService', function (ImgCache, ConnectionState, DYNENV) {
 
+        var init = ImgCache.$init();
+
+        function cacheImg(relativeUrl) {
+            if (!relativeUrl) {
+                return;
+            }
+            ConnectionState.checkOnline().then(function (isOnline) {
+                if (isOnline) {
+                    var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
+                    ImgCache.isCached(absoluteUri, function (cached) {
+                        if (!cached) {
+                            ImgCache.cacheFile(absoluteUri);
+                        }
+                    });
+                }
+            });
+        }
+
         var svc = {
+            init: function (){
+              // currently does nothing.
+            },
             /**
              * the url. to cache the image
              * @param relativeUrl
              */
             cacheImage: function (relativeUrl) {
-                if(!relativeUrl){
-                    return;
-                }
-                ConnectionState.checkOnline().then(function (isOnline) {
-                    if (isOnline) {
-                        var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
-                        if(!ImgCache.isCached(absoluteUri,function(cached){
-                                if(!cached){
-                                    ImgCache.cacheFile(absoluteUri);
-                                }
-                            })){
-                        }
-                    }
+                init.then(function () {
+                    cacheImg(relativeUrl);
                 });
             }
         };

@@ -53,7 +53,7 @@ angular.module('fsMobile.services')
                         var data = event.translations[lang].tags;
                         if(data){
                             event.tagString[lang] =
-                                (!data || data.length<=0) ? '': '#' + data.join(" #");
+                                (!data || data.length<=0) ? '': '#' + data.join(' #');
                         }
                     });
 
