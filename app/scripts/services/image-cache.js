@@ -16,11 +16,11 @@ angular.module('fsMobile')
         function init(){
             console.log('init imagecache');
             ImgCache.init(function() {
-                ImgCache.$deferred.resolve();
+                ImgCache.$deferred.resolve();// resolve the angular-image-cache-wrapper promises
                 deferred.resolve();
             }, function() {
                 console.log('init - failed');
-                ImgCache.$deferred.reject();
+                ImgCache.$deferred.reject();// reject the angular-image-cache-wrapper promises
                 deferred.reject();
             });
 
