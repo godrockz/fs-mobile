@@ -76,7 +76,18 @@ angular.module('fsMobile.services', []);
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 
-    .run(function ($ionicPlatform , ImageCacheService, $rootScope) {
+    .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q, $cordovaDevice) {
+
+
+
+
+        var platformReady = $q.defer();
+        var deviceReady = $q.defer();
+
+
+        var dependencies = [];
+        dependencies.push(platformReady.promise);
+        dependencies.push(deviceReady.promise);
 
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default
@@ -89,6 +100,18 @@ angular.module('fsMobile.services', []);
                 window.StatusBar.styleDefault();
             }
             console.log('runing ImageCacheHelperInit.');
+            platformReady.resolve('done-plattform-ready');
+        });
+
+        document.addEventListener('deviceready', onDeviceReady, false);
+
+        function onDeviceReady() {
+            console.log(device.cordova);
+            deviceReady.resolve();
+        }
+
+
+        $q.all(dependencies).then(function(){
             $rootScope.$apply( ImageCacheService.init);
             //ImageCacheService.init();
         });

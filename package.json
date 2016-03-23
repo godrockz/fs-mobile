@@ -62,10 +62,10 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-device",
     "com.ionic.keyboard",
-    "org.apache.cordova.device",
     "org.apache.cordova.file",
     "org.apache.cordova.file-transfer",
-    "cordova-plugin-crosswalk-webview"
+    "cordova-plugin-crosswalk-webview",
+    "org.apache.cordova.device"
   ],
   "cordovaPlatforms": [
     "android"
