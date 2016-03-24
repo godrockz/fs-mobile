@@ -7,7 +7,7 @@
  */
 'use strict';
 angular.module('fsMobile')
-    .service('ImageCacheService', function ($rootScope, $q, ImgCache, ConnectionState, DYNENV) {
+    .service('ImageCacheService', function (debug, $rootScope, $q, ImgCache, ConnectionState, DYNENV) {
 
         // we need to wait for platform ready event before we can init the image-cache
         var deferred = $q.defer();
@@ -37,6 +37,8 @@ angular.module('fsMobile')
 
         }
 
+
+
         /**
          * tries to cache the given url
          * @param relativeUrl
@@ -51,8 +53,10 @@ angular.module('fsMobile')
             ConnectionState.checkOnline().then(function (isOnline) {
                 if (isOnline) {
                     var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
+
                     ImgCache.isCached(absoluteUri, function (url, cached) {
                         if (!cached) {
+                            console.log('caching File ', absoluteUri);
                             ImgCache.cacheFile(absoluteUri, deferred.resolve, deferred.reject);
                         } else {
                             deferred.resolve();
@@ -72,7 +76,6 @@ angular.module('fsMobile')
              */
             cacheImage: function (relativeUrl) {
                 return initPromise.then(function () {
-                    console.log('cacheImage', relativeUrl);
                     return cacheImg(relativeUrl);
                 });
             },
@@ -89,7 +92,9 @@ angular.module('fsMobile')
                         deferred.resolve(relativeUrl, false);
                         return;
                     }
-                    ImgCache.isCached(relativeUrl, function (path, isCached) {
+                    var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
+                    debug.addData('IS CACHED '+absoluteUri,"xxxx","zzzz");
+                    ImgCache.isCached(absoluteUri, function (path, isCached) {
                         deferred.resolve(isCached);
                     });
                 });

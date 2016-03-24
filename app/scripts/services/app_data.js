@@ -4,7 +4,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('AppData', function (debug, Resource, $filter, ImageCacheService) {
+    .factory('AppData', function (Resource, $filter, ImageCacheService) {
 
         /**
          * events before this time are counted to the previous day
@@ -21,7 +21,6 @@ angular.module('fsMobile.services')
             // TODO: check how to remove unused images
             ImageCacheService.isCached(url).then(function(isCached){
                 if(!isCached){
-                    debug.addData('img-cache:'+url,'was not cached yet');
                     ImageCacheService.cacheImage(url);
                 }
             });
