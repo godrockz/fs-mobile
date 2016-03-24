@@ -3,6 +3,10 @@
         <header-image path="::news.image" topic="news">
 
         </header-image>
+        <div class="news-read-container">
+                    <span class="{{news.read?'ion-email':'ion-email-unread'}}"
+                          ng-click="toggleRead(news)"></span>
+        </div>
         <div class="content-box">
             <div class="news-item-single row">
                 <div class="news-date col-25">
@@ -10,7 +14,9 @@
                         <span>{{::'app.days.abbr.' + (news.publishDate | date:'EEEE') | lowercase | translate}}<br>{{::news.publishDate|date:'H:mm'}}</span>
                     </div>
                 </div>
+
                 <div class="news-text-head col-75 col-center">
+
                     <p class="head">{{::news|trans:'title'}}</p>
                 </div>
             </div>

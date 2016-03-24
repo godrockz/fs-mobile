@@ -10,8 +10,7 @@
  */
 'use strict';
 angular.module('fsMobile.services')
-    .service('dataProvider', function ($q, storageManager, $localForage, DYNENV,
-                                       EndpointDetector) {
+    .service('dataProvider', function ($q, storageManager, $localForage, DYNENV, EndpointDetector) {
 
         var metaInfoKey = 'meta_info';
 
@@ -44,7 +43,7 @@ angular.module('fsMobile.services')
                     delete localObjects[newObject.id];
                 } else {
                     // as we add additional information to objects in our storage
-                    // we need to merge them. (additionals: readState for news, liked events, ...)
+                    // we need to merge them. (additionally: readState for news, liked events, ...)
                     var existingObject = localObjects[newObject.id] || {};
                     var mergedObject = angular.extend(existingObject,newObject);
                     localObjects[newObject.id] = mergedObject;

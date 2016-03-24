@@ -11,10 +11,16 @@
                 </div>
             </div>
             <div class="news-text-head">
-                <p class="head">{{::item|trans:'title'}} </p>
+                <p class="head {{item.read?'read':'unread'}}">
+                    <span class="{{item.read?'ion-email':'ion-email-unread'}}"></span>
+                    {{::item|trans:'title'}} </p>
                 <p class="text"  markdown-to-html="item|trans:'preview'"></p>
             </div>
+            <div class="state-container">
+
+            </div>
         </div>
+
         <div class="news-item news-more" ng-click="::showMoreItems()"
                                          ng-if="appData.fsNews.length > itemsToDisplay">
             {{::'app.news.loadmore'|translate}}

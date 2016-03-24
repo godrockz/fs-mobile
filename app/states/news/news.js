@@ -33,6 +33,8 @@ angular.module('fsMobile.states')
                     $scope.$on('newDataAvailable', provideNewDataToScope);
                     $scope.itemsToDisplay = $scope.initialLength;
                     provideNewDataToScope();
+
+
                 }
             }
         }
@@ -44,14 +46,36 @@ angular.module('fsMobile.states')
         views: {
             'menuContent': {
                 templateUrl: 'states/news/singlenews.html',
-                controller: function ($scope, $stateParams) {
+                controller: function ($scope, $stateParams, $timeout, dataProvider) {
 
                     if ($scope.appData.news) {
 
                         $scope.news = $scope.appData.news[$stateParams.idx];
 
-                        console.log('SINGLE NEWS', $scope.appData.news);
                     }
+
+                    function setRead(item, read){
+                        item.read = read;
+                        console.log('marked as ',item.read);
+                        dataProvider.updateSingleObject('news',item.id, item, 'read');
+                    }
+
+                    // mark a news as read
+                    var markedManually = false;
+                    $timeout(function(){
+                        if(markedManually){
+                            return;
+                        }
+                        setRead($scope.news, true);
+                    },3000);
+
+                    $scope.toggleRead = function (item) {
+                        markedManually = true; // disable timer
+                        setRead(item,!item.read);
+                    };
+
+
+
                 }
             }
         }
