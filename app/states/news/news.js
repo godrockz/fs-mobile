@@ -56,7 +56,6 @@ angular.module('fsMobile.states')
 
                     function setRead(item, read){
                         item.read = read;
-                        console.log('marked as ',item.read);
                         dataProvider.updateSingleObject('news',item.id, item, 'read');
                     }
 
@@ -73,8 +72,6 @@ angular.module('fsMobile.states')
                         markedManually = true; // disable timer
                         setRead(item,!item.read);
                     };
-
-
 
                 }
             }
