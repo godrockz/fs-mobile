@@ -54,7 +54,7 @@ angular.module('fsMobile.directives')
             };
         }])
 
-    .directive('headerImage', function ($log, DYNENV, ConnectionState, ImageCacheService, DefaultImages) {
+    .directive('headerImage', function ($log, debug, DYNENV, ConnectionState, ImageCacheService, DefaultImages) {
         return {
             scope: {
                 path: '=',
@@ -90,8 +90,9 @@ angular.module('fsMobile.directives')
                 }
 
                 ConnectionState.checkOnline().then(function (isOnline) {
+                    debug.addData('check online', 'Results', isOnline);
                     ImageCacheService.isCached(url).then(function (isCached) {
-
+                        debug.addData('is image cached ' +url, 'cached', isCached);
                         if(isOnline  && !isCached ){
                             ImageCacheService.cacheImage(url).then(function(){
                                 // caching was successful

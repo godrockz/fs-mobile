@@ -1,4 +1,8 @@
 <ion-view class="workshops" view-title="{{::'app.general.workshops'|translate}}" >
+    <ion-nav-buttons side="right">
+        <button class="button {{view.filterLiked? 'ion-ios-star':'ion-ios-star-outline'}}" ng-click="view.filterLiked=!view.filterLiked">
+        </button>
+    </ion-nav-buttons>
     <ion-content>
         <div class="tabmenu">
             <div class="tabmenu-left" ng-click="previousTab()"
@@ -18,7 +22,7 @@
             <ion-slide class="work-tab" ng-repeat="day in ::appData.workshops | orderObjectBy:'date':'date'">
                 <ion-scroll class="work-list">
                     <div class="work-box"
-                            ng-repeat="event in ::day.events | orderBy: 'start'"
+                            ng-repeat="event in day.events |propertyFilter:'liked':true:view.filterLiked | orderBy: 'start'"
                             ui-sref="app.workshop({idx:event.id})"
                             id="{{::event.id}}">
                         <div class="work-date">
@@ -28,6 +32,10 @@
                                         ng-if="::event.end"><br><small>-</small><br>{{::event.end|date:'H:mm'}}</span></span>
 
                             </div>
+                        </div>
+                        <div class="marker-container">
+                            <span class="ion-ios-star" ng-show="event.liked"></span>
+                            <span class="ion-ios-star-outline" ng-show="!event.liked"></span>
                         </div>
                         <div class="work-text-head">
                             <p class="head">{{::event|trans:'name'}}</p>

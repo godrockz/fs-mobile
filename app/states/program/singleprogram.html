@@ -1,6 +1,12 @@
 <ion-view view-title="{{::event|trans:'name'}}">
     <ion-content class="single-program">
         <header-image path="event.images"></header-image>
+
+        <div class="marker-container" ng-click="toggleLike();">
+            <span class="ion-ios-star" ng-show="event.liked"></span>
+            <span class="ion-ios-star-outline" ng-show="!event.liked"></span>
+        </div>
+
         <div class="content-box">
             <div class="program-headline">
                 <div class="program-date">

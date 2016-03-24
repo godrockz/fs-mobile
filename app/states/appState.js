@@ -53,7 +53,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             };
 
             $scope.refreshData = function () {
-                // alwyas discover endpoint on refresh
+                // always discover endpoint on refresh
                 var ifModifiedSince = null;
                 if ($scope.appData.$metaInfo) {
                     ifModifiedSince = $scope.appData.$metaInfo.fetched;

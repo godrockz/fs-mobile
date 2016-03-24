@@ -153,6 +153,15 @@
             padding: 0.5em 1.5em;
         }
     }
+
+    div.marker-container{
+        position: absolute;
+        right: 18px;
+        top: 13px;
+        color: yellow;
+        font-weight: 900;
+        font-size: 47px;
+    }
 }
 
 .program-date {
@@ -266,6 +275,16 @@ div.new-prog {
             div.header-image {
 
             }
+
+            div.marker-container{
+                position: absolute;
+                right: 18px;
+                top: 13px;
+                color: yellow;
+                font-weight: 900;
+                font-size: 27px;
+            }
+
             div.text-container {
 
                 position: absolute;
@@ -289,6 +308,7 @@ div.new-prog {
                     width: 100%;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    letter-spacing: 2px;
                 }
             }
             color : #BFAFFf;

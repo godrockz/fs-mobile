@@ -4,7 +4,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('AppData', function (Resource, $filter, ImageCacheService) {
+    .factory('AppData', function (debug, Resource, $filter, ImageCacheService) {
 
         /**
          * events before this time are counted to the previous day
@@ -16,6 +16,17 @@ angular.module('fsMobile.services')
          */
         var dayLimit='05:59:59';
 
+
+        function cacheIfNeeded(url){
+            // TODO: check how to remove unused images
+            ImageCacheService.isCached(url).then(function(isCached){
+                if(!isCached){
+                    debug.addData('img-cache:'+url,'was not cached yet');
+                    ImageCacheService.cacheImage(url);
+                }
+            });
+        }
+
         function AppData(data) {
             var self = this;
             this.$metaInfo = data.$metaInfo;
@@ -24,7 +35,7 @@ angular.module('fsMobile.services')
             }.bind(this));
 
             // filter unpublished locations
-            this.locations = this.locations || {};
+            this.locations = this.locations || new Resource({});
             this.locations = this.locations.filterNotPublished();
 
             this.fsNews = [];
@@ -34,9 +45,7 @@ angular.module('fsMobile.services')
                 this.fsNews = $filter('orderObjectBy')(
                     this.fsNews, 'publishDate', 'date', 'desc');
                 angular.forEach(this.fsNews,function(news){
-                    // TODO: check how to remove unused images
-                    ImageCacheService.cacheImage(news.image);
-
+                    cacheIfNeeded(news.image);
                 });
             }
 
@@ -59,8 +68,7 @@ angular.module('fsMobile.services')
                     });
 
                     angular.forEach(event.images,function(url){
-                        ImageCacheService.cacheImage(url);
-
+                        cacheIfNeeded(url);
                     });
                 });
 

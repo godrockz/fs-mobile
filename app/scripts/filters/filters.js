@@ -97,4 +97,16 @@ angular.module('fsMobile.filters', [])
             });
             return ret;
         };
-    }]);
+    }])
+    .filter('propertyFilter', function () {
+        function propertyFilter(list, propertyName, value, enabled) {
+            if (!enabled) {
+                return list;
+            }
+            return list.filter(function (elem) {
+                return elem[propertyName] === value;
+            });
+        }
+        propertyFilter.$stateful = true;
+        return propertyFilter;
+});

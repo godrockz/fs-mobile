@@ -113,6 +113,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 templateUrl: 'states/program/program_2.html',
                 controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $stateParams,
                                       $translate) {
+                    $scope.view = {};
 
                     var program_length = $scope.appData.program.length,
                         startSlideIndex = 0;
@@ -251,7 +252,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',
-                controller: function ($scope, $stateParams, $translate) {
+                controller: function ($scope, $stateParams, $translate, dataProvider) {
 
                     var lang = $translate.use();
 
@@ -265,7 +266,15 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         $scope.event.tags.push($scope.event.translations[lang].tags[j]);
                     }
                     console.log('$scope.event', $scope.event);
+
+
+                    $scope.toggleLike = function (){
+                        $scope.event.liked = !$scope.event.liked;
+                        dataProvider.updateSingleObject('events',$scope.event.id, $scope.event,'liked');
+                    };
                 }
+
+
             }
         }
     });
