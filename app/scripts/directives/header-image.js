@@ -12,9 +12,7 @@ angular.module('fsMobile.directives')
                 link: function(scope, el, attrs) {
 
                     var setImg = function(type, el, src) {
-
                         ImgCache.getCachedFileURL(src, function(src, dest) {
-                            console.log('set img tags src',src,dest);
                             if(type === 'bg') {
                                 el.css({'background-image': 'url(' + dest + ')' });
                             } else {
@@ -29,11 +27,8 @@ angular.module('fsMobile.directives')
                             return;
                         }
 
-                        console.log('load image');
                         ImgCache.$promise.then(function() {
-                            console.log('imageCache promise ');
                             ImgCache.isCached(src, function(path, success) {
-                                console.log('isCached',success,'on', path);
                                 if (success) {
                                     setImg(type, el, src);
                                 } else {
@@ -47,13 +42,10 @@ angular.module('fsMobile.directives')
                     };
 
                     scope.$watch('icSrc', function() {
-                        console.log('modified icSrc',scope.icSrc);
                         loadImg('src', el, scope.icSrc);
-
                     });
 
                     attrs.$observe('icBg', function(src) {
-
                         loadImg('bg', el, src);
 
                     });
@@ -62,31 +54,7 @@ angular.module('fsMobile.directives')
             };
         }])
 
-    .directive('headerImage', function ($log, DYNENV, ConnectionState, ImageCacheService) {
-        var images = {
-            concert: [
-                'images/random/sw-bands_01.png',
-                'images/random/sw-bands_02.png',
-                'images/random/sw-bands_03.png',
-                'images/random/sw-bands_04.png'
-            ],
-            electro: [
-                'images/random/electro_01.png',
-                'images/random/electro_02.png'
-            ],
-            workshop: [
-                'images/random/workshop_01.png',
-                'images/random/workshop_02.png'
-            ]
-        };
-
-        function getRandomOfflineImage(topic) {
-            if (topic === undefined || topic === null || topic.length === 0) {
-                topic = 'concert';
-            }
-            return images[topic][Math.floor(Math.random() * images[topic].length)];
-        }
-
+    .directive('headerImage', function ($log, DYNENV, ConnectionState, ImageCacheService, DefaultImages) {
         return {
             scope: {
                 path: '=',
@@ -110,13 +78,15 @@ angular.module('fsMobile.directives')
                 }
 
                 function useRandomImage(topic){
-                    scope.url = getRandomOfflineImage(topic);
+                    console.log('using random image',topic);
+                    scope.url = DefaultImages.getRandomImage(topic);
                     scope.useFallbackImage = true;
                 }
 
+                // always display random image
+                useRandomImage(scope.topic);
                 if (!url) {
-                    useRandomImage(scope.topic);
-                    return; // no url so we always use random image
+                    return; // no url so we use random image
                 }
 
                 ConnectionState.checkOnline().then(function (isOnline) {
@@ -126,17 +96,12 @@ angular.module('fsMobile.directives')
                             ImageCacheService.cacheImage(url).then(function(){
                                 // caching was successful
                                 useCachedImage(url);
-                            },function(){
-                                // cannot cache image maybe it does not exist any more
-                                useRandomImage(scope.topic);
-                            });
+                            });// in case of error -> random image is left
                         }else if(isCached ) {
                             // in any case if it was cached we use it
                             useCachedImage(url);
-                        }else{
-                            // and if it was not cached and not possible to add it to cache we use the random img
-                            useRandomImage(scope.topic);
                         }
+                        // any other case, random image is left in dispaly
 
                     });
                 });

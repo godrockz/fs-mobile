@@ -8,30 +8,7 @@
     angular
 */
 'use strict';
-angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV, ConnectionState) {
-    var images = {
-        concert: [
-            'images/random/bands_01.png',
-            'images/random/bands_02.png',
-            'images/random/bands_03.png',
-            'images/random/bands_04.png'
-        ],
-        electro: [
-            'images/random/electro_01.png',
-            'images/random/electro_02.png'
-        ],
-        workshop: [
-            'images/random/workshop_01.png',
-            'images/random/workshop_02.png'
-        ]
-    };
-
-    function getRandomOfflineImage(topic) {
-        if (topic === undefined || topic === null || topic.length === 0) {
-            topic = 'concert';
-        }
-        return images[topic][Math.floor(Math.random() * images[topic].length)];
-    }
+angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV, ConnectionState, DefaultImages) {
 
     function setImage(elem, attrs, url) {
         if (elem[0].tagName === 'img') {
@@ -52,7 +29,7 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
                 $log.error('angular expression expected within fs-src attribute');
             }
             if (!onlineSrc) {
-                setImage(elem, attrs, getRandomOfflineImage(defaults));
+                setImage(elem, attrs, DefaultImages.getRandomImage(defaults));
                 return;
             }
             ConnectionState.checkOnline().then(function (isOnline) {
@@ -60,10 +37,10 @@ angular.module('fsMobile.directives').directive('fsSrc', function ($log, DYNENV,
                     var absoluteUri = (DYNENV.apiEndpoint||'') + onlineSrc;
                     setImage(elem, attrs, absoluteUri);
                 } else {
-                    setImage(elem, attrs, getRandomOfflineImage(defaults));
+                    setImage(elem, attrs, DefaultImages.getRandomImage(defaults));
                 }
             }, function () {
-                setImage(elem, attrs, getRandomOfflineImage(defaults));
+                setImage(elem, attrs, DefaultImages.getRandomImage(defaults));
             });
         }
     };

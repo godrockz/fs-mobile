@@ -58,7 +58,6 @@ angular.module('fsMobile.services')
                         }
                     });
 
-
                     angular.forEach(event.images,function(url){
                         ImageCacheService.cacheImage(url);
 

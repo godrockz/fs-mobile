@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" id="de.freakstock.app" version="0.0.9"
-        xmlns="http://www.w3.org/ns/widgets">
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="de.freakstock.app" version="0.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Freakstock</name>
     <description>
         Festival App and Program Guide for Freakstock Festival
@@ -9,74 +8,70 @@
     <author email="info@freakstock.de" href="http://freakstock.de">
         Freakstock App Team
     </author>
-    <content src="index.html"/>
-    <access origin="*"/>
-    <access origin="cdvfile://*"/>
-    <allow-navigation href="http://*/*"/>
-    <allow-navigation href="https://*/*"/>
-    <allow-navigation href="data:*"/>
-    <allow-navigation href="filesystem:*"/>
-    <allow-intent href="cdvfile://*"/>
-
-
+    <content src="index.html" />
+    <access origin="*" />
+    <access origin="cdvfile://*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+    <allow-navigation href="data:*" />
+    <allow-navigation href="filesystem:*" />
+    <allow-intent href="cdvfile://*" />
     <platform name="ios">
-
-        <icon src="resources/ios/icon/Icon.png" width="57" height="57"/>
-        <icon src="resources/ios/icon/Icon@2x.png" width="114" height="114"/>
-        <icon src="resources/ios/icon/Icon-40.png" width="40" height="40"/>
-        <icon src="resources/ios/icon/Icon-40@2x.png" width="80" height="80"/>
-        <icon src="resources/ios/icon/Icon-50.png" width="50" height="50"/>
-        <icon src="resources/ios/icon/Icon-50@2x.png" width="100" height="100"/>
-        <icon src="resources/ios/icon/Icon-60.png" width="60" height="60"/>
-        <icon src="resources/ios/icon/Icon-60@2x.png" width="120" height="120"/>
-        <icon src="resources/ios/icon/Icon-60@3x.png" width="180" height="180"/>
-        <icon src="resources/ios/icon/Icon-72.png" width="72" height="72"/>
-        <icon src="resources/ios/icon/Icon-72@2x.png" width="144" height="144"/>
-        <icon src="resources/ios/icon/Icon-76.png" width="76" height="76"/>
-        <icon src="resources/ios/icon/Icon-76@2x.png" width="152" height="152"/>
-        <icon src="resources/ios/icon/Icon-small.png" width="29" height="29"/>
-        <icon src="resources/ios/icon/Icon-small@2x.png" width="58" height="58"/>
-        <icon src="resources/ios/icon/Icon-small@3x.png" width="87" height="87"/>
+        <icon height="57" src="resources/ios/icon/Icon.png" width="57" />
+        <icon height="114" src="resources/ios/icon/Icon@2x.png" width="114" />
+        <icon height="40" src="resources/ios/icon/Icon-40.png" width="40" />
+        <icon height="80" src="resources/ios/icon/Icon-40@2x.png" width="80" />
+        <icon height="50" src="resources/ios/icon/Icon-50.png" width="50" />
+        <icon height="100" src="resources/ios/icon/Icon-50@2x.png" width="100" />
+        <icon height="60" src="resources/ios/icon/Icon-60.png" width="60" />
+        <icon height="120" src="resources/ios/icon/Icon-60@2x.png" width="120" />
+        <icon height="180" src="resources/ios/icon/Icon-60@3x.png" width="180" />
+        <icon height="72" src="resources/ios/icon/Icon-72.png" width="72" />
+        <icon height="144" src="resources/ios/icon/Icon-72@2x.png" width="144" />
+        <icon height="76" src="resources/ios/icon/Icon-76.png" width="76" />
+        <icon height="152" src="resources/ios/icon/Icon-76@2x.png" width="152" />
+        <icon height="29" src="resources/ios/icon/Icon-small.png" width="29" />
+        <icon height="58" src="resources/ios/icon/Icon-small@2x.png" width="58" />
+        <icon height="87" src="resources/ios/icon/Icon-small@3x.png" width="87" />
     </platform>
     <platform name="android">
-        <icon src="resources/android/drawable-ldpi/icon.png" density="ldpi"/>
-        <icon src="resources/android/drawable-mdpi/icon.png" density="mdpi"/>
-        <icon src="resources/android/drawable-hdpi/icon.png" density="hdpi"/>
-        <icon src="resources/android/drawable-xhdpi/icon.png" density="xhdpi"/>
-        <icon src="resources/android/drawable-xxhdpi/icon.png" density="xxhdpi"/>
-        <icon src="resources/android/drawable-xxxhdpi/icon.png" density="xxxhdpi"/>
-        <splash src="resources/android/drawable-land-hdpi/screen.png" density="land-hdpi"/>
-        <splash src="resources/android/drawable-land-ldpi/screen.png" density="land-ldpi"/>
-        <splash src="resources/android/drawable-land-mdpi/screen.png" density="land-mdpi"/>
-        <splash src="resources/android/drawable-land-xhdpi/screen.png" density="land-xhdpi"/>
-        <splash src="resources/android/drawable-port-hdpi/screen.png" density="port-hdpi"/>
-        <splash src="resources/android/drawable-port-ldpi/screen.png" density="port-ldpi"/>
-        <splash src="resources/android/drawable-port-mdpi/screen.png" density="port-mdpi"/>
-        <splash src="resources/android/drawable-port-xhdpi/screen.png" density="port-xhdpi"/>
-
+        <icon density="ldpi" src="resources/android/drawable-ldpi/icon.png" />
+        <icon density="mdpi" src="resources/android/drawable-mdpi/icon.png" />
+        <icon density="hdpi" src="resources/android/drawable-hdpi/icon.png" />
+        <icon density="xhdpi" src="resources/android/drawable-xhdpi/icon.png" />
+        <icon density="xxhdpi" src="resources/android/drawable-xxhdpi/icon.png" />
+        <icon density="xxxhdpi" src="resources/android/drawable-xxxhdpi/icon.png" />
+        <splash density="land-hdpi" src="resources/android/drawable-land-hdpi/screen.png" />
+        <splash density="land-ldpi" src="resources/android/drawable-land-ldpi/screen.png" />
+        <splash density="land-mdpi" src="resources/android/drawable-land-mdpi/screen.png" />
+        <splash density="land-xhdpi" src="resources/android/drawable-land-xhdpi/screen.png" />
+        <splash density="port-hdpi" src="resources/android/drawable-port-hdpi/screen.png" />
+        <splash density="port-ldpi" src="resources/android/drawable-port-ldpi/screen.png" />
+        <splash density="port-mdpi" src="resources/android/drawable-port-mdpi/screen.png" />
+        <splash density="port-xhdpi" src="resources/android/drawable-port-xhdpi/screen.png" />
     </platform>
-
-    <preference name="BackupWebStorage" value="none"/>
-    <preference name="SplashScreen" value="screen"/>
-    <preference name="AutoHideSplashScreen" value="false"/>
-    <preference name="SplashScreenDelay" value="10000"/>
-    <preference name="iosPersistentFileLocation" value="Library"/>
-    <preference name="AndroidPersistentFileLocation" value="Compatibility"/>
-
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <feature name="Device">
-        <param name="ios-package" value="CDVDevice"/>
-        <param name="android-package" value="org.apache.cordova.device.Device"/>
+        <param name="ios-package" value="CDVDevice" />
+        <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
     <feature name="File">
-        <param name="ios-package" value="CDVFile"/>
-        <param name="android-package" value="org.apache.cordova.file.FileUtils"/>
+        <param name="ios-package" value="CDVFile" />
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
     </feature>
     <feature name="FileTransfer">
-        <param name="ios-package" value="CDVFileTransfer"/>
-        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer"/>
+        <param name="ios-package" value="CDVFileTransfer" />
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
     </feature>
-
-
-    <plugin name="File" value="org.apache.cordova.FileUtils"/>
-    <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer"/>
+    <plugin name="File" value="org.apache.cordova.FileUtils" />
+    <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
+    <preference name="xwalkVersion" value="17+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
 </widget>
