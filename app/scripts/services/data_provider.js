@@ -15,29 +15,50 @@ angular.module('fsMobile.services')
 
         var metaInfoKey = 'meta_info';
 
-        // TODO : we must store data in local storage without using full api url
-        //        instead we should store it under data only
+        /**
+         * gets the current api endpoint
+         * @returns {string}
+         */
         function endPoint(){
             return (DYNENV.apiEndpoint||'') + '/data';
         }
 
-        function updateResourceData (localObjects, objects) {
+        /**
+         * merge any object of the given newObjects into the list of localObjects.
+         * This includes:
+         *  - removing deleted and archived objects
+         *  - merge new data/updates with existing object instances
+         * @param localObjects - currently stored objects
+         * @param newObjects - new objects received
+         * @returns {*|{}}
+         */
+        function updateResourceData (localObjects, newObjects) {
 
             localObjects = localObjects || {};
-            angular.forEach(objects, function (object) {
-                console.log('updateing data ',object);
-                if (object.deleted ) {
-                    delete localObjects[object.id];
-                } else if(object.archived){
+            angular.forEach(newObjects, function (newObject) {
+                console.log('updateing data ',newObject);
+                if (newObject.deleted ) {
+                    delete localObjects[newObject.id];
+                } else if(newObject.archived){
                     // handle archived objects same as deleted
-                    delete localObjects[object.id];
+                    delete localObjects[newObject.id];
                 } else {
-                    localObjects[object.id] = object;
+                    // as we add additional information to objects in our storage
+                    // we need to merge them. (additionals: readState for news, liked events, ...)
+                    var existingObject = localObjects[newObject.id] || {};
+                    var mergedObject = angular.extend(existingObject,newObject);
+                    localObjects[newObject.id] = mergedObject;
                 }
             });
             return localObjects;
         }
 
+        /**
+         * mergeS fresh data from response into old data given as data
+         * @param response new data
+         * @param data current data
+         * @returns {*}
+         */
         function updateLocalForageData (response, data) {
             data = data || {};
             angular.forEach(response.data, function (objects, resourceName) {
