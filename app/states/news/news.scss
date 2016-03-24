@@ -61,7 +61,7 @@
     float: left;
     margin-right: 0.5em;
     .box {
-        border-radius: 50%;
+        border-radius: 50% 0% 50% 50%;
         display: inline-block;
         width: 4em;
         height: 4em;
@@ -76,6 +76,9 @@
             font-size: 0.8em;
             color: white;
         }
+    }
+    .box.read{
+        border-radius: 50%;
     }
 
 }

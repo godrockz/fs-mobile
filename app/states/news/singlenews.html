@@ -10,7 +10,7 @@
         <div class="content-box">
             <div class="news-item-single row">
                 <div class="news-date col-25">
-                    <div class="box">
+                    <div class="box {{news.read?'read':'unread'}}" ng-click="toggleRead(news)">
                         <span>{{::'app.days.abbr.' + (news.publishDate | date:'EEEE') | lowercase | translate}}<br>{{::news.publishDate|date:'H:mm'}}</span>
                     </div>
                 </div>

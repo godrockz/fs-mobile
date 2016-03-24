@@ -4,7 +4,7 @@
         <div ng-repeat="item in newsToShow"
              class="news-item" ui-sref="app.singlenews({idx:item.id})">
             <div class="news-date">
-                <div class="box">
+                <div class="box {{item.read?'read':'unread'}}">
                     <span>{{::'app.days.abbr.' + (item.publishDate | date:'EEEE') | lowercase | translate}}<br>
                         {{::item.publishDate|date:'H:mm'}}
                     </span>
@@ -14,7 +14,7 @@
                 <p class="head {{item.read?'read':'unread'}}">
                     <span class="{{item.read?'ion-email':'ion-email-unread'}}"></span>
                     {{::item|trans:'title'}} </p>
-                <p class="text"  markdown-to-html="item|trans:'preview'"></p>
+                <p class="text" markdown-to-html="item|trans:'preview'"></p>
             </div>
             <div class="state-container">
 
@@ -22,7 +22,7 @@
         </div>
 
         <div class="news-item news-more" ng-click="::showMoreItems()"
-                                         ng-if="appData.fsNews.length > itemsToDisplay">
+             ng-if="appData.fsNews.length > itemsToDisplay">
             {{::'app.news.loadmore'|translate}}
         </div>
         <br>
