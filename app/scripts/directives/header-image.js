@@ -65,10 +65,10 @@ angular.module('fsMobile.directives')
     .directive('headerImage', function ($log, DYNENV, ConnectionState, ImageCacheService) {
         var images = {
             concert: [
-                'images/random/bands_01.png',
-                'images/random/bands_02.png',
-                'images/random/bands_03.png',
-                'images/random/bands_04.png'
+                'images/random/sw-bands_01.png',
+                'images/random/sw-bands_02.png',
+                'images/random/sw-bands_03.png',
+                'images/random/sw-bands_04.png'
             ],
             electro: [
                 'images/random/electro_01.png',
@@ -104,27 +104,40 @@ angular.module('fsMobile.directives')
                     url = scope.path[0];
                 }
 
+                function useCachedImage(url){
+                    scope.url =  (DYNENV.apiEndpoint || '') + url;
+                    scope.useFallbackImage = false;
+                }
+
+                function useRandomImage(topic){
+                    scope.url = getRandomOfflineImage(topic);
+                    scope.useFallbackImage = true;
+                }
+
                 if (!url) {
-                    console.log('url',url);
-                    scope.url = getRandomOfflineImage(scope.topic); // use a random image!
-                    scope.onlineImage = false;
-                    console.log('default image uri', scope.url);
+                    useRandomImage(scope.topic);
+                    return; // no url so we always use random image
                 }
 
                 ConnectionState.checkOnline().then(function (isOnline) {
                     ImageCacheService.isCached(url).then(function (isCached) {
-                        console.log('is cached ', isCached, isOnline);
-                        if (!isCached && !isOnline) {
-                            // we are not online and have no cached version
-                            scope.url = getRandomOfflineImage(scope.topic);
-                            scope.useFallbackImage = true;
-                            console.log('use offline image uri', scope.url);
-                        } else {
-                            // we are online or have a cached version so we use it
-                            scope.url =  (DYNENV.apiEndpoint || '') + url;
-                            scope.useFallbackImage = false;
-                            console.log('use cached / online image url ',scope.url);
+
+                        if(isOnline  && !isCached ){
+                            ImageCacheService.cacheImage(url).then(function(){
+                                // caching was successful
+                                useCachedImage(url);
+                            },function(){
+                                // cannot cache image maybe it does not exist any more
+                                useRandomImage(scope.topic);
+                            });
+                        }else if(isCached ) {
+                            // in any case if it was cached we use it
+                            useCachedImage(url);
+                        }else{
+                            // and if it was not cached and not possible to add it to cache we use the random img
+                            useRandomImage(scope.topic);
                         }
+
                     });
                 });
             }

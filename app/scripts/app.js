@@ -76,14 +76,17 @@ angular.module('fsMobile.services', []);
 
     }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
 
-    .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q, $cordovaDevice) {
+    .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q) {
 
+        function isMobile(){
+            return navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i) &&
+                !navigator.platform.match(/(Linux x86_64)/i); // required as chrome emulates agent string if device testing mode is enabled
 
+        }
 
-
+        // initialize different ready-states we depend on.
         var platformReady = $q.defer();
         var deviceReady = $q.defer();
-
 
         var dependencies = [];
         dependencies.push(platformReady.promise);
@@ -99,20 +102,21 @@ angular.module('fsMobile.services', []);
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
             }
-            console.log('runing ImageCacheHelperInit.');
             platformReady.resolve('done-plattform-ready');
         });
 
-        document.addEventListener('deviceready', onDeviceReady, false);
 
         function onDeviceReady() {
-            console.log(device.cordova);
+            deviceReady.resolve();
+        }
+        if(isMobile()) {
+            document.addEventListener('deviceready', onDeviceReady, false);
+        }else{
             deviceReady.resolve();
         }
 
 
         $q.all(dependencies).then(function(){
-            $rootScope.$apply( ImageCacheService.init);
-            //ImageCacheService.init();
+            ImageCacheService.init();
         });
     });

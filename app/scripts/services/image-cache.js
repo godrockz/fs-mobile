@@ -14,13 +14,12 @@ angular.module('fsMobile')
         var initPromise = deferred.promise;
 
         function init(){
-            console.log('init imagecache');
-            ImgCache.init(function() {
-                ImgCache.$deferred.resolve();// resolve the angular-image-cache-wrapper promises
+            ImgCache.$init();
+
+            // wait for the angular directive to be ready.
+            ImgCache.$deferred.promise.then(function () {
                 deferred.resolve();
-            }, function() {
-                console.log('init - failed');
-                ImgCache.$deferred.reject();// reject the angular-image-cache-wrapper promises
+            }, function () {
                 deferred.reject();
             });
 
@@ -29,21 +28,27 @@ angular.module('fsMobile')
         /**
          * tries to cache the given url
          * @param relativeUrl
+         * @return promise
          */
         function cacheImg(relativeUrl) {
+            var deferred = $q.defer();
             if (!relativeUrl) {
-                return;
+                deferred.reject();
+                return deferred.promise;
             }
             ConnectionState.checkOnline().then(function (isOnline) {
                 if (isOnline) {
                     var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
                     ImgCache.isCached(absoluteUri, function (url, cached) {
                         if (!cached) {
-                            ImgCache.cacheFile(absoluteUri);
+                            ImgCache.cacheFile(absoluteUri, deferred.resolve, deferred.reject);
+                        }else{
+                            deferred.resolve();
                         }
                     });
                 }
             });
+            return deferred.promise;
         }
 
         var svc = {
@@ -51,11 +56,12 @@ angular.module('fsMobile')
             /**
              * the url. to cache the image
              * @param relativeUrl
+             * @return promise;
              */
             cacheImage: function (relativeUrl) {
-                initPromise.then(function () {
+                return initPromise.then(function () {
                     console.log('cacheImage', relativeUrl);
-                    cacheImg(relativeUrl);
+                    return cacheImg(relativeUrl);
                 });
             },
 
@@ -72,9 +78,7 @@ angular.module('fsMobile')
                         return;
                     }
                     ImgCache.isCached(relativeUrl, function (path, isCached) {
-                        console.log('isCached result ',path, isCached);
                         deferred.resolve(isCached);
-
                     });
                 });
                 return deferred.promise;

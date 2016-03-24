@@ -34,6 +34,7 @@ angular.module('fsMobile.services')
                 this.fsNews = $filter('orderObjectBy')(
                     this.fsNews, 'publishDate', 'date', 'desc');
                 angular.forEach(this.fsNews,function(news){
+                    // TODO: check how to remove unused images
                     ImageCacheService.cacheImage(news.image);
 
                 });

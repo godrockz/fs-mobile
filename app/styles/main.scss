@@ -212,3 +212,9 @@ div.header-image {
         margin: auto;
     }
 }
+.click-block {
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.click-block-hide{
+    -webkit-transform: translate3d(-9999px, 0, 0);
+}
