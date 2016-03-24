@@ -24,6 +24,10 @@
                 <span class="tag" ng-if="::event.end">{{::'app.time.to'|translate}}:</span> {{::event.end?(event.end|date:'H:mm'):''}}</p>
             <p class="work-info" ng-if="::event.author"><span class="tag">{{::'app.workshop.from'|translate}}:</span> {{::event.author}}</p>
             <p class="work-text">{{::event|trans:'description'}}</p>
+            <p><a href="{{event.artistWebsite}}" ng-if="event.artistWebsite" class="work-text">
+                <span class="ion-link"></span>
+                {{::'app.event.artist.website.label'|translate}}
+            </a></p>
         </div>
 
     </ion-content>
