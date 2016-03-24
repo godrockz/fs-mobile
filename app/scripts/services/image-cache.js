@@ -13,7 +13,19 @@ angular.module('fsMobile')
         var deferred = $q.defer();
         var initPromise = deferred.promise;
 
-        function init(){
+        function init() {
+
+            ImgCache.options = {
+                debug: false,                   /* call the log method ? */
+                localCacheFolder: 'imgcache',   /* name of the cache folder */
+                useDataURI: false,              /* use src="data:.."? otherwise will use src="filesystem:.." */
+                chromeQuota: 10 * 1024 * 1024,  /* allocated cache space : here 10MB */
+                usePersistentCache: true,       /* false = use temporary cache storage */
+                cacheClearSize: 0,              /* size in MB that triggers cache clear on init, 0 to disable */
+                headers: {},                    /* HTTP headers for the download requests -- e.g: headers: { 'Accept': 'application/jpg' } */
+                skipURIencoding: false          /* enable if URIs are already encoded (skips call to sanitizeURI) */
+            };
+
             ImgCache.$init();
 
             // wait for the angular directive to be ready.
@@ -42,7 +54,7 @@ angular.module('fsMobile')
                     ImgCache.isCached(absoluteUri, function (url, cached) {
                         if (!cached) {
                             ImgCache.cacheFile(absoluteUri, deferred.resolve, deferred.reject);
-                        }else{
+                        } else {
                             deferred.resolve();
                         }
                     });
@@ -70,10 +82,10 @@ angular.module('fsMobile')
              * @param relativeUrl
              * @returns {*} promise
              */
-            isCached: function (relativeUrl){
+            isCached: function (relativeUrl) {
                 var deferred = $q.defer();
-                initPromise.then(function(){
-                    if(relativeUrl === null || relativeUrl === undefined ){
+                initPromise.then(function () {
+                    if (relativeUrl === null || relativeUrl === undefined) {
                         deferred.resolve(relativeUrl, false);
                         return;
                     }

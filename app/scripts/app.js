@@ -36,8 +36,8 @@ angular.module('fsMobile.services', []);
         ImgCacheProvider.setOption('debug', true);
         ImgCacheProvider.setOption('usePersistentCache', true);
         var quota =  73 * 1024 * 1024;
-        console.log('set quota',quota);
         ImgCacheProvider.setOption('chromeQuota',quota);
+
         ImgCacheProvider.manualInit = true;
 
         // markdown
