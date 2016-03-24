@@ -61,7 +61,7 @@ angular.module('fsMobile.states')
 
                     // mark a news as read
                     var markedManually = false;
-                    $timeout(function(){
+                    var markAsReadTimeout = $timeout(function(){
                         if(markedManually){
                             return;
                         }
@@ -72,6 +72,10 @@ angular.module('fsMobile.states')
                         markedManually = true; // disable timer
                         setRead(item,!item.read);
                     };
+
+                    $scope.$on('$ionicView.leave',function(){
+                        $timeout.cancel(markAsReadTimeout);
+                    });
 
                 }
             }
