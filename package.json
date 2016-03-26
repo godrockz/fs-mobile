@@ -62,7 +62,8 @@
     "cordova-plugin-device",
     "cordova-plugin-crosswalk-webview",
     "cordova-plugin-file",
-    "cordova-plugin-file-transfer"
+    "cordova-plugin-file-transfer",
+    "com.ionic.keyboard"
   ],
   "cordovaPlatforms": [
     "android"

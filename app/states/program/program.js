@@ -7,7 +7,7 @@
 
 'use strict';
 angular.module('fsMobile.states').config(function ($stateProvider) {
-
+/*
     function hsb2rgb(hue, saturation, value) {
         hue = (parseInt(hue, 10) || 0) % 360;
 
@@ -53,16 +53,17 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         return '#' + pad(rgb[0].toString(16),2,0) + pad(rgb[1].toString(16),2,0) + pad(rgb[2].toString(16),2,0);
 
     }
+    */
 
     function pad(n, width, z) {
         z = z || '0';
         n = n + '';
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
-
+/*
     function rgb2hsv (hex) {
         var num = parseInt(hex.slice(1),16),
-        /* jshint -W016 */
+        /* jshint -W016 * i/
             R = (num >> 16),
             G = (num >> 8 & 0x00FF),
             B = (num & 0x0000FF);
@@ -104,6 +105,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             v: Math.round(v * 100)
         };
     }
+    */
 
 
     $stateProvider.state('app.program', {
@@ -190,16 +192,16 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     // define a color for each location
 
-                    var startColor = '#BAFFD5',
+                    /*var startColor = '#BAFFD5',
                         startColorHsv = rgb2hsv(startColor),
                         stepSize = 220/$scope.appData.program.length ;
                     console.log('$scope data',$scope.appData.program);
 
                     console.log('stepSize',stepSize);
                     console.log('startColorHsv',startColorHsv);
-                    console.log('step-size',stepSize);
+                    console.log('step-size',stepSize);*/
                     angular.forEach($scope.appData.program,function(location){
-                        console.log('start color',startColorHsv.h + stepSize);
+                        /*console.log('start color',startColorHsv.h + stepSize);
                         startColorHsv.h =  (startColorHsv.h + stepSize) % 255;
 
 
@@ -207,9 +209,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         location.color = hsb2rgb(startColorHsv.h,startColorHsv.s, startColorHsv.v);
                         console.log('results in',location.color);
 
-
+                        */
                         // precalculate colors array
-                        var prev = location.color;
+                        var prev = location.color||'#ffffff';
                         location.colors=[];
                         for (var i = 0 ; i< 24 ; i++){
                             location.colors[((i+6)%24)] = prev = $scope.shade(prev,-1*90/24);
