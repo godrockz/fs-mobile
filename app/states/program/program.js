@@ -85,7 +85,12 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         // precalculate colors array
                         var prev = Colors.rgb2hsv(location.color|| '#ffffff');
                         location.colors=[];
+                        //console.log('=========');
                         for (var i = 0 ; i< 24 ;i++){
+                            //
+                            // var value = 20 *  Math.log(i/10)+ 80;
+                            // prev.s = value;
+                            // console.log('value',value);
 
                             prev.s = (i) * ((100 - startValue) / 24) + startValue;
                             location.colors[((i+6)%24)] = Colors.hsb2rgb(prev.h,prev.s,prev.v);
