@@ -78,7 +78,6 @@ angular.module('fsMobile.directives')
                 }
 
                 function useRandomImage(topic){
-                    console.log('using random image',topic);
                     scope.url = DefaultImages.getRandomImage(topic);
                     scope.useFallbackImage = true;
                 }
@@ -90,9 +89,7 @@ angular.module('fsMobile.directives')
                 }
 
                 ConnectionState.checkOnline().then(function (isOnline) {
-                    debug.addData('check online', 'Results', isOnline);
                     ImageCacheService.isCached(url).then(function (isCached) {
-                        debug.addData('is image cached ' +url, 'cached', isCached);
                         if(isOnline  && !isCached ){
                             ImageCacheService.cacheImage(url).then(function(){
                                 // caching was successful

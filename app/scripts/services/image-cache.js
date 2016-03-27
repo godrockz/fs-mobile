@@ -93,7 +93,6 @@ angular.module('fsMobile')
                         return;
                     }
                     var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
-                    debug.addData('IS CACHED '+absoluteUri,"xxxx","zzzz");
                     ImgCache.isCached(absoluteUri, function (path, isCached) {
                         deferred.resolve(isCached);
                     });
