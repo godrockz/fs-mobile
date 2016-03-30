@@ -32,6 +32,37 @@ angular.module('fsMobile.services', []);
 ])
     .config(function ($urlRouterProvider, $translateProvider, $showdownProvider, ImgCacheProvider) {
 
+        // PREPARE IMG CACHE
+        // as we deal with 2 hostnames for inner and outer network we provide a custom hash function
+        var origHash = ImgCache.overridables.hash;
+        var parser = document.createElement('a');
+
+
+        ImgCache.overridables.hash = function(a){
+
+            // so strip protocol host and port
+            parser.href=a;
+            /*
+             //parser.href = "http://example.com:3000/pathname/?search=test#hash";
+             parser.protocol; // => "http:"
+             parser.hostname; // => "example.com"
+             parser.port;     // => "3000"
+             parser.pathname; // => "/pathname/"
+             parser.search;   // => "?search=test"
+             parser.hash;     // => "#hash"
+             parser.host;     // => "example.com:3000"
+             */
+            var path = [parser.pathname,parser.search,parser.hash].join();
+
+
+
+
+            var hashResult = origHash(path);
+            console.log('hashing:', path, ' for a filename ??', hashResult);
+            return hashResult;
+        };
+
+        // PREPARE ANGULAR IMAGE CACHE WRAPPER
         // image cache
         ImgCacheProvider.setOption('debug', true);
         ImgCacheProvider.setOption('usePersistentCache', true);
