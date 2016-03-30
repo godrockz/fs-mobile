@@ -25,7 +25,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.view = {
                         availableLanguages: AVAILABLE_LANGUAGES,
                         selectedLanguage: $translate.use(),
-                        version : ENV.version||'?'
+                        jobName : ENV.jobName ||'?',
+                        version : ENV.version ||'?'
                     };
                     $scope.$watch('view.selectedLanguage', function () {
                         if ($scope.view.selectedLanguage !== $translate.use()) {

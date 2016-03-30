@@ -67,7 +67,8 @@ module.exports = function (grunt) {
                         remoteApiEndpoint: 'http://spektacholeriker.de:8080',
                         localApiEndpoint: 'http://fs.spektacholeriker.de:8080',
                         offlineJsonDataDirectory: 'scripts/data',
-                        version:  process.env.JOB_NAME + '-' + process.env.BUILD_NUMBER
+                        jobName: process.env.JOB_NAME,
+                        version: process.env.BUILD_NUMBER
                     }
                 }
             },
@@ -78,7 +79,8 @@ module.exports = function (grunt) {
                         remoteApiEndpoint: 'http://spektacholeriker.de:8080',
                         localApiEndpoint: 'http://fs.spektacholeriker.de:8080',
                         offlineJsonDataDirectory: 'scripts/data',
-                        version:  process.env.JOB_NAME + '-' + process.env.BUILD_NUMBER
+                        jobName: process.env.JOB_NAME,
+                        version: process.env.BUILD_NUMBER
                     }
                 }
             }
