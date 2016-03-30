@@ -1,14 +1,19 @@
 <ion-view view-title="{{'app.general.settings'|translate}}" class="settings">
     <ion-content>
         <div class="list">
-            <label class="item item-input item-select" >
+            <label class="item item-input item-select">
                 <div class="input-label">
-                        {{'app.settings.language.label'|translate}}
+                    {{'app.settings.language.label'|translate}}
                 </div>
                 <select ng-model="view.selectedLanguage"
                         ng-options="('language.'+lang | translate) for lang in view.availableLanguages">
                 </select>
             </label>
+
+            <div class="item">
+                <p class="pull-left">{{'app.settings.version.divider'|translate}}</p>
+                <p class="pull-right">{{view.version}}</p>
+            </div>
 
             <div class="item item-divider">
                 <span class="item-divider-text" ng-click="onDebug()">{{'app.settings.data.divider'|translate}}</span>
@@ -17,20 +22,26 @@
                 </span>
             </div>
 
-            <div class="item" >
-                <button class="button button-full button-positive" ng-click="refresh()">{{'app.settings.data.update'|translate}}</button>
+            <div class="item">
+                <button class="button button-full button-positive" ng-click="refresh()">
+                    {{'app.settings.data.update'|translate}}
+                </button>
             </div>
             <div class="item" ng-if="debug.cnt >10">
-                <button class="button button-full button-positive" ng-click="deleteData()">{{'app.settings.data.delete'|translate}}</button>
+                <button class="button button-full button-positive" ng-click="deleteData()">
+                    {{'app.settings.data.delete'|translate}}
+                </button>
             </div>
         </div>
 
         <div ng-if="debug.cnt >10">
-        <h1 >Debug:</h1>
-        <a style="float:right;" class="button button-calm"  ng-click="stopdebug();debug.cnt=0">off</a>
-        <pre style="font-size:14px">
+            <h1>Debug:</h1>
+            <a style="float:right;" class="button button-calm" ng-click="stopdebug();debug.cnt=0">off</a>
+            <pre style="font-size:14px">
 {{debugInfo|jsonice}}
-        </pre>
+            </pre>
         </div>
+
+
     </ion-content>
 </ion-view>

@@ -15,6 +15,7 @@
     "app.settings.fetchdate.label":"last update:",
     "app.settings.data.update":"update content",
     "app.settings.data.delete":"reset content",
+    "app.settings.version.divider":"Version",
 
     "app.days.monday":"Monday",
     "app.days.tuesday":"Tuesday",

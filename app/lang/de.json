@@ -15,6 +15,7 @@
     "app.settings.fetchdate.label":"Stand",
     "app.settings.data.update":"Daten update",
     "app.settings.data.delete":"Daten zurücksetzen",
+    "app.settings.version.divider":"Version",
 
     "app.days.monday":"Montag",
     "app.days.tuesday":"Dienstag",
