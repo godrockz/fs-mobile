@@ -34,7 +34,7 @@ angular.module('fsMobile.services', []);
 
         // PREPARE IMG CACHE
         // as we deal with 2 hostnames for inner and outer network we provide a custom hash function
-        var origHash = ImgCache.overridables.hash;
+        var origHashFn = ImgCache.overridables.hash;
         var parser = document.createElement('a');
 
 
@@ -54,11 +54,7 @@ angular.module('fsMobile.services', []);
              */
             var path = [parser.pathname,parser.search,parser.hash].join();
 
-
-
-
-            var hashResult = origHash(path);
-            console.log('hashing:', path, ' for a filename ??', hashResult);
+            var hashResult = origHashFn(path);
             return hashResult;
         };
 
