@@ -30,7 +30,7 @@ angular.module('fsMobile.services', []);
     'ng-showdown',
     'ImgCache'
 ])
-    .config(function ($urlRouterProvider, $translateProvider, $showdownProvider, ImgCacheProvider) {
+    .config(function ($translateProvider, $urlRouterProvider, $showdownProvider, ImgCacheProvider) {
 
         //######### PREPARE ImgCache
         // as we deal with 2 hostnames for inner and outer network we provide a custom hash function
@@ -38,10 +38,10 @@ angular.module('fsMobile.services', []);
         var parser = document.createElement('a');
 
 
-        ImgCache.overridables.hash = function(a){
+        ImgCache.overridables.hash = function (a) {
 
             // so strip protocol host and port
-            parser.href=a;
+            parser.href = a;
             /*
              //parser.href = "http://example.com:3000/pathname/?search=test#hash";
              parser.protocol; // => "http:"
@@ -52,7 +52,7 @@ angular.module('fsMobile.services', []);
              parser.hash;     // => "#hash"
              parser.host;     // => "example.com:3000"
              */
-            var path = [parser.pathname,parser.search,parser.hash].join();
+            var path = [parser.pathname, parser.search, parser.hash].join();
 
             var hashResult = origHashFn(path);
             return hashResult;
@@ -61,8 +61,8 @@ angular.module('fsMobile.services', []);
         //######### PREPARE ANGULAR IMAGE CACHE WRAPPER
         ImgCacheProvider.setOption('debug', true);
         ImgCacheProvider.setOption('usePersistentCache', true);
-        var quota =  73 * 1024 * 1024;
-        ImgCacheProvider.setOption('chromeQuota',quota);
+        var quota = 73 * 1024 * 1024;
+        ImgCacheProvider.setOption('chromeQuota', quota);
 
         ImgCacheProvider.manualInit = true;
 
@@ -75,34 +75,8 @@ angular.module('fsMobile.services', []);
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/news');
 
-        //######### TRANSLATION
-        $translateProvider.useStaticFilesLoader({
-            prefix: 'lang/',
-            suffix: '.json'
-        });
-        $translateProvider.fallbackLanguage(['en', 'de']);
-        var discoveredLanguage = $translateProvider.determinePreferredLanguage();
-        $translateProvider.registerAvailableLanguageKeys(['de', 'en'], {
-            'de*': 'de',
-            'en*': 'en'
-        });
-        function guessLanguage(lang) {
-            console.log(lang);
-            if (lang && lang.length >= 5 && lang.indexOf('_') !== -1) {
-                var parts = lang.split('_');
-                if (parts.length > 0) {
-                    return parts[0];
-                }
-            }
-            if (lang && lang.length === 2) {
-                return lang;
-            }
-            return 'de';
-        }
-        var lang = guessLanguage(discoveredLanguage);
-        $translateProvider.use(lang);
-
-    }).constant('AVAILABLE_LANGUAGES', ['de', 'en'])
+        //######### LANG: moved to language-service
+    })
 
     .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q) {
 
