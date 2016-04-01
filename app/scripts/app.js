@@ -32,7 +32,7 @@ angular.module('fsMobile.services', []);
 ])
     .config(function ($urlRouterProvider, $translateProvider, $showdownProvider, ImgCacheProvider) {
 
-        // PREPARE IMG CACHE
+        //######### PREPARE ImgCache
         // as we deal with 2 hostnames for inner and outer network we provide a custom hash function
         var origHashFn = ImgCache.overridables.hash;
         var parser = document.createElement('a');
@@ -58,8 +58,7 @@ angular.module('fsMobile.services', []);
             return hashResult;
         };
 
-        // PREPARE ANGULAR IMAGE CACHE WRAPPER
-        // image cache
+        //######### PREPARE ANGULAR IMAGE CACHE WRAPPER
         ImgCacheProvider.setOption('debug', true);
         ImgCacheProvider.setOption('usePersistentCache', true);
         var quota =  73 * 1024 * 1024;
@@ -67,14 +66,16 @@ angular.module('fsMobile.services', []);
 
         ImgCacheProvider.manualInit = true;
 
-        // markdown
+        //######### MARKDOWN
         $showdownProvider.setOption('parseImgDimension', true);
         $showdownProvider.setOption('strikethrough', true);
         $showdownProvider.setOption('tables', true);
 
+        //######### DEFAULT ROUTE
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/news');
 
+        //######### TRANSLATION
         $translateProvider.useStaticFilesLoader({
             prefix: 'lang/',
             suffix: '.json'
