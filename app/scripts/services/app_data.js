@@ -4,7 +4,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('AppData', function (Resource, $filter, ImageCacheService, ImgCache, debug) {
+    .factory('AppData', function (Resource, $filter, ImageCacheService) {
 
         /**
          * events before this time are counted to the previous day
@@ -15,28 +15,6 @@ angular.module('fsMobile.services')
          * @type {string}
          */
         var dayLimit='05:59:59';
-
-        function testCache(uri,scope){
-            // TODO: verify caching with different base urls
-            var u1 = 'http://spektacholeriker.de:8080/' + uri; // ... / url
-            var u2 = 'http://fs.spektacholeriker.de:8080/' + uri; // .. / url
-            //ImgCache.isCached(url)
-            //ImgCache.cacheFile(url)
-
-           ImgCache.cacheFile(u1,function(){
-               console.log('cache1 done');
-               ImgCache.isCached(u1,function(url1, isCached1){
-                   console.log('isCached1',url1, isCached1);
-                   ImgCache.isCached(u2,function(url2,isCached2){
-                       console.log('isCached2',url2,isCached2);
-                       debug.addData('scope: '+scope+' bothBaseUrisCache','check that '+u1+
-                           ' and '+ u2 + ' is cached: results',{ u1:isCached1, u2:isCached2 });
-                   });
-               });
-           },function(){
-               console.log('ERR CACHING FILE ', u1);
-           });
-        }
 
         function cacheIfNeeded(url){
             // TODO: check how to remove unused images
@@ -73,7 +51,7 @@ angular.module('fsMobile.services')
                         uri = news.image;
                     }
                 });
-                testCache(uri,'news');
+                //testCache(uri,'news');
             }
 
             this.program = [];
@@ -144,7 +122,6 @@ angular.module('fsMobile.services')
 
                 this.workshops = $filter('orderObjectBy')(this.workshops, 'date', 'date');
             }
-            testCache(uri,'events');
         }
 
         return AppData;
