@@ -99,7 +99,7 @@ angular.module('fsMobile.directives')
                             // in any case if it was cached we use it
                             useCachedImage(url);
                         }
-                        // any other case, random image is left in dispaly
+                        // any other case, random image is left in display
 
                     });
                 });
