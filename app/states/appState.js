@@ -24,7 +24,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 return defered.promise;
             }
         },
-        controller: function ($scope, $ionicLoading, dataProvider,
+        controller: function ($scope, $ionicLoading, dataProvider, ImageCacheService,
                               $timeout, $ionicHistory, appData, AppData, $rootScope) {
             $scope.appData = new AppData(appData);
 
@@ -49,6 +49,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             $scope.deleteData = function () {
                 $ionicLoading.show({template: 'Resetting...'});
                 var promise = dataProvider.deleteData();
+                promise = promise['finally'](ImageCacheService.clearCache);
                 loadData(promise);
             };
 

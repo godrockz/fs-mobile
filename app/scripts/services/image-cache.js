@@ -53,19 +53,26 @@ angular.module('fsMobile')
             ConnectionState.checkOnline().then(function (isOnline) {
                 if (isOnline) {
                     var absoluteUri = (DYNENV.apiEndpoint || '') + relativeUrl;
-
                     ImgCache.isCached(absoluteUri, function (url, cached) {
                         if (!cached) {
-                            console.log('caching File ', absoluteUri);
                             ImgCache.cacheFile(absoluteUri, deferred.resolve, deferred.reject);
                         } else {
                             deferred.resolve();
                         }
+                    }, function(e){
+                        deferred.reject(e);
                     });
+                }else{
+                    deferred.reject('not online');
                 }
-            });
+            }, deferred.reject);
             return deferred.promise;
         }
+
+        /**
+         * queue for cacheImage function
+         */
+        var cacheImgQueue;
 
         var svc = {
             init: init,
@@ -75,8 +82,17 @@ angular.module('fsMobile')
              * @return promise;
              */
             cacheImage: function (relativeUrl) {
+                var deferred = $q.defer();
                 return initPromise.then(function () {
-                    return cacheImg(relativeUrl);
+                    if(!cacheImgQueue) {
+                        cacheImgQueue = $q.when();
+                    }
+                    cacheImgQueue['finally'](function (){
+                        cacheImg(relativeUrl)
+                            .then(deferred.resolve, deferred.reject);
+                    });
+                    cacheImgQueue = deferred.promise;
+                    return cacheImgQueue;
                 });
             },
 
@@ -97,6 +113,17 @@ angular.module('fsMobile')
                         deferred.resolve(isCached);
                     });
                 });
+                return deferred.promise;
+            },
+
+            /**
+             * clears the cache
+             * @returns {*}
+             */
+            clearCache: function (){
+                var deferred = $q.defer();
+                ImgCache.clearCache(deferred.resolve,
+                deferred.reject);
                 return deferred.promise;
             }
         };
