@@ -80,7 +80,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     // define a colors array for each location
                     var startValue = 20;
 
-                    angular.forEach($scope.appData.program,function(location){
+                    angular.forEach($scope.appData.program, function(location){
 
                         // precalculate colors array
                         var prev = Colors.rgb2hsv(location.color|| '#ffffff');

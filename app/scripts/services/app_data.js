@@ -17,8 +17,6 @@ angular.module('fsMobile.services')
         var dayLimit='05:59:59';
 
         function cacheIfNeeded(url){
-            // TODO: check how to remove unused images
-            // TODO: linearize .. no DOS attack fetches
             ImageCacheService.isCached(url).then(function(isCached){
                 if(!isCached){
                     ImageCacheService.cacheImage(url);

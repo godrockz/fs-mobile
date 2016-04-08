@@ -10,6 +10,8 @@
     "app.general.program":"Program",
     "app.general.workshops":"Workshops",
     "app.general.workshop":"Workshops",
+    "app.general.favorites":"Favorites",
+
     "app.settings.language.label":"Language",
     "app.settings.data.divider":"App content",
     "app.settings.fetchdate.label":"last update:",

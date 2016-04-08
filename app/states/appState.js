@@ -26,6 +26,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
         },
         controller: function ($scope, $ionicLoading, dataProvider, ImageCacheService,
                               $timeout, $ionicHistory, appData, AppData, $rootScope) {
+
             $scope.appData = new AppData(appData);
 
             function loadData (promise) {

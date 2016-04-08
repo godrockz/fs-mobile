@@ -1,0 +1,42 @@
+
+<ion-view class="favorites-list"
+          view-title="{{::'app.general.favorites'|translate}}" >
+  <ion-content>
+
+      <!-- timeline-->
+      <div style="width:{{::view.columnWidth}}%;height:{{view.columnHeight}}px;float:left;">
+      <div ng-repeat="day in view.timeLine"
+        >
+
+          <div ng-repeat="hour in day.hours"
+               style="width:100%; height:{{::view.eventHeight}}px;
+               border-top:1px solid black;">
+              {{$index}}
+          </div>
+
+      </div>
+      </div>
+
+      <!-- normal stages-->
+      <div ng-repeat="location in locations"
+      style="width:{{::view.columnWidth}}%; height:{{::view.columnHeight }}px;
+        float:left;">
+
+          <div ng-repeat="day in location.days"
+               style="width:100%; height:{{::24*view.eventHeight}}px;">
+
+              <div ng-repeat="hour in day.hours"
+                   style="width:100%; height:{{::view.eventHeight}}px;">
+
+                  <div ng-if="hour.events.length >= 1"
+                       style="width:100%; height:100%;
+                       background-color:{{::location.color||'#ddd'}}" ></div>
+                  {{event.id}}
+
+              </div>
+          </div>
+      </div>
+
+
+  </ion-content>
+</ion-view>
