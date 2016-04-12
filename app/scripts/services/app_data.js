@@ -96,6 +96,16 @@ angular.module('fsMobile.services')
                             date: moment(dayString),
                             events: dayEvents
                         };
+
+                        // link them to allow next/previous navigation
+                        var prevEvent;
+                        angular.forEach(dayEvents,function(evt){
+                            if(prevEvent){
+                                prevEvent.$nextEvent = evt;
+                                evt.$previousEvent = prevEvent;
+                            }
+                            prevEvent = evt;
+                        });
                         loc.days.push(day);
                     });
                     // need to sort the days

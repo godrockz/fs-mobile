@@ -114,7 +114,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',
-                controller: function ($scope, $stateParams, $translate, dataProvider) {
+                controller: function ($scope, $stateParams, $translate, dataProvider, $state) {
 
                     var lang = $translate.use();
 
@@ -133,6 +133,18 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.toggleLike = function (){
                         $scope.event.liked = !$scope.event.liked;
                         dataProvider.updateSingleObject('events',$scope.event.id, $scope.event,'liked');
+                    };
+
+                    $scope.nextEvent = function (){
+                        if($scope.event.$nextEvent){
+                            $state.go('app.singleprogram',{idx:$scope.event.$nextEvent.id});
+                        }
+                    };
+
+                    $scope.previousEvent = function (){
+                        if($scope.event.$previousEvent){
+                            $state.go('app.singleprogram',{idx:$scope.event.$previousEvent.id});
+                        }
                     };
                 }
 
