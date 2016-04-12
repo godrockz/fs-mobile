@@ -43,32 +43,33 @@
 
 
 
-      <div ng-if="selectedLocationCt" class="event-overlay">
 
-          <div class="event-navigation">
+
+  </ion-content>
+    <div ng-if="selectedLocationCt" class="event-overlay">
+
+        <div class="event-navigation">
               <span ng-if="selectedLocationCt.events.length>1">
                   <div ng-click="previousEvent()" class="previous">&lt;</div>
                   <div class="num">{{selectedEventIdx+1+'/'+ selectedLocationCt.events.length}}</div>
                   <div ng-click="nextEvent()" class="next">&gt;</div>
               </span>
-              <div ng-click="closeLocation()" class="close">X</div>
-          </div>
-          <h5>{{selectedEvent|trans:'name'}}</h5>
-          <p>{{selectedEvent|trans:'preview'}}</p>
-          {{selectedEvent.start|date:'EEE HH:mm'}}-{{selectedEvent.end|date:'HH:mm'}}
+            <div ng-click="closeLocation()" class="close">X</div>
+        </div>
+        <h5>{{selectedEvent|trans:'name'}}</h5>
+        <p>{{selectedEvent|trans:'preview'}}</p>
+        {{selectedEvent.start|date:'EEE HH:mm'}}-{{selectedEvent.end|date:'HH:mm'}}
 
-          <a ng-if="!selectedEvent.location.originalLocation"
-             class="button button-positive program-btn"
-             ui-sref="app.singleprogram({idx:selectedEvent.id})">
-              {{'app.map.open.location'|translate}}
-          </a>
+        <a ng-if="!selectedEvent.location.originalLocation"
+           class="button button-positive program-btn"
+           ui-sref="app.singleprogram({idx:selectedEvent.id})">
+            {{'app.map.open.location'|translate}}
+        </a>
 
-          <a ng-if="selectedEvent.location.originalLocation"
-             class="button button-positive program-btn"
-             ui-sref="app.workshop({idx:selectedEvent.id})">
-              {{'app.map.open.location'|translate}} *
-          </a>
-      </div>
-
-  </ion-content>
+        <a ng-if="selectedEvent.location.originalLocation"
+           class="button button-positive program-btn"
+           ui-sref="app.workshop({idx:selectedEvent.id})">
+            {{'app.map.open.location'|translate}} *
+        </a>
+    </div>
 </ion-view>

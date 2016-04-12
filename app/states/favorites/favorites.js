@@ -47,7 +47,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         // update minStart max End
         // add location if not yet exists
         this.locations[event.location.id] = event.location;
-        this.entryWidth = 100 / (Object.keys(this.locations).length + 1 );// +1 to mind the time column
+        this.entryWidth = 99 / (Object.keys(this.locations).length + 1 );// +1 to mind the time column
 
         var start = moment(event.start), end = moment(event.end);
 
@@ -86,17 +86,18 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             step = parseInt(stepSizeMin, 10) || 15,
             currentTime = this.firstTime,
             result = [], cnt = 1000,
-            endTime = this.additionalSteps ? this.lastTime.add(this.additionalSteps * stepSizeMin, 'MINUTE') : this.lastTime,
+            endTime = this.additionalSteps ? moment(this.lastTime).add(this.additionalSteps * stepSizeMin, 'MINUTE') : this.lastTime,
             keeptStepCnt = 0,
             addedEvents = {};
 
         while (currentTime.isBefore(endTime) || cnt <= 0) {
             var nextTime = moment(currentTime).add(step, 'MINUTE'),
-                eventsToAdd = this.getEventsFor(currentTime, nextTime);
+                eventsToAdd = this.getEventsFor(currentTime, nextTime),
+                isAdditionalTime = currentTime.isAfter(this.lastTime);
 
             if (eventsToAdd.length <= 0 && this.removeEmptyRows) {
 
-                if (keeptStepCnt >= this.onRemovalKeepStepsBetween) {
+                if (keeptStepCnt >= this.onRemovalKeepStepsBetween && !isAdditionalTime) {
                     currentTime = nextTime;
                     cnt--; // avoid endless loops
                     continue;
@@ -162,8 +163,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 controller: function ($scope) {
                     var removeEmptyBlocks = true,
                         cellHeight = 30,
-                        slotSizeinMinutes = 15,
-                        additionalSteps = 16,
+                        slotSizeInMinutes = 15,
+                        additionalSteps = 6,
                         keeptStepCnt = 2,
                         renderTimeEachStep = false,
                         useAbsoluteRendering = true;
@@ -226,7 +227,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
 
                     // RESULTS TO SCOPE
-                    $scope.timeline = grid.getTimeLine(slotSizeinMinutes);
+                    $scope.timeline = grid.getTimeLine(slotSizeInMinutes);
                     $scope.grid = grid;
                 }
             }
