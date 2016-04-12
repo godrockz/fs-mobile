@@ -90,6 +90,18 @@ angular.module('fsMobile.services')
                     // we should not create dummy locations for unassigned events!
                     if (!loc){ return; }
                     loc.days = [];
+
+                    // link them to allow next/previous navigation via swipe in detail views
+                    var prevEvent;
+                    var sorted = locationEvents.sort(function(a,b){return moment(a.start).diff(moment(b.start))});
+                    angular.forEach(sorted,function(evt){
+                        if(prevEvent){
+                            prevEvent.$nextEvent = evt;
+                            evt.$previousEvent = prevEvent;
+                        }
+                        prevEvent = evt;
+                    });
+
                     angular.forEach(this.events.groupByDay(locationEvents, dayLimit),
                                     function(dayEvents, dayString) {
                         var day = {
@@ -97,15 +109,6 @@ angular.module('fsMobile.services')
                             events: dayEvents
                         };
 
-                        // link them to allow next/previous navigation
-                        var prevEvent;
-                        angular.forEach(dayEvents,function(evt){
-                            if(prevEvent){
-                                prevEvent.$nextEvent = evt;
-                                evt.$previousEvent = prevEvent;
-                            }
-                            prevEvent = evt;
-                        });
                         loc.days.push(day);
                     });
                     // need to sort the days
@@ -116,7 +119,8 @@ angular.module('fsMobile.services')
                 // BUILD WORKSHOPS
                 // groups workshops by days / filter unpublished / filter workshop types
                 var workshopEvents = this.events.filterByEventCategory('WORKSHOP');
-                workshopEvents =this.events.filterNotPublished(workshopEvents);
+                workshopEvents = this.events.filterNotPublished(workshopEvents);
+
                 workshopEvents = this.events.groupByDay(workshopEvents);
 
                 angular.forEach(workshopEvents, function (dayEvents, dayString) {
@@ -125,9 +129,10 @@ angular.module('fsMobile.services')
                         events: dayEvents
                     };
 
-                    // link them to allow next/previous navigation
+                    // link them to allow next/previous navigation via swipe in detail views
                     var prevEvent;
-                    angular.forEach(dayEvents,function(evt){
+                    var sorted = dayEvents.sort(function(a,b){return moment(a.start).diff(moment(b.start))});
+                    angular.forEach(sorted,function(evt){
                         if(prevEvent){
                             prevEvent.$nextEvent = evt;
                             evt.$previousEvent = prevEvent;
