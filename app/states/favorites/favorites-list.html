@@ -16,10 +16,14 @@
           }
       </style>
 
-      <div ng-repeat="timeslot in timeline" class="grid-row ">
+
+      <p class=no-content" ng-if="!timeline || timeline.length<=0">
+          {{'app.favorites.no.favs'|translate}}
+      </p>
+      <div ng-repeat="timeslot in timeline" class="grid-row " style="{{$index==0?'margin-top:14px;':''}}">
 
           <div class="timeslot-entry {{ timeslot.isFullHour ? 'border-heavy' : 'border-light'}}"  >
-              <span ng-if="timeslot.isFullHour||grid.showAllTimes" >{{timeslot.time| date:'HH:mm'}}</span>
+              <span ng-if="timeslot.isFullHour||grid.showAllTimes" >{{timeslot.time| date:(dimension.width/(grid.locationCount+1)<50?'HH':'HH:mm')}}</span>
           </div>
 
           <div ng-if="::grid.useAbsoluteRendering == false" ng-repeat="locationCt in timeslot.locations"
@@ -35,7 +39,7 @@
               <small ng-if="locationCt.events.length>1">
                   {{locationCt.events.length}}
               </small>
-              <small ng-if="locationCt.events.length==1">
+              <small ng-if="locationCt.events.length==1 && dimension.width/(grid.locationCount+1) >50 ">
                   {{locationCt.events[0]|trans:'name'}}
               </small>
           </div>
@@ -50,19 +54,19 @@
 
 
   </ion-content>
-    <div ng-if="selectedLocationCt" class="event-overlay">
+    <div ng-if="selectedLocationCt" class="event-overlay" on-swipe-left="nextEvent()" on-swipe-right="previousEvent()">
 
         <div class="event-navigation">
               <span ng-if="selectedLocationCt.events.length>1">
-                  <div ng-click="previousEvent()" class="previous">&lt;</div>
+                  <div ng-click="previousEvent()" class="previous ion-arrow-left-b"></div>
                   <div class="num">{{selectedEventIdx+1+'/'+ selectedLocationCt.events.length}}</div>
-                  <div ng-click="nextEvent()" class="next">&gt;</div>
+                  <div ng-click="nextEvent()" class="next ion-arrow-right-b"></div>
               </span>
-            <div ng-click="closeLocation()" class="close">X</div>
+            <div ng-click="closeLocation()" class="close ion-ios-close-outline"></div>
         </div>
         <h5>{{selectedEvent|trans:'name'}}</h5>
+        <p>{{selectedEvent.start|date:'EEE HH:mm'}}-{{selectedEvent.end|date:'HH:mm'}}</p>
         <p>{{selectedEvent|trans:'preview'}}</p>
-        {{selectedEvent.start|date:'EEE HH:mm'}}-{{selectedEvent.end|date:'HH:mm'}}
 
         <a ng-if="!selectedEvent.location.originalLocation"
            class="button button-positive program-btn"
@@ -75,5 +79,6 @@
            ui-sref="app.workshop({idx:selectedEvent.id})">
             {{'app.map.open.location'|translate}}
         </a>
+
     </div>
 </ion-view>

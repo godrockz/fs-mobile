@@ -42,6 +42,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         this.additionalSteps = additionalSteps || 0;
         this.onRemovalKeepStepsBetween = onRemovalKeepStepsBetween || 0;
         this.showAllTimes = renderAllTimes === undefined ? false : renderAllTimes;
+        this.locationCount = 0;
     }
 
     CalendarGrid.prototype.addEvent = function (event) {
@@ -49,7 +50,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         // update minStart max End
         // add location if not yet exists
         this.locations[event.location.id] = event.location;
-        this.entryWidth = 99 / (Object.keys(this.locations).length + 1 );// +1 to mind the time column
+        this.locationCount = Object.keys(this.locations).length;
+        this.entryWidth = 99 / (this.locationCount + 1 );// +1 to mind the time column
+
 
         var start = moment(event.start), end = moment(event.end);
 

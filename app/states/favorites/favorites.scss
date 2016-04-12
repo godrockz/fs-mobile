@@ -1,69 +1,82 @@
 .favorites-list {
-    .border-light{
+    p.no-content{
+        margin:15px;
+    }
+    .border-light {
         border-top: 1px dashed #ddd;
     }
-    .border-heavy{
+    .border-heavy {
         border-top: 1px solid black
     }
 
     .grid-row {
+
         .timeslot-entry {
 
             float: left;
             height: 100%;
-            max-width:45px;
+            /* max-width:45px; */
+            min-width: 50px;
+            padding-left: 3px;
         }
         .event-entry {
             float: left;
             height: 100%;
-
         }
         .main-slot {
 
         }
-        .abs-entry{
-            position:absolute;
+        .abs-entry {
+            position: absolute;
             padding: 3px;
-            color:#fff;
-            font-weight:bold;
-            z-index:5;
+            color: #fff;
+            font-weight: bold;
+            z-index: 5;
             box-shadow: 3px 2px 6px grey;
         }
-        .full-grid{
-            width:100%;
-            position:absolute;
-            z-index:2;
+        .full-grid {
+            width: 100%;
+            position: absolute;
+            z-index: 2;
         }
     }
     .event-overlay {
         position: fixed;
-        padding:15px;
+        padding: 25px;
         bottom: 0px;
-        height: 20%;
+        height: 25%;
         width: 100%;
-        opacity: 0.8;
+        opacity: 0.9;
         background-color: #000;
         color: #fff;
-        z-index:99;
+        z-index: 99;
 
         .event-navigation {
             position: absolute;
             top: 10px;
             right: 10px;
-            div{
-                float:left;
+            font-size:20px;
+            div {
+                float: left;
+                margin-left: 10px;
             }
 
         }
         h5 {
-            color:#fff;
-            font-weight:bold;
+            color: #fff;
+            font-weight: bold;
         }
-        .program-btn{
-            background-color:#ff0000;
-
+        p:first-child{
+            float:left;
+        }
+        p:nth-child(2){
             float:right;
-            bottom:0px;
+        }
+        .program-btn {
+            background-color: #ff0000;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
         }
     }
 
