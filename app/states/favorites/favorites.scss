@@ -1,12 +1,15 @@
 .favorites-list {
+    $grid-color-back: #ddd;
+    $grid-color-front : #999;
+
     p.no-content{
         margin:15px;
     }
     .border-light {
-        border-top: 1px dashed #ddd;
+        border-top: 1px dashed $grid-color-back;
     }
     .border-heavy {
-        border-top: 1px solid black
+        border-top: 1px solid $grid-color-front
     }
 
     .grid-row {
@@ -18,6 +21,7 @@
             /* max-width:45px; */
             min-width: 50px;
             padding-left: 3px;
+            color:$grid-color-front;
         }
         .event-entry {
             float: left;
