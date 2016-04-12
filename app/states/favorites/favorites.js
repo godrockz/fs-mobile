@@ -28,7 +28,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
      * @param renderAllTimes default:false, if true every step gets its time information rendered
      * @constructor
      */
-    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes) {
+    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes, useAbsoluteRendering) {
+        this.useAbsoluteRendering = useAbsoluteRendering === undefined?true:useAbsoluteRendering;
         this.events = [];
         this.firstTime = moment();
         this.lastTime = moment(0);
@@ -81,11 +82,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
     };
 
     CalendarGrid.prototype.getTimeLine = function (stepSizeMin) {
-        var step = parseInt(stepSizeMin, 10) || 15,
+        var me = this,
+            step = parseInt(stepSizeMin, 10) || 15,
             currentTime = this.firstTime,
             result = [], cnt = 1000,
             endTime = this.additionalSteps ? this.lastTime.add(this.additionalSteps * stepSizeMin, 'MINUTE') : this.lastTime,
-            keeptStepCnt = 0;
+            keeptStepCnt = 0,
+            addedEvents = {};
 
         while (currentTime.isBefore(endTime) || cnt <= 0) {
             var nextTime = moment(currentTime).add(step, 'MINUTE'),
@@ -116,11 +119,24 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
             /* jshint -W083 */
             angular.forEach(eventsToAdd, function (event) {
+
                 var location = locations[event.location.id];
+
                 if (!location) {
                     throw 'no locationContainer found';
                 }
+
+                if(!addedEvents[event.id]){
+                    // this is the first event getting added
+                    var durationInMinutes = moment.duration(moment(event.end).diff(moment(event.start))).asMinutes();
+                    var renderHeight = Math.ceil(durationInMinutes/stepSizeMin) * me.entryHeight;
+                    if(location.renderHeight === undefined || location.renderHeight<renderHeight){
+                        location.renderHeight = renderHeight;
+                    }
+                }
+
                 location.events.push(event);
+                addedEvents[event.id] = event;
             });
 
 
@@ -149,10 +165,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         slotSizeinMinutes = 15,
                         additionalSteps = 16,
                         keeptStepCnt = 2,
-                        renderTimeEachStep = false;
+                        renderTimeEachStep = false,
+                        useAbsoluteRendering = true;
 
 
-                    var grid = new CalendarGrid(cellHeight, removeEmptyBlocks, additionalSteps, keeptStepCnt, renderTimeEachStep);
+                    var grid = new CalendarGrid(cellHeight, removeEmptyBlocks, additionalSteps, keeptStepCnt, renderTimeEachStep, useAbsoluteRendering);
 
                     // FAVORITE EVENTS
                     angular.forEach($scope.appData.program, function (location) {

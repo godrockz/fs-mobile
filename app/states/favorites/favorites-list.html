@@ -4,27 +4,6 @@
   <ion-content>
 
 
-
-      <div ng-repeat="day in timeline" ng-if="false">
-
-          <div ng-repeat="hour in day.hours"
-               ng-if="hour.locations"
-               style="width:100%;height:{{view.entryHeight}}px;margin-top:3px;" >
-
-              <div style="float:left;width:10%;height:100%;border-top:1px solid black;">
-                  {{hour.hour|lpad:2:0}}:00
-              </div>
-
-              <div ng-repeat="locationContainer in hour.locations"
-                   style="{{!locationContainer.location.color && locationContainer.events ?'border: 1px dashed #ddd;':''}};float:left;background-color: {{locationContainer.events ? (locationContainer.location.color): 'white'}};width:{{view.entryWidth}}%;height:100%;">
-
-                  {{locationContainer.location.id}}
-
-              </div>
-
-          </div>
-      </div>
-
       <style type="text/css">
           .grid-row{
             height:{{grid.entryHeight+'px'}};
@@ -43,10 +22,22 @@
               <span ng-if="timeslot.isFullHour||grid.showAllTimes" >{{timeslot.time| date:'HH:mm'}}</span>
           </div>
 
-          <div ng-repeat="locationCt in timeslot.locations"
-               class="event-entry"
+          <div ng-if="grid.useAbsoluteRendering == false" ng-repeat="locationCt in timeslot.locations"
+               class="event-entry "
                style="{{locationCt.events.length > 0 ? (locationCt.location.color ? 'background-color:'+locationCt.location.color+';':'background-color:#ddd;') : '' }}"
                ng-click="locationCt.events.length > 0?selectLocation(locationCt):return;">
+          </div>
+
+          <div ng-if="grid.useAbsoluteRendering ==true && locationCt.renderHeight" ng-repeat="locationCt in timeslot.locations"
+               class="event-entry {{locationCt.renderHeight?'abs-entry':''}}"
+               style="{{locationCt.events.length > 0 ? (locationCt.location.color ? 'background-color:'+locationCt.location.color+';':'background-color:#ddd;') : '' }} {{locationCt.renderHeight?'height:'+locationCt.renderHeight+'px;':''}} left:{{grid.entryWidth * ($index +1)}}%; "
+               ng-click="locationCt.events.length > 0?selectLocation(locationCt):return;">
+              <small ng-if="locationCt.events.length>1">
+                  {{locationCt.events.length}}
+              </small>
+              <small ng-if="locationCt.events.length==1">
+                  {{locationCt.events[0]|trans:'name'}}
+              </small>
           </div>
       </div>
 
@@ -64,7 +55,7 @@
           </div>
           <h5>{{selectedEvent|trans:'name'}}</h5>
           <p>{{selectedEvent|trans:'preview'}}</p>
-          {{selectedEvent.start|date:'HH:mm'}}-{{selectedEvent.end|date:'HH:mm'}}
+          {{selectedEvent.start|date:'EEE HH:mm'}}-{{selectedEvent.end|date:'HH:mm'}}
 
           <a ng-if="!selectedEvent.location.originalLocation"
              class="button button-positive program-btn"
