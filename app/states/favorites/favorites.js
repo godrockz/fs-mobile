@@ -26,10 +26,12 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
      * @param additionalSteps - add amount of steps to end of the list (allow scroll)
      * @param onRemovalKeepStepsBetween keep amount steps after an event (only if removeEmptySteps is set tot true)
      * @param renderAllTimes default:false, if true every step gets its time information rendered
+     * @param showFullGrid - show gridlines on whole screen, default true
      * @constructor
      */
-    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes, useAbsoluteRendering) {
-        this.useAbsoluteRendering = useAbsoluteRendering === undefined?true:useAbsoluteRendering;
+    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes, useAbsoluteRendering, showFullGrid) {
+        this.useAbsoluteRendering = useAbsoluteRendering === undefined ? true : useAbsoluteRendering;
+        this.showFullGrid = showFullGrid === undefined ? true : showFullGrid;
         this.events = [];
         this.firstTime = moment();
         this.lastTime = moment(0);
@@ -62,10 +64,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
     };
 
 
-    CalendarGrid.prototype.addWorkshopEvent = function(event){
+    CalendarGrid.prototype.addWorkshopEvent = function (event) {
         // all ws events should be displayed @ same location so wrap it.
-        var newEvent = angular.copy(event,{});
-        newEvent.location = {id:'workshop',originalLocation:event.location};
+        var newEvent = angular.copy(event, {});
+        newEvent.location = {id: 'workshop', originalLocation: event.location};
         this.addEvent(newEvent);
     };
 
@@ -127,11 +129,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     throw 'no locationContainer found';
                 }
 
-                if(!addedEvents[event.id]){
+                if (!addedEvents[event.id]) {
                     // this is the first event getting added
                     var durationInMinutes = moment.duration(moment(event.end).diff(moment(event.start))).asMinutes();
-                    var renderHeight = Math.ceil(durationInMinutes/stepSizeMin) * me.entryHeight;
-                    if(location.renderHeight === undefined || location.renderHeight<renderHeight){
+                    var renderHeight = Math.ceil(durationInMinutes / stepSizeMin) * me.entryHeight;
+                    if (location.renderHeight === undefined || location.renderHeight < renderHeight) {
                         location.renderHeight = renderHeight;
                     }
                 }
@@ -143,7 +145,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
             result.push({
                 time: currentTime.toDate(),
-                isFullHour : currentTime.minute()===0,
+                isFullHour: currentTime.minute() === 0,
                 locations: locations
             });
 
@@ -167,10 +169,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         additionalSteps = 6,
                         keeptStepCnt = 2,
                         renderTimeEachStep = false,
-                        useAbsoluteRendering = true;
+                        useAbsoluteRendering = true,
+                        showFullGrid = true;
 
 
-                    var grid = new CalendarGrid(cellHeight, removeEmptyBlocks, additionalSteps, keeptStepCnt, renderTimeEachStep, useAbsoluteRendering);
+                    var grid = new CalendarGrid(cellHeight, removeEmptyBlocks, additionalSteps, keeptStepCnt, renderTimeEachStep, useAbsoluteRendering, showFullGrid);
 
                     // FAVORITE EVENTS
                     angular.forEach($scope.appData.program, function (location) {
@@ -184,16 +187,14 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     });
 
 
-
                     // FAVORITE WORKSHOPS
-                    angular.forEach($scope.appData.workshops,function(day){
-                        angular.forEach(day.events,function(event){
+                    angular.forEach($scope.appData.workshops, function (day) {
+                        angular.forEach(day.events, function (event) {
                             if (event.liked && event.liked === true) {
                                 grid.addWorkshopEvent(event);
                             }
                         });
                     });
-
 
 
                     // ### LOCATION SELECTION

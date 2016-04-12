@@ -16,9 +16,9 @@
           }
       </style>
 
-      <div ng-repeat="timeslot in timeline" class="grid-row">
+      <div ng-repeat="timeslot in timeline" class="grid-row ">
 
-          <div class="timeslot-entry {{ timeslot.isFullHour ? 'main-slot' : ''}}"  >
+          <div class="timeslot-entry {{ timeslot.isFullHour ? 'border-heavy' : 'border-light'}}"  >
               <span ng-if="timeslot.isFullHour||grid.showAllTimes" >{{timeslot.time| date:'HH:mm'}}</span>
           </div>
 
@@ -29,7 +29,7 @@
           </div>
 
           <div ng-if="grid.useAbsoluteRendering ==true && locationCt.renderHeight" ng-repeat="locationCt in timeslot.locations"
-               class="event-entry {{locationCt.renderHeight?'abs-entry':''}}"
+               class="event-entry {{locationCt.renderHeight?'abs-entry':''}} "
                style="{{locationCt.events.length > 0 ? (locationCt.location.color ? 'background-color:'+locationCt.location.color+';':'background-color:#ddd;') : '' }} {{locationCt.renderHeight?'height:'+locationCt.renderHeight+'px;':''}} left:{{grid.entryWidth * ($index +1)}}%; "
                ng-click="locationCt.events.length > 0?selectLocation(locationCt):return;">
               <small ng-if="locationCt.events.length>1">
@@ -39,6 +39,10 @@
                   {{locationCt.events[0]|trans:'name'}}
               </small>
           </div>
+
+          <div ng-if="grid.showFullGrid==true"
+               class="full-grid {{ timeslot.isFullHour ? 'border-heavy' : 'border-light'}}"
+          style="left:{{grid.entryWidth}}%"></div>
       </div>
 
 
