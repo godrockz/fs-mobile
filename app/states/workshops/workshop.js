@@ -63,7 +63,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshop.html',
-                controller: function ($scope, $stateParams, dataProvider) {
+                controller: function ($scope, $stateParams, dataProvider, $state) {
 
                     if ($scope.appData.events) {
                         $scope.event = $scope.appData.events[$stateParams.idx];
@@ -73,6 +73,18 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.toggleLike = function (){
                         $scope.event.liked = !$scope.event.liked;
                         dataProvider.updateSingleObject('events',$scope.event.id, $scope.event,'liked');
+                    };
+
+                    $scope.nextEvent = function (){
+                        if($scope.event.$nextEvent){
+                            $state.go('app.workshop',{idx:$scope.event.$nextEvent.id});
+                        }
+                    };
+
+                    $scope.previousEvent = function (){
+                        if($scope.event.$previousEvent){
+                            $state.go('app.workshop',{idx:$scope.event.$previousEvent.id});
+                        }
                     };
                 }
             }

@@ -7,7 +7,7 @@
             <span class="ion-ios-star" ng-show="event.liked"></span>
             <span class="ion-ios-star-outline" ng-show="!event.liked"></span>
         </div>
-        <div class="content-box">
+        <div class="content-box" on-swipe-left="previousEvent()" on-swipe-right="nextEvent()">
             <div class="work-headline">
                 <div class="work-date">
                     <div class="box">
