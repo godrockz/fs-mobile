@@ -6,8 +6,8 @@
  */
 
 /*global
-    angular, moment
-*/
+ angular, moment
+ */
 
 'use strict';
 angular.module('fsMobile.filters', [])
@@ -23,7 +23,9 @@ angular.module('fsMobile.filters', [])
     })
     .filter('timeFormat', function () {
         return function (time, property) {
-            if (!time) { return ''; }
+            if (!time) {
+                return '';
+            }
             return moment(time).format(property);
         };
     })
@@ -31,47 +33,53 @@ angular.module('fsMobile.filters', [])
         return function (instance, property) {
             var lang = $translate.use(),
                 translation = null;
-            if (!instance) { return ''; }
+            if (!instance) {
+                return '';
+            }
             if (instance.translations && instance.translations[lang]) {
                 translation = instance.translations[lang][property];
             }
             return translation || instance[property] || 'n.a';
         };
-    }).filter('filterNonPublished', function(){
-        return function(data){
-            var result = [];
-            angular.forEach(data,function(item){
-                if(!item.publishDate){ // no date given adding it
-                    result.push(item);
-                    return;
-                }
-                var publishDate = moment(item.publishDate,moment.ISO_8601);
-                if(publishDate && ! moment().isBefore(publishDate)){
-                    // should currently be published
-                    result.push(item);
-                }
-            });
-            return result;
-        };
-    }).filter('orderObjectBy', function(){
-        return function(input, attribute, type, dir) {
-            if (!angular.isObject(input)){ return input; }
-            if (!type) { type = 'int'; }
+    }).filter('filterNonPublished', function () {
+    return function (data) {
+        var result = [];
+        angular.forEach(data, function (item) {
+            if (!item.publishDate) { // no date given adding it
+                result.push(item);
+                return;
+            }
+            var publishDate = moment(item.publishDate, moment.ISO_8601);
+            if (publishDate && !moment().isBefore(publishDate)) {
+                // should currently be published
+                result.push(item);
+            }
+        });
+        return result;
+    };
+}).filter('orderObjectBy', function () {
+        return function (input, attribute, type, dir) {
+            if (!angular.isObject(input)) {
+                return input;
+            }
+            if (!type) {
+                type = 'int';
+            }
 
-            dir = dir? dir.toLowerCase() : null;
+            dir = dir ? dir.toLowerCase() : null;
 
-            switch (type){
+            switch (type) {
                 case 'int':
-                    input.sort(function(a, b){
+                    input.sort(function (a, b) {
                         a = parseInt(a[attribute]);
                         b = parseInt(b[attribute]);
                         return dir === 'desc' ? b - a : a - b;
                     });
                     break;
                 case 'date':
-                    input.sort(function(a, b){
-                        a = moment(a[attribute],'YYYY-MM-DD-HH:mm').unix();
-                        b = moment(b[attribute],'YYYY-MM-DD-HH:mm').unix();
+                    input.sort(function (a, b) {
+                        a = moment(a[attribute], 'YYYY-MM-DD-HH:mm').unix();
+                        b = moment(b[attribute], 'YYYY-MM-DD-HH:mm').unix();
                         return dir === 'desc' ? b - a : a - b;
                     });
                     break;
@@ -79,17 +87,17 @@ angular.module('fsMobile.filters', [])
             return input;
         };
     })
-    .filter('limitObjectTo', [function(){
-        return function(obj, limit){
+    .filter('limitObjectTo', [function () {
+        return function (obj, limit) {
             var keys = Object.keys(obj);
-            if(keys.length < 1){
+            if (keys.length < 1) {
                 return [];
             }
 
             var ret = {},
                 count = 0;
-            angular.forEach(keys, function(key){
-                if(count >= limit){
+            angular.forEach(keys, function (key) {
+                if (count >= limit) {
                     return false;
                 }
                 ret[key] = obj[key];
@@ -107,6 +115,19 @@ angular.module('fsMobile.filters', [])
                 return elem[propertyName] === value;
             });
         }
+
         propertyFilter.$stateful = true;
         return propertyFilter;
-});
+    })
+    .filter('lpad', function () {
+        return function (str, size, charSequence) {
+            var result = str + '',
+                char = charSequence||'0',
+                len = size || 2;
+
+            while (result.length < len) {
+                result = char + '' + result;
+            }
+            return result;
+        };
+    });

@@ -54,9 +54,10 @@
 
     "app.event.artist.website.label":"Website",
 
+    "app.favorites.open.details":"Details",
+
     "language.de":"Deutsch",
     "language.en":"Englisch",
-
 
     "imprint.board":"vertretungsberechtigter Vorstand",
     "imprint.chairman":"1. Vorsitzende",
@@ -73,5 +74,4 @@
     "imprint.geolocation.content":"Die dieser App vom Betriebssystem bereitgestellten Geoinformationen werden nicht gespeichert oder an nachgelagerte Systeme oder Server übertragen.",
     "imprint.more.header":"Weitere Informationen",
     "imprint.more.content":"Ihr Vertrauen ist uns wichtig. Daher möchten wir Ihnen jederzeit Rede und Antwort bezüglich der Verarbeitung Ihrer personenbezogenen Daten stehen. Wenn Sie Fragen haben, die Ihnen diese Datenschutzerklärung nicht beantworten konnte oder wenn Sie zu einem Punkt vertiefte Informationen wünschen, wenden Sie sich bitte jederzeit an"
-
 }

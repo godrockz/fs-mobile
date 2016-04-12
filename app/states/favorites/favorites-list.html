@@ -1,42 +1,83 @@
 
 <ion-view class="favorites-list"
-          view-title="{{::'app.general.favorites'|translate}}" >
+          view-title="{{::'app.general.favorites'|translate}}" cache-view="false">
   <ion-content>
 
-      <!-- timeline-->
-      <div style="width:{{::view.columnWidth}}%;height:{{view.columnHeight}}px;float:left;">
-      <div ng-repeat="day in view.timeLine"
-        >
+
+
+      <div ng-repeat="day in timeline" ng-if="false">
 
           <div ng-repeat="hour in day.hours"
-               style="width:100%; height:{{::view.eventHeight}}px;
-               border-top:1px solid black;">
-              {{$index}}
-          </div>
+               ng-if="hour.locations"
+               style="width:100%;height:{{view.entryHeight}}px;margin-top:3px;" >
 
-      </div>
-      </div>
+              <div style="float:left;width:10%;height:100%;border-top:1px solid black;">
+                  {{hour.hour|lpad:2:0}}:00
+              </div>
 
-      <!-- normal stages-->
-      <div ng-repeat="location in locations"
-      style="width:{{::view.columnWidth}}%; height:{{::view.columnHeight }}px;
-        float:left;">
+              <div ng-repeat="locationContainer in hour.locations"
+                   style="{{!locationContainer.location.color && locationContainer.events ?'border: 1px dashed #ddd;':''}};float:left;background-color: {{locationContainer.events ? (locationContainer.location.color): 'white'}};width:{{view.entryWidth}}%;height:100%;">
 
-          <div ng-repeat="day in location.days"
-               style="width:100%; height:{{::24*view.eventHeight}}px;">
-
-              <div ng-repeat="hour in day.hours"
-                   style="width:100%; height:{{::view.eventHeight}}px;">
-
-                  <div ng-if="hour.events.length >= 1"
-                       style="width:100%; height:100%;
-                       background-color:{{::location.color||'#ddd'}}" ></div>
-                  {{event.id}}
+                  {{locationContainer.location.id}}
 
               </div>
+
           </div>
       </div>
 
+      <style type="text/css">
+          .grid-row{
+            height:{{grid.entryHeight+'px'}};
+          }
+          .timeslot-entry{
+            width:{{grid.entryWidth+ '%'}};
+          }
+          .event-entry{
+            width:{{grid.entryWidth+ '%'}};
+          }
+      </style>
+
+      <div ng-repeat="timeslot in timeline" class="grid-row">
+
+          <div class="timeslot-entry {{ timeslot.isFullHour ? 'main-slot' : ''}}"  >
+              <span ng-if="timeslot.isFullHour||grid.showAllTimes" >{{timeslot.time| date:'HH:mm'}}</span>
+          </div>
+
+          <div ng-repeat="locationCt in timeslot.locations"
+               class="event-entry"
+               style="{{locationCt.events.length > 0 ? (locationCt.location.color ? 'background-color:'+locationCt.location.color+';':'background-color:#ddd;') : '' }}"
+               ng-click="locationCt.events.length > 0?selectLocation(locationCt):return;">
+          </div>
+      </div>
+
+
+
+      <div ng-if="selectedLocationCt" class="event-overlay">
+
+          <div class="event-navigation">
+              <span ng-if="selectedLocationCt.events.length>1">
+                  <div ng-click="previousEvent()" class="previous">&lt;</div>
+                  <div class="num">{{selectedEventIdx+1+'/'+ selectedLocationCt.events.length}}</div>
+                  <div ng-click="nextEvent()" class="next">&gt;</div>
+              </span>
+              <div ng-click="closeLocation()" class="close">X</div>
+          </div>
+          <h5>{{selectedEvent|trans:'name'}}</h5>
+          <p>{{selectedEvent|trans:'preview'}}</p>
+          {{selectedEvent.start|date:'HH:mm'}}-{{selectedEvent.end|date:'HH:mm'}}
+
+          <a ng-if="!selectedEvent.location.originalLocation"
+             class="button button-positive program-btn"
+             ui-sref="app.singleprogram({idx:selectedEvent.id})">
+              {{'app.map.open.location'|translate}}
+          </a>
+
+          <a ng-if="selectedEvent.location.originalLocation"
+             class="button button-positive program-btn"
+             ui-sref="app.workshop({idx:selectedEvent.id})">
+              {{'app.map.open.location'|translate}} *
+          </a>
+      </div>
 
   </ion-content>
 </ion-view>

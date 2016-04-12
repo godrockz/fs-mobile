@@ -11,7 +11,6 @@
     "app.general.workshops":"Workshops",
     "app.general.workshop":"Workshops",
     "app.general.favorites":"Favorites",
-
     "app.settings.language.label":"Language",
     "app.settings.data.divider":"App content",
     "app.settings.fetchdate.label":"last update:",
@@ -53,8 +52,9 @@
     "app.event.category.PRAYER":"Prayer",
     "app.event.category.MISC":"",
 
-
     "app.event.artist.website.label":"Website",
+
+    "app.favorites.open.details":"Details",
 
     "language.de":"German",
     "language.en":"English",
@@ -74,5 +74,4 @@
     "imprint.geolocation.content":"No data according your position is sent to our servers by this app.",
     "imprint.more.header":"Further information",
     "imprint.more.content":"It is important to us that you trust in us. Therefore we will always answer any questions concerning the processing of personal data. If you have questions that are not answered by this privacy statement or if you wish to receive more information, please sent an e-mail to"
-
 }
