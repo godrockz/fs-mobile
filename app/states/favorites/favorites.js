@@ -79,7 +79,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         angular.forEach(this.events, function (event) {
             var start = moment(event.start),
                 end = moment(event.end);
-            if (isBetween(startTime, start, end) || isBetween(endTime, start, end)) {
+            if (isBetween(startTime, start, end) || isBetween(endTime, start, end) ||
+                isBetween(start, startTime, endTime) || isBetween(end, startTime, endTime)) {
                 result.push(event);
             }
         });
@@ -97,20 +98,27 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
         while (currentTime.isBefore(endTime) || cnt <= 0) {
             var nextTime = moment(currentTime).add(step, 'MINUTE'),
-                eventsToAdd = this.getEventsFor(currentTime, nextTime),
-                isAdditionalTime = currentTime.isAfter(this.lastTime);
+                eventsInCurrentTimeSlice = this.getEventsFor(currentTime, nextTime),
+            // prepend n-steps before an event. this way an entry will always display steps before starting from full hour
+                keepStepsTimeSliceEnd = moment(currentTime).add(1, 'HOUR').set('MINUTE', 0),
+                upcomingEventsInKeepSteps = this.getEventsFor(currentTime, keepStepsTimeSliceEnd),
 
-            if (eventsToAdd.length <= 0 && this.removeEmptyRows) {
+                isAdditionalTime = currentTime.isAfter(this.lastTime);
+            // check if the row should be removed because it hs not entries
+            if (upcomingEventsInKeepSteps.length <= 0 && eventsInCurrentTimeSlice.length <= 0 && this.removeEmptyRows) {
 
                 if (keeptStepCnt >= this.onRemovalKeepStepsBetween && !isAdditionalTime) {
+                    // do not add current time slice
                     currentTime = nextTime;
                     cnt--; // avoid endless loops
+
+
                     continue;
                 }
                 keeptStepCnt++;
 
             }
-            if (this.removeEmptyRows && eventsToAdd.length > 0) {
+            if (this.removeEmptyRows && upcomingEventsInKeepSteps.length > 0 && eventsInCurrentTimeSlice.length <= 0) {
                 // reset keept step cnt
                 keeptStepCnt = 0;
             }
@@ -124,7 +132,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             });
 
             /* jshint -W083 */
-            angular.forEach(eventsToAdd, function (event) {
+            angular.forEach(eventsInCurrentTimeSlice, function (event) {
 
                 var location = locations[event.location.id];
 
