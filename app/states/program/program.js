@@ -13,8 +13,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/program_2.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $stateParams,
-                                      $translate, Colors) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate ,
+                                      $stateParams, $translate, Colors) {
                     $scope.view = {};
 
 
@@ -105,6 +105,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.colorForEvent = function (event, location) {
                         return location.colors[moment(event.start).hour()];
                     };
+
+                    // scroll to top when the filter gets enabled
+                    $scope.$watch('view.filterLiked',function(newValue){
+                        if(newValue!== undefined && newValue===true){
+                            $ionicScrollDelegate.scrollTop();
+                        }
+                    });
 
                     $scope.contrastColor = Colors.contrastColor;
                 }
