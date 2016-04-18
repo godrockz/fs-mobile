@@ -1,9 +1,9 @@
 /*jslint
-  plusplus: true
-*/
+ plusplus: true
+ */
 /*global
-    angular, moment, _
-*/
+ angular, moment, _
+ */
 
 'use strict';
 angular.module('fsMobile.states').config(function ($stateProvider) {
@@ -17,19 +17,21 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                                       $translate, Colors) {
                     $scope.view = {};
 
+
                     var program_length = $scope.appData.program.length,
-                        startSlideIndex = 0;
-                    var lang = $translate.use();
+                        startSlideIndex = 0,
+                        dayEnd = 6, // when will a new color start
+                        lang = $translate.use();
                     $scope.lang = lang;
 
                     /**
                      * for any reason ionic allows a slide.index > program_length.
-                     * So we are required to calculate-proper index to access our $scope.appData.programm
+                     * So we are required to calculate-proper index to access our $scope.appData.program
                      *
                      * @param add - is added to the current index
                      * @returns {number}
                      */
-                    function programIdx(add){
+                    function programIdx(add) {
                         var length = program_length,
                             slideIdx = $scope.slide.index + (add || 0);
                         return Math.abs(slideIdx % length);
@@ -37,10 +39,12 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     // jump to location if requested by param
                     if ($stateParams.locationId) {
-                        startSlideIndex  = _.findIndex($scope.appData.program, function (loc) {
+                        startSlideIndex = _.findIndex($scope.appData.program, function (loc) {
                             return loc.id === $stateParams.locationId;
                         });
-                        if (startSlideIndex < 0) { startSlideIndex = 0; }
+                        if (startSlideIndex < 0) {
+                            startSlideIndex = 0;
+                        }
                     }
 
                     $ionicSideMenuDelegate.canDragContent(false);
@@ -60,12 +64,12 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     $scope.nextLocation = function () {
                         var index = programIdx(+1);
-                        var result =  $scope.appData.program[index];
+                        var result = $scope.appData.program[index];
                         return result;
                     };
 
                     $scope.currentLocation = function () {
-                        var result =  $scope.appData.program[programIdx()];
+                        var result = $scope.appData.program[programIdx()];
                         return result;
                     };
 
@@ -73,32 +77,32 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         $ionicSlideBoxDelegate.slide($stateParams.locationId);
                     }
 
-                    $scope.slide = { index: startSlideIndex };
+                    $scope.slide = {index: startSlideIndex};
 
                     // THE NEW PROGRAM STYLE
 
                     // define a colors array for each location
                     var startValue = 20;
 
-                    angular.forEach($scope.appData.program, function(location){
+                    angular.forEach($scope.appData.program, function (location) {
 
                         // precalculate colors array
-                        var prev = Colors.rgb2hsv(location.color|| '#ffffff');
-                        location.colors=[];
+                        var prev = Colors.rgb2hsv(location.color || '#ffffff');
+                        location.colors = [];
                         //console.log('=========');
-                        for (var i = 0 ; i< 24 ;i++){
+                        for (var i = 0; i < 24; i++) {
                             //
                             // var value = 20 *  Math.log(i/10)+ 80;
                             // prev.s = value;
                             // console.log('value',value);
 
                             prev.s = (i) * ((100 - startValue) / 24) + startValue;
-                            location.colors[((i+6)%24)] = Colors.hsb2rgb(prev.h,prev.s,prev.v);
+                            location.colors[((i + dayEnd) % 24)] = Colors.hsb2rgb(prev.h, prev.s, prev.v);
                         }
 
                     });
 
-                    $scope.colorForEvent = function(event, location){
+                    $scope.colorForEvent = function (event, location) {
                         return location.colors[moment(event.start).hour()];
                     };
 
@@ -124,26 +128,26 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     }
 
                     $scope.event.tags = [];
-                    for(var j = 0; j < $scope.event.translations[lang].tags.length;j++){
+                    for (var j = 0; j < $scope.event.translations[lang].tags.length; j++) {
                         $scope.event.tags.push($scope.event.translations[lang].tags[j]);
                     }
                     console.log('$scope.event', $scope.event);
 
 
-                    $scope.toggleLike = function (){
+                    $scope.toggleLike = function () {
                         $scope.event.liked = !$scope.event.liked;
-                        dataProvider.updateSingleObject('events',$scope.event.id, $scope.event,'liked');
+                        dataProvider.updateSingleObject('events', $scope.event.id, $scope.event, 'liked');
                     };
 
-                    $scope.nextEvent = function (){
-                        if($scope.event.$nextEvent){
-                            $state.go('app.singleprogram',{idx:$scope.event.$nextEvent.id});
+                    $scope.nextEvent = function () {
+                        if ($scope.event.$nextEvent) {
+                            $state.go('app.singleprogram', {idx: $scope.event.$nextEvent.id});
                         }
                     };
 
-                    $scope.previousEvent = function (){
-                        if($scope.event.$previousEvent){
-                            $state.go('app.singleprogram',{idx:$scope.event.$previousEvent.id});
+                    $scope.previousEvent = function () {
+                        if ($scope.event.$previousEvent) {
+                            $state.go('app.singleprogram', {idx: $scope.event.$previousEvent.id});
                         }
                     };
                 }

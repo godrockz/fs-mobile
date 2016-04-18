@@ -30,12 +30,12 @@
                 <ion-scroll class="prog-list">
 
                     <!-- NEW OLD STUFF -->
-                    <div class="prog-day new-prog" ng-repeat="day in ::location.days" >
+                    <div class="prog-day new-prog" >
 
 
                         <div id="{{::event.id}}"
                              class="prog-box row"
-                             ng-repeat="event in day.events|propertyFilter:'liked':true:view.filterLiked| orderBy: 'start' track by event.id "
+                             ng-repeat="event in location.events|propertyFilter:'liked':true:view.filterLiked| orderBy: 'start' track by event.id "
                              ui-sref="app.singleprogram({idx:event.id})">
 
                             <div class="col col-prog-left event-date" style="background-color:{{colorForEvent(event,location)}}">
@@ -54,8 +54,7 @@
                                 <header-image path="event.images"></header-image>
 
                                 <div class="marker-container" >
-                                    <span class="ion-ios-star" ng-show="event.liked"></span>
-                                    <span class="ion-ios-star-outline" ng-show="!event.liked"></span>
+                                    <span class="{{event.liked?'ion-ios-star':'ion-ios-star-outline'}}" ></span>
                                 </div>
 
                                 <div class="text-container">
@@ -66,7 +65,7 @@
                                  0 1px {{contrastColor(colorForEvent(event, location))}},
                                  1px 0 {{contrastColor(colorForEvent(event, location))}},
                                  0 -1px {{contrastColor(colorForEvent(event, location))}};">
-                                    {{event.tagString[lang]}}
+                                    {{::event.tagString[lang]}}
                                 </div>
                             </div>
 
@@ -76,6 +75,11 @@
                                 <p class="text"><small ng-repeat="tag in getTags(event)">#{{tag|lowercase}}&nbsp;</small></p>
                             </div-->
                         </div>
+
+                        <div ng-if="view.filterLiked && (location.events|propertyFilter:'liked':true:true).length<=0" class="noEventsSelected" >
+                            {{"app.events.no.events.selected"|translate}}
+                        </div>
+
                     </div>
 
                     <!--div style="float:left;">

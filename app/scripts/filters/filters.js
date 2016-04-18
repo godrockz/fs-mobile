@@ -112,6 +112,9 @@ angular.module('fsMobile.filters', [])
                 return list;
             }
             return list.filter(function (elem) {
+                if(elem[propertyName] === undefined){
+                    return false;
+                }
                 return elem[propertyName] === value;
             });
         }

@@ -53,6 +53,7 @@
     "app.event.category.MISC":"",
 
     "app.event.artist.website.label":"Website",
+    "app.events.no.events.selected":"Für diese Bühne wurden keine Veranstaltungen favorisiert.",
 
     "app.favorites.open.details":"Details",
     "app.favorites.no.favs":"Es wurden noch keine Veranstaltungen vorgemerkt.",
