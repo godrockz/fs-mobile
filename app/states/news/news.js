@@ -18,7 +18,7 @@ angular.module('fsMobile.states')
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope, $filter) {
+                controller: function ($scope, $filter, dataProvider) {
                     var filterLimitTo = $filter('limitTo');
                     $scope.initialLength = 7;
 
@@ -34,6 +34,10 @@ angular.module('fsMobile.states')
                     $scope.itemsToDisplay = $scope.initialLength;
                     provideNewDataToScope();
 
+                    $scope.toggleRead = function(item){
+                        item.read = !item.read;
+                        dataProvider.updateSingleObject('news', item.id, item, 'read');
+                    };
 
                 }
             }

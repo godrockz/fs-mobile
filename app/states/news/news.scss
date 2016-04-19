@@ -1,29 +1,12 @@
-.news-state {
-    background-color: $background-general;
-    padding: 0 0.5em;
-    .news-item {
-        background-color: white;
-        box-shadow: 3px 2px 6px grey;
-        margin: 0.8em 0;
-        padding: 0.5em;
-    }
-    .news-more {
-        text-align: center;
-        color: $positive;
-        height: 3em;
-        line-height: 1.3em;
-        padding-top: 1em;
-        margin-bottom: 1em;
-    }
-}
 
 .single-news {
     background-color: $background-general;
     padding: 0;
 
-    div.news-read-container{
+    div.news-read-container {
         position: absolute;
-        top:10px;right: 10px;
+        top: 10px;
+        right: 10px;
         color: yellow;
         font-size: 36px;
     }
@@ -48,75 +31,75 @@
             padding: 0.5em 1.5em;
         }
     }
-    .author{
-        margin-right:10px;
-        font-size:smaller;
+    .author {
+        margin-right: 10px;
+        font-size: smaller;
         font-style: italic;
         text-align: right;
     }
 }
 
-.news-date {
-    text-align: left;
-    float: left;
-    margin-right: 0.5em;
-    .box {
-        border-radius: 50% 0% 50% 50%;
-        display: inline-block;
-        width: 4em;
-        height: 4em;
-        background-color: rgba($positive, 0.5);
+$background-gray-right: #e2e2e2;
+$background-gray-left: #c1c1c1;
+$border-color: #525252;
+$border-size: 2px;
+
+.row.news-item {
+    min-height: 20%;
+    border: $border-size solid $border-color;
+    padding: 0px;
+    margin: 7px;
+    width: inherit;
+
+    .news-left, .news-right {
+        padding: 10px;
+    }
+
+    .news-left {
         position: relative;
-        line-height: 4em;
-        text-align: center;
-        span {
-            display: inline-block;
-            vertical-align: middle;
-            line-height: 1.4em;
-            font-size: 0.8em;
-            color: white;
+        background-color: $background-gray-left;
+        .read-icon {
+            padding: 8px 8px 8px 0;
+            font-size: 24px;
+            margin-left: 3vw;
+
         }
-    }
-    .box.read{
-        border-radius: 50%;
+        .box-ct {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            margin-left: -14px;
+            .box {
+
+                width: 75%;
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 120px;
+                font-size: 22px;
+                text-align: justify;
+                text-align-last: justify;
+                line-height: 22px;
+                letter-spacing: -5px;
+                display: table;
+                margin: 0 auto;
+            }
+        }
+
     }
 
-}
-
-.news-text-head {
-    padding: 0.2em 0 0.5em;
-    overflow: hidden;
-    p.head {
-        font-size: 1em;
-        margin: 0 0 0.3em;
-        color: $positive;
-        line-height: 1.1em;
-        //overflow: hidden;
-        //text-overflow: ellipsis;
-        //white-space: nowrap;
-    }
-    p.head.unread{
-        font-weight: bolder;
-    }
-    p.head.read{
-        font-weight: lighter;
+    .news-right {
+        background-color: $background-gray-right;
+        border-left: $border-size solid $border-color;
     }
 
-    p.text {
-        font-size: 0.7em;
+    .head {
+        width: 100%;
+        text-overflow: ellipsis;
         overflow: hidden;
-        margin: 0;
-        height: 3.5em;
-        position:relative;
-        line-height: 1.2em;
+        font-weight: 900;
+        white-space: nowrap;
     }
-    p.text:before {
-        content:'';
-        width:100%;
-        height:100%;
-        position:absolute;
-        left:0;
-        top:0;
-        background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
-    }
+
 }
+
+

@@ -2,29 +2,35 @@
     <ion-content class="news-state">
         <ion-refresher on-refresh="refreshData()" spinner="ios"></ion-refresher>
         <div ng-repeat="item in newsToShow"
-             class="news-item" ui-sref="app.singlenews({idx:item.id})">
-            <div class="news-date">
-                <div class="box {{item.read?'read':'unread'}}">
-                    <span>{{::'app.days.abbr.' + (item.publishDate | date:'EEEE') | lowercase | translate}}<br>
-                        {{::item.publishDate|date:'H:mm'}}
-                    </span>
+             class="row news-item" >
+
+            <div class="col news-left">
+                <span class="read-icon {{item.read?'ion-email':'ion-email-unread'}}"
+                      ng-click="toggleRead(item)"></span>
+                <div class="box-ct ">
+
+                    <div class="box">
+                    <p class="upper-case">
+                        {{::('app.days.abbr.' + (item.publishDate | date:'EEEE') | lowercase | translate)|justifySpaces}}
+                        <br>
+                        {{::item.publishDate|date:'HH:mm'|justifySpaces}}
+                    </p>
+                    </div>
+
                 </div>
+
             </div>
-            <div class="news-text-head">
-                <p class="head {{item.read?'read':'unread'}}">
-                    <span class="{{item.read?'ion-email':'ion-email-unread'}}"></span>
-                    {{::item|trans:'title'}} </p>
+
+
+            <div class="col-75 news-right" ui-sref="app.singlenews({idx:item.id}) ">
+                <h2 class="head {{item.read?'read':'unread'}}">
+
+                    {{::item|trans:'title'}} </h2>
                 <p class="text" markdown-to-html="item|trans:'preview'"></p>
             </div>
-            <div class="state-container">
 
-            </div>
         </div>
 
-        <div class="news-item news-more" ng-click="::showMoreItems()"
-             ng-if="appData.fsNews.length > itemsToDisplay">
-            {{::'app.news.loadmore'|translate}}
-        </div>
-        <br>
+
     </ion-content>
 </ion-view>
