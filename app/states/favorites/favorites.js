@@ -76,6 +76,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
     CalendarGrid.prototype.getEventsFor = function (startTime, endTime) {
         var result = [];
+        // TODO: optimize, remind already added events and do not iterate them each time
         angular.forEach(this.events, function (event) {
             var start = moment(event.start),
                 end = moment(event.end);
@@ -99,7 +100,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         while (currentTime.isBefore(endTime) || cnt <= 0) {
             var nextTime = moment(currentTime).add(step, 'MINUTE'),
                 eventsInCurrentTimeSlice = this.getEventsFor(currentTime, nextTime),
-            // prepend n-steps before an event. this way an entry will always display steps before starting from full hour
+                // prepend n-steps before an event. this way an entry will always display full hour before starting.
                 keepStepsTimeSliceEnd = moment(currentTime).add(1, 'HOUR').set('MINUTE', 0),
                 upcomingEventsInKeepSteps = this.getEventsFor(currentTime, keepStepsTimeSliceEnd),
 
@@ -188,12 +189,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     // FAVORITE EVENTS
                     angular.forEach($scope.appData.program, function (location) {
-                        angular.forEach(location.days, function (day) {
-                            angular.forEach(day.events, function (event) {
-                                if (event.liked && event.liked === true) {
-                                    grid.addEvent(event);
-                                }
-                            });
+                        angular.forEach(location.events, function (event) {
+                            if (event.liked && event.liked === true) {
+                                grid.addEvent(event);
+                            }
+
                         });
                     });
 
