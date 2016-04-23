@@ -17,7 +17,7 @@
       </style>
 
 
-      <p class=no-content" ng-if="!timeline || timeline.length<=0">
+      <p class="no-content warntext" ng-if="!timeline || timeline.length<=0">
           {{'app.favorites.no.favs'|translate}}
       </p>
       <div ng-repeat="timeslot in timeline" class="grid-row " style="{{$index==0?'margin-top:14px;':''}}">
@@ -50,6 +50,9 @@
       </div>
 
 
+      <div ng-if="grid.largeTimeSpan">
+          <p class="warntext"> {{'app.favorites.crazy.timespan'|translate}}</p>
+      </div>
 
 
 

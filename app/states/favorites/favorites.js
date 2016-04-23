@@ -27,9 +27,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
      * @param onRemovalKeepStepsBetween keep amount steps after an event (only if removeEmptySteps is set tot true)
      * @param renderAllTimes default:false, if true every step gets its time information rendered
      * @param showFullGrid - show gridlines on whole screen, default true
+     * @param maxDaysToRender - max days to watch when render. this avoids lot of recursion
      * @constructor
      */
-    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes, useAbsoluteRendering, showFullGrid) {
+    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes, useAbsoluteRendering, showFullGrid, maxDaysToRender) {
         this.useAbsoluteRendering = useAbsoluteRendering === undefined ? true : useAbsoluteRendering;
         this.showFullGrid = showFullGrid === undefined ? true : showFullGrid;
         this.events = [];
@@ -43,6 +44,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         this.onRemovalKeepStepsBetween = onRemovalKeepStepsBetween || 0;
         this.showAllTimes = renderAllTimes === undefined ? false : renderAllTimes;
         this.locationCount = 0;
+        this.maxDaysToRender = maxDaysToRender || 10;
+        this.largeTimeSpan = false;
     }
 
     CalendarGrid.prototype.addEvent = function (event) {
@@ -92,12 +95,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         var me = this,
             step = parseInt(stepSizeMin, 10) || 15,
             currentTime = this.firstTime,
-            result = [], cnt = 1000,
+            result = [], 
+            cnt = (this.maxDaysToRender * 24 * 60 / stepSizeMin) + 10 ,// +10 some extra time for event prefix / suffix slots 
             endTime = this.additionalSteps ? moment(this.lastTime).add(this.additionalSteps * stepSizeMin, 'MINUTE') : this.lastTime,
             keeptStepCnt = 0,
             addedEvents = {};
 
-        while (currentTime.isBefore(endTime) || cnt <= 0) {
+        while (currentTime.isBefore(endTime) && cnt >= 0) {
             var nextTime = moment(currentTime).add(step, 'MINUTE'),
                 eventsInCurrentTimeSlice = this.getEventsFor(currentTime, nextTime),
                 // prepend n-steps before an event. this way an entry will always display full hour before starting.
@@ -105,15 +109,15 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                 upcomingEventsInKeepSteps = this.getEventsFor(currentTime, keepStepsTimeSliceEnd),
 
                 isAdditionalTime = currentTime.isAfter(this.lastTime);
+
+            cnt--; // avoid endless loops
+
             // check if the row should be removed because it hs not entries
             if (upcomingEventsInKeepSteps.length <= 0 && eventsInCurrentTimeSlice.length <= 0 && this.removeEmptyRows) {
 
                 if (keeptStepCnt >= this.onRemovalKeepStepsBetween && !isAdditionalTime) {
                     // do not add current time slice
                     currentTime = nextTime;
-                    cnt--; // avoid endless loops
-
-
                     continue;
                 }
                 keeptStepCnt++;
@@ -162,7 +166,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             });
 
             currentTime = nextTime;
-            cnt--; // avoid endless loops
+        }
+        if(cnt<=0){
+            this.largeTimeSpan = true;
         }
         // create grid starting @ start
         return result;
@@ -239,12 +245,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
 
                     // RESULTS TO SCOPE
-                    $scope.timeline = grid.getTimeLine(slotSizeInMinutes);
                     $scope.grid = grid;
+                    $scope.timeline = grid.getTimeLine(slotSizeInMinutes);
                 }
             }
-
-
         }
     });
 });

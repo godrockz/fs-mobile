@@ -2,8 +2,9 @@
     $grid-color-back: #ddd;
     $grid-color-front : #999;
 
-    p.no-content{
+    p.warntext{
         margin:15px;
+        padding:15px;
     }
     .border-light {
         border-top: 1px dashed $grid-color-back;

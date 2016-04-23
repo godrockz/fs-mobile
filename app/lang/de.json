@@ -57,6 +57,7 @@
 
     "app.favorites.open.details":"Details",
     "app.favorites.no.favs":"Es wurden noch keine Veranstaltungen vorgemerkt.",
+    "app.favorites.crazy.timespan":"Deine Favoriten liegen zu weit ausseinander, sie können nicht komplett dargestellt werden.",
 
     "language.de":"Deutsch",
     "language.en":"Englisch",
