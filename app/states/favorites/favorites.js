@@ -113,8 +113,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     // select NOW events EVENTS
                     angular.forEach($scope.appData.program, function (location) {
                         angular.forEach(location.events, function (event) {
-                            var eStart = moment(event.start),
-                                eEnd = moment(event.end);
+
+                            var eStart = event._mstart || moment(event.start),
+                                eEnd = event._mstart || moment(event.end);
+                            event._mstart = eStart;
+                            event._mend = eEnd;
 
                             if(grid.isBetween(eStart, start,end) ||
                                 grid.isBetween(eEnd, start, end) ||

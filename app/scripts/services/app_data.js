@@ -62,6 +62,13 @@ angular.module('fsMobile.services')
                 // attach locations to published events
                 this.events = this.events.filterNotPublished();
                 angular.forEach(this.events,function(event){
+
+                    // pre-calc moment.
+                    var eStart = event._mstart || moment(event.start),
+                        eEnd = event._mstart || moment(event.end);
+                    event._mstart = eStart;
+                    event._mend = eEnd;
+
                     event.location = self.locations[event.locationRef];
 
                     // pre-render tags string to avoid ng-repeat for every event

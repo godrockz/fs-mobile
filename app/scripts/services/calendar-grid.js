@@ -193,7 +193,7 @@ angular.module('fsMobile').service('CalendarGrid', function(){
         // create grid starting @ start
 
         var endTT = new Date().getTime();
-        console.log('duration ',endTT - startTT, initDuration);
+        console.log('duration ',endTT - startTT,'durationForLoopInit', initDuration);
         return result;
     };
 
