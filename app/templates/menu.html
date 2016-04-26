@@ -16,9 +16,11 @@
     <ion-side-menu side="left">
         <div class="menu-bar-overlay"></div>
         <ion-content>
-            <div class="menu-img"></div>
+            <div class="menu-img">
+                <a class="ion-ios-gear settings-menu-link" menu-close ui-sref="app.settings" ></a>
+            </div>
             <div class="menu-logo"></div>
-            <a class="ion-ios-gear settings-menu-link" menu-close ui-sref="app.settings" ></a>
+
             <ion-list>
                 <ion-item nav-clear menu-close ui-sref="app.news">
                     {{'app.general.news'|translate}}
