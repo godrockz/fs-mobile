@@ -30,10 +30,10 @@ angular.module('fsMobile').service('CalendarGrid', function(){
      * @param maxDaysToRender - max days to watch when render. this avoids lot of recursion
      * @constructor
      */
-    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes, 
+    function CalendarGrid(height, removeEmptyRows, additionalSteps, onRemovalKeepStepsBetween, renderAllTimes,
                           useAbsoluteRendering, showFullGrid, maxDaysToRender) {
-        
-        
+
+
         this.useAbsoluteRendering = useAbsoluteRendering === undefined ? true : useAbsoluteRendering;
         this.showFullGrid = showFullGrid === undefined ? true : showFullGrid;
         this.events = [];
@@ -94,8 +94,11 @@ angular.module('fsMobile').service('CalendarGrid', function(){
         var result = [];
         // TODO: optimize, remind already added events and do not iterate them each time
         angular.forEach(this.events, function (event) {
-            var start = moment(event.start),
-                end = moment(event.end);
+            var start = event._mstart || moment(event.start),
+                end = event._mend || moment(event.end);
+            event._mstart = start;
+            event._mend = end;
+
             if (isBetween(startTime, start, end) || isBetween(endTime, start, end) ||
                 isBetween(start, startTime, endTime) || isBetween(end, startTime, endTime)) {
                 result.push(event);
@@ -105,24 +108,28 @@ angular.module('fsMobile').service('CalendarGrid', function(){
     };
 
     CalendarGrid.prototype.getTimeLine = function (stepSizeMin) {
+        var startTT = new Date().getTime();
         var me = this,
             step = parseInt(stepSizeMin, 10) || 15,
             currentTime = this.firstTime,
             result = [],
-            cnt = (this.maxDaysToRender * 24 * 60 / stepSizeMin) + 10 ,// +10 some extra time for event prefix / suffix slots 
+            cnt = (this.maxDaysToRender * 24 * 60 / stepSizeMin) + 10 ,// +10 some extra time for event prefix / suffix slots
             endTime = this.additionalSteps ? moment(this.lastTime).add(this.additionalSteps * stepSizeMin, 'MINUTE') : this.lastTime,
             keeptStepCnt = 0,
             addedEvents = {};
 
+        var initDuration = 0;
+
         while (currentTime.isBefore(endTime) && cnt >= 0) {
-            var nextTime = moment(currentTime).add(step, 'MINUTE'),
+            var sss = new Date().getTime(), nextTime = moment(currentTime).add(step, 'MINUTE'),
+
                 eventsInCurrentTimeSlice = this.getEventsFor(currentTime, nextTime),
             // prepend n-steps before an event. this way an entry will always display full hour before starting.
                 keepStepsTimeSliceEnd = moment(currentTime).add(1, 'HOUR').set('MINUTE', 0),
                 upcomingEventsInKeepSteps = this.getEventsFor(currentTime, keepStepsTimeSliceEnd),
 
                 isAdditionalTime = currentTime.isAfter(this.lastTime);
-
+            initDuration += new Date().getTime()-sss;
             cnt--; // avoid endless loops
 
             // check if the row should be removed because it hs not entries
@@ -184,8 +191,11 @@ angular.module('fsMobile').service('CalendarGrid', function(){
             this.largeTimeSpan = true;
         }
         // create grid starting @ start
+
+        var endTT = new Date().getTime();
+        console.log('duration ',endTT - startTT, initDuration);
         return result;
     };
-    
+
     return CalendarGrid;
 });
