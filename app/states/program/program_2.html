@@ -36,9 +36,14 @@
                         <div id="{{::event.id}}"
                              class="prog-box row"
                              ng-repeat="event in location.events|propertyFilter:'liked':true:view.filterLiked| orderBy: 'start' track by event.id "
-                             ui-sref="app.singleprogram({idx:event.id})">
+                             >
 
                             <div class="col col-prog-left event-date" style="background-color:{{colorForEvent(event,location)}}">
+                                <div class="marker-container" >
+                                <div  ng-click="toggleLike(event);">
+                                    <span class="{{event.liked?'ion-ios-star':'ion-ios-star-outline'}}" ></span>
+                                </div>
+                                </div>
                                 <div>
                                     <span>{{::'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}</span>
                                     <br>
@@ -49,13 +54,11 @@
                             </div>
 
 
-                            <div class="col col-prog-right image-side">
+                            <div class="col col-prog-right image-side" ui-sref="app.singleprogram({idx:event.id})">
 
                                 <header-image path="event.images"></header-image>
 
-                                <div class="marker-container" >
-                                    <span class="{{event.liked?'ion-ios-star':'ion-ios-star-outline'}}" ></span>
-                                </div>
+
 
                                 <div class="text-container">
                                 <p class="head">{{::event|trans:'name'}}</p>

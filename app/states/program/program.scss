@@ -259,7 +259,7 @@
         overflow: auto;
 
         $spaceBottom: 15px;
-        .event-date > div {
+        .event-date > div:nth-child(2) {
             color: #fff;
             position: absolute;
             font-size: 18px;
@@ -271,7 +271,7 @@
                 letter-spacing: 3px;
             }
             span:first-child {
-                letter-spacing: 11px;
+                letter-spacing: 1px;
             }
         }
 
@@ -279,14 +279,19 @@
 
         }
 
-        div.marker-container {
-            position: absolute;
-            right: 18px;
-            top: 13px;
-            color: yellow;
-            font-weight: 900;
-            font-size: 27px;
+        div.marker-container{
+            position: relative;
+            &>div {
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                color: yellow;
+                font-weight: 900;
+                font-size: 27px;
+            }
         }
+
+
 
         div.text-container {
 

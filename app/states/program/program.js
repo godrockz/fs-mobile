@@ -14,7 +14,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/program/program_2.html',
                 controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate ,
-                                      $stateParams, $translate, Colors) {
+                                      $stateParams, $translate, Colors, dataProvider) {
                     $scope.view = {};
 
 
@@ -112,6 +112,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                             $ionicScrollDelegate.scrollTop();
                         }
                     });
+
+                    $scope.toggleLike = function (event) {
+                        event.liked = !event.liked;
+                        dataProvider.updateSingleObject('events', event.id, event, 'liked');
+                    };
 
                     $scope.contrastColor = Colors.contrastColor;
                 }
