@@ -37,7 +37,7 @@ angular.module('fsMobile').service('CalendarGrid', function(){
         this.useAbsoluteRendering = useAbsoluteRendering === undefined ? true : useAbsoluteRendering;
         this.showFullGrid = showFullGrid === undefined ? true : showFullGrid;
         this.events = [];
-        this.firstTime = moment();
+        this.firstTime = moment("2099-12-31");
         this.lastTime = moment(0);
         this.locations = {};
         this.entryHeight = height || 100; // px
@@ -68,9 +68,8 @@ angular.module('fsMobile').service('CalendarGrid', function(){
         this.locations[event.location.id] = event.location;
         this.locationCount = Object.keys(this.locations).length;
         this.entryWidth = 99 / (this.locationCount + 1 );// +1 to mind the time column
-
-
-        var start = moment(event.start), end = moment(event.end);
+        
+        var start = event._mstart || moment(event.start), end = event._mend || moment(event.end);
 
         if (this.firstTime.isAfter(start)) {
             this.firstTime = start;
