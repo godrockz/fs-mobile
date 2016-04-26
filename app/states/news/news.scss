@@ -45,7 +45,8 @@ $border-color: #525252;
 $border-size: 2px;
 
 .row.news-item {
-    min-height: 20%;
+    height: 25%;
+    overflow: auto;
     border: $border-size solid $border-color;
     padding: 0px;
     margin: 7px;
