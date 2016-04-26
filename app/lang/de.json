@@ -11,6 +11,7 @@
     "app.general.workshops":"Workshops",
     "app.general.workshop":"Workshops",
     "app.general.favorites":"Favoriten",
+    "app.general.now":"Jetzt",
     "app.settings.language.label":"Sprache",
     "app.settings.data.divider":"App Inhalt",
     "app.settings.fetchdate.label":"Stand",
@@ -58,6 +59,11 @@
     "app.favorites.open.details":"Details",
     "app.favorites.no.favs":"Es wurden noch keine Veranstaltungen vorgemerkt.",
     "app.favorites.crazy.timespan":"Deine Favoriten liegen zu weit ausseinander, sie können nicht komplett dargestellt werden.",
+
+    "app.now.open.details":"Details",
+    "app.now.no.favs":"Jetzt finden keine Veranstaltungen statt.",
+    "app.now.crazy.timespan":"Die Veranstaltungen liegen zu weit ausseinander, sie können nicht komplett dargestellt werden.",
+
 
     "language.de":"Deutsch",
     "language.en":"Englisch",
