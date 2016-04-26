@@ -166,7 +166,7 @@ angular.module('fsMobile').service('CalendarGrid', function(){
 
                 if (!addedEvents[event.id]) {
                     // this is the first event getting added
-                    var durationInMinutes = moment.duration(moment(event.end).diff(moment(event.start))).asMinutes();
+                    var durationInMinutes = moment.duration(event._mend.diff(event._mstart)).asMinutes();
                     var renderHeight = Math.ceil(durationInMinutes / stepSizeMin) * me.entryHeight;
                     if (location.renderHeight === undefined || location.renderHeight < renderHeight) {
                         location.renderHeight = renderHeight;
