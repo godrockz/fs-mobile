@@ -37,7 +37,7 @@ angular.module('fsMobile').service('CalendarGrid', function(){
         this.useAbsoluteRendering = useAbsoluteRendering === undefined ? true : useAbsoluteRendering;
         this.showFullGrid = showFullGrid === undefined ? true : showFullGrid;
         this.events = [];
-        this.firstTime = moment("2099-12-31");
+        this.firstTime = moment('2099-12-31');
         this.lastTime = moment(0);
         this.locations = {};
         this.entryHeight = height || 100; // px
@@ -68,7 +68,7 @@ angular.module('fsMobile').service('CalendarGrid', function(){
         this.locations[event.location.id] = event.location;
         this.locationCount = Object.keys(this.locations).length;
         this.entryWidth = 99 / (this.locationCount + 1 );// +1 to mind the time column
-        
+
         var start = event._mstart || moment(event.start), end = event._mend || moment(event.end);
 
         if (this.firstTime.isAfter(start)) {
@@ -106,6 +106,11 @@ angular.module('fsMobile').service('CalendarGrid', function(){
         return result;
     };
 
+    /**
+     * calculates a timeline that contains times and events
+     * @param stepSizeMin
+     * @returns {Array}
+     */
     CalendarGrid.prototype.getTimeLine = function (stepSizeMin) {
         var startTT = new Date().getTime();
         var me = this,
@@ -115,7 +120,8 @@ angular.module('fsMobile').service('CalendarGrid', function(){
             cnt = (this.maxDaysToRender * 24 * 60 / stepSizeMin) + 10 ,// +10 some extra time for event prefix / suffix slots
             endTime = this.additionalSteps ? moment(this.lastTime).add(this.additionalSteps * stepSizeMin, 'MINUTE') : this.lastTime,
             keeptStepCnt = 0,
-            addedEvents = {};
+            addedEvents = {},
+            nextTimeNewDate = true;
 
         var initDuration = 0;
 
@@ -136,6 +142,10 @@ angular.module('fsMobile').service('CalendarGrid', function(){
 
                 if (keeptStepCnt >= this.onRemovalKeepStepsBetween && !isAdditionalTime) {
                     // do not add current time slice
+                    if (!nextTimeNewDate){
+                        
+                        nextTimeNewDate = nextTime.date() !== currentTime.date();
+                    }
                     currentTime = nextTime;
                     continue;
                 }
@@ -180,10 +190,14 @@ angular.module('fsMobile').service('CalendarGrid', function(){
 
             result.push({
                 time: currentTime.toDate(),
+                isNewDay : nextTimeNewDate,
                 isFullHour: currentTime.minute() === 0,
                 locations: locations
             });
 
+            // check if next tick would be next day
+            nextTimeNewDate = nextTime.date() !== currentTime.date();
+            console.log('day', nextTimeNewDate,nextTime.date(),currentTime.date());
             currentTime = nextTime;
         }
         if(cnt<=0){

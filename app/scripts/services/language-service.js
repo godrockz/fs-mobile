@@ -13,7 +13,8 @@ angular.module('fsMobile.services')
             prefix: 'lang/',
             suffix: '.json'
         });
-        $translateProvider.registerAvailableLanguageKeys(['de', 'en'], {
+        $translateProvider.registerAvailableLanguageKeys(['de', 'en'],
+            {
             'de*': 'de',
             'en*': 'en'
         });
@@ -25,8 +26,8 @@ angular.module('fsMobile.services')
         LanguageService.discoverAndSetupLanguage();
 
     })
-    .service('LanguageService', function ($rootScope, $ionicHistory, $q, $localForage
-        , AVAILABLE_LANGUAGES, $translate) {
+    .service('LanguageService', function ($rootScope, $ionicHistory, $q, $localForage, AVAILABLE_LANGUAGES,
+                                          $translate) {
 
         var currentLanguageKey = 'currentLanguage';
 

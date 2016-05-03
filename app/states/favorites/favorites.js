@@ -82,6 +82,8 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     // RESULTS TO SCOPE
                     $scope.grid = grid;
                     $scope.timeline = grid.getTimeLine(slotSizeInMinutes);
+                    $scope.timeFormat = $scope.dimension.width/($scope.grid.locationCount+1)<50?'HH':'HH:mm';
+                    console.log('timeFormat:',$scope.timeFormat);
                 }
             }
         }
@@ -158,7 +160,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         delete $scope.selectedLocationCt;
                     };
 
-
                     // RESULTS TO SCOPE
                     $scope.grid = grid;
                     $scope.timeline = grid.getTimeLine(slotSizeInMinutes);
@@ -166,5 +167,24 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             }
         }
     });
+}).directive('reflow',function($timeout){
+    return {
+        // possibly fix a render problem for fairphones-1 users
+        // forcing re-layout after some time
+        restrict:'EA',
+        template:'<div></div>',
+        link:function(scope, elem, attrs){
+            $timeout(function(){
+                var element = elem[0];
+                try{
+                    element.parentNode.style.cssText += '';
+                    element.parentNode.style.zoom = 1;
+                    element.style.cssText += '';
+                    element.style.zoom = 1;
+                    element.style.cssText = 'border: 0px solid red; width:100%; height:5px;';
+                }catch(ex){}
+            }, attrs.time|| 3000);
+        }
+    };
 });
 

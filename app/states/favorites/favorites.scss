@@ -2,6 +2,14 @@
     $grid-color-back: #ddd;
     $grid-color-front : #999;
 
+    div.dayText{
+        position: relative;
+        div {
+            position: absolute;
+            top: 0px;
+            width: 150px;
+        }
+    }
     p.warntext{
         margin:15px;
         padding:15px;
