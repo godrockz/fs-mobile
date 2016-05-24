@@ -5,8 +5,8 @@
     "lodash": "~3.7.0",
     "ionic": "1.3.1",
     "ngCordova": "0.1.17-alpha",
-    "angular-resource": "~1.3.13",
-    "angular-localForage": "~1.2.2",
+    "angular-resource": "1.5.5",
+    "angular-localForage": "1.2.5",
     "localforage": "~1.2.2",
     "angular-translate-loader-static-files": "~2.7.2",
     "angular-translate": "~2.7.2",
@@ -16,12 +16,12 @@
     "ng-showdown": "1.1.0"
   },
   "devDependencies": {
-    "angular-mocks": "~1.3.6",
-    "angular-scenario": "~1.3.6",
+    "angular-mocks": "1.5.5",
+    "angular-scenario": "1.5.5",
     "chance": "~0.7.3"
   },
   "resolutions": {
-    "angular": "1.3.20",
+    "angular": "1.5.5",
       "angular-animate":"1.5.3"
   }
 }
