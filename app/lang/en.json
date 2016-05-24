@@ -11,6 +11,7 @@
     "app.general.workshops":"Workshops",
     "app.general.workshop":"Workshops",
     "app.general.favorites":"Favorites",
+    "app.general.now":"Now",
     "app.settings.language.label":"Language",
     "app.settings.data.divider":"App content",
     "app.settings.fetchdate.label":"last update:",
@@ -53,9 +54,16 @@
     "app.event.category.MISC":"",
 
     "app.event.artist.website.label":"Website",
+    "app.events.no.events.selected":"No events where marked as preferred for this stage",
 
     "app.favorites.open.details":"Details",
     "app.favorites.no.favs":"There are no events marked",
+    "app.favorites.crazy.timespan":"Due to the large timespan of liked events we could not display all of them.",
+
+
+    "app.now.open.details":"Details",
+    "app.now.no.favs":"Currently there are no events running",
+    "app.now.crazy.timespan":"Due to the large timespan of events we could not display all of them.",
 
     "language.de":"German",
     "language.en":"English",

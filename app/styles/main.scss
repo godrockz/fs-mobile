@@ -56,6 +56,7 @@ body * {
 @import "partials/tabmenu";
 
 // Your application styles go here
+@import "mixins";
 @import "../states/news/news";
 @import "../states/map/map";
 @import "../states/imprint/imprint";
@@ -64,6 +65,7 @@ body * {
 @import "../states/program/program";
 @import "../states/workshops/workshop";
 @import "../states/favorites/favorites";
+
 
 
 // menu bar image
@@ -83,16 +85,18 @@ body * {
     -o-background-size: cover;
     width:100%;
     height:30%;
+    position: relative;
+
+    .settings-menu-link{ /* gear wheel to goto settings */
+        position: absolute;
+        font-size: 24px;
+        bottom: 1px;
+        right: 10px;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+        color: black;
+    }
 }
 
-.settings-menu-link{ /* gear wheel to goto settings */
-    position: absolute;
-    font-size: 24px;
-    top: 27%;
-    right: 10px;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    color: black;
-}
 
 .menu-logo {
     background: url('../images/logo.png') no-repeat center center;
@@ -238,4 +242,8 @@ div.header-image {
 }
 .color-black{
     color: #000;
+}
+
+.upper-case{
+    text-transform: uppercase;
 }

@@ -5,25 +5,32 @@
 
 
       <style type="text/css">
-          .grid-row{
+          .grid-row {
             height:{{::grid.entryHeight+'px'}};
           }
-          .timeslot-entry{
+          .timeslot-entry {
             width:{{::grid.entryWidth+ '%'}};
           }
-          .event-entry{
+          .event-entry {
             width:{{::grid.entryWidth+ '%'}};
           }
       </style>
 
 
-      <p class=no-content" ng-if="!timeline || timeline.length<=0">
+      <p class="no-content warntext" ng-if="!timeline || timeline.length<=0">
           {{'app.favorites.no.favs'|translate}}
       </p>
       <div ng-repeat="timeslot in timeline" class="grid-row " style="{{$index==0?'margin-top:14px;':''}}">
 
           <div class="timeslot-entry {{ timeslot.isFullHour ? 'border-heavy' : 'border-light'}}"  >
-              <span ng-if="timeslot.isFullHour||grid.showAllTimes" >{{timeslot.time| date:(dimension.width/(grid.locationCount+1)<50?'HH':'HH:mm')}}</span>
+
+
+              <span ng-if="timeslot.isFullHour||grid.showAllTimes" >
+                  {{timeslot.time| date:(timeFormat)}}</span>
+              <div class="dayText" ng-if="timeslot.isNewDay">
+                  <div>{{('app.days.abbr.'+(timeslot.time|date:'EEEE')|lowercase)|translate}}</div>
+              </div>
+
           </div>
 
           <div ng-if="::grid.useAbsoluteRendering == false" ng-repeat="locationCt in timeslot.locations"
@@ -50,8 +57,11 @@
       </div>
 
 
+      <div ng-if="grid.largeTimeSpan">
+          <p class="warntext"> {{'app.favorites.crazy.timespan'|translate}}</p>
+      </div>
 
-
+    <div reflow=""></div>
 
   </ion-content>
     <div ng-if="selectedLocationCt" class="event-overlay" on-swipe-left="nextEvent()" on-swipe-right="previousEvent()">

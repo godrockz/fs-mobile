@@ -1,0 +1,4 @@
+
+@mixin txtShadow($size, $color) {
+    text-shadow: -$size 0px $color, 0px $size $color, $size 0px $color, 0px -1 * $size $color;
+}

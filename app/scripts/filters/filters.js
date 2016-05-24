@@ -112,6 +112,9 @@ angular.module('fsMobile.filters', [])
                 return list;
             }
             return list.filter(function (elem) {
+                if (elem[propertyName] === undefined) {
+                    return false;
+                }
                 return elem[propertyName] === value;
             });
         }
@@ -122,12 +125,18 @@ angular.module('fsMobile.filters', [])
     .filter('lpad', function () {
         return function (str, size, charSequence) {
             var result = str + '',
-                char = charSequence||'0',
+                char = charSequence || '0',
                 len = size || 2;
 
             while (result.length < len) {
                 result = char + '' + result;
             }
             return result;
+        };
+    })
+    .filter('justifySpaces', function () {
+        return function (input,sep) {
+            var separator = sep || '';
+            return input.split(separator).join(' '+ separator + ' ');
         };
     });

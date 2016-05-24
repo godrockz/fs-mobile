@@ -16,6 +16,10 @@ angular.module('fsMobile.services')
          */
         var dayLimit='05:59:59';
 
+        function BY_EVENT_START(a,b){
+            return moment(a.start).diff(moment(b.start));
+        }
+
         function cacheIfNeeded(url){
             ImageCacheService.isCached(url).then(function(isCached){
                 if(!isCached){
@@ -54,11 +58,17 @@ angular.module('fsMobile.services')
 
             this.program = [];
             this.workshops = [];
-            var uri;
             if (this.events) {
                 // attach locations to published events
                 this.events = this.events.filterNotPublished();
                 angular.forEach(this.events,function(event){
+
+                    // pre-calc moment.
+                    var eStart = event._mstart || moment(event.start),
+                        eEnd = event._mstart || moment(event.end);
+                    event._mstart = eStart;
+                    event._mend = eEnd;
+
                     event.location = self.locations[event.locationRef];
 
                     // pre-render tags string to avoid ng-repeat for every event
@@ -85,23 +95,29 @@ angular.module('fsMobile.services')
                 var programEvents = this.events.filterByEventCategory('WORKSHOP', true);
                 programEvents = this.events.groupByLocation(programEvents);
 
+
                 angular.forEach(programEvents, function(locationEvents, locationId) {
                     var loc = this.locations[locationId];
                     // we should not create dummy locations for unassigned events!
                     if (!loc){ return; }
-                    loc.days = [];
+
+                    loc.events = [];
+                    loc.days = []; // is this still required ?
 
                     // link them to allow next/previous navigation via swipe in detail views
                     var prevEvent;
-                    var sorted = locationEvents.sort(function(a,b){return moment(a.start).diff(moment(b.start))});
+                    var sorted = locationEvents.sort(BY_EVENT_START);
+
                     angular.forEach(sorted,function(evt){
                         if(prevEvent){
                             prevEvent.$nextEvent = evt;
                             evt.$previousEvent = prevEvent;
                         }
                         prevEvent = evt;
+                        loc.events.push(evt);
                     });
 
+                    // TODO: ist grouped by day still required ?
                     angular.forEach(this.events.groupByDay(locationEvents, dayLimit),
                                     function(dayEvents, dayString) {
                         var day = {
@@ -114,6 +130,8 @@ angular.module('fsMobile.services')
                     // need to sort the days
                     loc.days = $filter('orderObjectBy')(loc.days,'date','date');
                     this.program.push(loc);
+
+
                 }, this);
 
                 // BUILD WORKSHOPS
@@ -131,7 +149,7 @@ angular.module('fsMobile.services')
 
                     // link them to allow next/previous navigation via swipe in detail views
                     var prevEvent;
-                    var sorted = dayEvents.sort(function(a,b){return moment(a.start).diff(moment(b.start))});
+                    var sorted = dayEvents.sort(BY_EVENT_START);
                     angular.forEach(sorted,function(evt){
                         if(prevEvent){
                             prevEvent.$nextEvent = evt;

@@ -2,8 +2,17 @@
     $grid-color-back: #ddd;
     $grid-color-front : #999;
 
-    p.no-content{
+    div.dayText{
+        position: relative;
+        div {
+            position: absolute;
+            top: 0px;
+            width: 150px;
+        }
+    }
+    p.warntext{
         margin:15px;
+        padding:15px;
     }
     .border-light {
         border-top: 1px dashed $grid-color-back;

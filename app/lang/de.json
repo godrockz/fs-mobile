@@ -11,6 +11,7 @@
     "app.general.workshops":"Workshops",
     "app.general.workshop":"Workshops",
     "app.general.favorites":"Favoriten",
+    "app.general.now":"Jetzt",
     "app.settings.language.label":"Sprache",
     "app.settings.data.divider":"App Inhalt",
     "app.settings.fetchdate.label":"Stand",
@@ -26,13 +27,13 @@
     "app.days.saturday":"Samstag",
     "app.days.sunday":"Sonntag",
 
-    "app.days.abbr.monday":"Mon",
-    "app.days.abbr.tuesday":"Die",
-    "app.days.abbr.wednesday":"Mit",
-    "app.days.abbr.thursday":"Don",
-    "app.days.abbr.friday":"Fre",
-    "app.days.abbr.saturday":"Sam",
-    "app.days.abbr.sunday":"Son",
+    "app.days.abbr.monday":"Mo",
+    "app.days.abbr.tuesday":"Di",
+    "app.days.abbr.wednesday":"Mi",
+    "app.days.abbr.thursday":"Do",
+    "app.days.abbr.friday":"Fr",
+    "app.days.abbr.saturday":"Sa",
+    "app.days.abbr.sunday":"So",
 
     "app.time.start":"Start",
     "app.time.from":"Von",
@@ -53,9 +54,16 @@
     "app.event.category.MISC":"",
 
     "app.event.artist.website.label":"Website",
+    "app.events.no.events.selected":"Für diese Bühne wurden keine Veranstaltungen favorisiert.",
 
     "app.favorites.open.details":"Details",
     "app.favorites.no.favs":"Es wurden noch keine Veranstaltungen vorgemerkt.",
+    "app.favorites.crazy.timespan":"Deine Favoriten liegen zu weit ausseinander, sie können nicht komplett dargestellt werden.",
+
+    "app.now.open.details":"Details",
+    "app.now.no.favs":"Jetzt finden keine Veranstaltungen statt.",
+    "app.now.crazy.timespan":"Die Veranstaltungen liegen zu weit ausseinander, sie können nicht komplett dargestellt werden.",
+
 
     "language.de":"Deutsch",
     "language.en":"Englisch",

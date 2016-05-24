@@ -1,127 +1,127 @@
 .program {
 
-  .centerline {
-    border-left: 2px solid $positive;
-    border-right: 2px solid $positive;
-    height: 100%;
-    width: 0;
-    margin: 0 auto;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: -1;
-  }
-
-  .prog-container {
-    height: 100%;
-    .prog-tab {
-      background-color: $background-general;
-      .prog-list {
+    .centerline {
+        border-left: 2px solid $positive;
+        border-right: 2px solid $positive;
         height: 100%;
-        padding: 0 0.5em;
-        .prog-day {
-          .prog-date {
-            overflow: hidden;
-            div {
-              height: 2em;
-              padding: 0.5em;
-              float: left;
-              width: 50%;
-              &.prog-date-left {
-                text-align: right;
-              }
-              &.prog-date-right {
-                text-align: left;
-              }
-            }
-          }
-          .prog-box {
-              background-color: white;
-              box-shadow: 3px 2px 6px grey;
-              min-height: 5em;
-              position: relative;
-              .row {
-                  padding: 0;
-              }
-              .prog-datetime {
-                  float: left;
-                  text-align: left;
-                  margin-right: 0.5em;
-                  .box {
-                      border-radius: 50%;
-                      display: inline-block;
-                      width: 4em;
-                      height: 4em;
-                      background-color: rgba($positive, 0.5);
-                      position: relative;
-                      line-height: 4em;
-                      text-align: center;
-                      span {
-                          display: inline-block;
-                          vertical-align: middle;
-                          line-height: 1.4em;
-                          font-size: 0.8em;
-                          color: white;
-                      }
-                  }
-              }
-
-              .prog-text-head {
-                  padding: 0.2em 0;
-                  overflow: hidden;
-
-                  p.head {
-                      font-size: 1em;
-                      margin: 0 0 0.2em;
-                      color: $positive;
-                      //overflow: hidden;
-                      //text-overflow: ellipsis;
-                      //white-space: nowrap;
-                  }
-                  p.text {
-                      font-size: 0.7em;
-                      overflow: hidden;
-                      text-overflow: ellipsis;
-                      margin: 0;
-                      line-height: 1.5em;
-                      white-space: nowrap;
-                  }
-                  // p.tags {
-                  //     font-size: 0.6em;
-                  //     overflow: hidden;
-                  //     height: 1.2em;
-                  //     position:relative;
-                  //     line-height: 1.2em;
-                  //     text-overflow: ellipsis;
-                  //     white-space: nowrap;
-                  //     margin: 0.2em 0 0;
-                  // }
-                  //p.text:before {
-                  //    content:'';
-                  //    width:100%;
-                  //    height:100%;
-                  //    position:absolute;
-                  //    left:0;
-                  //    top:0;
-                  //    background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
-                  //}
-              }
-              .prog-actual {
-                  background-color: $positive;
-                  margin: 0 -1.8em;
-                  height: 6em;
-                  position: absolute;
-                  top: 5em;
-                  left: 0;
-                  z-index: 99;
-              }
-          }
-
-        }
-      }
+        width: 0;
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: -1;
     }
-  }
+
+    .prog-container {
+        height: 100%;
+        .prog-tab {
+            background-color: $background-general;
+            .prog-list {
+                height: 100%;
+                padding: 0 0.5em;
+                .prog-day {
+                    .prog-date {
+                        overflow: hidden;
+                        div {
+                            height: 2em;
+                            padding: 0.5em;
+                            float: left;
+                            width: 50%;
+                            &.prog-date-left {
+                                text-align: right;
+                            }
+                            &.prog-date-right {
+                                text-align: left;
+                            }
+                        }
+                    }
+                    .prog-box {
+                        background-color: white;
+                        box-shadow: 3px 2px 6px grey;
+                        min-height: 5em;
+                        position: relative;
+                        .row {
+                            padding: 0;
+                        }
+                        .prog-datetime {
+                            float: left;
+                            text-align: left;
+                            margin-right: 0.5em;
+                            .box {
+                                border-radius: 50%;
+                                display: inline-block;
+                                width: 4em;
+                                height: 4em;
+                                background-color: rgba($positive, 0.5);
+                                position: relative;
+                                line-height: 4em;
+                                text-align: center;
+                                span {
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    line-height: 1.4em;
+                                    font-size: 0.8em;
+                                    color: white;
+                                }
+                            }
+                        }
+
+                        .prog-text-head {
+                            padding: 0.2em 0;
+                            overflow: hidden;
+
+                            p.head {
+                                font-size: 1em;
+                                margin: 0 0 0.2em;
+                                color: $positive;
+                                //overflow: hidden;
+                                //text-overflow: ellipsis;
+                                //white-space: nowrap;
+                            }
+                            p.text {
+                                font-size: 0.7em;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                margin: 0;
+                                line-height: 1.5em;
+                                white-space: nowrap;
+                            }
+                            // p.tags {
+                            //     font-size: 0.6em;
+                            //     overflow: hidden;
+                            //     height: 1.2em;
+                            //     position:relative;
+                            //     line-height: 1.2em;
+                            //     text-overflow: ellipsis;
+                            //     white-space: nowrap;
+                            //     margin: 0.2em 0 0;
+                            // }
+                            //p.text:before {
+                            //    content:'';
+                            //    width:100%;
+                            //    height:100%;
+                            //    position:absolute;
+                            //    left:0;
+                            //    top:0;
+                            //    background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
+                            //}
+                        }
+                        .prog-actual {
+                            background-color: $positive;
+                            margin: 0 -1.8em;
+                            height: 6em;
+                            position: absolute;
+                            top: 5em;
+                            left: 0;
+                            z-index: 99;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
 }
 
 .single-program {
@@ -154,7 +154,7 @@
         }
     }
 
-    div.marker-container{
+    div.marker-container {
         position: absolute;
         right: 18px;
         top: 13px;
@@ -204,7 +204,7 @@
         overflow: hidden;
         margin: 0;
         height: 2em;
-        position:relative;
+        position: relative;
         line-height: 1.2em;
     }
     //p.text:before {
@@ -217,105 +217,113 @@
     //    background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
     //}
 
-
-
-}
-
-div.new-prog {
-
-color: #ff8c8c;
-
 }
 
 .program-new {
 
     $left-side: 20%;
     $right-side: 100% - $left-side;
-    .col-prog-left{
+    .col-prog-left {
         -webkit-flex: 0 0 $left-side;
         -moz-flex: 0 0 $left-side;
         flex: 0 0 $left-side;
         max-width: $left-side;
-        min-width:77px;
+        min-width: 77px;
     }
 
-    .col-prog-right{
+    .col-prog-right {
         -webkit-flex: 0 0 $right-side;
         -moz-flex: 0 0 $right-side;
         flex: 0 0 $right-side;
         max-width: $right-side;
     }
 
+    .noEventsSelected {
+        $font-size: 40px;
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: $font-size;
+        color: $background-general;
+        @include txtShadow(2px, #ddd);
+        line-height: $font-size + 5;
+        margin-top: 30px;
+        font-weight: 900;
 
+    }
 
-    .prog-day {
-        .prog-box {
+    .prog-box {
 
-            padding: 0px;
-            margin: 0px 0px 10px;
-            overflow:auto;
+        padding: 0px;
+        margin: 0px 0px 10px;
+        overflow: auto;
 
-            $spaceBottom:15px;
-            .event-date>div{
-                color:#fff;
-                position: absolute;
-                font-size:18px;
-                font-weight: 900;
-                bottom:$spaceBottom;
-                margin-bottom:10px;
-                text-transform: uppercase;
-                span{
-                    letter-spacing: 3px;
-                }
-                span:first-child{
-                    letter-spacing:11px;
-                }
+        $spaceBottom: 15px;
+        .event-date > div:nth-child(2) {
+            color: #fff;
+            position: absolute;
+            font-size: 18px;
+            font-weight: 900;
+            bottom: $spaceBottom;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            span {
+                letter-spacing: 3px;
             }
-
-            div.header-image {
-
+            span:first-child {
+                letter-spacing: 1px;
             }
+        }
 
-            div.marker-container{
+        div.header-image {
+
+        }
+
+        div.marker-container{
+            position: relative;
+            &>div {
                 position: absolute;
-                right: 18px;
-                top: 13px;
+                right: 5px;
+                top: 5px;
                 color: yellow;
                 font-weight: 900;
                 font-size: 27px;
             }
+        }
 
-            div.text-container {
 
-                position: absolute;
-                bottom:$spaceBottom;
-                width:80%;
-                overflow: hidden;
-                padding:10px;
 
-                p.head {
-                    font-size: 24px;
-                    color: #fff;
-                    font-weight: 900;
-                    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                }
-                p.tags {
-                    font-weight: bold;
-                    font-size: 15px;
-                    color: #fff;
-                    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                    white-space: nowrap;
-                    width: 100%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    letter-spacing: 2px;
-                }
+        div.text-container {
+
+            position: absolute;
+            bottom: $spaceBottom;
+            width: 80%;
+            overflow: hidden;
+            padding: 10px;
+
+            p.head {
+                font-size: 24px;
+                color: #fff;
+                font-weight: 900;
+                @include txtShadow(1px, black);
             }
-            color : #BFAFFf;
-
-            .image-side {
-                padding: 0px;
+            p.tags {
+                font-weight: bold;
+                font-size: 15px;
+                color: #fff;
+                @include txtShadow(1px, black);
+                white-space: nowrap;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                letter-spacing: 2px;
             }
         }
+        color: #BFAFFf;
+
+        .image-side {
+            padding: 0px;
+        }
     }
+
 }
