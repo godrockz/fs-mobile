@@ -78,7 +78,7 @@ angular.module('fsMobile.services', []);
         //######### LANG: moved to language-service
     })
 
-    .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q) {
+    .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q, $ionicHistory, $filter) {
 
         function isMobile(){
             return navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i) &&
@@ -106,6 +106,27 @@ angular.module('fsMobile.services', []);
             }
             platformReady.resolve('done-plattform-ready');
         });
+
+        $ionicPlatform.registerBackButtonAction(function(e){
+
+            if ($rootScope.backButtonPressedOnceToExit) {
+                ionic.Platform.exitApp();
+            }
+            else if ($ionicHistory.backView()) {
+                $ionicHistory.goBack();
+            }
+            else {
+                $rootScope.backButtonPressedOnceToExit = true;
+                window.plugins.toast.showShortBottom(
+                    $filter('translate')('app.general.backButton.exit.toast'),function(a){},function(b){}
+                );
+                setTimeout(function(){
+                    $rootScope.backButtonPressedOnceToExit = false;
+                },2000);
+            }
+            e.preventDefault();
+            return false;
+        },101);
 
 
         function onDeviceReady() {

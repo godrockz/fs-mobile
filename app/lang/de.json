@@ -12,6 +12,7 @@
     "app.general.workshop":"Workshops",
     "app.general.favorites":"Favoriten",
     "app.general.now":"Jetzt",
+    "app.general.backButton.exit.toast":"Zum Beenden nochmal drücken",
     "app.settings.language.label":"Sprache",
     "app.settings.data.divider":"App Inhalt",
     "app.settings.fetchdate.label":"Stand",
