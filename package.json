@@ -63,7 +63,6 @@
     "cordova-plugin-crosswalk-webview",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
-    "com.ionic.keyboard",
     "cordova-plugin-x-toast"
   ],
   "cordovaPlatforms": [
