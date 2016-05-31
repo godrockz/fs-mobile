@@ -61,14 +61,15 @@
 
 
                                 <div class="text-container">
-                                <p class="head">{{::event|trans:'name'}}</p>
-                                <p class="tags" style="color:{{::colorForEvent(event, location)}};
-                                text-shadow:
-                                 -1px 0 {{::contrastColor(colorForEvent(event, location))}},
-                                 0 1px {{::contrastColor(colorForEvent(event, location))}},
-                                 1px 0 {{::contrastColor(colorForEvent(event, location))}},
-                                 0 -1px {{::contrastColor(colorForEvent(event, location))}};">
-                                    {{::event.tagString[lang]}}
+                                    <p class="head">{{::event|trans:'name'}}</p>
+                                    <p class="tags" style="color:{{::colorForEvent(event, location)}};
+                                        text-shadow:
+                                         -1px 0 {{::contrastColor(colorForEvent(event, location))}},
+                                         0 1px {{::contrastColor(colorForEvent(event, location))}},
+                                         1px 0 {{::contrastColor(colorForEvent(event, location))}},
+                                         0 -1px {{::contrastColor(colorForEvent(event, location))}};">
+                                        {{::event.tagString[lang]}}
+                                    </p>
                                 </div>
                             </div>
 
