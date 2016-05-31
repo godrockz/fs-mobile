@@ -19,7 +19,7 @@ angular.module('fsMobile.services')
          * @returns {string}
          */
         function endPoint(){
-            return (DYNENV.apiEndpoint||'') + '/data';
+            return (DYNENV.apiEndpoint||'') + '/v16/data';
         }
 
         /**
@@ -35,7 +35,7 @@ angular.module('fsMobile.services')
 
             localObjects = localObjects || {};
             angular.forEach(newObjects, function (newObject) {
-                console.log('updateing data ',newObject);
+                console.log('updating data ',newObject);
                 if (newObject.deleted ) {
                     delete localObjects[newObject.id];
                 } else if(newObject.archived){
