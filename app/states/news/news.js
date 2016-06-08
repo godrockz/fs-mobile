@@ -15,15 +15,16 @@ angular.module('fsMobile.states')
 
     $stateProvider.state('app.news', {
         url: '/news',
+        onEnter: function ($state, appData) {
+            // because this news page is the app entry point it must be manually checked if app is outdated.
+            if (appData.outdated) {
+                $state.go('app.outdated');
+            }
+        },
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope, $filter, dataProvider, $state) {
-
-                    // because this news page is the app entry point and no transition 
-                    if ($scope.appData.outdated) {
-                        $state.go('app.outdated');
-                    }
+                controller: function ($scope, $filter, dataProvider) {
 
                     var filterLimitTo = $filter('limitTo');
                     $scope.initialLength = 7;

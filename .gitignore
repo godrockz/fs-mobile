@@ -16,3 +16,4 @@ plugins
 
 app/scripts/config.js
 app/scripts/data
+app/scripts/configuration.js
