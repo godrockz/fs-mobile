@@ -9,8 +9,8 @@
 /*jslint
   browser: true
 */
-/*global
-    angular
+/* global
+    angular, ionic
 */
 
 angular.module('fsMobile.states', []);
@@ -118,7 +118,7 @@ angular.module('fsMobile.services', []);
             else {
                 $rootScope.backButtonPressedOnceToExit = true;
                 window.plugins.toast.showShortBottom(
-                    $filter('translate')('app.general.backButton.exit.toast'),function(a){},function(b){}
+                    $filter('translate')('app.general.backButton.exit.toast'),function(){},function(){}
                 );
                 setTimeout(function(){
                     $rootScope.backButtonPressedOnceToExit = false;
