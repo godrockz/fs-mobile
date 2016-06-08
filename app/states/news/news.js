@@ -18,7 +18,13 @@ angular.module('fsMobile.states')
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope, $filter, dataProvider) {
+                controller: function ($scope, $filter, dataProvider, $state) {
+
+                    // because this news page is the app entry point and no transition 
+                    if ($scope.appData.outdated) {
+                        $state.go('app.outdated');
+                    }
+
                     var filterLimitTo = $filter('limitTo');
                     $scope.initialLength = 7;
 

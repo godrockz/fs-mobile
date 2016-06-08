@@ -25,7 +25,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             }
         },
         controller: function ($scope, $ionicLoading, dataProvider, ImageCacheService,
-                              $timeout, $ionicHistory, appData, AppData, $rootScope) {
+                              $timeout, $ionicHistory, appData, AppData, $rootScope, $state) {
 
             $scope.appData = new AppData(appData);
 
@@ -70,6 +70,15 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                     navigator.splashscreen.hide();
                 }
             });
+
+            $rootScope.$on('$stateChangeStart',
+                function(event, toState, toParams, fromState, fromParams, options){
+
+                    if (appData.outdated && toState.name !== 'app.outdated') {
+                        event.preventDefault();
+                        $state.go('app.outdated');
+                    }
+                });
         }
     });
 });

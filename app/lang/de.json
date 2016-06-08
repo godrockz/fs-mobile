@@ -6,6 +6,7 @@
     "app.general.siteplan":"Geländeplan",
     "app.general.events":"Events",
     "app.general.settings":"Einstellungen",
+    "app.general.outdated":"Bis bald ...",
     "app.general.imprint":"Impressum",
     "app.general.program":"Programm",
     "app.general.workshops":"Workshops",
@@ -65,6 +66,7 @@
     "app.now.no.favs":"Jetzt finden keine Veranstaltungen statt.",
     "app.now.crazy.timespan":"Die Veranstaltungen liegen zu weit ausseinander, sie können nicht komplett dargestellt werden.",
 
+    "app.outdated.text" : "Freakstock ist für dieses Jahr gelaufen. Schaue nächstes Jahr in deinem App-Store nach der aktuellen Version dieser App.",
 
     "language.de":"Deutsch",
     "language.en":"Englisch",

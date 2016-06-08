@@ -2,6 +2,6 @@
 
  angular.module('config', [])
 
-.constant('ENV', {name:'development',remoteApiEndpoint:'http://spektacholeriker.de:8080',localApiEndpoint:'http://fs.spektacholeriker.de:8080',offlineJsonDataDirectory:'scripts/data'})
+.constant('ENV', {name:'development',remoteApiEndpoint:'http://192.168.178.32:8080',localApiEndpoint:'http://192.168.178.32:8080',offlineJsonDataDirectory:'scripts/data'})
 
 ;

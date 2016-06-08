@@ -58,6 +58,9 @@ angular.module('fsMobile.services')
 
             this.program = [];
             this.workshops = [];
+
+            this.outdated = data.outdated;
+
             if (this.events) {
                 // attach locations to published events
                 this.events = this.events.filterNotPublished();

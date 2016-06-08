@@ -61,8 +61,14 @@ angular.module('fsMobile.services')
         function updateLocalForageData (response, data) {
             data = data || {};
             angular.forEach(response.data, function (objects, resourceName) {
-                data[resourceName] =
-                    updateResourceData(data[resourceName], objects);
+                if (angular.isArray(objects)) {
+                    data[resourceName] =
+                        updateResourceData(data[resourceName], objects);
+                }
+                else {
+                    data[resourceName] = objects;
+                }
+
             });
             data.$metaInfo = response.$metaInfo;
             return $localForage.setItem(metaInfoKey, response.$metaInfo).then(function () {
