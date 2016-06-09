@@ -94,7 +94,10 @@ angular.module('fsMobile.directives')
                             ImageCacheService.cacheImage(url).then(function(){
                                 // caching was successful
                                 useCachedImage(url);
-                            });// in case of error -> random image is left
+                            }, function () {
+                                // in case of error -> random image is left
+                                useRandomImage(scope.topic);
+                            });
                         } else if(isCached ) {
                             // in any case if it was cached we use it
                             useCachedImage(url);
