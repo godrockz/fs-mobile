@@ -126,7 +126,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
     $stateProvider.state('app.singleprogram', {
         url: '/program/:idx',
-        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',

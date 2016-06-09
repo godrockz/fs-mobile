@@ -51,7 +51,6 @@ angular.module('fsMobile.states')
 
     $stateProvider.state('app.singlenews', {
         url: '/news/:idx',
-        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'states/news/singlenews.html',

@@ -59,7 +59,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
     $stateProvider.state('app.workshop', {
         url: '/workshop/:idx',
-        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshop.html',
