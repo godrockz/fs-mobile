@@ -30,7 +30,7 @@ angular.module('fsMobile.services', []);
     'ng-showdown',
     'ImgCache'
 ])
-    .config(function ($translateProvider, $urlRouterProvider, $showdownProvider, ImgCacheProvider) {
+    .config(function ($translateProvider, $urlRouterProvider, $showdownProvider, ImgCacheProvider, $ionicConfigProvider) {
 
         //######### PREPARE ImgCache
         // as we deal with 2 hostnames for inner and outer network we provide a custom hash function
@@ -76,6 +76,8 @@ angular.module('fsMobile.services', []);
         $urlRouterProvider.otherwise('/app/news');
 
         //######### LANG: moved to language-service
+
+        $ionicConfigProvider.backButton.text('').previousTitleText('').icon('ion-chevron-left');
     })
 
     .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q, $ionicHistory, $filter) {
@@ -113,7 +115,7 @@ angular.module('fsMobile.services', []);
                 ionic.Platform.exitApp();
             }
             else if ($ionicHistory.backView()) {
-                $ionicHistory.goBack();
+                $ionicHistory.goBack(-1000);
             }
             else {
                 $rootScope.backButtonPressedOnceToExit = true;
@@ -127,7 +129,6 @@ angular.module('fsMobile.services', []);
             e.preventDefault();
             return false;
         },101);
-
 
         function onDeviceReady() {
             deviceReady.resolve();

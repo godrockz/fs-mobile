@@ -9,9 +9,7 @@
 */
 'use strict';
 angular.module('fsMobile.states')
-    .config(function ($stateProvider, $ionicConfigProvider) {
-
-    $ionicConfigProvider.backButton.text('').previousTitleText('').icon('ion-chevron-left');
+    .config(function ($stateProvider) {
 
     $stateProvider.state('app.news', {
         url: '/news',
@@ -87,7 +85,6 @@ angular.module('fsMobile.states')
                     $scope.$on('$ionicView.leave',function(){
                         $timeout.cancel(markAsReadTimeout);
                     });
-
                 }
             }
         }

@@ -8,9 +8,7 @@
 
 'use strict';
 angular.module('fsMobile.states')
-    .config(function ($stateProvider, $ionicConfigProvider) {
-
-        $ionicConfigProvider.backButton.text(null).previousTitleText(null).icon(null);
+    .config(function ($stateProvider) {
 
         $stateProvider.state('app.outdated', {
             url: '/outdated',

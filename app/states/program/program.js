@@ -13,7 +13,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/program_2.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate ,
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate,
                                       $stateParams, $translate, Colors, dataProvider) {
                     $scope.view = {};
 
@@ -130,7 +130,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',
-                controller: function ($scope, $stateParams, $translate, dataProvider, $state) {
+                controller: function ($scope, $stateParams, $translate, dataProvider, $state, $rootScope, $ionicHistory) {
 
                     var lang = $translate.use();
 
@@ -143,8 +143,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     for (var j = 0; j < $scope.event.translations[lang].tags.length; j++) {
                         $scope.event.tags.push($scope.event.translations[lang].tags[j]);
                     }
-                    console.log('$scope.event', $scope.event);
-
 
                     $scope.toggleLike = function () {
                         $scope.event.liked = !$scope.event.liked;
@@ -163,8 +161,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         }
                     };
                 }
-
-
             }
         }
     });
