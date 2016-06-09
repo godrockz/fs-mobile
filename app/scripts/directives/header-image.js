@@ -82,25 +82,25 @@ angular.module('fsMobile.directives')
                     scope.useFallbackImage = true;
                 }
 
-                // always display random image
-                useRandomImage(scope.topic);
                 if (!url) {
+                    useRandomImage(scope.topic);
                     return; // no url so we use random image
                 }
 
                 ConnectionState.checkOnline().then(function (isOnline) {
                     ImageCacheService.isCached(url).then(function (isCached) {
+
                         if(isOnline  && !isCached ){
                             ImageCacheService.cacheImage(url).then(function(){
                                 // caching was successful
                                 useCachedImage(url);
                             });// in case of error -> random image is left
-                        }else if(isCached ) {
+                        } else if(isCached ) {
                             // in any case if it was cached we use it
                             useCachedImage(url);
+                        } else {
+                            useRandomImage(scope.topic);
                         }
-                        // any other case, random image is left in display
-
                     });
                 });
             }

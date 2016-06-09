@@ -130,7 +130,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',
-                controller: function ($scope, $stateParams, $translate, dataProvider, $state, $rootScope, $ionicHistory) {
+                controller: function ($scope, $stateParams, $translate, dataProvider, $state) {
 
                     var lang = $translate.use();
 

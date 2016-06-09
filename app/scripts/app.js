@@ -83,8 +83,9 @@ angular.module('fsMobile.services', []);
     .run(function ($ionicPlatform , ImageCacheService, $rootScope, $q, $ionicHistory, $filter) {
 
         function isMobile(){
+
             return navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i) &&
-                !navigator.platform.match(/(Linux x86_64)/i); // required as chrome emulates agent string if device testing mode is enabled
+                !navigator.platform.match(/(Linux x86_64)|(Win32)/i); // required as chrome emulates agent string if device testing mode is enabled
 
         }
 
@@ -138,7 +139,6 @@ angular.module('fsMobile.services', []);
         }else{
             deviceReady.resolve();
         }
-
 
         $q.all(dependencies).then(function(){
             ImageCacheService.init();
