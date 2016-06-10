@@ -87,23 +87,17 @@ angular.module('fsMobile.directives')
                     return; // no url so we use random image
                 }
 
+                useCachedImage(url);
+
                 ConnectionState.checkOnline().then(function (isOnline) {
                     ImageCacheService.isCached(url).then(function (isCached) {
 
-                        if(isOnline  && !isCached ){
-                            ImageCacheService.cacheImage(url).then(function(){
-                                // caching was successful
-                                useCachedImage(url);
-                            }, function () {
-                                // in case of error -> random image is left
-                                useRandomImage(scope.topic);
-                            });
-                        } else if(isCached ) {
-                            // in any case if it was cached we use it
-                            useCachedImage(url);
-                        } else {
+                        if (!isOnline && !isCached) {
                             useRandomImage(scope.topic);
                         }
+
+                        // if cached: fine
+                        // if online: ic-src will cache it
                     });
                 });
             }
