@@ -92,12 +92,24 @@ angular.module('fsMobile.directives')
                 ConnectionState.checkOnline().then(function (isOnline) {
                     ImageCacheService.isCached(url).then(function (isCached) {
 
+                        // if cached: fine
+                        // if online: ic-src will cache it
+
                         if (!isOnline && !isCached) {
                             useRandomImage(scope.topic);
                         }
+                        else if (isOnline && !isCached) {
 
-                        // if cached: fine
-                        // if online: ic-src will cache it
+                            // this can only be the case if image could not be get because here it should already be cached
+
+                            ImageCacheService.cacheImage(url).then(function(){
+                                useCachedImage(url);
+                            }, function () {
+                                // in case of error -> use random image
+                                $log.error('Could not get image ' + url + ' Using random.');
+                                useRandomImage(scope.topic);
+                            });
+                        }
                     });
                 });
             }
