@@ -40,16 +40,21 @@
 }
 
 $background-gray-right: #e2e2e2;
-$background-gray-left: #c1c1c1;
-$border-color: #525252;
+$background-gray-left: $positive;
+$textcolor-left: #fff;
+$border-color: #000;
 $border-size: 2px;
+
+.news-state{
+    background-color: $background-gray-right;
+}
 
 .row.news-item {
     height: 25%;
     overflow: auto;
-    border: $border-size solid $border-color;
-    padding: 0px;
-    margin: 7px;
+    padding-right:12px;
+    margin-left:5px;
+    margin-top:5px;
     width: inherit;
 
     .news-left, .news-right {
@@ -59,12 +64,16 @@ $border-size: 2px;
     .news-left {
         position: relative;
         background-color: $background-gray-left;
+        border: $border-size solid $border-color;
+        color: $textcolor-left;
+
         .read-icon {
             padding: 8px 8px 8px 0;
-            font-size: 24px;
+            font-size: 36px;
             margin-left: 3vw;
 
         }
+        font-weight:100;
         .box-ct {
             position: absolute;
             bottom: 0px;
@@ -74,13 +83,17 @@ $border-size: 2px;
 
                 width: 75%;
                 max-width: 120px;
-                font-size: 22px;
-                text-align: justify;
-                text-align-last: justify;
-                line-height: 22px;
-                letter-spacing: -5px;
+
                 display: table;
                 margin: 0 auto;
+
+                p{ /* always on bottom*/
+                    position:absolute;
+                    bottom:0px;
+                    font-size: 24px;
+                    line-height: 24px;
+
+                }
             }
             .box:after {
                 content: "";
@@ -93,7 +106,8 @@ $border-size: 2px;
 
     .news-right {
         background-color: $background-gray-right;
-        border-left: $border-size solid $border-color;
+        border: $border-size solid $border-color;
+
     }
 
     .head {

@@ -11,9 +11,9 @@
 
                     <div class="box">
                     <p class="upper-case">
-                        {{::('app.days.abbr.' + (item.publishDate | date:'EEEE') | lowercase | translate)|justifySpaces}}
+                        {{::('app.days.abbr.' + (item.publishDate | date:'EEEE') | lowercase | translate)}}
                         <br>
-                        {{::item.publishDate|date:'HH:mm'|justifySpaces}}
+                        {{::item.publishDate|date:'HH:mm'}}
                     </p>
                     </div>
 
