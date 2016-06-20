@@ -1,13 +1,18 @@
-.workshops {
-    $background-gray-right: #e2e2e2;
-    $background-gray-left: $positive;
-    $textcolor-left: #fff;
-    $border-color: #777777;
-    $border-size: 1px;
+$background-gray-right: #e2e2e2;
+$background-gray-left: #689aca;
+$textcolor-left: #fff;
+$border-color: #777777;
+$border-size: 1px;
 
-    $left-side:20%;
-    $right-side: 100% - 20%;
-    $row-height: 150px;
+$left-side:20%;
+$right-side: 100% - 20%;
+$row-height: 150px;
+
+.bar.bar-positive , .bar-positive .button{
+    background-color: $background-gray-left !important;
+}
+
+.workshops {
 
     .work-container {
         height: 100%;
@@ -78,6 +83,23 @@
                         -moz-flex: 0 0 $right-side;
                         flex: 0 0 $right-side;
                         max-width: $right-side;
+
+                        .head{
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                        p{
+                            margin-bottom: 1px;
+                            line-height: 12px;
+                            font-size: 12px;
+                        }
+                        p.extra{
+                            font-weight: bold;
+                        }
+                        p:last-child{
+                            margin-top:10px;
+                        }
                     }
                 }
             }

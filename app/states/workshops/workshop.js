@@ -67,9 +67,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/workshops/workshop.html',
                 controller: function ($scope, $stateParams, dataProvider, $state) {
-
                     if ($scope.appData.events) {
                         $scope.event = $scope.appData.events[$stateParams.idx];
+                        console.log('event ',$scope.event);
                         $scope.event.location = $scope.appData.locations[$scope.event.locationRef];
                     }
 

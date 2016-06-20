@@ -55,10 +55,10 @@
                            </div>
                            <div class="col right-side" ui-sref="app.workshop({idx:event.id})">
 
-                               <p class="head">{{::event|trans:'name'}}</p>
-                               <p class="text" ng-if="::event.author">{{::'app.workshop.from'|translate }}: {{::event.author}}</p>
-                               <p class="text">{{::'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
-
+                               <h3 class="head">{{::event|trans:'name'}}</h3>
+                               <p class="text extra" ng-if="::event.author">{{::'app.workshop.from'|translate }}: {{::event.author}}</p>
+                               <p class="text extra">{{::'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
+                               <p class="text">{{:: event|trans:'preview'}}</p>
                            </div>
                        </div>
                     </div>
