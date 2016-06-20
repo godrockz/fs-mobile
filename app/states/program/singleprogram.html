@@ -2,36 +2,36 @@
     <ion-content class="single-program" on-swipe-right="previousEvent()" on-swipe-left="nextEvent()">
         <header-image path="event.images"></header-image>
 
-        <div class="marker-container" ng-click="toggleLike();">
-            <span class="ion-ios-star" ng-show="event.liked"></span>
-            <span class="ion-ios-star-outline" ng-show="!event.liked"></span>
+        <div class="row sub-title-row" style="background-color:{{::event.location.color}}">
+            <div class="left">
+                <p class="upper-case">
+                    {{::('app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate)}}
+                    <br>
+                    {{::event.start|date:'HH:mm'}} <br>
+                    {{::event.end|date:'HH:mm'}}
+                </p>
+            </div>
+            <div class="middle text-center">{{::event.location|trans:'name'}}</div>
+            <div class="right">
+                 <span class="pull-right star-icon {{event.liked?'ion-ios-star':'ion-ios-star-outline'}}"
+                       ng-click="toggleLike()"></span>
+            </div>
         </div>
 
-        <div class="content-box" >
-            <div class="program-headline">
-                <div class="program-date">
-                    <div class="box">
-                        <span>{{::'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{::event.start|date:'H:mm'}}</span>
-                    </div>
-                </div>
-                <div class="program-text-head">
-                    {{::event.location|trans:'name'}}
-                </div>
-            </div>
-            <p class="program-info">
-                <span class="tag">{{::'app.time.from'|translate}}:</span> {{::event.start|date:'H:mm'}}
-                <span class="tag">{{::'app.time.to'|translate}}:</span> {{::event.end|date:'H:mm'}}
-            </p>
+        <div class="content-box">
             <p class="program-tags">
                 <small ng-repeat="tag in event.tags">#{{tag|lowercase}}&nbsp;</small>
             </p>
+
             <p class="program-text">{{::event|trans:'description'}}</p>
 
             <p><a href="{{event.artistWebsite}}" ng-if="event.artistWebsite" class="program-text">
                 <span class="ion-link"></span>
                 {{::'app.event.artist.website.label'|translate}}
             </a></p>
+
         </div>
+
 
     </ion-content>
 </ion-view>
