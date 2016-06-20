@@ -2,7 +2,7 @@
  plusplus: true
  */
 /*global
- angular, moment, _
+ angular, _
  */
 
 'use strict';
@@ -20,7 +20,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     var program_length = $scope.appData.program.length,
                         startSlideIndex = 0,
-                        dayEnd = 6, // when will a new color start
                         lang = $translate.use();
                     $scope.lang = lang;
 
@@ -79,33 +78,6 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     $scope.slide = {index: startSlideIndex};
 
-                    // THE NEW PROGRAM STYLE
-
-                    // define a colors array for each location
-                    var startValue = 20;
-
-                    angular.forEach($scope.appData.program, function (location) {
-
-                        // precalculate colors array
-                        var prev = Colors.rgb2hsv(location.color || '#ffffff');
-                        location.colors = [];
-                        //console.log('=========');
-                        for (var i = 0; i < 24; i++) {
-                            //
-                            // var value = 20 *  Math.log(i/10)+ 80;
-                            // prev.s = value;
-                            // console.log('value',value);
-
-                            prev.s = (i) * ((100 - startValue) / 24) + startValue;
-                            location.colors[((i + dayEnd) % 24)] = Colors.hsb2rgb(prev.h, prev.s, prev.v);
-                        }
-
-                    });
-
-                    $scope.colorForEvent = function (event, location) {
-                        return location.colors[moment(event.start).hour()];
-                    };
-
                     // scroll to top when the filter gets enabled
                     $scope.$watch('view.filterLiked',function(newValue){
                         if(newValue!== undefined && newValue===true){
@@ -129,7 +101,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',
-                controller: function ($scope, $stateParams, $translate, dataProvider, $state) {
+                controller: function ($scope, $stateParams, $translate, dataProvider, $state, $rootScope) {
 
                     var lang = $translate.use();
 
@@ -159,6 +131,16 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                             $state.go('app.singleprogram', {idx: $scope.event.$previousEvent.id});
                         }
                     };
+
+                    $scope.$on('$stateChangeStart',
+                        function(event, toState /*, toParams, fromState, fromParams, options */){
+
+                            if (toState.name !== 'app.singleprogram') {
+                                delete $rootScope.viewColor;
+                            }
+                        });
+
+                    $rootScope.viewColor = $scope.event.color;
                 }
             }
         }

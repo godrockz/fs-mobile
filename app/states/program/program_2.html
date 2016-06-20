@@ -1,5 +1,3 @@
-<!--<ion-view view-title="{{'app.general.locations'|translate}}" >-->
-
 <ion-view class="program program-new" view-title="{{::'app.general.program'|translate}}">
 
     <ion-nav-buttons side="right">
@@ -39,7 +37,7 @@
                              ng-repeat="event in location.events|propertyFilter:'liked':true:view.filterLiked| orderBy: 'start' track by event.id "
                              >
 
-                            <div class="col col-prog-left event-date" style="background-color:{{::colorForEvent(event,location)}}">
+                            <div class="col col-prog-left event-date" style="background-color:{{::event.color}}">
                                 <div class="marker-container" >
                                 <div  ng-click="toggleLike(event);">
                                     <span class="{{event.liked?'ion-ios-star':'ion-ios-star-outline'}}"  ></span>
@@ -63,22 +61,16 @@
 
                                 <div class="text-container">
                                     <p class="head">{{::event|trans:'name'}}</p>
-                                    <p class="tags" style="color:{{::colorForEvent(event, location)}};
+                                    <p class="tags" style="color:{{event.color}};
                                         text-shadow:
-                                         -1px 0 {{::contrastColor(colorForEvent(event, location))}},
-                                         0 1px {{::contrastColor(colorForEvent(event, location))}},
-                                         1px 0 {{::contrastColor(colorForEvent(event, location))}},
-                                         0 -1px {{::contrastColor(colorForEvent(event, location))}};">
+                                         -1px 0 {{::contrastColor(event.color)}},
+                                         0 1px {{::contrastColor(event.color)}},
+                                         1px 0 {{::contrastColor(event.color)}},
+                                         0 -1px {{::contrastColor(event.color)}};">
                                         {{::event.tagString[lang]}}
                                     </p>
                                 </div>
                             </div>
-
-                            <!--div class="prog-text-head">
-                                <p class="head">{{::event|trans:'name'}}</p>
-                                <p class="text">{{::'app.event.category.' + event.eventCategory|translate | uppercase}}  <span ng-if="::event.author">| {{::event.author}}</span></p>
-                                <p class="text"><small ng-repeat="tag in getTags(event)">#{{tag|lowercase}}&nbsp;</small></p>
-                            </div-->
                         </div>
 
                         <div ng-if="view.filterLiked && (location.events|propertyFilter:'liked':true:true).length<=0" class="noEventsSelected" >
@@ -86,10 +78,6 @@
                         </div>
 
                     </div>
-
-                    <!--div style="float:left;">
-                        <div ng-repeat="col in location.colors" style="width:10px;height:10px;float:left;background-color:{{col}}"></div>
-                    </div-->
 
                     <div style="height:5em;"></div>
 

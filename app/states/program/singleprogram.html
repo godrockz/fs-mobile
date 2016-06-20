@@ -4,11 +4,11 @@
 
         <style>
             .bar.bar-positive , .bar-positive .button{
-                background-color: {{::event.location.color}} !important;
+                background-color: {{::event.color}} !important;
             }
         </style>
 
-        <div class="row sub-title-row" style="background-color:{{::event.location.color}}">
+        <div class="row sub-title-row" style="background-color:{{::event.color}}">
             <div class="left">
                 <p class="upper-case">
                     {{::('app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate)}}
