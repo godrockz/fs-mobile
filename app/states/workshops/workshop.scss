@@ -8,9 +8,7 @@ $left-side:20%;
 $right-side: 100% - 20%;
 $row-height: 150px;
 
-.bar.bar-positive , .bar-positive .button{
-    background-color: $background-gray-left !important;
-}
+
 .slider-pager{
     display: none;
 }
@@ -86,6 +84,7 @@ $row-height: 150px;
                         -moz-flex: 0 0 $right-side;
                         flex: 0 0 $right-side;
                         max-width: $right-side;
+                        overflow: hidden;
 
                         .head{
                             overflow: hidden;
