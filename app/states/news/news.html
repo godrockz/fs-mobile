@@ -22,10 +22,8 @@
             </div>
 
 
-            <div class="col-75 news-right" ui-sref="app.singlenews({idx:item.id}) ">
-                <h2 class="head {{item.read?'read':'unread'}}">
-
-                    {{::item|trans:'title'}} </h2>
+            <div class="col-80 news-right" ui-sref="app.singlenews({idx:item.id}) ">
+                <h2 class="head {{item.read?'read':'unread'}}">{{::item|trans:'title'}} </h2>
                 <p class="text" >{{item|trans:'preview'}}</p>
             </div>
 
