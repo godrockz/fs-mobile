@@ -122,6 +122,10 @@ body * {
   }
 }
 
+.nav-bar-block, .bar {
+    background-color: inherit !important;
+}
+
 .tab-item {
   opacity: 1;
 }

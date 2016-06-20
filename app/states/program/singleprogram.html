@@ -2,7 +2,7 @@
     <ion-content class="single-program" on-swipe-right="previousEvent()" on-swipe-left="nextEvent()">
         <header-image path="event.images"></header-image>
 
-        <div class="row sub-title-row" style="background-color:{{::event.location.color}}">
+        <div class="row sub-title-row" style="background-color:{{::event.color}}">
             <div class="left">
                 <p class="upper-case">
                     {{::('app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate)}}

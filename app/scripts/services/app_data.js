@@ -4,7 +4,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('AppData', function (Resource, $filter, ImageCacheService) {
+    .factory('AppData', function (Resource, $filter, ImageCacheService, Colors) {
 
         /**
          * events before this time are counted to the previous day
@@ -99,6 +99,8 @@ angular.module('fsMobile.services')
                 programEvents = this.events.groupByLocation(programEvents);
 
 
+                var dayEnd = 6; // when will a new color start
+
                 angular.forEach(programEvents, function(locationEvents, locationId) {
                     var loc = this.locations[locationId];
                     // we should not create dummy locations for unassigned events!
@@ -111,12 +113,29 @@ angular.module('fsMobile.services')
                     var prevEvent;
                     var sorted = locationEvents.sort(BY_EVENT_START);
 
+                    // define a colors array for each location
+                    var startValue = 20;
+                    // precalculate colors array
+                    var prev = Colors.rgb2hsv(loc.color || '#ffffff');
+                    loc.colors = [];
+                    for (var i = 0; i < 24; i++) {
+                        // var value = 20 *  Math.log(i/10)+ 80;
+                        // prev.s = value;
+                        // console.log('value',value);
+
+                        prev.s = (i) * ((100 - startValue) / 24) + startValue;
+                        loc.colors[((i + dayEnd) % 24)] = Colors.hsb2rgb(prev.h, prev.s, prev.v);
+                    }
+
                     angular.forEach(sorted,function(evt){
                         if(prevEvent){
                             prevEvent.$nextEvent = evt;
                             evt.$previousEvent = prevEvent;
                         }
                         prevEvent = evt;
+
+                        evt.color = loc.colors[moment(evt.start).hour()];
+
                         loc.events.push(evt);
                     });
 
@@ -133,7 +152,6 @@ angular.module('fsMobile.services')
                     // need to sort the days
                     loc.days = $filter('orderObjectBy')(loc.days,'date','date');
                     this.program.push(loc);
-
 
                 }, this);
 
