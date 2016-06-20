@@ -15,7 +15,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider) {
                     var currentTime = moment();
                     $scope.view = {};
 
@@ -51,6 +51,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $scope.currentDay = function () {
                         var day =  $scope.appData.workshops[$scope.tabIndex];
                         return day? day.day_name : undefined;
+                    };
+                    $scope.toggleLike = function (event){
+                        event.liked = !event.liked;
+                        dataProvider.updateSingleObject('events',event.id, event,'liked');
                     };
                 }
             }

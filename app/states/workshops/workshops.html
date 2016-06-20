@@ -3,6 +3,7 @@
         <button class="button {{view.filterLiked? 'ion-ios-star':'ion-ios-star-outline'}}" ng-click="view.filterLiked=!view.filterLiked">
         </button>
     </ion-nav-buttons>
+
     <ion-content>
         <div class="tabmenu">
             <div class="tabmenu-left" ng-click="previousTab()"
@@ -18,30 +19,48 @@
             </div>
         </div>
 
+
         <ion-slide-box class="work-container" on-slide-changed="changeTabHeadTo($index)">
             <ion-slide class="work-tab" ng-repeat="day in ::appData.workshops | orderObjectBy:'date':'date'">
                 <ion-scroll class="work-list">
-                    <div class="work-box"
+                   <div class="work-box"
                             ng-repeat="event in day.events |propertyFilter:'liked':true:view.filterLiked | orderBy: 'start'"
-                            ui-sref="app.workshop({idx:event.id})"
-                            id="{{::event.id}}">
-                        <div class="work-date">
-                            <div class="box">
-                                <span
-                                    class="box-text">{{::event.start|date:'H:mm'}}<span
-                                        ng-if="::event.end"><br><small>-</small><br>{{::event.end|date:'H:mm'}}</span></span>
 
-                            </div>
-                        </div>
-                        <div class="marker-container">
-                            <span class="ion-ios-star" ng-show="event.liked"></span>
-                            <span class="ion-ios-star-outline" ng-show="!event.liked"></span>
-                        </div>
-                        <div class="work-text-head">
-                            <p class="head">{{::event|trans:'name'}}</p>
-                            <p class="text" ng-if="::event.author">{{::'app.workshop.from'|translate }}: {{::event.author}}</p>
-                            <p class="text">{{::'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
-                        </div>
+                            id="{{::event.id}}">
+
+
+                       <div class="row">
+                           <div class="col left-side">
+                               <div class="marker-container">
+
+                                   <div ng-click="toggleLike(event);">
+                                       <span class="{{event.liked ? 'ion-ios-star' : 'ion-ios-star-outline'}}"></span>
+                                   </div>
+                               </div>
+
+
+                               <div class="box-ct ">
+
+                                   <div class="box">
+                                       <p class="upper-case">
+                                           {{::('app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate)}}
+                                           <br>
+                                           {{::event.start|date:'HH:mm'}}
+                                           <br>
+                                           {{::event.end|date:'HH:mm'}}
+                                       </p>
+                                   </div>
+
+                               </div>
+                           </div>
+                           <div class="col right-side" ui-sref="app.workshop({idx:event.id})">
+
+                               <p class="head">{{::event|trans:'name'}}</p>
+                               <p class="text" ng-if="::event.author">{{::'app.workshop.from'|translate }}: {{::event.author}}</p>
+                               <p class="text">{{::'app.general.location'|translate }}: {{::appData.locations[event.locationRef]|trans:'name'}}</p>
+
+                           </div>
+                       </div>
                     </div>
                     <br><br>
                 </ion-scroll>

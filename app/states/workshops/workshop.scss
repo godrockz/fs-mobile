@@ -1,4 +1,13 @@
 .workshops {
+    $background-gray-right: #e2e2e2;
+    $background-gray-left: $positive;
+    $textcolor-left: #fff;
+    $border-color: #777777;
+    $border-size: 1px;
+
+    $left-side:20%;
+    $right-side: 100% - 20%;
+    $row-height: 150px;
 
     .work-container {
         height: 100%;
@@ -8,71 +17,75 @@
                 height: 100%;
                 padding: 0 0.5em;
                 .work-box {
-                    background-color: white;
-                    box-shadow: 3px 2px 6px grey;
-                    margin: 0.5em 0 1em 0;
-                    padding: 0.5em;
-                    min-height: 5em;
-                    position: relative;
-                    div.marker-container{ // the star icon
-                        position: absolute;
-                        right: 18px;
-                        top: 13px;
-                        color: black;
-                        font-weight: 900;
-                        font-size: 27px;
+                    .row{
+                        height:$row-height;
                     }
-                    .row {
-                        padding: 0;
+                    .row>div{
+                        border: $border-size solid $border-color;
                     }
-                    .work-date {
-                        text-align: left;
-                        margin-right: 0.5em;
-                        float: left;
-                        .box {
-                            border-radius: 50%;
-                            display: inline-block;
-                            width: 4em;
-                            height: 4em;
-                            background-color: rgba($positive, 0.5);
+                    .left-side {
+                        div.marker-container{
                             position: relative;
-                            line-height: 4em;
-                            text-align: center;
-                            span.box-text {
-                                width: 4em;
-                                display: inline-block;
-                                vertical-align: middle;
-                                line-height: 1.2em;
-                                font-size: 0.8em;
+                            &>div {
+                                position: absolute;
+                                top: 5px;
                                 color: white;
+                                font-weight: 900;
+                                font-size: 27px;
                             }
                         }
+                        -webkit-flex: 0 0 $left-side;
+                        -moz-flex: 0 0 $left-side;
+                        flex: 0 0 $left-side;
+                        max-width: $left-side;
+
+                        position: relative;
+                        background-color: $background-gray-left;
+                        color: $textcolor-left;
+
+                        .box-ct {
+                            position: absolute;
+                            bottom: 0px;
+                            width: 100%;
+                            margin-left: -14px;
+                            .box {
+
+                                width: 75%;
+                                max-width: 120px;
+
+                                display: table;
+                                margin: 0 auto;
+
+                                p { /* always on bottom*/
+                                    position: absolute;
+                                    bottom: 0px;
+                                    font-size: 18px;
+                                    line-height: 18px;
+
+                                }
+                            }
+                            .box:after {
+                                content: "";
+                                display: inline-block;
+                                width: 100%;
+                            }
+
+                        }
                     }
+                    .right-side{
 
-                    .work-text-head {
-                        overflow: hidden;
-                        padding-top: 0.2em;
-
-                        p.head {
-                            font-size: 1em;
-                            margin: 0 0 0.2em;
-                            color: $positive;
-                            //overflow: hidden;
-                            //text-overflow: ellipsis;
-                            //white-space: nowrap;
-                        }
-                        p.text {
-                            font-size: 0.7em;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            margin: 0;
-                            line-height: 1.5em;
-                        }
+                        -webkit-flex: 0 0 $right-side;
+                        -moz-flex: 0 0 $right-side;
+                        flex: 0 0 $right-side;
+                        max-width: $right-side;
                     }
                 }
             }
         }
     }
+
+
+
 }
 
 .single-work {
@@ -157,15 +170,6 @@
             position:relative;
             line-height: 1.2em;
         }
-        //p.text:before {
-        //    content:'';
-        //    width:100%;
-        //    height:100%;
-        //    position:absolute;
-        //    left:0;
-        //    top:0;
-        //    background:linear-gradient(rgba(255, 255, 255, 0) 1em, white);
-        //}
     }
 }
 
