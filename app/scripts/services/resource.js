@@ -98,9 +98,14 @@ angular.module('fsMobile.services')
             },
             filterByEventCategory: function (cat, exclude) {
                 exclude = exclude || false;
+                var categories = cat;
+                if( !angular.isArray(categories) ){
+                    categories = [];
+                    categories.push(cat);
+                }
                 return _.filter(this.values(), function (resource) {
                     if (!resource.eventCategory) { return false; }
-                    if (resource.eventCategory === cat) {
+                    if (categories.indexOf(resource.eventCategory) !== -1) {
                         return !exclude;
                     }
                     return exclude;

@@ -95,7 +95,7 @@ angular.module('fsMobile.services')
                 });
 
                 // BUILD PROGRAM
-                var programEvents = this.events.filterByEventCategory('WORKSHOP', true);
+                var programEvents = this.events.filterByEventCategory(['WORKSHOP', 'MISC'], true);
                 programEvents = this.events.groupByLocation(programEvents);
 
 
@@ -139,7 +139,7 @@ angular.module('fsMobile.services')
 
                 // BUILD WORKSHOPS
                 // groups workshops by days / filter unpublished / filter workshop types
-                var workshopEvents = this.events.filterByEventCategory('WORKSHOP');
+                var workshopEvents = this.events.filterByEventCategory(['WORKSHOP', 'MISC']);
                 workshopEvents = this.events.filterNotPublished(workshopEvents);
 
                 workshopEvents = this.events.groupByDay(workshopEvents);
