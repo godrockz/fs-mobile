@@ -26,10 +26,10 @@ $row-height: 150px;
                     .row{
                         height:$row-height;
                     }
-                    .row>div{
-                        border: $border-size solid $border-color;
-                    }
                     .left-side {
+
+                        border: $border-size solid $border-color;
+
                         div.marker-container{
                             position: relative;
                             &>div {
@@ -86,6 +86,10 @@ $row-height: 150px;
                         max-width: $right-side;
                         overflow: hidden;
 
+                        border-top: $border-size solid $border-color;
+                        border-bottom: $border-size solid $border-color;
+                        border-right: $border-size solid $border-color;
+
                         .head{
                             overflow: hidden;
                             text-overflow: ellipsis;
@@ -93,8 +97,8 @@ $row-height: 150px;
                         }
                         p{
                             margin-bottom: 1px;
-                            line-height: 12px;
-                            font-size: 12px;
+                            line-height: 1.2em;
+                            //font-size: 12px;
                         }
                         p.extra{
                             font-weight: bold;
