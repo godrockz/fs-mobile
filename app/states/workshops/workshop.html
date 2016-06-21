@@ -1,33 +1,40 @@
-<ion-view view-title="{{::'app.general.workshop'|translate}}">
+<ion-view view-title="{{::event|trans:'name'}}">
     <ion-content class="single-work" on-swipe-left="nextEvent()" on-swipe-right="previousEvent()">
         <header-image path="::event.images[0]" topic="workshop">
 
         </header-image>
-        <div class="marker-container" ng-click="toggleLike();">
-            <span class="ion-ios-star" ng-show="event.liked"></span>
-            <span class="ion-ios-star-outline" ng-show="!event.liked"></span>
-        </div>
-        <div class="content-box" >
-            <div class="work-headline">
-                <div class="work-date">
-                    <div class="box">
-                        <span>{{::'app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate}}<br>{{::event.start|date:'H:mm'}}</span>
-                    </div>
-                </div>
-                <div class="work-text-head col-center">
-                    <p class="head">{{::event|trans:'name'}}</p>
+
+        <div class="row sub-title-row" >
+            <div class="left">
+                <div class="center-vertical">
+                    <p class="upper-case">
+                        {{::('app.days.abbr.' + (event.start | date:'EEEE') | lowercase | translate)}}
+                        <br>
+                        {{::event.start|date:'HH:mm'}} <br>
+                        {{::event.end|date:'HH:mm'}}
+                    </p>
                 </div>
             </div>
-            <p class="work-info"><span class="tag">{{::'app.general.location'|translate}}:</span> {{::event.location|trans:'name'}}</p>
-            <p class="work-info">
-                <span class="tag">{{::event.end?('app.time.from'|translate):('app.time.start'|translate)}}:</span> {{::event.start|date:'H:mm'}}
-                <span class="tag" ng-if="::event.end">{{::'app.time.to'|translate}}:</span> {{::event.end?(event.end|date:'H:mm'):''}}</p>
-            <p class="work-info" ng-if="::event.author"><span class="tag">{{::'app.workshop.from'|translate}}:</span> {{::event.author}}</p>
+            <div class="middle text-center"><div class="center-vertical"><span>{{::event.location|trans:'name'}}</span></div></div>
+            <div class="right">
+                <div class="center-vertical">
+                    <div>
+                        <span class="state-icon {{event.liked?'ion-ios-star':'ion-ios-star-outline'}}"  ng-click="toggleLike()"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box" >
+            <h4>{{::event|trans:'name'}}</h4>
+
             <p class="work-text">{{::event|trans:'description'}}</p>
-            <p><a href="{{event.artistWebsite}}" ng-if="event.artistWebsite" class="work-text">
+            <p>
+                <a href="{{event.artistWebsite}}" ng-if="event.artistWebsite" class="">
                 <span class="ion-link"></span>
                 {{::'app.event.artist.website.label'|translate}}
-            </a></p>
+            </a>
+            </p>
         </div>
 
     </ion-content>

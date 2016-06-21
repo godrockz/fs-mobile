@@ -17,7 +17,7 @@ $dark:                            #444 !default;
 
 $background-general:                #f0f0f0;
 $positive:                          #336666 !default;
-$bar-title-font-size:               16px !default;
+$bar-title-font-size:               19px !default;
 $font-size-large:                   18px !default;
 $font-size-base:                    14px !default;
 $font-size-medium:                  12px !default;
@@ -241,6 +241,8 @@ div.header-image {
     -webkit-transform: translate3d(-9999px, 0, 0);
 }
 
+/* css helpers */
+
 .pull-left {
     float: left;
 }
@@ -259,10 +261,12 @@ div.header-image {
 
 /** DETAIL VIEW **/
 
-$subtitle-fontsize: 19px;
+$subtitle-fontsize: $bar-title-font-size;
 $subtitle-bar-height: 60px;
+
+
 .content-box{
-    padding: 0.5em;
+    padding: 1.5em;
     padding-bottom: 50px; /* allow scrolling from underneath fixed author div */
 }
 
@@ -312,7 +316,7 @@ $subtitle-bar-height: 60px;
     }
 
     &>div:nth-child(1){
-        padding-left: 1.5em;
+        padding-left: 0.5em;
     }
     &>div:nth-child(2){
         line-height: $subtitle-fontsize+4px;
