@@ -58,14 +58,15 @@ angular.module('fsMobile.directives')
         return {
             scope: {
                 path: '=',
-                topic: '@'
+                topic: '@',
+                useFallbacks : '='
             },
             template: '<div class="header-image">' +
             ' <img img-x-cache="" ic-src="url" ng-if="!useFallbackImage" >' +
             ' <img img-x-cache="" ng-src="{{url}}" ng-if="useFallbackImage" >' +
             '</div>',
             link: function (scope) {
-
+                var useFallbacks = scope.useFallbacks !== false ? true: false;
                 var url = scope.path;
 
                 if (angular.isArray(scope.path)) {
@@ -78,6 +79,11 @@ angular.module('fsMobile.directives')
                 }
 
                 function useRandomImage(topic){
+                    if(!useFallbacks){
+                        scope.url = undefined;
+                        scope.useFallbackImage = false;
+                        return;
+                    }
                     scope.url = DefaultImages.getRandomImage(topic);
                     scope.useFallbackImage = true;
                 }

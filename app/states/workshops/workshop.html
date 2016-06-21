@@ -1,6 +1,6 @@
 <ion-view view-title="{{::event|trans:'name'}}">
     <ion-content class="single-work" on-swipe-left="nextEvent()" on-swipe-right="previousEvent()">
-        <header-image path="::event.images[0]" topic="workshop">
+        <header-image path="::event.images[0]" topic="workshop" use-fallbacks="false">
 
         </header-image>
 
