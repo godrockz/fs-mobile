@@ -19,9 +19,6 @@
         </div>
 
         <div class="content-box">
-            <p class="program-tags">
-                <small ng-repeat="tag in event.tags">#{{tag|lowercase}}&nbsp;</small>
-            </p>
 
             <p class="program-text">{{::event|trans:'description'}}</p>
 
@@ -34,4 +31,7 @@
 
 
     </ion-content>
+    <div class="bottom-line" ng-if="::event.tags">
+        {{::event.tags|join:' #'}}
+    </div>
 </ion-view>

@@ -139,4 +139,16 @@ angular.module('fsMobile.filters', [])
             var separator = sep || '';
             return input.split(separator).join(' '+ separator + ' ');
         };
+    })
+    .filter('join',function (){
+        return function (data, delimiter){
+            console.log('data');
+            var dataA = data;
+            if(!angular.isArray(data)){
+                dataA = [];
+                data.push(data);
+            }
+            var result = dataA.join(delimiter||'');
+            return result.length>0 ? delimiter + result:'';
+        };
     });

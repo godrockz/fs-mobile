@@ -73,20 +73,7 @@ $border-size: 1px;
 
 }
 
-.bottom-line {
-    font-size: smaller;
-    font-style: italic;
-    text-align: left;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    z-index: 99;
-    background-color: $background-general;
-    margin: 0px;
-    height: 40px;
-    line-height: 40px;
-    padding-left: 2em;
-}
+
 
 .news-state{
     background-color: $background-general;

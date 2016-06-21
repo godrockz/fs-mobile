@@ -255,3 +255,28 @@ div.header-image {
 .upper-case{
     text-transform: uppercase;
 }
+
+
+/** DETAIL VIEW **/
+.content-box{
+    margin-bottom:40px;
+}
+
+.bottom-line {
+    font-size: smaller;
+    font-style: italic;
+    text-align: left;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 99;
+    background-color: $background-general;
+    margin: 0px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 2em;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

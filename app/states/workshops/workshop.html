@@ -31,4 +31,7 @@
         </div>
 
     </ion-content>
+    <p class="bottom-line" ng-if="::event.author">
+        {{::'app.workshop.from'|translate}}: {{::event.author}}
+    </p>
 </ion-view>
