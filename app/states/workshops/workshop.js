@@ -15,9 +15,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider, $rootScope) {
                     var currentTime = moment();
                     $scope.view = {};
+
+                    $rootScope.viewColor = '#689aca';
 
                     // sets the tabIndex to the current day
                     $scope.tabIndex = _.findIndex($scope.appData.workshops, function (ws) {
@@ -66,7 +68,10 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshop.html',
-                controller: function ($scope, $stateParams, dataProvider, $state) {
+                controller: function ($scope, $stateParams, dataProvider, $state, $rootScope) {
+
+                    $rootScope.viewColor = '#689aca';
+
                     if ($scope.appData.events) {
                         $scope.event = $scope.appData.events[$stateParams.idx];
                         console.log('event ',$scope.event);

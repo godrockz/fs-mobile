@@ -74,6 +74,8 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
             $rootScope.$on('$stateChangeStart',
                 function(event, toState /*, toParams, fromState, fromParams, options */){
 
+                    delete $rootScope.viewColor;
+
                     if (appData.outdated && toState.name !== 'app.outdated') {
                         event.preventDefault();
                         $state.go('app.outdated');

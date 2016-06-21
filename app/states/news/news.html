@@ -1,10 +1,5 @@
 <ion-view view-title="{{::'app.general.news'|translate}}">
     <ion-content class="news-state">
-        <style>
-            .bar.bar-positive , .bar-positive .button{
-                background-color: #336666 !important;
-            }
-        </style>
         <ion-refresher on-refresh="refreshData()" spinner="ios"></ion-refresher>
         <div ng-repeat="item in newsToShow"
              class="row news-item" >
@@ -32,5 +27,8 @@
                 <p class="text" >{{item|trans:'preview'}}</p>
             </div>
         </div>
+
     </ion-content>
 </ion-view>
+
+

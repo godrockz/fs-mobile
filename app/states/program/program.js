@@ -14,10 +14,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
             'menuContent': {
                 templateUrl: 'states/program/program_2.html',
                 controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicScrollDelegate,
-                                      $stateParams, $translate, Colors, dataProvider) {
+                                      $stateParams, $translate, Colors, dataProvider, $rootScope) {
                     $scope.view = {};
 
-
+                    $rootScope.viewColor = '#000000';
+                    
                     var program_length = $scope.appData.program.length,
                         startSlideIndex = 0,
                         lang = $translate.use();
@@ -132,13 +133,13 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         }
                     };
 
-                    $scope.$on('$stateChangeStart',
-                        function(event, toState /*, toParams, fromState, fromParams, options */){
-
-                            if (toState.name !== 'app.singleprogram') {
-                                delete $rootScope.viewColor;
-                            }
-                        });
+                    // $scope.$on('$stateChangeStart',
+                    //     function(event, toState /*, toParams, fromState, fromParams, options */){
+                    //
+                    //         if (toState.name !== 'app.singleprogram') {
+                    //             delete $rootScope.viewColor;
+                    //         }
+                    //     });
 
                     $rootScope.viewColor = $scope.event.color;
                 }

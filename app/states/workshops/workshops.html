@@ -1,6 +1,6 @@
 <ion-view class="workshops" view-title="{{::'app.general.workshops'|translate}}" >
     <ion-nav-buttons side="right">
-        <button class="button {{view.filterLiked? 'ion-ios-star':'ion-ios-star-outline'}}" ng-click="view.filterLiked=!view.filterLiked">
+        <button class="like-button button {{view.filterLiked? 'ion-ios-star':'ion-ios-star-outline'}}" ng-click="view.filterLiked=!view.filterLiked">
         </button>
     </ion-nav-buttons>
 
@@ -18,11 +18,6 @@
                 <small ng-if="nextDay()">{{ 'app.days.' + nextDay()|translate }}</small>
             </div>
         </div>
-        <style>
-            .bar.bar-positive , .bar-positive .button{
-                background-color: #689aca !important;
-            }
-        </style>
 
         <ion-slide-box class="work-container" on-slide-changed="changeTabHeadTo($index)">
             <ion-slide class="work-tab" ng-repeat="day in ::appData.workshops | orderObjectBy:'date':'date'">
