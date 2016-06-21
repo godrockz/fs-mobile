@@ -258,8 +258,12 @@ div.header-image {
 
 
 /** DETAIL VIEW **/
+
+$subtitle-fontsize: 19px;
+$subtitle-bar-height: 60px;
 .content-box{
-    margin-bottom:40px;
+    padding: 0.5em;
+    padding-bottom: 50px; /* allow scrolling from underneath fixed author div */
 }
 
 .bottom-line {
@@ -279,4 +283,56 @@ div.header-image {
 
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* subtitle bar */
+
+
+.sub-title-row{
+
+    background-color: $positive;
+    color: #fff;
+    font-size: $subtitle-fontsize;
+    font-weight: bold;
+
+    &>div{
+        height: $subtitle-bar-height;// to allow 100% height divs
+    }
+    .left{
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+    .middle{
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+    .right{
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+
+    &>div:nth-child(1){
+        padding-left: 1.5em;
+    }
+    &>div:nth-child(2){
+        line-height: $subtitle-fontsize+4px;
+    }
+
+    .state-icon{
+        @extend .pull-right;
+        font-size: 40px;
+        line-height: 44px;
+        margin-right: 0.5em;
+    }
+    .center-vertical{/* vertical center */
+        position: relative;
+        display:table;
+        width: 100%;
+        height: 100%;
+        >*{
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+
 }

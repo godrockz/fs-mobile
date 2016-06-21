@@ -129,7 +129,6 @@
     padding: 0;
 
     div.content-box {
-        padding: 0.5em;
 
         .program-headline {
             margin-top: -1em;
@@ -154,40 +153,6 @@
         color: white;
         font-weight: 900;
         font-size: 47px;
-    }
-
-    /* subtitle bar */
-    .sub-title-row{
-        color: #fff;
-        font-size: 19px;
-        font-weight: bold;
-
-        .left{
-            flex: 0 0 30%;
-            max-width: 30%;
-        }
-        .middle{
-            flex: 0 0 40%;
-            max-width: 40%;
-        }
-        .right{
-            flex: 0 0 30%;
-            max-width: 30%;
-        }
-
-        &>div:nth-child(1){
-            padding-top: 10px;
-            padding-left: 1.5em;
-        }
-        &>div:nth-child(2){
-            padding-top: 10px;
-        }
-
-        .star-icon{
-            margin-top: 5px;
-            font-size: 40px;
-            margin-right: 0.5em;
-        }
     }
 }
 

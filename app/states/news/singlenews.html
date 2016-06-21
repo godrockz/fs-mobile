@@ -11,16 +11,27 @@
 
         <div class="row sub-title-row">
             <div class="left">
-                <p class="upper-case">
-                    {{::('app.days.abbr.' + (news.publishDate | date:'EEEE') | lowercase | translate)}}
-                    <br>
-                    {{::news.publishDate|date:'HH:mm'}}
-                </p>
+                <div class="center-vertical">
+                    <p class="upper-case">
+                        {{::('app.days.abbr.' + (news.publishDate | date:'EEEE') | lowercase | translate)}}
+                        <br>
+                        {{::news.publishDate|date:'HH:mm'}}
+                    </p>
+                </div>
             </div>
-            <div class="middle text-center"><span>News</span></div>
+            <div class="middle text-center">
+                <div class="center-vertical">
+                    <SPAN>News</SPAN>
+                </div>
+
+            </div>
             <div class="right">
-                 <span class="pull-right news-read-icon {{news.read?'ion-email':'ion-email-unread'}}"
-                       ng-click="toggleRead(news)"></span>
+                <div class="center-vertical">
+                    <div>
+                        <span class="state-icon {{news.read?'ion-email':'ion-email-unread'}}"
+                            ng-click="toggleRead(news)"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
