@@ -12,6 +12,9 @@
 angular.module('fsMobile.states').config(function ($stateProvider) {
     $stateProvider.state('app.workshops', {
         url: '/workshops',
+        data: {
+            color: '#689aca'
+        },
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
@@ -19,7 +22,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     var currentTime = moment();
                     $scope.view = {};
 
-                    $rootScope.viewColor = '#689aca';
+                    // $rootScope.viewColor = '#689aca';
 
                     // sets the tabIndex to the current day
                     $scope.tabIndex = _.findIndex($scope.appData.workshops, function (ws) {
@@ -65,6 +68,9 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
     $stateProvider.state('app.workshop', {
         url: '/workshop/:idx',
+        data: {
+            color: '#689aca'
+        },
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshop.html',

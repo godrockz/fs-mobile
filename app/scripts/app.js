@@ -78,8 +78,8 @@ angular.module('fsMobile.services', []);
         //######### LANG: moved to language-service
 
         $ionicConfigProvider.backButton.text('').previousTitleText('').icon('ion-chevron-left');
-        // $ionicConfigProvider.views.forwardCache(true);
-        $ionicConfigProvider.views.maxCache(0);
+        $ionicConfigProvider.views.forwardCache(true);
+        // $ionicConfigProvider.views.maxCache(0);
 
     })
 
