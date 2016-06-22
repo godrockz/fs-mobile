@@ -147,7 +147,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         };
 
                         $cordovaInAppBrowser.open(url, '_system', options);
-                    }
+                    };
                 }
             }
         }
