@@ -63,7 +63,8 @@
     "cordova-plugin-crosswalk-webview",
     "cordova-plugin-file",
     "cordova-plugin-file-transfer",
-    "cordova-plugin-x-toast"
+    "cordova-plugin-x-toast",
+      "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
     "android"

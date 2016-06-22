@@ -29,7 +29,7 @@
         <div class="content-box">
             <p>{{::event|trans:'description'}}</p>
 
-            <p><a href="{{event.artistWebsite}}" ng-if="event.artistWebsite" class="program-text" target="_system">
+            <p><a ng-click="openInAppBrowser(event.artistWebsite)" ng-if="event.artistWebsite" class="program-text">
                 <span class="ion-link"></span>
                 {{::'app.event.artist.website.label'|translate}}
             </a></p>

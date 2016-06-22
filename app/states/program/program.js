@@ -2,7 +2,7 @@
  plusplus: true
  */
 /*global
- angular, _
+ angular, _, cordova
  */
 
 'use strict';
@@ -103,7 +103,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/program/singleprogram.html',
-                controller: function ($scope, $stateParams, $translate, dataProvider, $state, $rootScope) {
+                controller: function ($scope, $stateParams, $translate, dataProvider, $state, $rootScope, $cordovaInAppBrowser) {
 
                     var lang = $translate.use();
 
@@ -137,6 +137,16 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $rootScope.viewColor = $scope.event.color;
                     $state.current.data = {
                         color: $scope.event.color
+                    };
+
+                    $scope.openInAppBrowser = function (url) {
+
+                        var options = {
+                            location: 'yes',
+                            toolbar: 'no'
+                        };
+
+                        $cordovaInAppBrowser.open(url, '_system', options);
                     }
                 }
             }
