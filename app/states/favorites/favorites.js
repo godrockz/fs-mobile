@@ -117,7 +117,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         angular.forEach(location.events, function (event) {
 
                             var eStart = event._mstart || moment(event.start),
-                                eEnd = event._mstart || moment(event.end);
+                                eEnd = event._mend || moment(event.end);
                             event._mstart = eStart;
                             event._mend = eEnd;
 
