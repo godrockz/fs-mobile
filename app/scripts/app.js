@@ -79,7 +79,7 @@ angular.module('fsMobile.services', []);
 
         $ionicConfigProvider.backButton.text('').previousTitleText('').icon('ion-chevron-left');
         $ionicConfigProvider.views.forwardCache(true);
-        // $ionicConfigProvider.views.maxCache(0);
+        $ionicConfigProvider.views.maxCache(50);
 
     })
 
