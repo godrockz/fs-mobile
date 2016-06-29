@@ -2,7 +2,7 @@
  plusplus: true
  */
 /*global
- angular, _, cordova
+ angular, _
  */
 
 'use strict';

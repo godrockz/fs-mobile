@@ -18,7 +18,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider, $rootScope) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider) {
                     var currentTime = moment();
                     $scope.view = {};
 

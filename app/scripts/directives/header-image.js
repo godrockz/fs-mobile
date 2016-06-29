@@ -95,29 +95,42 @@ angular.module('fsMobile.directives')
 
                 useCachedImage(url);
 
-                ConnectionState.checkOnline().then(function (isOnline) {
-                    ImageCacheService.isCached(url).then(function (isCached) {
+                ImageCacheService.isCached(url).then(function (isCached) {
 
-                        // if cached: fine
-                        // if online: ic-src will cache it
+                    // if cached: fine
 
-                        if (!isOnline && !isCached) {
-                            useRandomImage(scope.topic);
-                        }
-                        else if (isOnline && !isCached) {
+                    if (!isCached) {
 
-                            // this can only be the case if image could not be get because here it should already be cached
+                        ConnectionState.checkOnline().then(function (isOnline) {
 
-                            ImageCacheService.cacheImage(url).then(function(){
-                                useCachedImage(url);
-                            }, function () {
-                                // in case of error -> use random image
-                                $log.error('Could not get image ' + url + ' Using random.');
+                            // if online: ic-src will cache it
+
+                            if (!isOnline) {
                                 useRandomImage(scope.topic);
-                            });
-                        }
-                    });
+                            }
+                            else {
+
+                                // this can only be the case if image could not be get because here it should already be cached
+
+                                ImageCacheService.cacheImage(url).then(function () {
+                                    useCachedImage(url);
+                                }, function () {
+                                    // in case of error -> use random image
+                                    $log.error('Could not get image ' + url + ' Using random.');
+                                    useRandomImage(scope.topic);
+                                });
+                            }
+                        }, function (err) {
+                            $log.error('Error online check', err);
+                            useRandomImage(scope.topic);
+                        });
+                    }
+
+                }, function (err) {
+                    $log.error('Error cache check', err);
+                    useRandomImage(scope.topic);
                 });
+
             }
         };
     });
