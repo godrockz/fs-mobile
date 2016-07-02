@@ -39,7 +39,7 @@
                     .prog-box {
                         background-color: white;
                         box-shadow: 3px 2px 6px grey;
-                        min-height: 5em;
+                        min-height: 130px;
                         position: relative;
                         .row {
                             padding: 0;
@@ -263,12 +263,6 @@
             }
         }
 
-        div.header-image {
-            img{
-                min-height:130px;
-            }
-        }
-
         div.marker-container{
             position: relative;
             &>div {
@@ -279,8 +273,6 @@
                 font-size: 27px;
             }
         }
-
-
 
         div.text-container {
 
