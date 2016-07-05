@@ -68,14 +68,6 @@ body * {
 @import "../states/outdated/outdated";
 
 // menu bar image
-.menu-bar-overlay{
-    height:44px;
-    width:100%;
-    background-color:$positive;
-    opacity: 0.5;
-    position: relative;
-    z-index: 12;
-}
 .menu-img{
     background: url('../images/menu.png') no-repeat center center ;
     background-size: cover;
@@ -105,8 +97,8 @@ body * {
     -o-background-size: cover;
     width: 6em;
     height: 6em;
-    left: 9em;
-    top: 3em;
+    left: 0.5em;
+    top: 0.5em;
     position: absolute;
 }
 
