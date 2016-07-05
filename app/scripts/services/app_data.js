@@ -4,7 +4,7 @@
 
 'use strict';
 angular.module('fsMobile.services')
-    .factory('AppData', function (Resource, $filter, ImageCacheService, Colors) {
+    .factory('AppData', function (Resource, $filter, ImageCacheService, Colors, ENV) {
 
         /**
          * events before this time are counted to the previous day
@@ -115,8 +115,10 @@ angular.module('fsMobile.services')
 
                     // define a colors array for each location
                     var startValue = 20;
-                    // precalculate colors array
-                    var prev = Colors.rgb2hsv(loc.color || '#ffffff');
+
+                    // pre-calculate colors array
+                    loc.color = loc.color || '#ffffff';
+                    var prev = Colors.rgb2hsv(loc.color);
                     loc.colors = [];
                     for (var i = 0; i < 24; i++) {
                         // var value = 20 *  Math.log(i/10)+ 80;
@@ -134,7 +136,13 @@ angular.module('fsMobile.services')
                         }
                         prevEvent = evt;
 
-                        evt.color = loc.colors[moment(evt.start).hour()];
+                        // color of the event
+                        console.log('Estting',ENV.colorEventByStartTime);
+                        if(ENV.colorEventByStartTime) {
+                            evt.color = loc.colors[moment(evt.start).hour()];
+                        }else{
+                            evt.color = loc.color;
+                        }
 
                         loc.events.push(evt);
                     });

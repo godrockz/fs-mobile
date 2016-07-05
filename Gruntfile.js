@@ -68,7 +68,8 @@ module.exports = function (grunt) {
                         localApiEndpoint: 'http://fs.spektacholeriker.de:8080',
                         offlineJsonDataDirectory: 'scripts/data',
                         jobName: process.env.JOB_NAME,
-                        version: process.env.BUILD_NUMBER
+                        version: process.env.BUILD_NUMBER,
+                        colorEventByStartTime: false
                     }
                 }
             },
