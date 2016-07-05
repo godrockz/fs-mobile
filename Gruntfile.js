@@ -81,7 +81,8 @@ module.exports = function (grunt) {
                         localApiEndpoint: 'http://fs.spektacholeriker.de:8080',
                         offlineJsonDataDirectory: 'scripts/data',
                         jobName: process.env.JOB_NAME,
-                        version: process.env.BUILD_NUMBER
+                        version: process.env.BUILD_NUMBER,
+                        colorEventByStartTime: false
                     }
                 }
             }
@@ -174,7 +175,7 @@ module.exports = function (grunt) {
                     jsonOutputDirectory: '<%= yeoman.dist %>/<%= yeoman.scripts %>/data',
                     outputFileSuffix: '.json',
                     //baseUrl: 'http://dev-fs-rest-service.herokuapp.com',
-                    baseUrl: 'http://spektacholeriker.de:8080',
+                    baseUrl: 'http://spektacholeriker.de:8080/v16/',
                     resources: [{
                         url: '/data',
                         recursive: false
