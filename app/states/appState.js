@@ -54,10 +54,10 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 loadData(promise);
             };
 
-            $scope.refreshData = function () {
+            $scope.refreshData = function (deleteLocal) {
                 // always discover endpoint on refresh
                 var ifModifiedSince = null;
-                if ($scope.appData.$metaInfo) {
+                if (!deleteLocal && $scope.appData.$metaInfo) {
                     ifModifiedSince = $scope.appData.$metaInfo.fetched;
                 }
                 var promise = dataProvider.refreshData(ifModifiedSince);
@@ -75,7 +75,7 @@ angular.module('fsMobile.controllers', []).config(function ($stateProvider) {
                 function(event, toState /*, toParams, fromState, fromParams, options */){
 
                     if (toState.data && toState.data.color) {
-                        $rootScope.viewColor = toState.data.color;    
+                        $rootScope.viewColor = toState.data.color;
                     }
                     else {
                         $rootScope.viewColor = '#336666';

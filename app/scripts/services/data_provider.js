@@ -101,9 +101,15 @@ angular.module('fsMobile.services')
              * @returns {*}
              */
             refreshData: function (ifModifiedSince) {
-                console.log('refresh');
+                console.log('Refresh data ...');
                 return EndpointDetector.discoverEndpoint().then(function () {
-                    return storageManager.fetchRemote(endPoint(), ifModifiedSince);
+                    return storageManager.fetchRemote(endPoint(), ifModifiedSince).then(function (data) {
+                        if (!ifModifiedSince) {
+                            console.log('Received new data. Deleting local data ...');
+                            storageManager.deleteLocalData(endPoint());
+                        }
+                        return data;
+                    });
                 }).then(function (response) {
                     return storageManager.fetchData(endPoint())
                         .then(function (localForageData) {

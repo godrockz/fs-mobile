@@ -39,7 +39,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
 
                     $scope.refresh = function() {
                         $ionicLoading.show({template: 'Updating...'});
-                        $scope.refreshData();
+                        $scope.refreshData(true);
                     };
 
                     // DEBUGGING INFORMATION
