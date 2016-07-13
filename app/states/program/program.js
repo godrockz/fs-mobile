@@ -35,6 +35,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     function programIdx(add) {
                         var length = program_length,
                             slideIdx = $scope.slide.index + (add || 0);
+                        if(slideIdx<0){slideIdx=(program_length-1);};
                         return Math.abs(slideIdx % length);
                     }
 
