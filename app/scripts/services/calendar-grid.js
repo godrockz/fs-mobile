@@ -71,6 +71,11 @@ angular.module('fsMobile').service('CalendarGrid', function(){
 
         var start = event._mstart || moment(event.start), end = event._mend || moment(event.end);
 
+        //runde auf die nächste Viertelstunde auf
+        while(start.minute()%15){
+            start.minute(start.minute()+1);
+        }
+
         if (this.firstTime.isAfter(start)) {
             this.firstTime = start;
         }
