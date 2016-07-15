@@ -41,7 +41,9 @@
     "app.time.from":"From",
     "app.time.to":"Until",
 
-    "app.map.open.location":"Program",
+    "app.map.open.location":"Stage",
+    "app.favorite.open.location":"Program",
+    "app.favorite.open.workshop.location":"Workshop",
 
     "app.news.by":"By",
     "app.news.loadmore":"Load more News...",

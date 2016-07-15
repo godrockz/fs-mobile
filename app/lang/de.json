@@ -41,8 +41,9 @@
     "app.time.from":"Von",
     "app.time.to":"Bis",
 
-    "app.map.open.location":"zur Bühne",
+    "app.map.open.location":"Bühne",
     "app.favorite.open.location":"Programm",
+    "app.favorite.open.workshop.location":"Workshop",
 
     "app.news.by":"Text von ",
     "app.news.loadmore":"Mehr News laden...",
