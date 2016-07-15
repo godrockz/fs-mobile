@@ -63,7 +63,8 @@
         padding-top: 10px;
     }
     .close {
-        padding: 10px; // bigger clickarea
+        padding: 5px;
+        font-size: $font-size-close-icon;
         position: absolute;
         z-index: 4;
         right: 0px;
