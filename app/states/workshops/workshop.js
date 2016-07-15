@@ -18,7 +18,7 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider) {
+                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider, $timeout) {
                     var currentTime = moment();
                     $scope.view = {};
 
@@ -29,6 +29,12 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                         return currentTime.isSame(ws.date, 'day');
                     });
                     if ($scope.tabIndex < 0) { $scope.tabIndex = 0; }
+
+                    //Zeige nach dem Init die korrekte Tages-Seite an
+                    //Durch den Timeout wird die Funktion erst im nächsten Zyklus ausgeführt
+                    $timeout(function(){
+                        $ionicSlideBoxDelegate.slide($scope.tabIndex);
+                    },0);
 
                     $ionicSideMenuDelegate.canDragContent(false);
 
