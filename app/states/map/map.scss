@@ -3,13 +3,16 @@
     .zoombuttons {
         position: absolute;
         top: 30px;
-        left: 15px;
+        right: 10px;
         z-index: 9999;
-        .button {
-            background-color: $positive;
-            color: white;
-            margin-bottom: 2em;
-            border: 1px solid white;
+        font-size: 30px;
+        width:30px;
+        a {
+            color: #8C3E4E;
+            display:inline-block;
+        }
+        a:last-child{
+            margin-top:15px;
         }
     }
     .location-pin {
