@@ -1,4 +1,4 @@
-<ion-view view-title="{{'app.general.siteplan'|translate}}" class="map">
+<ion-view view-title="{{'app.general.siteplan'|translate}}" class="map" cache-view="false">
     <ion-content>
         <div class="card selected-loc" ng-if="selection.location">
             <div class="item item-text-wrap" >
@@ -25,9 +25,6 @@
                     locations="mappedLocations"
                     ng-model="selection.location">
             </locmap>
-
-
-
         </ion-scroll>
     </ion-content>
 </ion-view>
