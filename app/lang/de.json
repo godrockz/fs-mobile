@@ -87,5 +87,19 @@
     "imprint.geolocation.header":"Ortungsdienste",
     "imprint.geolocation.content":"Die dieser App vom Betriebssystem bereitgestellten Geoinformationen werden nicht gespeichert oder an nachgelagerte Systeme oder Server übertragen.",
     "imprint.more.header":"Weitere Informationen",
-    "imprint.more.content":"Ihr Vertrauen ist uns wichtig. Daher möchten wir Ihnen jederzeit Rede und Antwort bezüglich der Verarbeitung Ihrer personenbezogenen Daten stehen. Wenn Sie Fragen haben, die Ihnen diese Datenschutzerklärung nicht beantworten konnte oder wenn Sie zu einem Punkt vertiefte Informationen wünschen, wenden Sie sich bitte jederzeit an"
+    "imprint.more.content":"Ihr Vertrauen ist uns wichtig. Daher möchten wir Ihnen jederzeit Rede und Antwort bezüglich der Verarbeitung Ihrer personenbezogenen Daten stehen. Wenn Sie Fragen haben, die Ihnen diese Datenschutzerklärung nicht beantworten konnte oder wenn Sie zu einem Punkt vertiefte Informationen wünschen, wenden Sie sich bitte jederzeit an",
+
+
+
+    "app.workshop.filter":"Filter aktiv",
+    "app.workshop.all":"Alle",
+    "app.workshop.other":"Sonstige",
+    "app.workshop.category":"Rubrik",
+    "#Exercise":"Bewegung",
+    "#Movement":"Bewegung",
+    "#Creativity":"Kreativität",
+    "#Self-Help":"Lebenshilfe",
+    "#Nature":"Natur",
+    "#ReligionAndSubcultures":"Religionen und (Sub-)kulturen im Gespräch",
+    "#Theology":"Theologie"
 }
