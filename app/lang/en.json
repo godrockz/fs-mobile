@@ -85,4 +85,16 @@
     "imprint.geolocation.content":"No data according your position is sent to our servers by this app.",
     "imprint.more.header":"Further information",
     "imprint.more.content":"It is important to us that you trust in us. Therefore we will always answer any questions concerning the processing of personal data. If you have questions that are not answered by this privacy statement or if you wish to receive more information, please sent an e-mail to"
+
+    "app.workshop.filter":"selected filter",
+    "app.workshop.all":"All",
+    "app.workshop.other":"Other",
+    "app.workshop.category":"Category",
+    "#Exercise":"Exercise",
+    "#Movement":"Movement",
+    "#Creativity":"Creativity",
+    "#Self-Help":"Self-help",
+    "#Nature":"Nature",
+    "#ReligionAndSubcultures":"Religion and (sub)culture in dialog",
+    "#Theology":"Theology"
 }

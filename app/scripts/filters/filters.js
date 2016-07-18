@@ -122,6 +122,36 @@ angular.module('fsMobile.filters', [])
         propertyFilter.$stateful = true;
         return propertyFilter;
     })
+    ///neuer Filter zum Heraussuchen von Hashtags
+    .filter('tagFilter', function () {
+        function tagFilter(list, value, hashtags) {
+            //gebe alle Workshops aus
+            if (value===99) {
+                return list;
+            }
+
+            //gebe alle Workshops ohne Hashtag aus
+            else if (value===98) {
+                return list.filter(function (elem) {
+                    if (elem.tagString.de === '') {
+                        return elem;
+                    }
+                    return false;
+                });
+            }
+
+            var hashtag = hashtags[value];
+            return list.filter(function (elem) {
+                if (elem.tagString.de === hashtag) {
+                    return elem;
+                }
+                return false;
+            });
+        }
+
+        tagFilter.$stateful = true;
+        return tagFilter;
+    })
     .filter('lpad', function () {
         return function (str, size, charSequence) {
             var result = str + '',

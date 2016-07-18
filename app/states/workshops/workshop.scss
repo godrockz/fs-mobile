@@ -15,6 +15,16 @@ $row-height: 150px;
 
 .workshops {
 
+    .bar-subheader{
+        background-color: #689aca !important;
+        h2.title{
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+        }
+    }
+
+
     .work-container {
         height: 100%;
         .work-tab {
@@ -90,9 +100,9 @@ $row-height: 150px;
                         border-right: $border-size solid $border-color;
 
                         .head{
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
+                           // overflow: hidden;
+                           // text-overflow: ellipsis;
+                           // white-space: nowrap;
                         }
                         p{
                             margin-bottom: 1px;

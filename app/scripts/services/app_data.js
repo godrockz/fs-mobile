@@ -192,6 +192,22 @@ angular.module('fsMobile.services')
                 }, this);
 
                 this.workshops = $filter('orderObjectBy')(this.workshops, 'date', 'date');
+
+
+                var WorkshopTags = [];
+                angular.forEach(this.workshops, function (day) {
+                    angular.forEach(day.events, function (event) {
+
+                        WorkshopTags.push(event.tagString.de);
+
+                    });
+                });
+
+                this.WorkshopTags = _.uniq(WorkshopTags);
+
+
+
+
             }
         }
 

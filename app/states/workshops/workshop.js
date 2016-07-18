@@ -18,9 +18,30 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
         views: {
             'menuContent': {
                 templateUrl: 'states/workshops/workshops.html',
-                controller: function ($scope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider, $timeout) {
+                controller: function ($scope, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, dataProvider, $timeout, $ionicPopover, $translate) {
                     var currentTime = moment();
+                    var lang = $translate.use();
+                    $scope.lang = lang;
                     $scope.view = {};
+                    $scope.view.filterHashtag = 99;
+
+
+                    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+                        scope: $scope,
+                    }).then(function(popover) {
+                        $scope.popover = popover;
+                    });
+
+                    $scope.openPopover = function($event) {
+                        $scope.popover.show($event);
+
+                    };
+
+                    $scope.setWorkshopFilter = function(){
+                        $scope.popover.hide();
+                    };
+
+
 
                     // $rootScope.viewColor = '#689aca';
 

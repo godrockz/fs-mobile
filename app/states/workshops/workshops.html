@@ -1,10 +1,16 @@
 <ion-view class="workshops" view-title="{{::'app.general.workshops'|translate}}" >
     <ion-nav-buttons side="right">
-        <button class="like-button button {{view.filterLiked? 'ion-ios-star':'ion-ios-star-outline'}}" ng-click="view.filterLiked=!view.filterLiked">
+        <button class="like-button button {{view.filterHashtag!=99? 'ion-ios-pricetags':'ion-ios-pricetags-outline'}}" ng-click="openPopover($event)">
         </button>
-    </ion-nav-buttons>
 
-    <ion-content>
+
+    </ion-nav-buttons>
+    <div ng-show="view.filterHashtag!=99" class="bar bar-subheader">
+        <h2 class="title">{{::'app.workshop.filter'|translate}}: {{appData.WorkshopTags[view.filterHashtag]|translate}}</h2>
+    </div>
+
+
+    <ion-content ng-class="{'has-subheader': view.filterHashtag!=99}" >
         <div class="tabmenu">
             <div class="tabmenu-left" ng-click="previousTab()"
                                     style="word-wrap: normal; direction: rtl; padding-right: 0.5em;">
@@ -19,11 +25,12 @@
             </div>
         </div>
 
+
         <ion-slide-box class="work-container" on-slide-changed="changeTabHeadTo($index)">
             <ion-slide class="work-tab" ng-repeat="day in ::appData.workshops | orderObjectBy:'date':'date'">
                 <ion-scroll class="work-list">
                    <div class="work-box"
-                            ng-repeat="event in day.events |propertyFilter:'liked':true:view.filterLiked | orderBy: 'start'"
+                            ng-repeat="event in day.events |tagFilter:view.filterHashtag:appData.WorkshopTags | orderBy: 'start'"
 
                             id="{{::event.id}}">
 
@@ -65,4 +72,23 @@
             </ion-slide>
         </ion-slide-box>
     </ion-content>
+
+    <script id="templates/popover.html" type="text/ng-template">
+        <ion-popover-view>
+            <ion-header-bar> <h1 class="title">{{'app.workshop.category'|translate}}</h1> </ion-header-bar>
+            <ion-content>
+                <ion-list>
+                    <ion-radio ng-model="view.filterHashtag" ng-click="setWorkshopFilter('99')" ng-value="99">{{::'app.workshop.all'|translate}}</ion-radio>
+                    <ion-radio ng-model="view.filterHashtag" ng-click="setWorkshopFilter($index)" ng-repeat="typeSection in ::appData.WorkshopTags" ng-value="{{$index}}">{{::typeSection|translate}}</ion-radio>
+                    <ion-radio ng-model="view.filterHashtag" ng-click="setWorkshopFilter('98')" ng-value="98">{{::'app.workshop.other'|translate}}</ion-radio>
+                </ion-list>
+            </ion-content>
+        </ion-popover-view>
+    </script>
+
+
+
+
+
+
 </ion-view>
