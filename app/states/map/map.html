@@ -8,12 +8,12 @@
 
                     <p class="locationPreview">
                         {{selection.location|trans:'preview'}}</p>
-                    <a ng-if="selection.location.markOnMap" class="button button-positive program-btn"
+                    <a ng-if="selection.location.markOnMap" class="button button-positive program-btn button-small"
                        ui-sref="app.program({locationId:selection.location.id})" >
                         {{'app.map.open.location'|translate}}
                     </a>
 
-                    <a ng-click="selection.location=undefined" class="close"><span class="ion-android-close"></span></a>
+                    <a ng-click="selection.location=undefined" class="close"><span class="ion-ios-close-outline"></span></a>
 
             </div>
         </div>
