@@ -28,7 +28,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     $ionicSideMenuDelegate.canDragContent(false);
 
                     var headHeight = document.getElementsByClassName('bar-header')[0].offsetHeight,
-                        scrollDelegate = $ionicScrollDelegate.$getByHandle('siteplan');
+                        scrollDelegate = $ionicScrollDelegate.$getByHandle('siteplan'),
+                        maxZoomLevel = 1.5, // 3 is max by ionic
+                        minZoomLevel = 0.5, // 0.5 is min by ionic
+                        zoomStep = 0.25,
+                        initialZoomLevel=0.5;
 
                     function safeApply(fn){
                         if (!$scope.$$phase) {
@@ -59,10 +63,11 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                             });
                         };
                     }
-
                     updateScreenSize(headHeight);
                     $scope.selection={};// will hold selected location as a container to prevent problems with inherited scopes
-                    $scope.zoomlevel = 1;
+                    $scope.zoomlevel = initialZoomLevel;
+                    $scope.minZoom = minZoomLevel;
+                    $scope.maxZoom = maxZoomLevel;
 
                     // HANDLE ORIENTATION CHANGES portrait / landscape
                     $scope._updateOrientation = updateOrientation(headHeight);
@@ -82,14 +87,22 @@ angular.module('fsMobile.states').config(function ($stateProvider) {
                     console.log('got ',$scope.mappedLocations.length,' found', $scope.mappedLocations);
 
                     $scope.zoomOut = function () {
-                        $scope.zoomlevel = scrollDelegate.getScrollView().__zoomLevel - 0.5;
+                        if($scope.zoomlevel - zoomStep < minZoomLevel){
+                            return;
+                        }
+                        $scope.zoomlevel = scrollDelegate.getScrollView().__zoomLevel - zoomStep;
                         scrollDelegate.zoomTo($scope.zoomlevel);
                     };
 
                     $scope.zoomIn = function () {
-                        $scope.zoomlevel = scrollDelegate.getScrollView().__zoomLevel + 0.5;
+                        if($scope.zoomlevel + zoomStep > maxZoomLevel ){
+                            return;
+                        }
+                        $scope.zoomlevel = scrollDelegate.getScrollView().__zoomLevel + zoomStep;
                         scrollDelegate.zoomTo($scope.zoomlevel);
                     };
+                    // default zoom 
+                    scrollDelegate.zoomTo($scope.zoomlevel);
                 }
             }
         }
