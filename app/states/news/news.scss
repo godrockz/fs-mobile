@@ -33,6 +33,9 @@ $border-size: 1px;
 
 .news-state{
     background-color: $background-general;
+    .last-col{
+        min-height:2em;
+    }
 }
 
 .row.news-item {
@@ -115,6 +118,7 @@ $border-size: 1px;
         //text-overflow: ellipsis;
         line-height: 1.2em;
     }
+
 
 }
 

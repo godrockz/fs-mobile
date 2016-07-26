@@ -1,5 +1,5 @@
 <ion-view view-title="{{::'app.general.news'|translate}}">
-    <ion-content class="news-state">
+    <ion-content class="news-state" delegate-handle="newsScrollDelegate">
         <ion-refresher on-refresh="refreshData()" spinner="ios"></ion-refresher>
         <div ng-repeat="item in newsToShow"
              class="row news-item" >
@@ -27,6 +27,14 @@
                 <p class="text" >{{item|trans:'preview'}}</p>
             </div>
         </div>
+
+        <div class="row ">
+            <div class="col ">
+                <button ng-if="appData.fsNews.length>itemsToDisplay" class="button button-block button-positive"
+                        ng-click="showMoreItems()">{{'app.news.loadmore'|translate}}</button>
+            </div>
+        </div>
+        <div class="last-col"></div>
 
     </ion-content>
 </ion-view>

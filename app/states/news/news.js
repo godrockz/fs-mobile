@@ -22,7 +22,7 @@ angular.module('fsMobile.states')
         views: {
             'menuContent': {
                 templateUrl: 'states/news/news.html',
-                controller: function ($scope, $filter, dataProvider) {
+                controller: function ($scope, $filter, dataProvider, $ionicScrollDelegate) {
 
                     var filterLimitTo = $filter('limitTo');
                     $scope.initialLength = 7;
@@ -34,6 +34,7 @@ angular.module('fsMobile.states')
 
                     function provideNewDataToScope(){
                         $scope.newsToShow = filterLimitTo($scope.appData.fsNews,$scope.itemsToDisplay);
+                        $ionicScrollDelegate.$getByHandle('newsScrollDelegate').resize();
                     }
                     $scope.$on('newDataAvailable', provideNewDataToScope);
                     $scope.itemsToDisplay = $scope.initialLength;
