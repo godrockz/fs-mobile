@@ -83,7 +83,7 @@
     <param name="ios-package" value="CDVFileTransfer"/>
     <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer"/>
   </feature>
-  <plugin name="File" value="org.apache.cordova.FileUtils"/>
-  <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer"/>
+  <!-- <plugin name="File" value="org.apache.cordova.FileUtils"/>
+  <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer"/> -->
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
 </widget>
