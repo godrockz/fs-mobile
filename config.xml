@@ -4,7 +4,7 @@
   <description>
         Festival App and Program Guide for Freakstock Festival
     </description>
-  <engine name="android" spec="^4.0.0"/>
+  <engine name="android" spec="^7.1.2"/>
   <author email="info@freakstock.de" href="http://freakstock.de">
         Freakstock App Team
     </author>
